@@ -109,6 +109,13 @@ select.input-field{appearance:auto}
 .doc-status{font-size:8px;color:#94A3B8;margin-top:2px}
 .doc-status.attached{color:#059669;font-weight:700}
 .prof-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.q-block{transition:transform 0.2s, box-shadow 0.2s}
+.q-block:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.06)}
+.opt-row{transition:all 0.2s ease}
+.opt-row:hover{background:#F1F5F9!important;border-color:#CBD5E1!important}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseSubtle{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.ai-gen-btn:active{transform:scale(0.95)}
 @media(max-width:400px){.phone{width:calc(100vw - 32px);height:calc(100vh - 60px)}}
 </style>
 </head>
@@ -343,7 +350,11 @@ select.input-field{appearance:auto}
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#065F46,#059669);padding-top:14px"><span>9:41</span><div class="notch" style="background:#059669"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#065F46,#059669);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Mark Attendance</div></div>
-<div style="display:flex;gap:8px;margin-top:8px"><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📅 March 27, 2026</div><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📚 X-A Mathematics</div></div>
+<div style="display:flex;gap:8px;margin-top:8px;cursor:pointer" onclick="showModal('attendanceSettingsModal')">
+    <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600" id="attDateDisplay">📅 March 27, 2026</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600" id="attClassDisplay">📚 X-A Mathematics</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.6);display:flex;align-items:center;margin-left:auto">Change ⚙️</div>
+</div>
 </div>
 <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text);font-family:'Outfit',sans-serif">Student List (45)</div><div style="display:flex;gap:6px"><div style="background:#ECFDF5;color:#059669;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;cursor:pointer" onclick="markAllPresent()">✅ All Present</div></div></div>
 <div style="padding:0 14px">
@@ -367,7 +378,26 @@ select.input-field{appearance:auto}
 <div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div>
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
-<div class="modal-overlay" id="attSuccessModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">✅</div><div class="modal-title" style="color:#059669">Attendance Submitted!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px">X-A Mathematics attendance for March 27 has been recorded.<br>Present: 42 · Absent: 2 · Late: 1</p><button class="btn-primary" onclick="hideModal('attSuccessModal')">Done</button></div></div>
+<div class="modal-overlay" id="attSuccessModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">✅</div><div class="modal-title" style="color:#059669">Attendance Submitted!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px"><span id="successAttDetails">X-A Mathematics attendance for March 27 has been recorded.</span><br>Present: 42 · Absent: 2 · Late: 1</p><button class="btn-primary" onclick="hideModal('attSuccessModal')">Done</button></div></div>
+
+<div class="modal-overlay" id="attendanceSettingsModal">
+    <div class="modal-sheet">
+        <div class="modal-handle"></div>
+        <div class="modal-title">⚙️ Attendance Settings</div>
+        <div class="label-sm">Select Date</div>
+        <input class="input-field" type="date" id="attDateInput" value="2026-03-27">
+        <div class="label-sm">Select Class</div>
+        <select class="input-field" id="attClassInput">
+            <option value="X-A Mathematics">X-A Mathematics</option>
+            <option value="X-B Mathematics">X-B Mathematics</option>
+            <option value="IX-A Mathematics">IX-A Mathematics</option>
+        </select>
+        <div style="margin-top:10px;display:flex;gap:10px">
+            <button class="btn-primary" onclick="updateAttendanceSettings()">Apply Changes</button>
+            <button class="btn-secondary" onclick="hideModal('attendanceSettingsModal')">Cancel</button>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- ==================== TIMETABLE SCREEN ==================== -->
@@ -570,28 +600,84 @@ select.input-field{appearance:auto}
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#134E4A,#0F766E);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Exam Management</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer" onclick="showModal('createExamModal')">+ Create</div></div></div>
 <div style="display:flex;gap:6px;padding:12px 14px 0">
-<div class="chip" style="flex:1;text-align:center;padding:8px;border-radius:12px;background:#0F766E;color:#fff">Upcoming</div>
-<div class="chip" style="flex:1;text-align:center;padding:8px;border-radius:12px;color:var(--ev-text3)">Past</div>
-<div class="chip" style="flex:1;text-align:center;padding:8px;border-radius:12px;color:var(--ev-text3)">Results</div>
+<div class="chip active" id="tabChipUpcoming" style="flex:1;text-align:center;padding:8px;border-radius:12px;background:#0F766E;color:#fff;cursor:pointer" onclick="switchExamTab('upcoming')">Upcoming</div>
+<div class="chip" id="tabChipPast" style="flex:1;text-align:center;padding:8px;border-radius:12px;color:var(--ev-text3);cursor:pointer" onclick="switchExamTab('past')">Past</div>
+<div class="chip" id="tabChipResults" style="flex:1;text-align:center;padding:8px;border-radius:12px;color:var(--ev-text3);cursor:pointer" onclick="switchExamTab('results')">Results</div>
 </div>
 <div class="spacer-sm"></div>
-<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #0EA5E9">
-<div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Final Exam</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#E0F2FE;color:#0EA5E9">X-A & X-B</div></div>
-<div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 March 28, 2026 · ⏰ 9:00 AM – 12:00 PM<br>📍 Hall A · 100 Marks · Duration: 3 hrs</div>
-<div style="display:flex;gap:6px">
-<button onclick="showModal('createExamModal')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#0F766E;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Set Paper</button>
-<button onclick="navigateTo('results')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📊 Upload Marks</button>
+
+<div id="examUpcomingBox">
+    <!-- DRAFT EXAM -->
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);border-left:4px solid #94A3B8;position:relative">
+        <div style="position:absolute;top:14px;right:14px;background:#F1F5F9;color:#64748B;font-size:8px;font-weight:800;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:0.5px">📁 Draft</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;padding-right:50px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Unit Test 5 — Probability</div></div>
+        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:12px">📅 Set for April 5, 2026<br>Marks not yet distributed · Duration: 90 mins</div>
+        <div style="display:flex;gap:6px">
+            <button onclick="navigateTo('setpaper')" style="flex:2;padding:9px;border-radius:10px;border:none;background:linear-gradient(135deg,#0F766E,#0D9488);color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✨ Complete Setup</button>
+            <button onclick="showModal('editExamModal')" style="flex:1;padding:9px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✏️ Edit</button>
+            <button onclick="confirmDeleteExam()" style="padding:9px 12px;border-radius:10px;border:none;background:#FEF2F2;color:#EF4444;font-size:11px;cursor:pointer">🗑️</button>
+        </div>
+    </div>
+    
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #0EA5E9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Final Exam</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#E0F2FE;color:#0EA5E9">X-A & X-B</div></div>
+        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 March 28, 2026 · ⏰ 9:00 AM – 12:00 PM<br>📍 Hall A · 100 Marks · Published ✓</div>
+        <div style="display:flex;gap:6px">
+            <button onclick="navigateTo('setpaper')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#0F766E;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Edit Paper</button>
+            <button onclick="navigateTo('results')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📊 Marks</button>
+            <button onclick="cancelExam('Final Exam')" style="padding:8px 10px;border-radius:10px;border:1.5px solid #FEE2E2;background:#fff;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">Cancel</button>
+        </div>
+    </div>
+
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #F59E0B">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Unit Test 4</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">IX-A</div></div>
+        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 April 2, 2026 · ⏰ 10:00 AM – 11:30 AM<br>📍 Room 202 · 50 Marks · Published ✓</div>
+        <div style="display:flex;gap:6px">
+            <button onclick="navigateTo('setpaper')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#D97706;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Edit Paper</button>
+            <button onclick="showModal('editExamModal')" style="padding:8px 10px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;cursor:pointer">✏️ Edit Details</button>
+            <button onclick="cancelExam('Unit Test 4')" style="padding:8px 10px;border-radius:10px;border:none;background:#FEF2F2;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">Cancel</button>
+        </div>
+    </div>
+    <div style="margin:8px 14px;background:linear-gradient(135deg,#ECFDF5,#F0FDFA);border-radius:14px;padding:12px;border:1px solid #A7F3D0"><div class="ai-tag" style="background:#059669">🤖 AI QUESTION GENERATOR</div><div style="font-size:11px;color:#065F46;line-height:1.6;margin-bottom:8px">Generate question papers with AI! Select chapter, difficulty & marks distribution.</div><button onclick="navigateTo('aichat')" style="background:#059669;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">🤖 Generate Questions</button></div>
 </div>
+
+<div id="examPastBox" style="display:none">
+    <div style="margin:10px 14px;background:#F1F5F9;padding:10px;border-radius:12px;font-size:11px;color:var(--ev-text2);font-weight:600">🕰️ History of conducted exams</div>
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Final Term — Grade 9</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#F1F5F9;color:#64748B">IX-A</div></div>
+        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:10px">📅 Feb 15, 2026 · Avg Score: 78% · 100 Marks</div>
+        <button onclick="navigateTo('results')" style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">View Full Report</button>
+    </div>
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Grade 10</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#F1F5F9;color:#64748B">X-A</div></div>
+        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:10px">📅 Jan 20, 2026 · Avg Score: 85% · 50 Marks</div>
+        <button onclick="navigateTo('results')" style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">View Full Report</button>
+    </div>
 </div>
-<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #F59E0B">
-<div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Unit Test 4</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">IX-A</div></div>
-<div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 April 2, 2026 · ⏰ 10:00 AM – 11:30 AM<br>📍 Room 202 · 50 Marks · Chapter 5-6</div>
-<div style="display:flex;gap:6px">
-<button onclick="showModal('createExamModal')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#D97706;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Set Paper</button>
-<button onclick="showModal('editExamModal')" style="padding:8px 10px;border-radius:10px;border:none;background:#FEF3C7;color:#D97706;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✏️</button>
+
+<div id="examResultsBox" style="display:none">
+    <div style="margin:8px 14px;background:linear-gradient(135deg,#EFF6FF,#F0F9FF);border-radius:14px;padding:12px;border:1px solid #DBEAFE">
+        <div class="ai-tag" style="background:#2563EB">📊 RECENT PERFORMANCE</div>
+        <div style="font-size:11px;color:#1E40AF;line-height:1.6">X-A performance has increased by 15% in Integration chapters compared to last month.</div>
+    </div>
+    <div class="section-header-row"><div class="section-header-title">Past Exam Results</div></div>
+    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Calculus</div><div style="font-size:10px;color:var(--ev-text3)">Class X-A · Jan 20, 2026</div></div>
+        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#0EA5E9">85%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+    </div>
+    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#F5F3FF;display:flex;align-items:center;justify-content:center;font-size:18px">📈</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Monthly Test — Algebra</div><div style="font-size:10px;color:var(--ev-text3)">Class IX-A · Feb 2, 2026</div></div>
+        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#8B5CF6">72%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+    </div>
+    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:18px">📉</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Term 1 Finals</div><div style="font-size:10px;color:var(--ev-text3)">Combined Classes · Dec 15, 2025</div></div>
+        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">68%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+    </div>
+    <div style="padding:10px 14px"><button class="btn-secondary" onclick="navigateTo('results')">View All in Gradebook</button></div>
 </div>
-</div>
-<div style="margin:8px 14px;background:linear-gradient(135deg,#ECFDF5,#F0FDFA);border-radius:14px;padding:12px;border:1px solid #A7F3D0"><div class="ai-tag" style="background:#059669">🤖 AI QUESTION GENERATOR</div><div style="font-size:11px;color:#065F46;line-height:1.6;margin-bottom:8px">Generate question papers with AI! Select chapter, difficulty & marks distribution.</div><button onclick="navigateTo('aichat')" style="background:#059669;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">🤖 Generate Questions</button></div>
 <div class="spacer"></div>
 </div>
 <div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
@@ -602,6 +688,64 @@ select.input-field{appearance:auto}
 <div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div>
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
+</div>
+<!-- ==================== PAPER BUILDER SCREEN ==================== -->
+<div class="screen" data-screen="setpaper" style="background:#F8FAFC">
+<div class="status-bar" style="color:#0F172A;background:#F8FAFC;padding-top:14px"><span>9:41</span><div class="notch" style="background:#000"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div style="background:#fff;border-bottom:1px solid #E2E8F0;padding:8px 18px 12px">
+    <div class="mini-top">
+        <div class="back-btn" onclick="goBack()" style="color:#0F172A;background:#F1F5F9">←</div>
+        <div style="flex:1">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:var(--ev-text)">Paper Builder</div>
+            <div style="font-size:10px;color:var(--ev-text3)">Math — Unit Test 5 — Probability</div>
+        </div>
+        <div style="display:flex;gap:6px">
+            <button onclick="savePaper('draft')" style="padding:6px 12px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">Draft</button>
+            <button onclick="savePaper('publish')" style="padding:6px 12px;border-radius:10px;border:none;background:var(--ev-primary);color:#fff;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">Publish</button>
+        </div>
+    </div>
+</div>
+<div class="screen-body" style="padding:14px 14px 100px">
+    <div style="background:linear-gradient(135deg,#0F172A,#1E293B);border-radius:20px;padding:16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 25px rgba(0,0,0,0.1)">
+        <div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">Total Progress</div>
+            <div style="display:flex;align-items:baseline;gap:4px">
+                <span id="totalMarksDisplay" style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#fff">0</span>
+                <span style="font-size:12px;color:rgba(255,255,255,0.4)">/ 50 Marks</span>
+            </div>
+        </div>
+        <div style="text-align:right">
+            <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">Questions</div>
+            <div id="totalQuestionsDisplay" style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#38BDF8">0</div>
+        </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#fff,#F0F9FF);border-radius:24px;padding:12px;margin-bottom:20px;border:2.5px solid #0EA5E9;box-shadow:0 8px 30px rgba(14,165,233,0.12);display:flex;align-items:center;gap:12px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-20px;right:-20px;width:60px;height:60px;background:radial-gradient(circle,rgba(6,182,212,0.15),transparent 70%)"></div>
+        <div style="width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#0EA5E9,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 10px 20px rgba(14,165,233,0.3)">✨</div>
+        <div style="flex:1">
+            <div style="font-size:9px;font-weight:900;color:var(--ev-primary);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Simulate AI Generation</div>
+            <input type="text" id="aiPaperPrompt" placeholder="E.g., 5 hard Calculus questions..." style="width:100%;border:none;background:none;font-size:13px;font-family:'Outfit',sans-serif;outline:none;font-weight:700;color:var(--ev-text)">
+        </div>
+        <button onclick="generateAiPaper()" class="ai-gen-btn" style="padding:10px 18px;border-radius:14px;border:none;background:linear-gradient(135deg,#0EA5E9,#06B6D4);color:#fff;font-size:11px;font-weight:900;cursor:pointer;animation:pulseSubtle 2s infinite;box-shadow:0 4px 15px rgba(14,165,233,0.4)">Magic Generate</button>
+    </div>
+
+    <div id="questionList" style="display:flex;flex-direction:column;gap:14px">
+        <!-- Question blocks will be injected here -->
+        <div id="emptyBuilderState" style="text-align:center;padding:40px 20px;border:2px dashed #E2E8F0;border-radius:24px;background:#fff">
+            <div style="font-size:40px;margin-bottom:12px">📝</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Start Building Your Paper</div>
+            <div style="font-size:11px;color:var(--ev-text3);margin-top:4px">Add objective or subjective questions below.</div>
+        </div>
+    </div>
+
+    <div style="padding:20px 0;display:flex;gap:10px">
+        <button class="btn-secondary" onclick="addQuestion('objective')" style="flex:1;background:#fff;border:1.5px solid var(--ev-primary);color:var(--ev-primary);display:flex;align-items:center;justify-content:center;gap:6px"><span>➕</span> Objective</button>
+        <button class="btn-secondary" onclick="addQuestion('subjective')" style="flex:1;background:#fff;border:1.5px solid var(--ev-accent);color:var(--ev-accent);display:flex;align-items:center;justify-content:center;gap:6px"><span>➕</span> Subjective</button>
+    </div>
+</div>
+</div>
+
 <div class="modal-overlay" id="createExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📝 Create Exam</div>
 <div class="label-sm">Exam Title</div><input class="input-field" value="Unit Test 5 — Probability">
 <div class="label-sm">Class</div><select class="input-field"><option>X-A</option><option>X-B</option><option>IX-A</option></select>
@@ -620,7 +764,6 @@ select.input-field{appearance:auto}
 <button class="btn-primary" onclick="hideModal('editExamModal')">💾 Save Changes</button>
 <button class="btn-secondary" onclick="hideModal('editExamModal')" style="margin-top:8px">Cancel</button>
 </div></div>
-</div>
 
 <!-- ==================== RESULTS / GRADEBOOK ==================== -->
 <div class="screen" data-screen="results" style="background:#FAF5FF">
@@ -1434,6 +1577,246 @@ function openChatDetail(name) {
     icon.innerText = name.split(' ').map(n => n[0]).join('');
     navigateTo('chatdetail');
 }
+
+// Exam & Paper Builder State
+let qCounter = 0;
+let isGenerating = false;
+
+function addQuestion(type, customData = {}) {
+    const emptyState = document.getElementById('emptyBuilderState');
+    if(emptyState) emptyState.remove();
+
+    qCounter++;
+    const container = document.getElementById('questionList');
+    const qBlock = document.createElement('div');
+    qBlock.className = 'q-block';
+    const qId = `q_block_${qCounter}`;
+    qBlock.id = qId;
+    qBlock.style = "background:#fff;border-radius:20px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,0.04);border:1px solid #E2E8F0;position:relative;animation:slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);margin-bottom:14px";
+    
+    const initialText = customData.text || "";
+    const initialMarks = customData.marks || "2";
+
+    let content = `
+        <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:10px">
+                <span style="width:28px;height:28px;background:linear-gradient(135deg,#0EA5E9,#06B6D4);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;font-family:'Outfit',sans-serif">Q${qCounter}</span>
+                <span style="font-size:10px;font-weight:800;color:var(--ev-text3);text-transform:uppercase;letter-spacing:1px;background:#F1F5F9;padding:4px 8px;border-radius:6px">${type}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+                <div style="display:flex;align-items:center;background:#F8FAFC;padding:4px 10px;border-radius:10px;border:1px solid #E2E8F0">
+                    <input type="number" class="q-marks" value="${initialMarks}" onchange="updatePaperStats()" style="width:30px;border:none;background:none;font-size:11px;font-weight:900;text-align:center;font-family:'Outfit',sans-serif;outline:none;color:#0369A1">
+                    <span style="font-size:9px;font-weight:700;color:#64748B;margin-left:2px">M</span>
+                </div>
+                <button onclick="removeQuestion(this)" style="width:32px;height:32px;border-radius:10px;border:none;background:#FEF2F2;color:#EF4444;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s" onmouseover="this.style.background='#FEE2E2'" onmouseout="this.style.background='#FEF2F2'">🗑️</button>
+            </div>
+        </div>
+        <textarea class="input-field" placeholder="Enter question description..." style="min-height:80px;margin-bottom:14px;font-size:13px;background:#F9FBFF;border-color:#D0E1FD">${initialText}</textarea>
+    `;
+
+    if(type === 'objective') {
+        content += `<div class="options-list" style="display:flex;flex-direction:column;gap:8px"></div>
+                    <button onclick="addOption('${qId}')" style="margin-top:12px;width:100%;padding:8px;border-radius:12px;border:1.5px dashed #0EA5E9;background:rgba(14,165,233,0.03);color:#0EA5E9;font-size:10px;font-weight:800;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(14,165,233,0.08)'" onmouseout="this.style.background='rgba(14,165,233,0.03)'">+ Add Option</button>`;
+    } else {
+        content += `
+            <div style="background:rgba(14,165,233,0.05);padding:14px;border-radius:14px;border:1px dashed #BAE6FD;display:flex;gap:12px;align-items:center">
+                <div style="font-size:20px">📝</div>
+                <div>
+                   <div style="font-size:10px;color:#0369A1;font-weight:800">Subjective Response Field</div>
+                   <div style="font-size:9px;color:#64748B;margin-top:2px;line-height:1.4">Teacher will manually grade the descriptive response or document upload for this question.</div>
+                </div>
+            </div>
+        `;
+    }
+
+    qBlock.innerHTML = content;
+    container.appendChild(qBlock);
+    
+    if(type === 'objective') {
+        const initialOptions = customData.options || ["Option A", "Option B", "Option C", "Option D"];
+        initialOptions.forEach(opt => addOption(qId, opt));
+    }
+    
+    updatePaperStats();
+}
+
+function addOption(qId, text = "") {
+    const qBlock = document.getElementById(qId);
+    if(!qBlock) return;
+    const list = qBlock.querySelector('.options-list');
+    const optIndex = list.children.length;
+    const label = String.fromCharCode(65 + optIndex);
+    
+    const optDiv = document.createElement('div');
+    optDiv.style = "display:flex;align-items:center;gap:10px;background:#F8FAFC;padding:10px 14px;border-radius:12px;border:1px solid #E2E8F0;animation:slideUp 0.3s ease";
+    optDiv.innerHTML = `
+        <div style="width:18px;height:18px;border-radius:50%;border:1.5px solid #CBD5E1;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#64748B">${label}</div>
+        <input type="text" value="${text}" placeholder="Enter option..." style="flex:1;border:none;background:none;font-size:11px;font-family:'Outfit',sans-serif;outline:none;font-weight:600;color:var(--ev-text)">
+        <button onclick="this.parentElement.remove(); updateLabels('${qId}')" style="border:none;background:none;color:#94A3B8;font-size:12px;cursor:pointer;padding:4px">✕</button>
+    `;
+    list.appendChild(optDiv);
+}
+
+function updateLabels(qId) {
+    const qBlock = document.getElementById(qId);
+    if(!qBlock) return;
+    const labels = qBlock.querySelectorAll('.options-list > div > div:first-child');
+    labels.forEach((lbl, i) => {
+        lbl.innerText = String.fromCharCode(65 + i);
+    });
+}
+
+function generateAiPaper() {
+    const prompt = document.getElementById('aiPaperPrompt').value.trim();
+    if(!prompt) { alert("Please enter a prompt like '5 hard integration questions'"); return; }
+    
+    if(isGenerating) return;
+    isGenerating = true;
+
+    const loader = document.createElement('div');
+    loader.style = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:999999';
+    loader.innerHTML = `
+        <div style="background:#fff;padding:40px;border-radius:32px;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,0.3);max-width:320px;width:90%">
+            <div style="font-size:60px;margin-bottom:20px;animation:pulseSubtle 1.5s infinite">🤖</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:#0F172A;margin-bottom:12px">EduVerse AI Engine</div>
+            <div id="aiStatus" style="font-size:11px;color:#0EA5E9;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px">Initializing...</div>
+            <div style="width:100%;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;margin-bottom:12px">
+                <div id="aiProgress" style="width:0%;height:100%;background:linear-gradient(90deg,#0EA5E9,#06B6D4);transition:width 0.5s ease"></div>
+            </div>
+            <div style="font-size:10px;color:#64748B;font-style:italic">Generating questions for: "${prompt}"</div>
+        </div>
+    `;
+    document.body.appendChild(loader);
+    
+    const steps = [
+        { msg: "🔍 Scanning Curriculum...", p: 20 },
+        { msg: "🧠 Analyzing Difficulty Level...", p: 45 },
+        { msg: "✍️ Formulating MCQ Options...", p: 70 },
+        { msg: "⚖️ Balancing Marks Distribution...", p: 90 },
+        { msg: "✨ Finalizing Paper...", p: 100 }
+    ];
+
+    let currentStep = 0;
+    const interval = setInterval(() => {
+        if(currentStep < steps.length) {
+            document.getElementById('aiStatus').innerText = steps[currentStep].msg;
+            document.getElementById('aiProgress').style.width = steps[currentStep].p + "%";
+            currentStep++;
+        } else {
+            clearInterval(interval);
+            finishAiGeneration(loader);
+        }
+    }, 800);
+}
+
+function finishAiGeneration(loader) {
+    loader.remove();
+    isGenerating = false;
+    document.getElementById('aiPaperPrompt').value = "";
+    
+    // Add simulated questions
+    addQuestion('objective', {
+        text: "Evaluate the definite integral ∫₀¹ x · eˣ dx using integration by parts.",
+        marks: "4",
+        options: ["1", "e - 1", "e", "0"]
+    });
+    
+    addQuestion('objective', {
+        text: "Two fair dice are thrown. What is the probability that the sum of the numbers appearing on them is 7?",
+        marks: "3",
+        options: ["1/6", "1/12", "5/36", "1/4"]
+    });
+    
+    addQuestion('subjective', {
+        text: "State and prove the Fundamental Theorem of Calculus (Part 1). Include a geometric interpretation of the area under the curve.",
+        marks: "10"
+    });
+    
+    const toast = document.createElement('div');
+    toast.style = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0EA5E9,#06B6D4);color:#fff;padding:14px 28px;border-radius:30px;font-size:12px;font-weight:800;box-shadow:0 10px 25px rgba(14,165,233,0.3);z-index:999999;animation:slideUp 0.3s ease-out';
+    toast.innerHTML = '✨ Magic Paper Generated Successfully!';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+
+function removeQuestion(btn) {
+    btn.closest('.q-block').remove();
+    updatePaperStats();
+}
+
+function updatePaperStats() {
+    const blocks = document.querySelectorAll('.q-block');
+    const marksInputs = document.querySelectorAll('.q-marks');
+    let totalMarks = 0;
+    marksInputs.forEach(input => totalMarks += parseInt(input.value || 0));
+    
+    document.getElementById('totalQuestionsDisplay').innerText = blocks.length;
+    document.getElementById('totalMarksDisplay').innerText = totalMarks;
+}
+
+function savePaper(status) {
+    const loader = document.createElement('div');
+    loader.style = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:999998';
+    loader.innerHTML = `<div style="background:#fff;padding:24px;border-radius:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)">
+        <div style="font-size:40px;margin-bottom:12px;display:inline-block;animation:ring-spin 2s linear infinite">⚙️</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:var(--ev-text)">${status === 'publish' ? 'Publishing Exam...' : 'Saving Draft...'}</div>
+    </div>`;
+    document.body.appendChild(loader);
+    
+    setTimeout(() => {
+        loader.remove();
+        const toast = document.createElement('div');
+        toast.style = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#059669;color:#fff;padding:12px 24px;border-radius:30px;font-size:12px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:999999';
+        toast.innerHTML = status === 'publish' ? '✅ Exam Published Successfully!' : '✅ Paper Saved as Draft';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+        goBack();
+    }, 1500);
+}
+
+function cancelExam(title) {
+    if(confirm(`Are you sure you want to cancel '${title}'? This will notify students.`)) {
+        alert('Exam cancelled. Notifications sent to all registered students.');
+    }
+}
+
+function deleteExam(id) {
+    if(confirm('Permanently delete this exam draft?')) {
+        confirmDeleteExam();
+    }
+}
+
+
+// Attendance Logic
+function toggleAtt(btn, type) {
+    const row = btn.parentElement;
+    row.querySelectorAll('.att-btn').forEach(b => b.classList.remove('p','a','l'));
+    btn.classList.add(type);
+}
+
+function markAllPresent() {
+    document.querySelectorAll('.att-row').forEach(row => {
+        const pBtn = row.querySelector('.att-btn:nth-of-type(1)');
+        toggleAtt(pBtn, 'p');
+    });
+}
+
+function updateAttendanceSettings() {
+    const date = document.getElementById('attDateInput').value;
+    const className = document.getElementById('attClassInput').value;
+    
+    // Format date nicely
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(date);
+    const formattedDate = dateObj.toLocaleDateString('en-US', options);
+    
+    document.getElementById('attDateDisplay').innerText = "📅 " + formattedDate;
+    document.getElementById('attClassDisplay').innerText = "📚 " + className;
+    document.getElementById('successAttDetails').innerText = `${className} attendance for ${formattedDate} has been recorded.`;
+    
+    hideModal('attendanceSettingsModal');
+}
+
 
 </script>
 </body>
