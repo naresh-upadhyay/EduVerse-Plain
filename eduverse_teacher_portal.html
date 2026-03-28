@@ -125,6 +125,10 @@ select.input-field{appearance:auto}
 .adj-btn:active{transform:scale(0.9)}
 
 @media(max-width:400px){.phone{width:calc(100vw - 32px);height:calc(100vh - 60px)}}
+.adj-btn { width:24px; height:24px; border-radius:6px; background:#EEF2FF; color:#6366F1; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; cursor:pointer; user-select:none; transition:all 0.2s; border:1px solid #DDD6FE; }
+.adj-btn:active { transform:scale(0.9); background:#6366F1; color:#fff; }
+.weight-slider { width:100%; height:4px; border-radius:2px; background:#F1F5F9; outline:none; -webkit-appearance:none; appearance:none; margin-top:12px; }
+.weight-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:14px; height:14px; border-radius:50%; background:#6366F1; cursor:pointer; border:2px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
 </style>
 </head>
 <body>
@@ -698,7 +702,8 @@ select.input-field{appearance:auto}
             <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Calculus</div>
             <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#0EA5E9;font-weight:700">CLASS TEST</span><span style="font-size:8px;color:var(--ev-text3)">· Offline Mode</span></div>
         </div>
-        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#0EA5E9">85%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="text-align:right;margin-right:4px"><div style="font-size:14px;font-weight:900;color:#0EA5E9">85%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="color:var(--ev-text3);font-size:12px">›</div>
     </div>
     <div onclick="openDetailedResults('Monthly Test — Algebra')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
         <div style="width:40px;height:40px;border-radius:12px;background:#F5F3FF;display:flex;align-items:center;justify-content:center;font-size:18px">📈</div>
@@ -706,7 +711,8 @@ select.input-field{appearance:auto}
             <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Monthly Test — Algebra</div>
             <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#8B5CF6;font-weight:700">CLASS TEST</span><span style="font-size:8px;color:var(--ev-text3)">· Online Mode</span></div>
         </div>
-        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#8B5CF6">72%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="text-align:right;margin-right:4px"><div style="font-size:14px;font-weight:900;color:#8B5CF6">72%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="color:var(--ev-text3);font-size:12px">›</div>
     </div>
     <div onclick="openDetailedResults('Term 1 Finals')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
         <div style="width:40px;height:40px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:18px">📉</div>
@@ -714,7 +720,8 @@ select.input-field{appearance:auto}
             <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Term 1 Finals</div>
             <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#10B981;font-weight:700">MID-TERM</span><span style="font-size:8px;color:var(--ev-text3)">· Offline Mode</span></div>
         </div>
-        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">68%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="text-align:right;margin-right:4px"><div style="font-size:14px;font-weight:900;color:#10B981">68%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
+        <div style="color:var(--ev-text3);font-size:12px">›</div>
     </div>
     <div style="padding:10px 14px"><button class="btn-secondary" onclick="openDetailedResults('X-A Academic Summary')">View All in Gradebook</button></div>
 </div>
@@ -828,15 +835,28 @@ select.input-field{appearance:auto}
 <button class="btn-secondary" onclick="hideModal('editExamModal')" style="margin-top:8px">Cancel</button>
 </div></div>
 
+<div class="modal-overlay" id="yearPickerModal"><div class="modal-sheet" style="max-height:40%;"><div class="modal-handle"></div><div class="modal-title">📅 Academic Year</div>
+<div style="display:flex;flex-direction:column;gap:12px;margin:10px 0">
+    <div id="year_2026" onclick="changeAcademicYear('Year 2026')" style="padding:14px;background:#EEF2FF;border:1.5px solid #4F46E5;border-radius:12px;font-size:13px;font-weight:700;color:#4F46E5;cursor:pointer;display:flex;justify-content:space-between;align-items:center">Academic Year 2026 <span style="font-size:16px">✓</span></div>
+    <div id="year_2025" onclick="changeAcademicYear('Year 2025')" style="padding:14px;border:1px solid #F1F5F9;border-radius:12px;font-size:13px;font-weight:500;color:var(--ev-text2);cursor:pointer">Academic Year 2025</div>
+    <div id="year_2024" onclick="changeAcademicYear('Year 2024')" style="padding:14px;border:1px solid #F1F5F9;border-radius:12px;font-size:13px;font-weight:500;color:var(--ev-text2);cursor:pointer">Academic Year 2024</div>
+</div>
+<button class="btn-secondary" onclick="hideModal('yearPickerModal')" style="margin-top:10px">Close</button>
+</div></div>
+
 <!-- ==================== RESULTS / GRADEBOOK ==================== -->
 <div class="screen" data-screen="results" style="background:#F8FAFC">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#4F46E5,#6366F1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#6366F1"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title" id="resultsMainTitle">Gradebook Summary</div><div style="display:flex;gap:8px"><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600" id="resultsContextTag">Year 2026</div><div id="gradingSettingsBtn" onclick="navigateTo('gradingconfig')" style="width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">⚙️</div></div></div>
-<div style="display:flex;gap:6px;margin-top:14px" id="termSelectorRow">
-    <div class="chip active" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,1);color:#4F46E5;font-weight:800;font-size:10px" onclick="switchGradebookTerm('T1', this)">Term 1</div>
-    <div class="chip" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px" onclick="switchGradebookTerm('T2', this)">Term 2</div>
-    <div class="chip" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px" onclick="switchGradebookTerm('Overall', this)">Overall</div>
+<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title" id="resultsMainTitle">Gradebook Summary</div><div style="display:flex;gap:8px"><div id="resultsContextTag" onclick="showModal('yearPickerModal')" style="cursor:pointer;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">X-A · Year 2026 ▾</div><div id="gradingSettingsBtn" onclick="navigateTo('gradingconfig')" style="width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">⚙️</div></div></div>
+<div style="display:flex;gap:6px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none" id="termSelectorRow">
+    <div class="chip active category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:#fff;color:#4F46E5;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Class Test', this)">Class Test</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Lab Test', this)">Lab Test</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Assignment', this)">Assignment</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Mid-Term', this)">Mid-Term</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('End-Term', this)">End-Term</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Other', this)">Other</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchGradebookTerm('Overall', this)">Overall</div>
 </div>
 <div style="display:flex;gap:8px;margin-top:12px" id="resultsStatTiles">
     <div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">76%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">📚 Class Avg</div></div>
@@ -852,29 +872,29 @@ select.input-field{appearance:auto}
     </div>
     <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">EXAMS</div>
-            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_exam" style="width:78%;height:100%;background:linear-gradient(90deg,#4F46E5,#6366F1);transition:width 0.5s ease"></div></div>
-            <div id="matrix_exam_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">78%</div>
+            <div id="lbl_matrix_1" style="width:75px;font-size:8px;font-weight:700;color:var(--ev-text3)">ACADEMIC AVG</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_1_bar" style="width:78%;height:100%;background:linear-gradient(90deg,#4F46E5,#6366F1);transition:width 0.5s ease"></div></div>
+            <div id="matrix_1_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">78%</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">ATTEND.</div>
-            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_att" style="width:92%;height:100%;background:linear-gradient(90deg,#059669,#10B981);transition:width 0.5s ease"></div></div>
-            <div id="matrix_att_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">92%</div>
+            <div id="lbl_matrix_2" style="width:75px;font-size:8px;font-weight:700;color:var(--ev-text3)">SUBMISSION</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_2_bar" style="width:92%;height:100%;background:linear-gradient(90deg,#059669,#10B981);transition:width 0.5s ease"></div></div>
+            <div id="matrix_2_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">92%</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">ASSIGN.</div>
-            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_ass" style="width:85%;height:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);transition:width 0.5s ease"></div></div>
-            <div id="matrix_ass_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">85%</div>
+            <div id="lbl_matrix_3" style="width:75px;font-size:8px;font-weight:700;color:var(--ev-text3)">MASTERY</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_3_bar" style="width:85%;height:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);transition:width 0.5s ease"></div></div>
+            <div id="matrix_3_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">85%</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">TESTS</div>
-            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_tst" style="width:72%;height:100%;background:linear-gradient(90deg,#F59E0B,#FBBF24);transition:width 0.5s ease"></div></div>
-            <div id="matrix_tst_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">72%</div>
+            <div id="lbl_matrix_4" style="width:75px;font-size:8px;font-weight:700;color:var(--ev-text3)">GROWTH</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_4_bar" style="width:72%;height:100%;background:linear-gradient(90deg,#F59E0B,#FBBF24);transition:width 0.5s ease"></div></div>
+            <div id="matrix_4_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">72%</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">LABS</div>
-            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_lab" style="width:88%;height:100%;background:linear-gradient(90deg,#0EA5E9,#38BDF8);transition:width 0.5s ease"></div></div>
-            <div id="matrix_lab_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">88%</div>
+            <div id="lbl_matrix_5" style="width:75px;font-size:8px;font-weight:700;color:var(--ev-text3)">PEER INDEX</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_5_bar" style="width:88%;height:100%;background:linear-gradient(90deg,#0EA5E9,#38BDF8);transition:width 0.5s ease"></div></div>
+            <div id="matrix_5_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">88%</div>
         </div>
     </div>
 </div>
@@ -2181,30 +2201,54 @@ function openDetailedResults(title) {
     
     if (title.includes('Summary')) {
         mainTitle.innerText = "Academic Ledger";
-        contextTag.innerText = "X-A · Academic Year 2026";
+        contextTag.innerText = "X-A · Year 2026 ▾";
         termSelector.style.display = 'flex';
         settingsBtn.style.display = 'flex';
         matrixCard.style.display = 'block';
         examStatsCard.style.display = 'none';
         
-        // Trigger initial T1 load
+        // Trigger initial Class Test load
         const firstBtn = termSelector.querySelector('.chip');
-        switchGradebookTerm('T1', firstBtn);
+        switchGradebookTerm('Class Test', firstBtn);
     } else {
         termSelector.style.display = 'none';
         settingsBtn.style.display = 'none';
-        matrixCard.style.display = 'none';
+        matrixCard.style.display = 'block'; // Make Matrix visible for individual exams
         examStatsCard.style.display = 'block';
-        // Single Exam mode
+        
+        // Single Exam mode - Matrix Update
+        let examMatrix;
         if (title.includes('Calculus')) {
             mainTitle.innerText = "Calculus Unit Test";
             contextTag.innerText = "Class X-A · Jan 2026";
+            examMatrix = { 1: 85, 2: 78, 3: 92, 4: 88, 5: 82, labels: ["ACCURACY", "TIME UTIL.", "STEP MASTERY", "CALCULATION", "CONCEPT"] };
         } else if (title.includes('Algebra')) {
             mainTitle.innerText = "Algebra Monthly Test";
             contextTag.innerText = "Class IX-A · Feb 2026";
+            examMatrix = { 1: 72, 2: 95, 3: 68, 4: 75, 5: 80, labels: ["MCQ SCORE", "SPEED", "LOGIC", "VARIABLES", "GRAPHING"] };
         } else if (title.includes('Finals')) {
             mainTitle.innerText = "Term 1 Final Results";
             contextTag.innerText = "All Sections · Dec 2025";
+            examMatrix = { 1: 68, 2: 85, 3: 75, 4: 70, 5: 72, labels: ["SECTION A", "SECTION B", "SECTION C", "PASS RATE", "AVG SCORE"] };
+        }
+        
+        // Update Matrix labels and values
+        if (examMatrix) {
+            document.getElementById('lbl_matrix_1').innerText = examMatrix.labels[0];
+            document.getElementById('matrix_1_bar').style.width = examMatrix[1] + '%';
+            document.getElementById('matrix_1_val').innerText = examMatrix[1] + '%';
+            document.getElementById('lbl_matrix_2').innerText = examMatrix.labels[1];
+            document.getElementById('matrix_2_bar').style.width = examMatrix[2] + '%';
+            document.getElementById('matrix_2_val').innerText = examMatrix[2] + '%';
+            document.getElementById('lbl_matrix_3').innerText = examMatrix.labels[2];
+            document.getElementById('matrix_3_bar').style.width = examMatrix[3] + '%';
+            document.getElementById('matrix_3_val').innerText = examMatrix[3] + '%';
+            document.getElementById('lbl_matrix_4').innerText = examMatrix.labels[3];
+            document.getElementById('matrix_4_bar').style.width = examMatrix[4] + '%';
+            document.getElementById('matrix_4_val').innerText = examMatrix[4] + '%';
+            document.getElementById('lbl_matrix_5').innerText = examMatrix.labels[4];
+            document.getElementById('matrix_5_bar').style.width = examMatrix[5] + '%';
+            document.getElementById('matrix_5_val').innerText = examMatrix[5] + '%';
         }
         
         // Custom simple header for specific exam
@@ -2213,7 +2257,7 @@ function openDetailedResults(title) {
         // Dynamic Table Body for specific exam (Multi-student fix)
         const body = document.getElementById('gradeTableBody');
         body.innerHTML = '';
-        const students = gradebookData.T1.students; // Use T1 mock list for all students
+        const students = gradebookData['Class Test'].students; // Use Class Test list for all students
         
         students.forEach(s => {
             // Give them exam-specific marks
@@ -2236,31 +2280,67 @@ function openDetailedResults(title) {
 }
 
 const gradebookData = {
-    'T1': {
+    'Class Test': {
         avg: '76%', att: '92%', prof: '84%',
-        matrix: { exam: 76, att: 92, ass: 84, tst: 72, lab: 88 },
+        matrix: { 1: 76, 2: 92, 3: 84, 4: 72, 5: 88, labels: ["CLASS AVG", "SUBMISSION", "TOP SCORES", "CONSISTENCY", "CHAPTER AVG"] },
         students: [
-            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 28, fin: 38, att: 5, ass: 9, tst: 9, lab: 5, tot: 94, grd: 'A+', trend: '📈' },
-            { id: 105, name: 'Riya Gupta', rnk: 2, mid: 26, fin: 36, att: 5, ass: 8, tst: 10, lab: 4, tot: 89, grd: 'A', trend: '↔️' },
-            { id: 103, name: 'Sanjay Mehta', rnk: 38, mid: 10, fin: 15, att: 2, ass: 3, tst: 4, lab: 1, tot: 35, grd: 'F', trend: '📉', fail: true }
+            { id: 101, name: 'Arjun Kumar', rnk: 1, tot: 94, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, tot: 89, grd: 'A', trend: '↔️' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 38, tot: 35, grd: 'F', trend: '📉', fail: true }
         ]
     },
-    'T2': {
-        avg: '79%', att: '94%', prof: '88%',
-        matrix: { exam: 79, att: 94, ass: 88, tst: 76, lab: 90 },
+    'Lab Test': {
+        avg: '82%', att: '95%', prof: '88%',
+        matrix: { 1: 82, 2: 95, 3: 88, 4: 80, 5: 85, labels: ["PRACTICAL", "LAB CONDUCT", "EXPERIMENTS", "SAFETY", "VIVA"] },
         students: [
-            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 29, fin: 39, att: 5, ass: 10, tst: 10, lab: 5, tot: 98, grd: 'A+', trend: '📈' },
-            { id: 105, name: 'Riya Gupta', rnk: 3, mid: 24, fin: 35, att: 4, ass: 9, tst: 8, lab: 5, tot: 85, grd: 'A-', trend: '📉' },
-            { id: 103, name: 'Sanjay Mehta', rnk: 35, mid: 14, fin: 22, att: 3, ass: 5, tst: 3, lab: 2, tot: 49, grd: 'E', trend: '📈', fail: true }
+            { id: 101, name: 'Arjun Kumar', rnk: 1, tot: 98, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 4, tot: 82, grd: 'B+', trend: '📉' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 25, tot: 55, grd: 'D', trend: '📈' }
+        ]
+    },
+    'Assignment': {
+        avg: '85%', att: '98%', prof: '90%',
+        matrix: { 1: 85, 2: 98, 3: 90, 4: 88, 5: 92, labels: ["TIMELINESS", "QUALITY", "RESEARCH", "PRESENTATION", "ORIGINALITY"] },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, tot: 96, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, tot: 94, grd: 'A', trend: '📈' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 12, tot: 78, grd: 'B', trend: '📈' }
+        ]
+    },
+    'Mid-Term': {
+        avg: '74%', att: '88%', prof: '78%',
+        matrix: { 1: 74, 2: 88, 3: 78, 4: 70, 5: 75, labels: ["SECTION A", "SECTION B", "SECTION C", "TIME MGMT", "ACCURACY"] },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 2, tot: 88, grd: 'A', trend: '📉' },
+            { id: 105, name: 'Riya Gupta', rnk: 1, tot: 92, grd: 'A+', trend: '📈' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 40, tot: 32, grd: 'F', trend: '📉', fail: true }
+        ]
+    },
+    'End-Term': {
+        avg: '71%', att: '85%', prof: '75%',
+        matrix: { 1: 71, 2: 85, 3: 75, 4: 68, 5: 70, labels: ["THEORY", "OBJECTIVE", "PRACTICAL", "TOTAL AVG", "PASS %"] },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, tot: 95, grd: 'A+', trend: '↔️' },
+            { id: 105, name: 'Riya Gupta', rnk: 3, tot: 87, grd: 'A', trend: '📉' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 38, tot: 42, grd: 'E', trend: '📈', fail: true }
+        ]
+    },
+    'Other': {
+        avg: '88%', att: '96%', prof: '92%',
+        matrix: { 1: 88, 2: 96, 3: 92, 4: 90, 5: 94, labels: ["PARTICIPATION", "CO-CURRICULAR", "PROJECTS", "PERSONALITY", "LEADERSHIP"] },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, tot: 98, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, tot: 96, grd: 'A+', trend: '📈' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 5, tot: 88, grd: 'A', trend: '📈' }
         ]
     },
     'Overall': {
         avg: '77.5%', att: '93%', prof: '86%',
-        matrix: { exam: 78, att: 93, ass: 86, tst: 74, lab: 89 },
+        matrix: { 1: 78, 2: 93, 3: 86, 4: 74, 5: 89, labels: ["ACADEMIC AVG", "SUBMISSION", "MASTERY", "GROWTH", "PEER INDEX"] },
         students: [
-            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 'T1:94%', fin: 'T2:98%', tot: 96, grd: 'A+', trend: '🌟' },
-            { id: 105, name: 'Riya Gupta', rnk: 2, mid: 'T1:89%', fin: 'T2:85%', tot: 87, grd: 'A', trend: '↔️' },
-            { id: 103, name: 'Sanjay Mehta', rnk: 36, mid: 'T1:35%', fin: 'T2:49%', tot: 42, grd: 'F', trend: '📉', fail: true }
+            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 28, fin: 38, att: 5, ass: 9, tst: 9, lab: 5, tot: 94, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, mid: 26, fin: 36, att: 5, ass: 8, tst: 10, lab: 4, tot: 89, grd: 'A', trend: '↔️' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 38, mid: 10, fin: 15, att: 2, ass: 3, tst: 4, lab: 1, tot: 35, grd: 'F', trend: '📉', fail: true }
         ]
     }
 };
@@ -2292,20 +2372,29 @@ function switchGradebookTerm(term, btn) {
 
     // Update Matrix
     const m = data.matrix;
-    document.getElementById('matrix_exam').style.width = m.exam + '%';
-    document.getElementById('matrix_exam_val').innerText = m.exam + '%';
-    document.getElementById('matrix_att').style.width = m.att + '%';
-    document.getElementById('matrix_att_val').innerText = m.att + '%';
-    document.getElementById('matrix_ass').style.width = m.ass + '%';
-    document.getElementById('matrix_ass_val').innerText = m.ass + '%';
-    document.getElementById('matrix_tst').style.width = m.tst + '%';
-    document.getElementById('matrix_tst_val').innerText = m.tst + '%';
-    document.getElementById('matrix_lab').style.width = m.lab + '%';
-    document.getElementById('matrix_lab_val').innerText = m.lab + '%';
+    document.getElementById('lbl_matrix_1').innerText = m.labels[0];
+    document.getElementById('matrix_1_bar').style.width = m[1] + '%';
+    document.getElementById('matrix_1_val').innerText = m[1] + '%';
+    
+    document.getElementById('lbl_matrix_2').innerText = m.labels[1];
+    document.getElementById('matrix_2_bar').style.width = m[2] + '%';
+    document.getElementById('matrix_2_val').innerText = m[2] + '%';
+    
+    document.getElementById('lbl_matrix_3').innerText = m.labels[2];
+    document.getElementById('matrix_3_bar').style.width = m[3] + '%';
+    document.getElementById('matrix_3_val').innerText = m[3] + '%';
+    
+    document.getElementById('lbl_matrix_4').innerText = m.labels[3];
+    document.getElementById('matrix_4_bar').style.width = m[4] + '%';
+    document.getElementById('matrix_4_val').innerText = m[4] + '%';
+    
+    document.getElementById('lbl_matrix_5').innerText = m.labels[4];
+    document.getElementById('matrix_5_bar').style.width = m[5] + '%';
+    document.getElementById('matrix_5_val').innerText = m[5] + '%';
     
     const header = document.getElementById('gradeTableHeader');
     if (term === 'Overall') {
-        header.innerHTML = `<div style="flex:1.5">Student</div><div style="width:50px;text-align:center">Term 1</div><div style="width:50px;text-align:center">Term 2</div><div style="width:55px;text-align:center">Total</div>`;
+        header.innerHTML = `<div style="flex:1.5">Student</div><div style="width:40px;text-align:center">Rnk</div><div style="width:40px;text-align:center">Trend</div><div style="width:55px;text-align:center">Total</div>`;
     } else {
         header.innerHTML = `<div style="flex:1.5">Student</div><div style="width:40px;text-align:center">Rnk</div><div style="width:40px;text-align:center">Trend</div><div style="width:55px;text-align:center">Result</div>`;
     }
@@ -2320,27 +2409,21 @@ function switchGradebookTerm(term, btn) {
             container.style = "border-bottom:1px solid #F1F5F9";
             
             const row = document.createElement('div');
-            row.onclick = () => term === 'Overall' ? null : toggleStudentBreakdown(s.id);
-            row.style = `cursor:pointer;display:flex;align-items:center;padding:14px;${s.fail ? 'background:#FEF2F2' : ''}`;
+            // ONLY clickable if term is Overall
+            row.onclick = () => term === 'Overall' ? toggleStudentBreakdown(s.id) : null;
+            row.style = `cursor:${term === 'Overall' ? 'pointer' : 'default'};display:flex;align-items:center;padding:14px;${s.fail ? 'background:#FEF2F2' : ''}`;
             
             let resultCol = `<div style="width:55px;text-align:center"><div style="font-size:11px;font-weight:900;color:${s.fail ? '#EF4444' : '#4F46E5'}">${s.tot}${typeof s.tot === 'number' ? '%' : ''}</div><div style="font-size:8px;font-weight:800;color:${s.fail ? '#EF4444' : '#059669'}">${s.grd}</div></div>`;
             
+            row.innerHTML = `
+                <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">ID: #${s.id}</div></div>
+                <div style="width:40px;text-align:center;font-size:10px;font-weight:700;color:var(--ev-text)">#${s.rnk}</div>
+                <div style="width:40px;text-align:center;font-size:12px">${s.trend}</div>
+                ${resultCol}
+            `;
+            
+            // Add Breakdown Drawer ONLY if term is Overall
             if (term === 'Overall') {
-                row.innerHTML = `
-                    <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">Rank ${s.rnk}</div></div>
-                    <div style="width:50px;text-align:center;font-size:10px;font-weight:600;color:var(--ev-text)">${s.mid}</div>
-                    <div style="width:50px;text-align:center;font-size:10px;font-weight:600;color:var(--ev-text)">${s.fin}</div>
-                    ${resultCol}
-                `;
-            } else {
-                row.innerHTML = `
-                    <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">ID: #${s.id}</div></div>
-                    <div style="width:40px;text-align:center;font-size:10px;font-weight:700;color:var(--ev-text)">#${s.rnk}</div>
-                    <div style="width:40px;text-align:center;font-size:12px">${s.trend}</div>
-                    ${resultCol}
-                `;
-                
-                // Add Breakdown Drawer
                 const breakdown = document.createElement('div');
                 breakdown.id = 'breakdown_' + s.id;
                 breakdown.className = 'student-breakdown';
@@ -2354,17 +2437,14 @@ function switchGradebookTerm(term, btn) {
                         <div class="param-box"><span>Tests</span><strong>${s.tst}</strong></div>
                         <div class="param-box"><span>Labs</span><strong>${s.lab}</strong></div>
                     </div>
-                    <div style="margin-top:10px;display:flex;gap:6px">
-                        <button class="btn-primary" style="flex:1;padding:6px;font-size:10px" onclick="openGradeUpdate('${s.name}', ${s.tot}, '96%')">📝 Update Marks</button>
-                        <button class="btn-secondary" style="flex:1;padding:6px;font-size:10px">📊 Analytics</button>
-                    </div>
                 `;
                 container.appendChild(row);
                 container.appendChild(breakdown);
+            } else {
+                container.appendChild(row);
             }
             
-            if (term === 'Overall') body.appendChild(row);
-            else body.appendChild(container);
+            body.appendChild(container);
         });
         body.style.opacity = '1';
     }, 300);
