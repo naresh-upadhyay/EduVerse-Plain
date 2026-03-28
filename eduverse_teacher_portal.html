@@ -129,6 +129,13 @@ select.input-field{appearance:auto}
 .adj-btn:active { transform:scale(0.9); background:#6366F1; color:#fff; }
 .weight-slider { width:100%; height:4px; border-radius:2px; background:#F1F5F9; outline:none; -webkit-appearance:none; appearance:none; margin-top:12px; }
 .weight-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:14px; height:14px; border-radius:50%; background:#6366F1; cursor:pointer; border:2px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+.student-card { cursor:pointer; margin:0 14px 10px; background:#fff; border-radius:18px; padding:14px; box-shadow:0 2px 8px rgba(0,0,0,.04); display:flex; align-items:center; gap:12px; transition:transform 0.2s, box-shadow 0.2s; border:1px solid #F1F5F9; }
+.student-card:active { transform:scale(0.98); }
+.comm-btn { width:34px; height:34px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:14px; cursor:pointer; transition:all 0.2s; border:none; }
+.comm-btn.call { background:#E0F2FE; color:#0EA5E9; }
+.comm-btn.message { background:#ECFDF5; color:#059669; }
+.comm-btn:active { transform:scale(0.85); opacity:0.8; }
+.class-chip { padding:8px 16px; border-radius:12px; font-size:11px; font-weight:700; cursor:pointer; transition:all 0.2s; white-space:nowrap; border:1px solid #FDE68A; }
 </style>
 </head>
 <body>
@@ -301,24 +308,24 @@ select.input-field{appearance:auto}
 <div id="classTabContent">
     <!-- Students Tab -->
     <div class="class-tab-pane" style="display:block">
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">AK</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">Roll 1 · 95% · Rank 2</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">96% Att</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RG</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">Roll 2 · 91% · Rank 5</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">94% Att</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">SM</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta</div><div style="font-size:10px;color:var(--ev-text3)">Roll 3 · 42% · Rank 38</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF2F2;color:#EF4444">72% Att ⚠️</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">NP</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="font-size:10px;color:var(--ev-text3)">Roll 4 · 88% · Rank 8</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">98% Att</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">VJ</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Vikram Joshi</div><div style="font-size:10px;color:var(--ev-text3)">Roll 5 · 35% · Rank 42</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF2F2;color:#EF4444">68% Att ⚠️</div></div>
+        <div onclick="showStudentProfile('Arjun Kumar', 'Roll 1 · 95% · Rank 2', 'linear-gradient(135deg,#06B6D4,#0EA5E9)')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">AK</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">Roll 1 · 95% · Rank 2</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">96% Att</div></div>
+        <div onclick="showStudentProfile('Riya Gupta', 'Roll 2 · 91% · Rank 5', 'linear-gradient(135deg,#F59E0B,#EF4444)')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RG</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">Roll 2 · 91% · Rank 5</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">94% Att</div></div>
+        <div onclick="showStudentProfile('Sanjay Mehta', 'Roll 3 · 42% · Rank 38', 'linear-gradient(135deg,#8B5CF6,#EC4899)')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">SM</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta</div><div style="font-size:10px;color:var(--ev-text3)">Roll 3 · 42% · Rank 38</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF2F2;color:#EF4444">72% Att ⚠️</div></div>
+        <div onclick="showStudentProfile('Neha Patel', 'Roll 4 · 88% · Rank 8', 'linear-gradient(135deg,#10B981,#059669)')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">NP</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="font-size:10px;color:var(--ev-text3)">Roll 4 · 88% · Rank 8</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#ECFDF5;color:#059669">98% Att</div></div>
+        <div onclick="showStudentProfile('Vikram Joshi', 'Roll 5 · 35% · Rank 42', 'linear-gradient(135deg,#3B82F6,#1D4ED8)')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">VJ</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Vikram Joshi</div><div style="font-size:10px;color:var(--ev-text3)">Roll 5 · 35% · Rank 42</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF2F2;color:#EF4444">68% Att ⚠️</div></div>
     </div>
     <!-- Top Performers Tab -->
     <div class="class-tab-pane" style="display:none">
         <div style="margin:8px 14px;background:rgba(16,185,129,.1);padding:10px;border-radius:12px;font-size:11px;color:#059669;font-weight:600">⭐ Keep up the good work! These students are leading the class.</div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#FCD34D;display:flex;align-items:center;justify-content:center;font-size:14px">🥇</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="font-size:10px;color:var(--ev-text3)">98% Attendance · 94% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">98%</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#94A3B8;display:flex;align-items:center;justify-content:center;font-size:14px">🥈</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">96% Attendance · 95% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">95%</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#B45309;display:flex;align-items:center;justify-content:center;font-size:14px">🥉</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">94% Attendance · 91% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">91%</div></div>
+        <div onclick="showStudentProfile('Neha Patel', '98% Attendance · 94% Avg Score', '#FCD34D')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#FCD34D;display:flex;align-items:center;justify-content:center;font-size:14px">🥇</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="font-size:10px;color:var(--ev-text3)">98% Attendance · 94% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">98%</div></div>
+        <div onclick="showStudentProfile('Arjun Kumar', '96% Attendance · 95% Avg Score', '#94A3B8')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#94A3B8;display:flex;align-items:center;justify-content:center;font-size:14px">🥈</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">96% Attendance · 95% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">95%</div></div>
+        <div onclick="showStudentProfile('Riya Gupta', '94% Attendance · 91% Avg Score', '#B45309')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#B45309;display:flex;align-items:center;justify-content:center;font-size:14px">🥉</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">94% Attendance · 91% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#059669">91%</div></div>
     </div>
     <!-- At Risk Tab -->
     <div class="class-tab-pane" style="display:none">
         <div style="margin:8px 14px;background:rgba(239,68,68,.1);padding:10px;border-radius:12px;font-size:11px;color:#EF4444;font-weight:600">⚠️ Attention needed for these students (Low Attendance/Scores).</div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff">⚠️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Vikram Joshi</div><div style="font-size:10px;color:var(--ev-text3)">68% Attendance · 35% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#EF4444">At Risk</div></div>
-        <div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff">⚠️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta</div><div style="font-size:10px;color:var(--ev-text3)">72% Attendance · 42% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#EF4444">Warning</div></div>
+        <div onclick="showStudentProfile('Vikram Joshi', '68% Attendance · 35% Avg Score', '#EF4444')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff">⚠️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Vikram Joshi</div><div style="font-size:10px;color:var(--ev-text3)">68% Attendance · 35% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#EF4444">At Risk</div></div>
+        <div onclick="showStudentProfile('Sanjay Mehta', '72% Attendance · 42% Avg Score', '#EF4444')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff">⚠️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta</div><div style="font-size:10px;color:var(--ev-text3)">72% Attendance · 42% Avg Score</div></div><div style="font-family:'Outfit',sans-serif;font-weight:800;color:#EF4444">Warning</div></div>
         <button class="btn-primary" style="margin:10px 14px;width:calc(100% - 28px);background:#EF4444" onclick="navigateTo('aichat')">🤖 Generate Remedial Plan for X-A</button>
     </div>
 </div>
@@ -336,25 +343,7 @@ select.input-field{appearance:auto}
 <div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div>
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
-<!-- Student Profile Modal -->
-<div class="modal-overlay" id="studentProfileModal"><div class="modal-sheet"><div class="modal-handle"></div>
-<div style="text-align:center;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 8px;border:3px solid #E0F2FE">🧑</div><div class="modal-title">Arjun Kumar</div><div style="font-size:11px;color:var(--ev-text3)">Class X-A · Roll No. 1 · STU-2024-1082</div></div>
-<div style="display:flex;gap:8px;margin-bottom:12px">
-<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#059669">95%</div><div style="font-size:9px;color:#6B7280">Math Score</div></div>
-<div style="flex:1;background:#EFF6FF;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#1D4ED8">96%</div><div style="font-size:9px;color:#6B7280">Attendance</div></div>
-<div style="flex:1;background:#FEF3C7;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#D97706">2nd</div><div style="font-size:9px;color:#6B7280">Rank</div></div>
-</div>
-<div style="background:#F8FAFC;border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--ev-text2);line-height:1.6">
-    <b>👨‍👩‍👦 Parent:</b> <span style="color:var(--ev-text3)">Mr. Rajesh Kumar</span><br>
-    <b>📞 Mobile:</b> <a href="tel:+919876543210" style="color:var(--ev-text3);text-decoration:none">+91-9876543210</a><br>
-    <b>📧 Email:</b> <a href="mailto:arjun.k@eduverse.in" style="color:var(--ev-text3);text-decoration:none">arjun.k@eduverse.in</a><br>
-    <b>📝 Last Test:</b> <span style="color:var(--ev-text3)">95/100 (Unit Test 3)</span>
-</div>
-<div style="display:flex;gap:8px">
-    <button class="btn-success" onclick="hideModal('studentProfileModal');navigateTo('chatdetail')" style="flex:1;font-size:12px">💬 Drop Message</button>
-    <button class="btn-secondary" onclick="hideModal('studentProfileModal')" style="flex:1">Close</button>
-</div>
-</div></div>
+
 </div>
 
 <!-- ==================== ATTENDANCE SCREEN ==================== -->
@@ -416,25 +405,49 @@ select.input-field{appearance:auto}
 <div class="screen" data-screen="timetable" style="background:#F0F4FF">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1E40AF,#3B82F6);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1E40AF"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#1E40AF,#3B82F6);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">My Timetable</div><div style="font-size:10px;color:rgba(255,255,255,.6)">Wednesday</div></div>
-<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;margin-top:12px">
-<div class="day-chip"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">MON</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">24</div></div>
-<div class="day-chip"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">TUE</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">25</div></div>
-<div class="day-chip active"><div style="font-size:9px;font-weight:600">WED</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800">26</div></div>
-<div class="day-chip"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">THU</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">27</div></div>
-<div class="day-chip"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">FRI</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">28</div></div>
-<div class="day-chip"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">SAT</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">29</div></div>
-</div></div>
+<div style="background:linear-gradient(135deg,#1E40AF,#3B82F6);padding:8px 18px 16px">
+    <div class="mini-top">
+        <div class="back-btn" onclick="goBack()">←</div>
+        <div class="mini-title">My Timetable</div>
+        <div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer" onclick="openDatePicker()">📅 Select Date</div>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:8px;font-weight:600" id="ttHeaderDate">Wednesday, March 26</div>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;margin-top:12px;scroll-behavior:smooth" id="ttDateScroller">
+        <!-- Dynamic chips will be injected here -->
+    </div>
+</div>
 <div class="spacer-sm"></div>
-<div style="margin:0 14px 10px;padding:12px;background:#E0F2FE;border:1.5px solid #BAE6FD;border-radius:16px;display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#0EA5E9;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;color:var(--ev-text)">8:00</div><div style="font-size:9px;color:var(--ev-text3)">9:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#0EA5E9"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Mathematics — X-A</div><div style="font-size:10px;color:var(--ev-text3)">Calculus Ch.7</div></div><div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">301</div></div>
-<div style="margin:0 14px 10px;padding:12px;background:#ECFDF5;border:1.5px solid #BBF7D0;border-radius:16px;display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#059669;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;color:#059669">9:00</div><div style="font-size:9px;color:var(--ev-text3)">10:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#059669"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Mathematics — X-B</div><div style="font-size:10px;color:var(--ev-text3)">Integration Practice</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">305</div><div style="font-size:9px;background:#DCFCE7;color:#059669;padding:2px 6px;border-radius:5px;font-weight:700">NOW</div></div></div>
-<div style="margin:0 14px 10px;background:#FFF7ED;border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11px;color:#92400E;font-weight:600">☕ Break</div><div style="font-size:10px;color:#B45309">10:00 – 10:20</div></div>
-<div style="margin:0 14px 10px;padding:12px;background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:16px;display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#8B5CF6;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">10:20</div><div style="font-size:9px;color:var(--ev-text3)">11:20</div></div><div style="width:8px;height:8px;border-radius:50%;background:#8B5CF6"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Free Period</div><div style="font-size:10px;color:var(--ev-text3)">Staff Room</div></div><div style="font-size:10px;font-weight:600;background:#F5F3FF;color:#8B5CF6;padding:4px 8px;border-radius:8px">Free</div></div>
-<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#F59E0B;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">11:20</div><div style="font-size:9px;color:var(--ev-text3)">12:20</div></div><div style="width:8px;height:8px;border-radius:50%;background:#F59E0B"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Mathematics — IX-A</div><div style="font-size:10px;color:var(--ev-text3)">Algebra Ch.5</div></div><div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">202</div></div>
-<div style="margin:0 14px 10px;background:#FFF7ED;border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11px;color:#92400E;font-weight:600">🍱 Lunch</div><div style="font-size:10px;color:#B45309">12:20 – 1:00</div></div>
-<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#0EA5E9;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">1:00</div><div style="font-size:9px;color:var(--ev-text3)">2:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#0EA5E9"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Math Lab — X-A</div><div style="font-size:10px;color:var(--ev-text3)">Practical Session</div></div><div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">Lab 1</div></div>
-<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#10B981;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">2:00</div><div style="font-size:9px;color:var(--ev-text3)">3:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#10B981"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">Dept Meeting</div><div style="font-size:10px;color:var(--ev-text3)">Math Dept · HOD Review</div></div><div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">Conf</div></div>
-<div class="spacer"></div>
+<div id="ttCardsContainer">
+    <!-- Dynamic cards will be injected here -->
+</div>
+</div>
+
+<div class="modal-overlay" id="selectDateModal">
+  <div class="modal-sheet" style="padding:20px 14px">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Select Date</div>
+    
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;background:#F1F5F9;padding:8px;border-radius:12px">
+        <button class="adj-btn" onclick="moveCalendarMonth(-1)">←</button>
+        <div id="calendarMonthYear" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;color:var(--ev-text)">March 2026</div>
+        <button class="adj-btn" onclick="moveCalendarMonth(1)">→</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:8px">
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">SUN</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">MON</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">TUE</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">WED</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">THU</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">FRI</div>
+        <div style="font-size:9px;font-weight:800;color:var(--ev-text3)">SAT</div>
+    </div>
+    <div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px"></div>
+    
+    <div style="margin-top:20px">
+        <button class="btn-secondary" onclick="hideModal('selectDateModal')">Cancel</button>
+    </div>
+  </div>
 </div>
 <div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
 <div class="bottom-nav">
@@ -1017,13 +1030,81 @@ select.input-field{appearance:auto}
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#92400E,#D97706);padding-top:14px"><span>9:41</span><div class="notch" style="background:#D97706"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#92400E,#D97706);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Student Directory</div><div style="font-size:10px;color:rgba(255,255,255,.6)">133 Students</div></div></div>
-<div style="padding:10px 14px"><input class="input-field" placeholder="🔍 Search students by name, roll no..." style="margin-bottom:0"></div>
-<div class="chip-row"><div class="chip" style="background:#D97706;color:#fff">All (133)</div><div class="chip" style="color:#D97706;background:#FEF3C7">X-A (45)</div><div class="chip" style="color:#D97706;background:#FEF3C7">X-B (48)</div><div class="chip" style="color:#D97706;background:#FEF3C7">IX-A (40)</div></div>
-<div class="spacer-sm"></div>
-<div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">AK</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 1 · 95% Avg</div></div><div style="display:flex;gap:6px"><div style="width:28px;height:28px;border-radius:8px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">📞</div><div style="width:28px;height:28px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">💬</div></div></div>
-<div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RG</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 2 · 91% Avg</div></div><div style="display:flex;gap:6px"><div style="width:28px;height:28px;border-radius:8px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">📞</div><div style="width:28px;height:28px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">💬</div></div></div>
-<div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#FEF2F2;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border:1px solid #FECACA"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">SM</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta ⚠️</div><div style="font-size:10px;color:#EF4444">X-A · Roll 3 · 42% Avg · Low Attendance</div></div><div style="display:flex;gap:6px"><div style="width:28px;height:28px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">📞</div></div></div>
-<div onclick="showModal('studentProfileModal')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">NP</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 4 · 88% Avg</div></div><div style="display:flex;gap:6px"><div style="width:28px;height:28px;border-radius:8px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">📞</div><div style="width:28px;height:28px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">💬</div></div></div>
+<div style="padding:12px 14px"><input class="input-field" placeholder="🔍 Search students by name, roll no..." style="margin-bottom:0;border-color:#FDE68A;background:#FFF"></div>
+<div class="chip-row" style="background:#FFF7ED;padding:4px 14px 12px;overflow-x:auto;scrollbar-width:none">
+    <div id="chip-all" class="class-chip active" style="background:#D97706;color:#fff" onclick="filterDirectory('all')">All (133)</div>
+    <div id="chip-XA" class="class-chip" style="background:#FEF3C7;color:#D97706" onclick="filterDirectory('X-A')">X-A (45)</div>
+    <div id="chip-XB" class="class-chip" style="background:#FEF3C7;color:#D97706" onclick="filterDirectory('X-B')">X-B (48)</div>
+    <div id="chip-IXA" class="class-chip" style="background:#FEF3C7;color:#D97706" onclick="filterDirectory('IX-A')">IX-A (40)</div>
+</div>
+
+<div id="directoryList">
+    <!-- X-A STUDENTS -->
+    <div class="student-card" data-class="X-A" onclick="showStudentProfile('Arjun Kumar', 'Class X-A · Roll 1 · 95% Avg', 'linear-gradient(135deg,#06B6D4,#0EA5E9)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">AK</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 1 · 95% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Arjun Kumar', 'call')">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Arjun Kumar', 'message')">💬</button>
+        </div>
+    </div>
+    <div class="student-card" data-class="X-A" onclick="showStudentProfile('Riya Gupta', 'Class X-A · Roll 2 · 91% Avg', 'linear-gradient(135deg,#F59E0B,#EF4444)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RG</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 2 · 91% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Riya Gupta', 'call')">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Riya Gupta', 'message')">💬</button>
+        </div>
+    </div>
+    <div class="student-card" data-class="X-A" style="background:#FEF2F2;border-color:#FECACA" onclick="showStudentProfile('Sanjay Mehta', 'Class X-A · Roll 3 · 42% Avg · Low Attendance', 'linear-gradient(135deg,#8B5CF6,#EC4899)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">SM</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Sanjay Mehta ⚠️</div><div style="font-size:10px;color:#EF4444">X-A · Roll 3 · 42% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Sanjay Mehta', 'call')" style="background:#FEE2E2;color:#EF4444">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Sanjay Mehta', 'message')">💬</button>
+        </div>
+    </div>
+    
+    <!-- X-B STUDENTS -->
+    <div class="student-card" data-class="X-B" onclick="showStudentProfile('Kabir Singh', 'Class X-B · Roll 1 · 88% Avg', 'linear-gradient(135deg,#4F46E5,#6366F1)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#6366F1);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">KS</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Kabir Singh</div><div style="font-size:10px;color:var(--ev-text3)">X-B · Roll 1 · 88% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Kabir Singh', 'call')">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Kabir Singh', 'message')">💬</button>
+        </div>
+    </div>
+    <div class="student-card" data-class="X-B" onclick="showStudentProfile('Ishika Roy', 'Class X-B · Roll 2 · 92% Avg', 'linear-gradient(135deg,#D946EF,#701A75)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#D946EF,#701A75);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">IR</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ishika Roy</div><div style="font-size:10px;color:var(--ev-text3)">X-B · Roll 2 · 92% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Ishika Roy', 'call')">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Ishika Roy', 'message')">💬</button>
+        </div>
+    </div>
+
+    <!-- IX-A STUDENTS -->
+    <div class="student-card" data-class="IX-A" onclick="showStudentProfile('Rahul Verma', 'Class IX-A · Roll 1 · 75% Avg', 'linear-gradient(135deg,#10B981,#059669)')">
+        <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RV</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Rahul Verma</div><div style="font-size:10px;color:var(--ev-text3)">IX-A · Roll 1 · 75% Avg</div></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <button class="comm-btn call" onclick="event.stopPropagation(); initiateComm('Rahul Verma', 'call')">📞</button>
+            <button class="comm-btn message" onclick="event.stopPropagation(); initiateComm('Rahul Verma', 'message')">💬</button>
+        </div>
+    </div>
+</div>
 <div class="spacer"></div>
 </div>
 <div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
@@ -1163,7 +1244,7 @@ select.input-field{appearance:auto}
 <!-- ==================== CHAT DETAIL ==================== -->
 <div class="screen" data-screen="chatdetail" style="background:#F8FAFC">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0C4A6E"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
-<div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 12px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;font-size:14px">👨‍💼</div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">Principal - Dr. Kapoor</div><div style="font-size:10px;color:rgba(255,255,255,.5)">Online now</div></div></div></div>
+<div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 12px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div id="chatProfileIcon" style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;font-size:14px">👨‍💼</div><div style="flex:1"><div id="chatHeaderName" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">Principal - Dr. Kapoor</div><div style="font-size:10px;color:rgba(255,255,255,.5)">Online now</div></div></div></div>
 <div class="screen-body" style="background:#F8FAFC;padding:12px 14px" id="chatThreadBox">
 <div style="display:flex;justify-content:flex-start;margin-bottom:10px"><div style="max-width:75%;background:#fff;border-radius:14px 14px 14px 4px;padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06)"><div style="font-size:12px;color:var(--ev-text);line-height:1.5">Mrs. Sharma, please submit the Mathematics final exam paper by Friday. Include both objective and subjective sections.</div><div style="font-size:9px;color:var(--ev-text3);margin-top:4px;text-align:right">10:15 AM</div></div></div>
 <div style="display:flex;justify-content:flex-end;margin-bottom:10px"><div style="max-width:75%;background:linear-gradient(135deg,#0EA5E9,#06B6D4);border-radius:14px 14px 4px 14px;padding:10px 14px"><div style="font-size:12px;color:#fff;line-height:1.5">Sure Sir, I'll have it ready by Thursday evening. The paper will cover Chapters 7-14.</div><div style="font-size:9px;color:rgba(255,255,255,.6);margin-top:4px;text-align:right">10:18 AM ✓✓</div></div></div>
@@ -1206,6 +1287,27 @@ select.input-field{appearance:auto}
 </div></div>
 
 </div>
+
+<div class="modal-overlay" id="studentProfileModal"><div class="modal-sheet"><div class="modal-handle"></div>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+    <div id="profileAvatar" style="width:64px;height:64px;border-radius:50%;background:#0EA5E9;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;font-family:'Outfit',sans-serif">AK</div>
+    <div style="flex:1">
+        <div id="profileName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--ev-text)">Arjun Kumar</div>
+        <div id="profileDetails" style="font-size:12px;color:var(--ev-text3)">Class X-A · Roll 1 · 95% Avg</div>
+    </div>
+</div>
+<div style="display:flex;gap:10px;margin-bottom:20px">
+    <button class="btn-primary" style="flex:1;background:#E0F2FE;color:#0369A1;border:none;padding:12px;border-radius:12px" onclick="initiateComm(document.getElementById('profileName').innerText, 'call')">📞 Call</button>
+    <button class="btn-primary" style="flex:1;background:#ECFDF5;color:#047857;border:none;padding:12px;border-radius:12px" onclick="initiateComm(document.getElementById('profileName').innerText, 'message')">💬 Message</button>
+</div>
+<div style="background:#F8FAFC;border-radius:16px;padding:16px;margin-bottom:16px">
+    <div style="font-size:10px;font-weight:800;color:var(--ev-text3);text-transform:uppercase;margin-bottom:12px">Student Performance</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:12px;color:var(--ev-text2)">Current Grade</span><span style="font-size:12px;font-weight:700;color:#059669">A+ (95.4%)</span></div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:12px;color:var(--ev-text2)">Attendance</span><span style="font-size:12px;font-weight:700;color:var(--ev-text)">92%</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--ev-text2)">Class Rank</span><span style="font-size:12px;font-weight:700;color:var(--ev-text)">#1 of 45</span></div>
+</div>
+<button class="btn-secondary" onclick="hideModal('studentProfileModal')">Close Profile</button>
+</div></div>
 
 <!-- ==================== SALARY & PAYSLIPS ==================== -->
 <div class="screen" data-screen="salary" style="background:#F0FDF4">
@@ -1532,7 +1634,11 @@ function goBack() {
 function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.querySelector('[data-screen="'+name+'"]');
-  if (target) { target.classList.add('active'); currentScreen = name; }
+  if (target) { 
+      target.classList.add('active'); 
+      currentScreen = name; 
+      if (name === 'timetable') initTimetable();
+  }
   // Update bottom nav
   document.querySelectorAll('.bottom-nav').forEach(nav => {
     nav.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -1550,6 +1656,170 @@ function showScreen(name) {
 
 function showModal(id) { const m = document.getElementById(id); if(m) m.classList.add('show'); }
 function hideModal(id) { const m = document.getElementById(id); if(m) m.classList.remove('show'); }
+
+// ==================== TIMETABLE DYNAMIC LOGIC ====================
+let ttDate = new Date(2026, 2, 26); // Default starting date (March 26, 2026)
+let calViewDate = new Date(2026, 2, 26);
+
+function initTimetable() {
+    renderTTHeader();
+    renderTTChips();
+    renderTTCards();
+}
+
+function renderTTHeader() {
+    const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+    document.getElementById('ttHeaderDate').innerText = ttDate.toLocaleDateString('en-US', options);
+}
+
+function renderTTChips() {
+    const scroller = document.getElementById('ttDateScroller');
+    scroller.innerHTML = '';
+    
+    // Generate 7 days centered around ttDate
+    for (let i = -3; i <= 3; i++) {
+        const d = new Date(ttDate);
+        d.setDate(ttDate.getDate() + i);
+        
+        const isActive = i === 0;
+        const dayName = d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+        const dateNum = d.getDate();
+        
+        const chip = document.createElement('div');
+        chip.className = `day-chip ${isActive ? 'active' : ''}`;
+        chip.style.minWidth = '54px';
+        chip.onclick = () => { ttDate = d; initTimetable(); };
+        chip.innerHTML = `<div style="font-size:9px;${isActive ? '' : 'color:rgba(255,255,255,.6);'}font-weight:600">${dayName}</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;${isActive ? '' : 'color:#fff'}">${dateNum}</div>`;
+        scroller.appendChild(chip);
+        
+        if (isActive) {
+            setTimeout(() => {
+                chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }, 100);
+        }
+    }
+}
+
+function renderTTCards() {
+    const container = document.getElementById('ttCardsContainer');
+    container.innerHTML = '';
+    const day = ttDate.getDay(); // 0=Sun, 1=Mon, etc.
+    const isToday = ttDate.toDateString() === new Date().toDateString();
+    
+    if (day === 0) { // Sunday
+        container.innerHTML = `
+            <div style="text-align:center;padding:60px 20px">
+                <div style="font-size:48px;margin-bottom:16px">🏖️</div>
+                <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:var(--ev-text)">No Classes Today</div>
+                <div style="font-size:12px;color:var(--ev-text3);margin-top:4px">Enjoy your Sunday rest, Mrs. Sharma!</div>
+            </div>`;
+        return;
+    }
+
+    // Realistic Simulated Schedules based on day of week
+    const schedules = {
+        1: [ // Monday
+            { type: "class", time: "8:00 AM", endTime: "9:00 AM", title: "Mathematics — X-A", sub: "Calculus Intro", room: "301", bg: "#E0F2FE", border: "#BAE6FD", accent: "#0EA5E9" },
+            { type: "break", time: "10:00 AM", endTime: "10:20 AM", title: "☕ Break", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "free", time: "10:20 AM", endTime: "11:20 AM", title: "Free Period", sub: "Lesson Planning", room: "Staff", bg: "#F5F3FF", border: "#DDD6FE", accent: "#8B5CF6" },
+            { type: "lunch", time: "12:20 PM", endTime: "1:00 PM", title: "🍱 Lunch", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "class", time: "1:00 PM", endTime: "2:00 PM", title: "Mathematics — IX-A", sub: "Algebra Review", room: "202", bg: "#fff", border: "#F1F5F9", accent: "#F59E0B" }
+        ],
+        3: [ // Wednesday
+            { type: "class", time: "8:00 AM", endTime: "9:00 AM", title: "Mathematics — X-A", sub: "Calculus Ch.7", room: "301", bg: "#E0F2FE", border: "#BAE6FD", accent: "#0EA5E9" },
+            { type: "class", time: "9:00 AM", endTime: "10:00 AM", title: "Mathematics — X-B", sub: "Integration Practice", room: "305", bg: "#ECFDF5", border: "#BBF7D0", accent: "#059669" },
+            { type: "break", time: "10:00 AM", endTime: "10:20 AM", title: "☕ Break", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "free", time: "10:20 AM", endTime: "11:20 AM", title: "Free Period", sub: "Staff Room", room: "Free", bg: "#F5F3FF", border: "#DDD6FE", accent: "#8B5CF6" },
+            { type: "class", time: "11:20 AM", endTime: "12:20 PM", title: "Mathematics — IX-A", sub: "Algebra Ch.5", room: "202", bg: "#fff", border: "#F1F5F9", accent: "#F59E0B" },
+            { type: "lunch", time: "12:20 PM", endTime: "1:00 PM", title: "🍱 Lunch", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "class", time: "1:00 PM", endTime: "2:00 PM", title: "Math Lab — X-A", sub: "Practical Session", room: "Lab 1", bg: "#E0F2FE", border: "#BAE6FD", accent: "#10B981" }
+        ],
+        default: [ // Tue, Thu, Fri, Sat
+            { type: "class", time: "9:00 AM", endTime: "10:00 AM", title: "Mathematics — X-B", sub: "Problem Solving", room: "305", bg: "#ECFDF5", border: "#BBF7D0", accent: "#059669" },
+            { type: "break", time: "10:00 AM", endTime: "10:20 AM", title: "☕ Break", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "class", time: "11:20 AM", endTime: "12:20 PM", title: "Mathematics — IX-A", sub: "Geometry Ch.2", room: "202", bg: "#fff", border: "#F1F5F9", accent: "#F59E0B" },
+            { type: "lunch", time: "12:20 PM", endTime: "1:00 PM", title: "🍱 Lunch", room: "", bg: "#FFF7ED", color: "#92400E" },
+            { type: "class", time: "2:00 PM", endTime: "3:00 PM", title: "Dept Meeting", sub: "Monthly Review", room: "Conf", bg: "#fff", border: "#F1F5F9", accent: "#10B981" }
+        ]
+    };
+
+    const schedule = schedules[day] || schedules.default;
+    
+    schedule.forEach((item, idx) => {
+        const isTodayNow = isToday && ((day === 3 && idx === 1) || (day !== 3 && idx === 0)); // Simulated "NOW" logic
+        
+        if (item.type === 'break' || item.type === 'lunch') {
+            const card = document.createElement('div');
+            card.style = `margin:0 14px 10px;background:${item.bg};border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;animation:slideIn 0.3s ease forwards;animation-delay:${idx * 0.1}s`;
+            card.innerHTML = `<div style="font-size:11px;color:${item.color};font-weight:600">${item.title}</div><div style="font-size:10px;color:${item.color}">${item.time} – ${item.endTime}</div>`;
+            container.appendChild(card);
+        } else {
+            const card = document.createElement('div');
+            card.style = `margin:0 14px 10px;padding:12px;background:${item.bg};border:1.5px solid ${item.border};border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative;animation:slideIn 0.3s ease forwards;animation-delay:${idx * 0.1}s`;
+            
+            card.innerHTML = `
+                <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:${item.accent};border-radius:4px 0 0 4px"></div>
+                <div style="width:42px;text-align:center">
+                    <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;${isTodayNow ? 'color:'+item.accent : 'color:var(--ev-text)'}">${item.time.split(' ')[0]}</div>
+                    <div style="font-size:9px;color:var(--ev-text3)">${item.endTime.split(' ')[0]}</div>
+                </div>
+                <div style="width:8px;height:8px;border-radius:50%;background:${item.accent}"></div>
+                <div style="flex:1">
+                    <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text)">${item.title}</div>
+                    <div style="font-size:10px;color:var(--ev-text3)">${item.sub}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+                    <div style="font-size:10px;font-weight:600;color:var(--ev-text2);background:#F1F5F9;padding:4px 8px;border-radius:8px">${item.room}</div>
+                    ${isTodayNow ? `<div style="font-size:9px;background:#DCFCE7;color:#059669;padding:2px 6px;border-radius:5px;font-weight:700">NOW</div>` : ''}
+                </div>`;
+            container.appendChild(card);
+        }
+    });
+    
+    // Add spacer
+    const sp = document.createElement('div'); sp.className = 'spacer'; container.appendChild(sp);
+}
+
+function openDatePicker() {
+    calViewDate = new Date(ttDate); // Sync calendar view with selected date
+    renderCalModal();
+    showModal('selectDateModal');
+}
+
+function renderCalModal() {
+    const monthYear = document.getElementById('calendarMonthYear');
+    const options = { month: 'long', year: 'numeric' };
+    monthYear.innerText = calViewDate.toLocaleDateString('en-US', options);
+    
+    const grid = document.getElementById('calendarGrid');
+    grid.innerHTML = '';
+    
+    const firstDay = new Date(calViewDate.getFullYear(), calViewDate.getMonth(), 1).getDay();
+    const daysInMonth = new Date(calViewDate.getFullYear(), calViewDate.getMonth() + 1, 0).getDate();
+    
+    // Fill empty spots for previous month
+    for (let i = 0; i < firstDay; i++) {
+        grid.appendChild(document.createElement('div'));
+    }
+    
+    // Current month days
+    for (let i = 1; i <= daysInMonth; i++) {
+        const d = new Date(calViewDate.getFullYear(), calViewDate.getMonth(), i);
+        const day = document.createElement('div');
+        const isSelected = d.toDateString() === ttDate.toDateString();
+        
+        day.style = `padding:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border-radius:8px;${isSelected ? 'background:var(--ev-primary);color:#fff' : 'color:var(--ev-text)'}`;
+        day.innerText = i;
+        day.onclick = () => { ttDate = d; hideModal('selectDateModal'); initTimetable(); };
+        grid.appendChild(day);
+    }
+}
+
+function moveCalendarMonth(dir) {
+    calViewDate.setMonth(calViewDate.getMonth() + dir);
+    renderCalModal();
+}
+// =================================================================
 
 // Splash auto-transition
 setTimeout(() => { document.getElementById('splashBar').style.width = '100%'; }, 300);
@@ -1885,8 +2155,10 @@ function showStudentProfile(name, info, color) {
     document.getElementById('profileName').innerText = name;
     document.getElementById('profileDetails').innerText = info;
     const avatar = document.getElementById('profileAvatar');
-    avatar.style.background = color;
-    avatar.innerText = name.split(' ').map(n => n[0]).join('');
+    if(avatar) {
+        avatar.style.background = color;
+        avatar.innerText = name.split(' ').map(n => n[0]).join('');
+    }
     showModal('studentProfileModal');
 }
 
