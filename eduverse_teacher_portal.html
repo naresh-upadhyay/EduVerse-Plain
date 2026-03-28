@@ -1203,25 +1203,87 @@ select.input-field{appearance:auto}
 <div class="screen" data-screen="notices" style="background:#FFFBEB">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#92400E,#D97706);padding-top:14px"><span>9:41</span><div class="notch" style="background:#D97706"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#92400E,#D97706);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Notices & Circulars</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer" onclick="showModal('createNoticeModal')">+ Create</div></div></div>
-<div class="chip-row"><div class="chip" style="background:#D97706;color:#fff">All (8)</div><div class="chip" style="color:#D97706;background:#FEF3C7">My Notices</div><div class="chip" style="color:#D97706;background:#FEF3C7">School</div></div>
+<div style="background:linear-gradient(135deg,#92400E,#D97706);padding:8px 18px 16px">
+    <div class="mini-top">
+        <div class="back-btn" onclick="goBack()">←</div>
+        <div class="mini-title">Notices & Circulars</div>
+        <div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer" onclick="openCreateNotice()">+ Create</div>
+    </div>
+    <div style="margin-top:12px">
+        <input type="text" id="noticeSearchInput" class="input-dark input-field" placeholder="🔍 Search notices..." style="margin-bottom:0;background:rgba(255,255,255,.12);border:none" oninput="renderNoticesList()">
+    </div>
+</div>
+<div class="chip-row" id="noticeTabs" style="background:#fff;padding:12px 14px;border-bottom:1px solid #F1F5F9">
+    <div class="chip active" style="background:#D97706;color:#fff" onclick="filterNotices('all', this)">All</div>
+    <div class="chip" style="color:#D97706;background:#FEF3C7" onclick="filterNotices('my', this)">My Notices</div>
+    <div class="chip" style="color:#D97706;background:#FEF3C7" onclick="filterNotices('school', this)">School</div>
+    <div class="chip" style="color:#D97706;background:#FEF3C7" onclick="filterNotices('draft', this)">Drafts</div>
+</div>
 <div class="spacer-sm"></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#0EA5E9"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#E0F2FE;color:#0EA5E9">📋 YOUR NOTICE</div><div style="font-size:12px;font-weight:700;color:var(--ev-text);margin-bottom:4px">Extra Class — Integration Revision</div><div style="font-size:10.5px;color:var(--ev-text3);line-height:1.5">Remedial class for students scoring below 50%. Room 301, Saturday 10 AM.</div><div style="font-size:9px;color:var(--ev-text3);margin-top:6px">📅 Published by You · March 25</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#EF4444"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#FEF2F2;color:#EF4444">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text);margin-bottom:4px">Staff Meeting — Friday 3 PM</div><div style="font-size:10.5px;color:var(--ev-text3);line-height:1.5">Mandatory meeting. Agenda: Final exam preparation & duty allocation.</div><div style="font-size:9px;color:var(--ev-text3);margin-top:6px">📅 By Principal · March 26</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#4F46E5"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#EEF2FF;color:#4F46E5">📋 GENERAL</div><div style="font-size:12px;font-weight:700;color:var(--ev-text);margin-bottom:4px">Exam Invigilation Duty Schedule</div><div style="font-size:10.5px;color:var(--ev-text3);line-height:1.5">Your invigilation: March 28 (Hall A, 9-12) & March 30 (Hall B, 9-12).</div><div style="font-size:9px;color:var(--ev-text3);margin-top:6px">📅 By Exam Cell · March 24</div></div>
+<div id="noticesContainer">
+    <!-- Notices will be injected here -->
+</div>
 <div class="spacer"></div>
 </div>
 <div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
 <div class="bottom-nav"><div class="nav-item" onclick="navigateTo('dashboard')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div><div class="nav-item" onclick="navigateTo('myclasses')"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Classes</div></div><div class="nav-item" onclick="navigateTo('exams')"><div class="nav-icon-wrap">📝</div><div class="nav-lbl">Exams</div></div><div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div><div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div></div>
-<div class="modal-overlay" id="createNoticeModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📢 Create Notice</div>
-<div class="label-sm">Title</div><input class="input-field" placeholder="Notice title..." value="Homework Deadline Extended">
-<div class="label-sm">Category</div><select class="input-field"><option>General</option><option>Urgent</option><option>Event</option><option>Academic</option></select>
-<div class="label-sm">Target Audience</div><select class="input-field"><option>X-A Students</option><option>X-B Students</option><option>IX-A Students</option><option>All My Students</option><option>Parents</option></select>
-<div class="label-sm">Content</div><textarea class="input-field" rows="3" placeholder="Notice content...">Integration homework deadline extended to April 1. Extra revision class on Saturday 10 AM in Room 301.</textarea>
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><input type="checkbox" id="urgentCheck"><label for="urgentCheck" style="font-size:11px;color:var(--ev-text2)">Mark as Urgent 🚨</label></div>
-<button class="btn-primary" onclick="hideModal('createNoticeModal')">📤 Publish Notice</button>
-<button class="btn-secondary" onclick="hideModal('createNoticeModal')" style="margin-top:8px">Cancel</button>
-</div></div>
+<div class="modal-overlay" id="createNoticeModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="noticeModalTitle">📢 Create Notice</div>
+    
+    <input type="hidden" id="editNoticeId">
+    <div class="label-sm">Title</div>
+    <input class="input-field" id="noticeTitleInput" placeholder="Notice title...">
+    
+    <div class="label-sm">Category</div>
+    <select class="input-field" id="noticeCategoryInput">
+        <option value="General">General</option>
+        <option value="Urgent">Urgent</option>
+        <option value="Event">Event</option>
+        <option value="Academic">Academic</option>
+    </select>
+    
+    <div class="label-sm">Target Audience</div>
+    <select class="input-field" id="noticeTargetInput">
+        <option>X-A Students</option>
+        <option>X-B Students</option>
+        <option>IX-A Students</option>
+        <option>All My Students</option>
+        <option>Parents</option>
+    </select>
+    
+    <div class="label-sm">Content</div>
+    <textarea class="input-field" id="noticeContentInput" rows="3" placeholder="Notice content..."></textarea>
+    
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <input type="checkbox" id="noticeUrgentCheck">
+        <label for="noticeUrgentCheck" style="font-size:11px;color:#EF4444;font-weight:700">Mark as Urgent 🚨</label>
+    </div>
+
+    <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-size:11px;font-weight:700;color:var(--ev-text2)">📅 Schedule for later</div>
+            <div class="toggle toggle-off" id="noticeScheduleToggle" onclick="toggleNoticeSchedule()">
+                <div class="toggle-knob"></div>
+            </div>
+        </div>
+        <input type="datetime-local" id="noticeScheduleInput" class="input-field" style="display:none">
+    </div>
+
+    <div style="border:1.5px dashed #E2E8F0;border-radius:12px;padding:12px;text-align:center;margin-bottom:16px;background:#F8FAFC;cursor:pointer" onclick="simulateFileUpload()">
+        <div style="font-size:18px">📎</div>
+        <div style="font-size:10px;font-weight:700;color:var(--ev-text2)" id="noticeAttachmentLabel">Attach Files (optional)</div>
+        <div style="font-size:8px;color:var(--ev-text3)">PDF, JPG or DOC up to 5MB</div>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <button class="btn-primary" onclick="saveNotice('published')">📤 Publish</button>
+        <button class="btn-secondary" style="background:#F1F5F9;color:var(--ev-text2)" onclick="saveNotice('draft')">💾 Save Draft</button>
+    </div>
+    <button class="btn-secondary" onclick="hideModal('createNoticeModal')" style="margin-top:10px">Cancel</button>
+  </div>
+</div>
 </div>
 
 <!-- ==================== MESSAGES ==================== -->
@@ -1340,17 +1402,44 @@ select.input-field{appearance:auto}
 <div class="bottom-nav"><div class="nav-item" onclick="navigateTo('dashboard')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div><div class="nav-item" onclick="navigateTo('myclasses')"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Classes</div></div><div class="nav-item" onclick="navigateTo('exams')"><div class="nav-icon-wrap">📝</div><div class="nav-lbl">Exams</div></div><div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div><div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div></div>
 </div>
 
+<div class="modal-overlay" id="viewNoticeModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div id="vnBadge" style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;display:inline-block;margin-bottom:10px">CATEGORY</div>
+    <div id="vnTitle" style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:var(--ev-text);margin-bottom:8px">Notice Title</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div id="vnMeta" style="font-size:10px;color:var(--ev-text3)">By Principal · March 26</div>
+        <div id="vnUrgent" style="display:none;font-size:10px;color:#EF4444;font-weight:700">🚨 URGENT</div>
+    </div>
+    <div id="vnContent" style="font-size:13px;color:var(--ev-text2);line-height:1.6;margin-bottom:20px;padding:14px;background:#F8FAFC;border-radius:14px;border:1px solid #F1F5F9">Notice full description goes here...</div>
+    
+    <div id="vnAttachmentBox" style="display:none">
+        <div style="font-size:10px;font-weight:800;color:var(--ev-text3);text-transform:uppercase;margin-bottom:8px">Attachments (1)</div>
+        <div style="background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onclick="alert('Downloading attachment...')">
+            <div style="font-size:18px">📎</div>
+            <div style="flex:1">
+                <div style="font-size:11px;font-weight:700;color:var(--ev-text)" id="vnAttachmentName">filename.pdf</div>
+                <div style="font-size:9px;color:var(--ev-text3)">PDF Document · 1.2MB</div>
+            </div>
+            <div style="font-size:14px;color:var(--ev-primary)">⬇️</div>
+        </div>
+    </div>
+    
+    <div style="margin-top:20px">
+        <button class="btn-primary" onclick="hideModal('viewNoticeModal')">Got it</button>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== NOTIFICATIONS ==================== -->
 <div class="screen" data-screen="notifications" style="background:#F0F7FF">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0C4A6E"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Notifications</div><div style="font-size:10px;color:rgba(255,255,255,.6)">5 new</div></div></div>
 <div class="spacer-sm"></div>
-<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #EF4444"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">📋 Sanjay Mehta absent 3 days in a row</div><div style="font-size:10px;color:var(--ev-text3)">2 min ago · Attendance Alert</div></div>
-<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #0EA5E9"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">📝 32 students submitted Integration HW</div><div style="font-size:10px;color:var(--ev-text3)">1 hr ago · Homework</div></div>
-<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #7C3AED"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">💬 New message from Principal</div><div style="font-size:10px;color:var(--ev-text3)">2 hrs ago · Message</div></div>
-<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #F59E0B"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">📢 Staff meeting tomorrow 3 PM</div><div style="font-size:10px;color:var(--ev-text3)">3 hrs ago · Notice</div></div>
-<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid #059669"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">💰 March salary credited ₹68,450</div><div style="font-size:10px;color:var(--ev-text3)">Yesterday · Salary</div></div>
+<div id="notificationsListContainer">
+    <!-- Dynamic notifications will be injected here -->
+</div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav"><div class="nav-item" onclick="navigateTo('dashboard')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div><div class="nav-item" onclick="navigateTo('myclasses')"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Classes</div></div><div class="nav-item" onclick="navigateTo('exams')"><div class="nav-icon-wrap">📝</div><div class="nav-lbl">Exams</div></div><div class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon-wrap">💬</div><div class="nav-lbl">Messages</div></div><div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div></div>
@@ -1561,8 +1650,6 @@ select.input-field{appearance:auto}
     <button class="btn-primary" id="applyPolicyBtn" onclick="applyGradingPolicy()">🚀 Apply Grading Policy</button>
 </div>
 </div>
-</div>
-
 </div> <!-- phone-screen -->
 </div> <!-- phone -->
 </div> <!-- page-wrap -->
@@ -1652,10 +1739,37 @@ function showScreen(name) {
       if (idx !== undefined && bn.children[idx]) bn.children[idx].classList.add('active');
     }
   }
+  if (name === 'notices') renderNoticesList();
+  if (name === 'notifications') renderNotifications();
 }
 
 function showModal(id) { const m = document.getElementById(id); if(m) m.classList.add('show'); }
 function hideModal(id) { const m = document.getElementById(id); if(m) m.classList.remove('show'); }
+
+// ==================== NOTIFICATIONS LOGIC ====================
+let notificationsList = [
+    { id: 1, type: 'attendance', title: '📋 Sanjay Mehta absent 3 days in a row', meta: '2 min ago · Attendance Alert', color: '#EF4444', action: "navigateTo('students')" },
+    { id: 2, type: 'homework', title: '📝 32 students submitted Integration HW', meta: '1 hr ago · Homework', color: '#0EA5E9', action: "navigateTo('exams')" },
+    { id: 3, type: 'message', title: '💬 New message from Principal', meta: '2 hrs ago · Message', color: '#7C3AED', action: "navigateTo('chatdetail')" },
+    { id: 4, type: 'notice', title: '📢 Staff meeting tomorrow 3 PM', meta: '3 hrs ago · Notice', color: '#F59E0B', action: "viewNoticeDetails(1)" },
+    { id: 5, type: 'salary', title: '💰 March salary credited ₹68,450', meta: 'Yesterday · Salary', color: '#059669', action: "navigateTo('salary')" }
+];
+
+function renderNotifications() {
+    const container = document.getElementById('notificationsListContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    notificationsList.forEach(n => {
+        const card = document.createElement('div');
+        card.style = `margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);border-left:4px solid ${n.color};cursor:pointer`;
+        card.setAttribute('onclick', n.action);
+        card.innerHTML = `
+            <div style="font-size:12px;font-weight:600;color:var(--ev-text)">${n.title}</div>
+            <div style="font-size:10px;color:var(--ev-text3)">${n.meta}</div>
+        `;
+        container.appendChild(card);
+    });
+}
 
 // ==================== TIMETABLE DYNAMIC LOGIC ====================
 let ttDate = new Date(2026, 2, 26); // Default starting date (March 26, 2026)
@@ -2797,6 +2911,232 @@ function applyGradingPolicy() {
         alert("✅ Grading Policy Applied! All student totals have been recalculated.");
         goBack();
     }, 2000);
+}
+
+// ==================== NOTICES LOGIC ====================
+let noticesList = [
+    { id: 1, type: "school", status: "published", category: "Urgent", title: "Staff Meeting — Friday 3 PM", content: "Mandatory meeting. Agenda: Final exam preparation & duty allocation.", author: "Principal", date: "March 26, 2026", read: false, urgent: true, attachments: [] },
+    { id: 2, type: "my", status: "published", category: "Academic", title: "Extra Class — Integration Revision", content: "Remedial class for students scoring below 50%. Room 301, Saturday 10 AM.", author: "You", date: "March 25, 2026", read: true, urgent: false, attachments: ["revision_notes.pdf"] },
+    { id: 3, type: "school", status: "published", category: "General", title: "Exam Invigilation Duty Schedule", content: "Your invigilation: March 28 (Hall A, 9-12) & March 30 (Hall B, 9-12).", author: "Exam Cell", date: "March 24, 2026", read: true, urgent: false, attachments: [] },
+    { id: 4, type: "my", status: "draft", category: "General", title: "Parent Teacher Meeting Prep", content: "Notes for the upcoming PTM regarding student performance in Term 2.", author: "You", date: "Draft", read: true, urgent: false, attachments: [] }
+];
+
+let currentNoticeFilter = 'all';
+
+function renderNoticesList() {
+    const container = document.getElementById('noticesContainer');
+    const searchInput = document.getElementById('noticeSearchInput');
+    if (!container || !searchInput) return;
+    const search = searchInput.value.toLowerCase();
+    container.innerHTML = '';
+
+    const filtered = noticesList.filter(n => {
+        const matchesTab = 
+            currentNoticeFilter === 'all' ? n.status !== 'draft' :
+            currentNoticeFilter === 'my' ? n.type === 'my' && n.status !== 'draft' :
+            currentNoticeFilter === 'school' ? n.type === 'school' :
+            currentNoticeFilter === 'draft' ? n.status === 'draft' : true;
+        
+        const matchesSearch = n.title.toLowerCase().includes(search) || n.content.toLowerCase().includes(search);
+        return matchesTab && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--ev-text3);font-size:12px">No notices found in this category.</div>`;
+        return;
+    }
+
+    filtered.forEach((n, idx) => {
+        const card = document.createElement('div');
+        card.style = `margin:0 14px 10px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden;animation:slideIn 0.3s ease forwards;animation-delay:${idx*0.05}s;cursor:pointer`;
+        card.onclick = () => viewNoticeDetails(n.id);
+        
+        const accentColor = n.urgent ? '#EF4444' : (n.type === 'my' ? '#0EA5E9' : '#4F46E5');
+        const bgColor = n.urgent ? '#FEF2F2' : (n.type === 'my' ? '#E0F2FE' : '#EEF2FF');
+        
+        card.innerHTML = `
+            <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:${accentColor}"></div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:6px">
+                    <div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;background:${bgColor};color:${accentColor}">
+                        ${n.urgent ? '🚨 URGENT' : n.category.toUpperCase()}
+                    </div>
+                    ${n.status === 'scheduled' ? `<div style="font-size:9px;font-weight:700;color:#F59E0B">⏳ Scheduled</div>` : ''}
+                    ${!n.read ? `<div style="width:6px;height:6px;border-radius:50%;background:#EF4444"></div>` : ''}
+                </div>
+                <div style="display:flex;gap:10px">
+                    ${n.type === 'my' || n.status === 'draft' ? `
+                        <span onclick="event.stopPropagation();openEditNotice(${n.id})" style="font-size:14px;cursor:pointer">✏️</span>
+                        <span onclick="event.stopPropagation();deleteNotice(${n.id})" style="font-size:14px;cursor:pointer">🗑️</span>
+                    ` : ''}
+                    <span onclick="event.stopPropagation();toggleNoticeRead(${n.id})" style="font-size:14px;cursor:pointer">${n.read ? '🆗' : '🔔'}</span>
+                </div>
+            </div>
+            <div style="font-size:12px;font-weight:700;color:var(--ev-text);margin-bottom:4px">${n.title}</div>
+            <div style="font-size:10.5px;color:var(--ev-text3);line-height:1.5">${n.content}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+                <div style="font-size:9px;color:var(--ev-text3)">📅 ${n.status === 'draft' ? 'Draft' : (n.status === 'scheduled' ? 'Scheduled for '+n.scheduleDate : 'Published by '+n.author+' · '+n.date)}</div>
+                ${n.attachments.length > 0 ? `<div style="font-size:12px">📎</div>` : ''}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function viewNoticeDetails(id) {
+    const n = noticesList.find(x => x.id === id);
+    if (!n) return;
+    
+    // Fill Modal
+    const badge = document.getElementById('vnBadge');
+    badge.innerText = n.category.toUpperCase();
+    badge.style.background = n.urgent ? '#FEF2F2' : (n.type === 'my' ? '#E0F2FE' : '#EEF2FF');
+    badge.style.color = n.urgent ? '#EF4444' : (n.type === 'my' ? '#0EA5E9' : '#4F46E5');
+    
+    document.getElementById('vnTitle').innerText = n.title;
+    document.getElementById('vnMeta').innerText = `By ${n.author} · ${n.date}`;
+    document.getElementById('vnUrgent').style.display = n.urgent ? 'block' : 'none';
+    document.getElementById('vnContent').innerText = n.content;
+    
+    const attachBox = document.getElementById('vnAttachmentBox');
+    if (n.attachments && n.attachments.length > 0) {
+        attachBox.style.display = 'block';
+        document.getElementById('vnAttachmentName').innerText = n.attachments[0];
+    } else {
+        attachBox.style.display = 'none';
+    }
+    
+    // Mark as read
+    if (!n.read) {
+        n.read = true;
+        renderNoticesList();
+    }
+    
+    showModal('viewNoticeModal');
+}
+
+function filterNotices(tab, el) {
+    currentNoticeFilter = tab;
+    const chips = el.parentElement.querySelectorAll('.chip');
+    chips.forEach(c => {
+        c.classList.remove('active');
+        c.style.background = '#FEF3C7';
+        c.style.color = '#D97706';
+    });
+    el.classList.add('active');
+    el.style.background = '#D97706';
+    el.style.color = '#fff';
+    renderNoticesList();
+}
+
+function toggleNoticeRead(id) {
+    const n = noticesList.find(x => x.id === id);
+    if (n) {
+        n.read = !n.read;
+        renderNoticesList();
+    }
+}
+
+function deleteNotice(id) {
+    if (confirm("Are you sure you want to delete this notice?")) {
+        noticesList = noticesList.filter(x => x.id !== id);
+        renderNoticesList();
+    }
+}
+
+function openCreateNotice() {
+    document.getElementById('noticeModalTitle').innerText = '📢 Create Notice';
+    document.getElementById('editNoticeId').value = '';
+    document.getElementById('noticeTitleInput').value = '';
+    document.getElementById('noticeCategoryInput').value = 'General';
+    document.getElementById('noticeContentInput').value = '';
+    document.getElementById('noticeUrgentCheck').checked = false;
+    document.getElementById('noticeScheduleToggle').className = 'toggle toggle-off';
+    document.getElementById('noticeScheduleInput').style.display = 'none';
+    document.getElementById('noticeAttachmentLabel').innerText = 'Attach Files (optional)';
+    showModal('createNoticeModal');
+}
+
+function openEditNotice(id) {
+    const n = noticesList.find(x => x.id === id);
+    if (!n) return;
+    
+    document.getElementById('noticeModalTitle').innerText = '✏️ Edit Notice';
+    document.getElementById('editNoticeId').value = n.id;
+    document.getElementById('noticeTitleInput').value = n.title;
+    document.getElementById('noticeCategoryInput').value = n.category;
+    document.getElementById('noticeContentInput').value = n.content;
+    document.getElementById('noticeUrgentCheck').checked = n.urgent;
+    
+    if (n.status === 'scheduled') {
+        document.getElementById('noticeScheduleToggle').className = 'toggle toggle-on';
+        document.getElementById('noticeScheduleInput').style.display = 'block';
+        document.getElementById('noticeScheduleInput').value = n.scheduleDate;
+    } else {
+        document.getElementById('noticeScheduleToggle').className = 'toggle toggle-off';
+        document.getElementById('noticeScheduleInput').style.display = 'none';
+    }
+    
+    showModal('createNoticeModal');
+}
+
+function toggleNoticeSchedule() {
+    const t = document.getElementById('noticeScheduleToggle');
+    const input = document.getElementById('noticeScheduleInput');
+    if (t.classList.contains('toggle-off')) {
+        t.className = 'toggle toggle-on';
+        input.style.display = 'block';
+    } else {
+        t.className = 'toggle toggle-off';
+        input.style.display = 'none';
+    }
+}
+
+function simulateFileUpload() {
+    const label = document.getElementById('noticeAttachmentLabel');
+    label.innerText = "circular_ref_102.pdf Attached ✅";
+    label.style.color = "#059669";
+}
+
+function saveNotice(status) {
+    const id = document.getElementById('editNoticeId').value;
+    const title = document.getElementById('noticeTitleInput').value;
+    const content = document.getElementById('noticeContentInput').value;
+    const category = document.getElementById('noticeCategoryInput').value;
+    const urgent = document.getElementById('noticeUrgentCheck').checked;
+    const isScheduled = document.getElementById('noticeScheduleToggle').classList.contains('toggle-on');
+    const scheduleDate = document.getElementById('noticeScheduleInput').value;
+    
+    if (!title || !content) { alert("Please fill in title and content"); return; }
+
+    const finalStatus = isScheduled && status === 'published' ? 'scheduled' : status;
+    const attachments = document.getElementById('noticeAttachmentLabel').innerText.includes('Attached') ? ['file.pdf'] : [];
+
+    if (id) {
+        // Edit
+        const idx = noticesList.findIndex(x => x.id == id);
+        noticesList[idx] = { ...noticesList[idx], title, content, category, urgent, status: finalStatus, scheduleDate, attachments };
+    } else {
+        // Create
+        const newId = noticesList.length > 0 ? Math.max(...noticesList.map(x => x.id)) + 1 : 1;
+        noticesList.push({
+            id: newId,
+            type: "my",
+            status: finalStatus,
+            category,
+            title,
+            content,
+            author: "You",
+            date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+            read: true,
+            urgent,
+            scheduleDate,
+            attachments
+        });
+    }
+    
+    hideModal('createNoticeModal');
+    renderNoticesList();
 }
 
 </script>
