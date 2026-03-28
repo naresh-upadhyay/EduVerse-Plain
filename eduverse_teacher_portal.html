@@ -116,6 +116,14 @@ select.input-field{appearance:auto}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulseSubtle{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 .ai-gen-btn:active{transform:scale(0.95)}
+.student-breakdown{animation:slideIn .2s ease-out}
+.param-box{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:8px;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.param-box span{display:block;font-size:7px;color:#64748B;text-transform:uppercase;font-weight:700;margin-bottom:2px}
+.param-box strong{display:block;font-size:11px;color:#1E293B;font-family:'Outfit',sans-serif}
+.adj-btn{width:28px;height:28px;border-radius:50%;border:1px solid #E2E8F0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#6366F1;cursor:pointer;transition:all 0.2s;user-select:none;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+.adj-btn:hover{background:#6366F1!important;color:#fff!important;border-color:#6366F1!important;transform:translateY(-1px)}
+.adj-btn:active{transform:scale(0.9)}
+
 @media(max-width:400px){.phone{width:calc(100vw - 32px);height:calc(100vh - 60px)}}
 </style>
 </head>
@@ -610,32 +618,49 @@ select.input-field{appearance:auto}
     <!-- DRAFT EXAM -->
     <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);border-left:4px solid #94A3B8;position:relative">
         <div style="position:absolute;top:14px;right:14px;background:#F1F5F9;color:#64748B;font-size:8px;font-weight:800;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:0.5px">📁 Draft</div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;padding-right:50px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Unit Test 5 — Probability</div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;padding-right:50px">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Unit Test 5 — Probability</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#EEF2FF;color:#4F46E5">CLASS TEST</div>
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B">ONLINE MODE</div>
+        </div>
         <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:12px">📅 Set for April 5, 2026<br>Marks not yet distributed · Duration: 90 mins</div>
         <div style="display:flex;gap:6px">
             <button onclick="navigateTo('setpaper')" style="flex:2;padding:9px;border-radius:10px;border:none;background:linear-gradient(135deg,#0F766E,#0D9488);color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✨ Complete Setup</button>
             <button onclick="showModal('editExamModal')" style="flex:1;padding:9px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✏️ Edit</button>
-            <button onclick="confirmDeleteExam()" style="padding:9px 12px;border-radius:10px;border:none;background:#FEF2F2;color:#EF4444;font-size:11px;cursor:pointer">🗑️</button>
         </div>
     </div>
     
     <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #0EA5E9">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Final Exam</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#E0F2FE;color:#0EA5E9">X-A & X-B</div></div>
-        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 March 28, 2026 · ⏰ 9:00 AM – 12:00 PM<br>📍 Hall A · 100 Marks · Published ✓</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Final Exam</div>
+            <div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#E0F2FE;color:#0EA5E9">X-A & X-B</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#EEF2FF;color:#4F46E5">END TERM</div>
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B">OFFLINE MODE</div>
+        </div>
+        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 March 28, 2026 · ⏰ 9:00 AM<br>📍 Hall A · 100 Marks · Published ✓</div>
         <div style="display:flex;gap:6px">
             <button onclick="navigateTo('setpaper')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#0F766E;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Edit Paper</button>
             <button onclick="showModal('editExamModal')" style="flex:1;padding:8px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✏️ Edit Details</button>
-            <button onclick="cancelExam('Final Exam')" style="padding:8px 10px;border-radius:10px;border:1.5px solid #FEE2E2;background:#fff;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">Cancel</button>
         </div>
     </div>
 
     <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #F59E0B">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Unit Test 4</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">IX-A</div></div>
-        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 April 2, 2026 · ⏰ 10:00 AM – 11:30 AM<br>📍 Room 202 · 50 Marks · Published ✓</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">📐 Mathematics — Unit Test 4</div>
+            <div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">IX-A</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#FEF3C7;color:#D97706">MID TERM</div>
+            <div style="font-size:8px;font-weight:800;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B">OFFLINE MODE</div>
+        </div>
+        <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 April 2, 2026 · ⏰ 10:00 AM<br>📍 Room 202 · 50 Marks · Published ✓</div>
         <div style="display:flex;gap:6px">
             <button onclick="navigateTo('setpaper')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#D97706;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Edit Paper</button>
             <button onclick="showModal('editExamModal')" style="padding:8px 10px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;cursor:pointer">✏️ Edit Details</button>
-            <button onclick="cancelExam('Unit Test 4')" style="padding:8px 10px;border-radius:10px;border:none;background:#FEF2F2;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">Cancel</button>
         </div>
     </div>
     <div style="margin:8px 14px;background:linear-gradient(135deg,#ECFDF5,#F0FDFA);border-radius:14px;padding:12px;border:1px solid #A7F3D0"><div class="ai-tag" style="background:#059669">🤖 AI QUESTION GENERATOR</div><div style="font-size:11px;color:#065F46;line-height:1.6;margin-bottom:8px">Generate question papers with AI! Select chapter, difficulty & marks distribution.</div><button onclick="navigateTo('aichat')" style="background:#059669;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">🤖 Generate Questions</button></div>
@@ -643,15 +668,21 @@ select.input-field{appearance:auto}
 
 <div id="examPastBox" style="display:none">
     <div style="margin:10px 14px;background:#F1F5F9;padding:10px;border-radius:12px;font-size:11px;color:var(--ev-text2);font-weight:600">🕰️ History of conducted exams</div>
-    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Final Term — Grade 9</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#F1F5F9;color:#64748B">IX-A</div></div>
-        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:10px">📅 Feb 15, 2026 · Avg Score: 78% · 100 Marks</div>
-        <button onclick="navigateTo('results')" style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">View Full Report</button>
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8;cursor:pointer" onclick="openGradingFlow('Final Term — Grade 9')">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Final Term — Grade 9</div>
+            <div style="display:flex;gap:4px"><div style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:#EEF2FF;color:#4F46E5">END-TERM</div><div style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B">IX-A</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--ev-text3);margin-bottom:10px">📅 Feb 15, 2026 · Mode: Offline · 100 Marks</div>
+        <button style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✍️ Grade Submissions</button>
     </div>
-    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Grade 10</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#F1F5F9;color:#64748B">X-A</div></div>
-        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:10px">📅 Jan 20, 2026 · Avg Score: 85% · 50 Marks</div>
-        <button onclick="navigateTo('results')" style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">View Full Report</button>
+    <div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #94A3B8;cursor:pointer" onclick="openGradingFlow('Unit Test 3 — Grade 10')">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Grade 10</div>
+            <div style="display:flex;gap:4px"><div style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:#F0FDF4;color:#059669">CLASS TEST</div><div style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:#F1F5F9;color:#64748B">X-A</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--ev-text3);margin-bottom:10px">📅 Jan 20, 2026 · Mode: Online · 50 Marks</div>
+        <button style="width:100%;padding:8px;border-radius:10px;border:1.5px solid #F1F5F9;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✍️ Grade Submissions</button>
     </div>
 </div>
 
@@ -661,22 +692,31 @@ select.input-field{appearance:auto}
         <div style="font-size:11px;color:#1E40AF;line-height:1.6">X-A performance has increased by 15% in Integration chapters compared to last month.</div>
     </div>
     <div class="section-header-row"><div class="section-header-title">Past Exam Results</div></div>
-    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+    <div onclick="openDetailedResults('Unit Test 3 — Calculus')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
         <div style="width:40px;height:40px;border-radius:12px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
-        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Calculus</div><div style="font-size:10px;color:var(--ev-text3)">Class X-A · Jan 20, 2026</div></div>
+        <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Unit Test 3 — Calculus</div>
+            <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#0EA5E9;font-weight:700">CLASS TEST</span><span style="font-size:8px;color:var(--ev-text3)">· Offline Mode</span></div>
+        </div>
         <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#0EA5E9">85%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
     </div>
-    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+    <div onclick="openDetailedResults('Monthly Test — Algebra')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
         <div style="width:40px;height:40px;border-radius:12px;background:#F5F3FF;display:flex;align-items:center;justify-content:center;font-size:18px">📈</div>
-        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Monthly Test — Algebra</div><div style="font-size:10px;color:var(--ev-text3)">Class IX-A · Feb 2, 2026</div></div>
+        <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Monthly Test — Algebra</div>
+            <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#8B5CF6;font-weight:700">CLASS TEST</span><span style="font-size:8px;color:var(--ev-text3)">· Online Mode</span></div>
+        </div>
         <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#8B5CF6">72%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
     </div>
-    <div onclick="navigateTo('results')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
+    <div onclick="openDetailedResults('Term 1 Finals')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px">
         <div style="width:40px;height:40px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:18px">📉</div>
-        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Term 1 Finals</div><div style="font-size:10px;color:var(--ev-text3)">Combined Classes · Dec 15, 2025</div></div>
+        <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--ev-text)">Term 1 Finals</div>
+            <div style="display:flex;gap:4px;margin-top:2px"><span style="font-size:8px;color:#10B981;font-weight:700">MID-TERM</span><span style="font-size:8px;color:var(--ev-text3)">· Offline Mode</span></div>
+        </div>
         <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">68%</div><div style="font-size:8px;color:var(--ev-text3)">Avg Score</div></div>
     </div>
-    <div style="padding:10px 14px"><button class="btn-secondary" onclick="navigateTo('results')">View All in Gradebook</button></div>
+    <div style="padding:10px 14px"><button class="btn-secondary" onclick="openDetailedResults('X-A Academic Summary')">View All in Gradebook</button></div>
 </div>
 <div class="spacer"></div>
 </div>
@@ -750,10 +790,13 @@ select.input-field{appearance:auto}
 
 <div class="modal-overlay" id="createExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📝 Create Exam</div>
 <div class="label-sm">Exam Title</div><input class="input-field" placeholder="E.g. Mid-Term 2026">
-<div class="label-sm">Class</div><select class="input-field"><option>X-A</option><option>X-B</option><option>IX-A</option></select>
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Class</div><select class="input-field"><option>X-A</option><option>X-B</option><option>IX-A</option></select></div>
+    <div style="flex:1"><div class="label-sm">Exam Category</div><select class="input-field"><option>Class test</option><option>Lab test</option><option>Assignment</option><option>Mid term</option><option>End term</option><option>Other</option></select></div>
+</div>
 <div style="display:flex;gap:10px">
     <div style="flex:1"><div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local"></div>
-    <div style="flex:1"><div class="label-sm">Exam Type</div><select class="input-field"><option>Offline</option><option>Online</option></select></div>
+    <div style="flex:1"><div class="label-sm">Exam Mode</div><select class="input-field"><option>Offline</option><option>Online</option></select></div>
 </div>
 <div style="display:flex;gap:10px">
     <div style="flex:1"><div class="label-sm">Hall No.</div><input class="input-field" placeholder="E.g. Hall A"></div>
@@ -767,10 +810,13 @@ select.input-field{appearance:auto}
 
 <div class="modal-overlay" id="editExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">✏️ Edit Exam Details</div>
 <div class="label-sm">Exam Title</div><input class="input-field" value="Mathematics — Final Exam">
-<div class="label-sm">Class</div><select class="input-field"><option selected>X-A & X-B</option><option>X-A</option><option>X-B</option><option>IX-A</option></select>
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Class</div><select class="input-field"><option selected>X-A & X-B</option><option>X-A</option><option>X-B</option><option>IX-A</option></select></div>
+    <div style="flex:1"><div class="label-sm">Exam Category</div><select class="input-field"><option selected>End term</option><option>Class test</option><option>Lab test</option><option>Assignment</option><option>Mid term</option><option>Other</option></select></div>
+</div>
 <div style="display:flex;gap:10px">
     <div style="flex:1"><div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local" value="2026-03-28T09:00"></div>
-    <div style="flex:1"><div class="label-sm">Exam Type</div><select class="input-field"><option selected>Offline</option><option>Online</option></select></div>
+    <div style="flex:1"><div class="label-sm">Exam Mode</div><select class="input-field"><option selected>Offline</option><option>Online</option></select></div>
 </div>
 <div style="display:flex;gap:10px">
     <div style="flex:1"><div class="label-sm">Hall No.</div><input class="input-field" value="Hall A"></div>
@@ -783,26 +829,121 @@ select.input-field{appearance:auto}
 </div></div>
 
 <!-- ==================== RESULTS / GRADEBOOK ==================== -->
-<div class="screen" data-screen="results" style="background:#FAF5FF">
-<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#5B21B6,#7C3AED);padding-top:14px"><span>9:41</span><div class="notch" style="background:#7C3AED"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen" data-screen="results" style="background:#F8FAFC">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#4F46E5,#6366F1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#6366F1"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#5B21B6,#7C3AED);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Gradebook</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">X-A · Term 2</div></div></div>
-<div style="margin:-10px 14px 12px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(91,33,182,.15);text-align:center">
-<div style="font-size:11px;color:var(--ev-text3);margin-bottom:4px">Class X-A Average</div>
-<div style="font-family:'Outfit',sans-serif;font-size:42px;font-weight:900;background:linear-gradient(135deg,#5B21B6,#06B6D4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1">78.5%</div>
-<div style="display:flex;justify-content:center;gap:20px;margin-top:8px">
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">45</div><div style="font-size:9px;color:var(--ev-text3)">Students</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#059669">12</div><div style="font-size:9px;color:var(--ev-text3)">90%+ ⭐</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#EF4444">5</div><div style="font-size:9px;color:var(--ev-text3)">Below 40% ⚠️</div></div>
-</div></div>
-<div class="section-header-row"><div class="section-header-title">Student Marks</div><div class="section-header-link">Export CSV</div></div>
-<div onclick="openGradeUpdate('Arjun Kumar', 95, '98%')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:10px;color:var(--ev-text3);width:20px;font-weight:600">1</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--ev-text)">Arjun Kumar</div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:95%;height:100%;background:#4F46E5;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#4F46E5;width:35px;text-align:right">95</div></div>
-<div onclick="openGradeUpdate('Riya Gupta', 91, '94%')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:10px;color:var(--ev-text3);width:20px;font-weight:600">2</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--ev-text)">Riya Gupta</div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:91%;height:100%;background:#059669;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#059669;width:35px;text-align:right">91</div></div>
-<div onclick="openGradeUpdate('Neha Patel', 88, '98%')" style="cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:10px;color:var(--ev-text3);width:20px;font-weight:600">3</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--ev-text)">Neha Patel</div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:88%;height:100%;background:#3B82F6;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#3B82F6;width:35px;text-align:right">88</div></div>
-<div onclick="openGradeUpdate('Sanjay Mehta', 42, '72%')" style="cursor:pointer;margin:0 14px 6px;background:#FEF2F2;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border:1px solid #FECACA"><div style="font-size:10px;color:var(--ev-text3);width:20px;font-weight:600">38</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--ev-text)">Sanjay Mehta ⚠️</div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:42%;height:100%;background:#EF4444;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#EF4444;width:35px;text-align:right">42</div></div>
-<div onclick="openGradeUpdate('Vikram Joshi', 35, '68%')" style="cursor:pointer;margin:0 14px 6px;background:#FEF2F2;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border:1px solid #FECACA"><div style="font-size:10px;color:var(--ev-text3);width:20px;font-weight:600">42</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--ev-text)">Vikram Joshi ⚠️</div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:35%;height:100%;background:#EF4444;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#EF4444;width:35px;text-align:right">35</div></div>
-<div style="margin:8px 14px;background:linear-gradient(135deg,#F5F3FF,#EFF6FF);border-radius:14px;padding:12px;border:1px solid #DDD6FE"><div class="ai-tag" style="background:#7C3AED">🤖 AI ANALYTICS</div><div style="font-size:11px;color:#4338CA;line-height:1.6">5 students need remedial classes. Topics: Integration (3 students), Trigonometry (2). Average improved by 3.2% from Term 1.</div></div>
-<div style="padding:8px 14px"><button class="btn-primary" style="background:linear-gradient(135deg,#5B21B6,#7C3AED)" onclick="showModal('exportModal')">📥 Export Report Cards</button></div>
+<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title" id="resultsMainTitle">Gradebook Summary</div><div style="display:flex;gap:8px"><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600" id="resultsContextTag">Year 2026</div><div id="gradingSettingsBtn" onclick="navigateTo('gradingconfig')" style="width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">⚙️</div></div></div>
+<div style="display:flex;gap:6px;margin-top:14px" id="termSelectorRow">
+    <div class="chip active" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,1);color:#4F46E5;font-weight:800;font-size:10px" onclick="switchGradebookTerm('T1', this)">Term 1</div>
+    <div class="chip" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px" onclick="switchGradebookTerm('T2', this)">Term 2</div>
+    <div class="chip" style="flex:1;text-align:center;padding:6px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px" onclick="switchGradebookTerm('Overall', this)">Overall</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px" id="resultsStatTiles">
+    <div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">76%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">📚 Class Avg</div></div>
+    <div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">92%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">✅ Attendance</div></div>
+    <div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">84%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">🎖️ Proficiency</div></div>
+</div>
+</div>
+
+<div id="resultsMatrixCard" style="margin:16px 14px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Class Proficiency Matrix</div>
+        <div style="font-size:8px;background:#EEF2FF;color:#4F46E5;padding:2px 6px;border-radius:4px;font-weight:700">6 Parameters</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">EXAMS</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_exam" style="width:78%;height:100%;background:linear-gradient(90deg,#4F46E5,#6366F1);transition:width 0.5s ease"></div></div>
+            <div id="matrix_exam_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">78%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">ATTEND.</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_att" style="width:92%;height:100%;background:linear-gradient(90deg,#059669,#10B981);transition:width 0.5s ease"></div></div>
+            <div id="matrix_att_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">92%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">ASSIGN.</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_ass" style="width:85%;height:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);transition:width 0.5s ease"></div></div>
+            <div id="matrix_ass_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">85%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">TESTS</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_tst" style="width:72%;height:100%;background:linear-gradient(90deg,#F59E0B,#FBBF24);transition:width 0.5s ease"></div></div>
+            <div id="matrix_tst_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">72%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:50px;font-size:8px;font-weight:700;color:var(--ev-text3)">LABS</div>
+            <div style="flex:1;height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div id="matrix_lab" style="width:88%;height:100%;background:linear-gradient(90deg,#0EA5E9,#38BDF8);transition:width 0.5s ease"></div></div>
+            <div id="matrix_lab_val" style="width:25px;font-size:8px;font-weight:800;text-align:right">88%</div>
+        </div>
+    </div>
+</div>
+
+<div id="examStatsCard" style="display:none;margin:16px 14px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Class Performance Analytics</div>
+        <div style="font-size:8px;background:#ECFDF5;color:#059669;padding:2px 6px;border-radius:4px;font-weight:700">Exam Stats</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        <div style="background:#F8FAFC;padding:10px;border-radius:12px">
+            <div style="font-size:8px;color:var(--ev-text3);margin-bottom:4px;text-transform:uppercase">Avg Score</div>
+            <div id="exam_avg_stat" style="font-size:16px;font-weight:800;color:#1E293B">78.5</div>
+        </div>
+        <div style="background:#F8FAFC;padding:10px;border-radius:12px">
+            <div style="font-size:8px;color:var(--ev-text3);margin-bottom:4px;text-transform:uppercase">Highest</div>
+            <div id="exam_high_stat" style="font-size:16px;font-weight:800;color:#059669">98.0</div>
+        </div>
+        <div style="background:#F8FAFC;padding:10px;border-radius:12px">
+            <div style="font-size:8px;color:var(--ev-text3);margin-bottom:4px;text-transform:uppercase">Pass Rate</div>
+            <div id="exam_pass_stat" style="font-size:16px;font-weight:800;color:#4F46E5">92%</div>
+        </div>
+        <div style="background:#F8FAFC;padding:10px;border-radius:12px">
+            <div style="font-size:8px;color:var(--ev-text3);margin-bottom:4px;text-transform:uppercase">Absentees</div>
+            <div id="exam_absent_stat" style="font-size:16px;font-weight:800;color:#EF4444">02</div>
+        </div>
+    </div>
+</div>
+
+<div class="section-header-row"><div class="section-header-title">Consolidated Academic Ledger</div></div>
+<div style="margin:0 14px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+    <div id="gradeTableHeader" style="display:flex;background:#F8FAFC;padding:12px 14px;border-bottom:1px solid #F1F5F9;font-size:8px;font-weight:800;color:#64748B;text-transform:uppercase;letter-spacing:1px">
+        <div style="width:25px">Rnk</div>
+        <div style="flex:1">Student</div>
+        <div style="width:35px;text-align:center">Mid(40)</div>
+        <div style="width:35px;text-align:center">Fin(60)</div>
+        <div style="width:35px;text-align:center">Tot(100)</div>
+        <div style="width:25px;text-align:center">Grd</div>
+    </div>
+    <div id="gradeTableBody">
+        <div onclick="openGradeUpdate('Arjun Kumar', 95, '98%')" style="cursor:pointer;display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid #F1F5F9">
+            <div style="width:25px;font-size:10px;font-weight:900;color:#4F46E5">1</div>
+            <div style="flex:1"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:8px;color:var(--ev-text3)">Trends: Improving 📈</div></div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">38</div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">57</div>
+            <div style="width:35px;text-align:center;font-size:11px;font-weight:900;color:#4F46E5">95</div>
+            <div style="width:25px;text-align:center"><span style="color:#059669;font-weight:900;font-size:10px">A+</span></div>
+        </div>
+        <div onclick="openGradeUpdate('Riya Gupta', 91, '94%')" style="cursor:pointer;display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid #F1F5F9">
+            <div style="width:25px;font-size:10px;font-weight:900;color:#4F46E5">2</div>
+            <div style="flex:1"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">Riya Gupta</div><div style="font-size:8px;color:var(--ev-text3)">Steady State ↔️</div></div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">36</div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">55</div>
+            <div style="width:35px;text-align:center;font-size:11px;font-weight:900;color:#4F46E5">91</div>
+            <div style="width:25px;text-align:center"><span style="color:#059669;font-weight:900;font-size:10px">A</span></div>
+        </div>
+        <div onclick="openGradeUpdate('Sanjay Mehta', 42, '72%')" style="cursor:pointer;display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid #F1F5F9;background:#FEF2F2">
+            <div style="width:25px;font-size:10px;font-weight:900;color:#EF4444">38</div>
+            <div style="flex:1"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">Sanjay Mehta</div><div style="font-size:8px;color:#EF4444">Needs Support 📉</div></div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">18</div>
+            <div style="width:35px;text-align:center;font-size:10px;font-weight:700">24</div>
+            <div style="width:35px;text-align:center;font-size:11px;font-weight:900;color:#EF4444">42</div>
+            <div style="width:25px;text-align:center"><span style="color:#EF4444;font-weight:900;font-size:10px">F</span></div>
+        </div>
+    </div>
+</div>
+
+<div style="margin:16px 14px;background:linear-gradient(135deg,#EEF2FF,#F5F3FF);border-radius:14px;padding:12px;border:1px solid #DDD6FE"><div class="ai-tag" style="background:#6366F1">🤖 AI PERFORMANCE REPORT</div><div style="font-size:11px;color:#4338CA;line-height:1.6">Class performance is up 12% in practicals. Major bottleneck identified: <b>Trigonometry Section B</b>. I suggest auto-generating a revision quiz for this weekend.</div></div>
+<div style="padding:8px 14px 20px"><button class="btn-primary" style="background:linear-gradient(135deg,#4F46E5,#6366F1)" onclick="showModal('exportModal')">📥 Export Report Cards</button></div>
 <div class="spacer"></div>
 </div>
 <div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
@@ -824,22 +965,27 @@ select.input-field{appearance:auto}
         </div>
         
         <div style="background:#F1F5F9;border-radius:14px;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
-            <div><div style="font-size:10px;color:var(--ev-text3)">Total Grade</div><div style="font-size:22px;font-weight:900;color:#4F46E5" id="totalPercent">95%</div></div>
-            <div style="text-align:right"><div style="font-size:10px;color:var(--ev-text3)">Attendance</div><div style="font-size:16px;font-weight:800;color:#059669" id="stuAtt">98%</div></div>
+            <div><div style="font-size:10px;color:var(--ev-text3)">Calculated Grade</div><div style="font-size:22px;font-weight:900;color:#4F46E5" id="totalPercent">95%</div></div>
+            <div style="text-align:right"><div style="font-size:10px;color:var(--ev-text3)">Grand Total</div><div style="font-size:16px;font-weight:800;color:var(--ev-text)" id="grandTotalDisplay">114 / 120</div></div>
         </div>
         
-        <div class="label-sm">Internal Assessment (20)</div>
-        <input class="input-field" type="number" value="19" id="internalMark">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+                <div class="label-sm">Internal Assmt (20)</div>
+                <input class="input-field" type="number" value="19" id="internalMark" oninput="calculateFinalGrade()" max="20">
+            </div>
+            <div>
+                <div class="label-sm">Practical/Proj (20)</div>
+                <input class="input-field" type="number" value="19" id="practicalMark" oninput="calculateFinalGrade()" max="20">
+            </div>
+        </div>
         
-        <div class="label-sm">Term Exam (80)</div>
-        <input class="input-field" type="number" value="76" id="termMark">
-        
-        <div class="label-sm">Practical / Project (20)</div>
-        <input class="input-field" type="number" value="19" id="practicalMark">
+        <div class="label-sm">Main Term Exam (80)</div>
+        <input class="input-field" type="number" value="76" id="termMark" oninput="calculateFinalGrade()" max="80" style="font-size:16px;font-weight:700;color:var(--ev-text)">
         
         <div style="display:flex;gap:10px;margin-top:10px">
-            <button class="btn-primary" style="flex:2" onclick="saveMarks()">✅ Save Changes</button>
-            <button class="btn-secondary" style="flex:1" onclick="hideModal('updateMarksModal')">Cancel</button>
+            <button class="btn-primary" style="flex:2;background:linear-gradient(135deg,#4F46E5,#6366F1)" onclick="saveMarks()">💾 Update Result</button>
+            <button class="btn-secondary" style="flex:1" onclick="hideModal('updateMarksModal')">Dismiss</button>
         </div>
         <button class="btn-secondary" style="margin-top:10px;background:#F8FAFC;border:1px solid #E2E8F0" onclick="showModal('studentProfileModal')">👤 View Full Profile</button>
     </div>
@@ -869,6 +1015,62 @@ select.input-field{appearance:auto}
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
 </div>
+
+<!-- ==================== EXAM ATTENDANCE ==================== -->
+<div class="screen" data-screen="examattendance" style="background:#F8FAFC">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1E293B,#334155);padding-top:14px"><span>9:41</span><div class="notch" style="background:#334155"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#1E293B,#334155);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title" id="gradingExamTitle">Final Term Exam</div><div style="font-size:10px;color:rgba(255,255,255,.6)">Attendance & Grading</div></div></div>
+<div style="padding:10px 14px"><input class="input-field" placeholder="🔍 Find student..." style="margin-bottom:0"></div>
+<div id="attendanceList">
+    <div onclick="openStudentResponse('Arjun Kumar')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px;border-left:4px solid #F59E0B">
+        <div style="width:36px;height:36px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#64748B">AK</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">Roll Offset: #101 · Submitted: 10:45 AM</div></div>
+        <div style="text-align:right"><div style="font-size:8px;font-weight:800;background:#FEF3C7;color:#D97706;padding:2px 6px;border-radius:4px;text-transform:uppercase">Pending</div></div>
+    </div>
+    <div onclick="openStudentResponse('Riya Gupta')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px;border-left:4px solid #10B981">
+        <div style="width:36px;height:36px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#64748B">RG</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">Roll Offset: #105 · Submitted: 11:10 AM</div></div>
+        <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">92%</div><div style="font-size:8px;color:var(--ev-text3)">Graded</div></div>
+    </div>
+</div>
+</div></div>
+
+<!-- ==================== GRADE STUDENT RESPONSE ==================== -->
+<div class="screen" data-screen="gradestudent" style="background:#fff">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1E293B,#334155);padding-top:14px"><span>9:41</span><div class="notch" style="background:#334155"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#1E293B,#334155);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div style="flex:1"><div class="mini-title" id="gradingStuName">Arjun Kumar</div><div style="font-size:10px;color:rgba(255,255,255,.6)">Review Submissions</div></div><div id="gradestudentTotal" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:#fff">0/100</div></div></div>
+
+<div style="padding:16px" id="responseDetails">
+    <!-- MCQ Review Example -->
+    <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:800;font-size:11px;color:#64748B">Question 1 (MCQ)</span><span style="font-size:10px;font-weight:900;color:#059669">+1 Mark</span></div>
+        <div style="font-size:13px;color:var(--ev-text);margin-bottom:10px;font-weight:600">What is the derivative of sin(x)?</div>
+        <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:12px;display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:12px;color:#065F46"><b>Student Answer:</b> cos(x)</div>
+            <div style="font-size:14px">✅</div>
+        </div>
+    </div>
+
+    <!-- Subjective Review Example -->
+    <div style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:800;font-size:11px;color:#64748B">Question 5 (Subjective)</span><span style="font-size:10px;font-weight:900;color:#0EA5E9">Max. 10 Marks</span></div>
+        <div style="font-size:13px;color:var(--ev-text);margin-bottom:10px;font-weight:600">Explain the Fundamental Theorem of Calculus with examples.</div>
+        <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;padding:14px;border-radius:16px;margin-bottom:14px">
+            <div style="font-size:10px;font-weight:800;color:var(--ev-text3);margin-bottom:4px;text-transform:uppercase">Student Response:</div>
+            <div style="font-size:12px;color:var(--ev-text2);line-height:1.6">The fundamental theorem of calculus relates the concept of differentiating a function with the concept of integrating a function... (Attached 1 Image)</div>
+            <div style="margin-top:10px;padding:8px;background:#fff;border:1px solid #E2E8F0;border-radius:8px;display:flex;align-items:center;gap:8px">🖼️ <span style="font-size:10px;font-weight:600;color:#0EA5E9;cursor:pointer">View Handwritten Sheet.jpg</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+            <div style="flex:1"><div class="label-sm">Assign Marks</div><input type="number" class="input-field" placeholder="0-10" id="subjectiveMarkVal" onblur="updateGradingTotal()"></div>
+            <div style="flex:1"><div class="label-sm">Feedback</div><input type="text" class="input-field" placeholder="Optional..."></div>
+        </div>
+    </div>
+</div>
+
+<div style="padding:16px"><button class="btn-primary" onclick="submitStudentGrade()">💾 Submit Final Grade</button></div>
+</div></div>
 
 <!-- ==================== LEAVE MANAGEMENT ==================== -->
 <div class="screen" data-screen="leave" style="background:#F0FDF4">
@@ -1130,7 +1332,6 @@ select.input-field{appearance:auto}
 <button class="btn-secondary" onclick="hideModal('editProfileModal')" style="margin-top:8px">Cancel</button>
 </div></div>
 </div>
-
 <!-- ==================== AI TEACHING ASSISTANT ==================== -->
 <div class="screen" data-screen="aichat" style="background:#0F172A">
 <div class="status-bar" style="color:#fff;padding-top:14px"><span>9:41</span><div class="notch" style="background:#0F172A"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
@@ -1139,18 +1340,110 @@ select.input-field{appearance:auto}
 <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
 <div class="ai-chip">📝 Generate Questions</div><div class="ai-chip">📋 Lesson Plan</div><div class="ai-chip">📊 Performance Report</div><div class="ai-chip">🔧 Remedial Plan</div>
 </div>
-<div style="display:flex;justify-content:flex-start;margin-bottom:10px"><div style="max-width:80%;background:rgba(255,255,255,.08);border-radius:14px 14px 14px 4px;padding:10px 14px;border:1px solid rgba(255,255,255,.08)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="font-size:12px">🤖</div><div style="font-size:10px;font-weight:700;color:#38BDF8;font-family:'Outfit',sans-serif">AI ASSISTANT</div></div><div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.6">Hello Mrs. Sharma! 👋 I'm your AI Teaching Assistant. I can help you with:<br><br>• 📝 <b style="color:#38BDF8">Generate</b> question papers & worksheets<br>• 📋 <b style="color:#38BDF8">Create</b> lesson plans aligned with NCERT<br>• 📊 <b style="color:#38BDF8">Analyze</b> student performance trends<br>• 🔧 <b style="color:#38BDF8">Plan</b> remedial sessions for weak students<br>• ✍️ <b style="color:#38BDF8">Draft</b> notices, parent letters & reports<br><br>What would you like help with today?</div></div></div>
-<div style="display:flex;justify-content:flex-end;margin-bottom:10px"><div style="max-width:75%;background:linear-gradient(135deg,#0EA5E9,#06B6D4);border-radius:14px 14px 4px 14px;padding:10px 14px"><div style="font-size:12px;color:#fff;line-height:1.5">Generate 10 MCQ questions on Integration by Parts for Class X-A, difficulty: medium</div></div></div>
 <div id="aiThreadBox">
-<div style="display:flex;justify-content:flex-start;margin-bottom:10px"><div style="max-width:80%;background:rgba(255,255,255,.08);border-radius:14px 14px 14px 4px;padding:10px 14px;border:1px solid rgba(255,255,255,.08)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="font-size:12px">🤖</div><div style="font-size:10px;font-weight:700;color:#38BDF8;font-family:'Outfit',sans-serif">AI ASSISTANT</div></div><div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.6">Here are 10 MCQs on Integration by Parts:<br><br><b style="color:#38BDF8">Q1.</b> ∫ x·eˣ dx equals:<br>(a) eˣ(x-1)+C  (b) eˣ(x+1)+C<br>(c) xeˣ+C  (d) eˣ+C<br><b style="color:#059669">Ans: (a)</b><br><br><b style="color:#38BDF8">Q2.</b> ∫ x·sin(x) dx equals:<br>(a) -xcos(x)+sin(x)+C<br>(b) xcos(x)-sin(x)+C<br>...<br><br>📄 <span style="color:#38BDF8;text-decoration:underline">Download full paper (PDF)</span></div></div></div>
+<div style="display:flex;justify-content:flex-start;margin-bottom:10px"><div style="max-width:80%;background:rgba(255,255,255,.08);border-radius:14px 14px 14px 4px;padding:10px 14px;border:1px solid rgba(255,255,255,.08)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="font-size:12px">🤖</div><div style="font-size:10px;font-weight:700;color:#38BDF8;font-family:'Outfit',sans-serif">AI ASSISTANT</div></div><div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.6">Hello Mrs. Sharma! 👋 I'm your AI Teaching Assistant. I can help you with:<br><br>• 📝 <b style="color:#38BDF8">Generate</b> question papers & worksheets<br>• 📋 <b style="color:#38BDF8">Create</b> lesson plans aligned with NCERT<br>• 📊 <b style="color:#38BDF8">Analyze</b> student performance trends<br>• 🔧 <b style="color:#38BDF8">Plan</b> remedial sessions for weak students<br>• ✍️ <b style="color:#38BDF8">Draft</b> notices, parent letters & reports<br><br>What would you like help with today?</div></div></div>
 </div>
 </div>
 <div style="padding:8px 14px 16px;background:#0F172A;display:flex;gap:8px;flex-shrink:0"><input class="input-dark input-field" id="aiMsgInput" placeholder="Ask AI anything..." style="margin-bottom:0;flex:1" onkeypress="if(event.key==='Enter') sendAiMessage()"><button onclick="sendAiMessage()" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0EA5E9,#06B6D4);border:none;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0">📤</button></div>
 </div>
 
+<!-- ==================== GRADING CONFIGURATION ==================== -->
+<div class="screen" data-screen="gradingconfig" style="background:#F8FAFC">
+<div class="status-bar" style="color:#fff;background:#1E293B;padding-top:14px"><span>9:41</span><div class="notch" style="background:#1E293B"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:#1E293B;padding:8px 18px 20px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Grading Policy</div><div style="font-size:10px;color:rgba(255,255,255,.5)">Weightage Allocation</div></div></div>
+
+<div style="margin:-15px 14px 16px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center">
+    <div style="position:relative;width:120px;height:120px;margin:0 auto 12px">
+        <svg viewBox="0 0 36 36" style="width:100%;height:100%;transform:rotate(-90deg)">
+            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#F1F5F9" stroke-width="3" />
+            <path id="weightageGauge" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#6366F1" stroke-width="3" stroke-dasharray="100, 100" />
+        </svg>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+            <div id="gaugeText" style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:var(--ev-text)">100%</div>
+            <div style="font-size:8px;color:var(--ev-text3);text-transform:uppercase;letter-spacing:1px">Allocated</div>
+        </div>
+    </div>
+    <div id="gaugeWarn" style="font-size:10px;color:#059669;font-weight:600">✓ Perfect Allocation</div>
+</div>
+
+<div style="padding:0 14px">
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">📝</span><div style="font-size:12px;font-weight:700">Mid-Term Exam</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('mid', -1)">−</div>
+                <div id="val_mid" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">30%</div>
+                <div class="adj-btn" onclick="adjustWeightage('mid', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="30" class="weight-slider" data-id="mid" id="range_mid" oninput="updateWeightage()">
+    </div>
+    
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">🎓</span><div style="font-size:12px;font-weight:700">Final-Term Exam</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('fin', -1)">−</div>
+                <div id="val_fin" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">40%</div>
+                <div class="adj-btn" onclick="adjustWeightage('fin', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="40" class="weight-slider" data-id="fin" id="range_fin" oninput="updateWeightage()">
+    </div>
+
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">✅</span><div style="font-size:12px;font-weight:700">Class Attendance</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('att', -1)">−</div>
+                <div id="val_att" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">5%</div>
+                <div class="adj-btn" onclick="adjustWeightage('att', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="5" class="weight-slider" data-id="att" id="range_att" oninput="updateWeightage()">
+    </div>
+
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">📚</span><div style="font-size:12px;font-weight:700">Assignments</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('ass', -1)">−</div>
+                <div id="val_ass" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">10%</div>
+                <div class="adj-btn" onclick="adjustWeightage('ass', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="10" class="weight-slider" data-id="ass" id="range_ass" oninput="updateWeightage()">
+    </div>
+
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">✍️</span><div style="font-size:12px;font-weight:700">Class Tests</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('tst', -1)">−</div>
+                <div id="val_tst" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">10%</div>
+                <div class="adj-btn" onclick="adjustWeightage('tst', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="10" class="weight-slider" data-id="tst" id="range_tst" oninput="updateWeightage()">
+    </div>
+
+    <div class="weightage-card" style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #F1F5F9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">🧪</span><div style="font-size:12px;font-weight:700">Labs / Practical</div></div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <div class="adj-btn" onclick="adjustWeightage('lab', -1)">−</div>
+                <div id="val_lab" style="font-family:'Outfit',sans-serif;font-weight:800;color:#6366F1;min-width:35px;text-align:center">5%</div>
+                <div class="adj-btn" onclick="adjustWeightage('lab', 1)">＋</div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="5" class="weight-slider" data-id="lab" id="range_lab" oninput="updateWeightage()">
+    </div>
+</div>
+
+<div style="padding:10px 14px 40px">
+    <button class="btn-primary" id="applyPolicyBtn" onclick="applyGradingPolicy()">🚀 Apply Grading Policy</button>
 </div>
 </div>
 </div>
+
+</div> <!-- phone-screen -->
+</div> <!-- phone -->
+</div> <!-- page-wrap -->
 
 <script>
 
@@ -1299,16 +1592,40 @@ function autoGrade() {
 
 function openGradeUpdate(name, mark, att) {
     document.getElementById('stuNameMarks').innerText = name;
-    document.getElementById('totalPercent').innerText = mark + '%';
     document.getElementById('stuAtt').innerText = att;
     
-    // Simulate breakdown calculation
+    // Initial values based on passed mark (as a starting point)
     const base = mark / 100;
-    document.getElementById('internalMark').value = Math.round(base * 20);
-    document.getElementById('termMark').value = Math.round(base * 80);
-    document.getElementById('practicalMark').value = Math.round(base * 20);
+    const internal = Math.round(base * 20);
+    const term = Math.round(base * 80);
+    const practical = Math.round(base * 20);
     
+    document.getElementById('internalMark').value = internal;
+    document.getElementById('termMark').value = term;
+    document.getElementById('practicalMark').value = practical;
+    
+    calculateFinalGrade();
     showModal('updateMarksModal');
+}
+
+function calculateFinalGrade() {
+    const internal = parseInt(document.getElementById('internalMark').value || 0);
+    const term = parseInt(document.getElementById('termMark').value || 0);
+    const practical = parseInt(document.getElementById('practicalMark').value || 0);
+    
+    const totalObtained = internal + term + practical;
+    const maxTotal = 120; // 20 + 80 + 20
+    const percentage = Math.round((totalObtained / maxTotal) * 100);
+    
+    document.getElementById('totalPercent').innerText = percentage + '%';
+    document.getElementById('grandTotalDisplay').innerText = `${totalObtained} / ${maxTotal}`;
+    
+    // Optional: Dynamic color coding
+    const gradeWrap = document.getElementById('totalPercent').parentElement;
+    if(percentage >= 90) document.getElementById('totalPercent').style.color = '#059669';
+    else if(percentage >= 75) document.getElementById('totalPercent').style.color = '#4F46E5';
+    else if(percentage < 40) document.getElementById('totalPercent').style.color = '#EF4444';
+    else document.getElementById('totalPercent').style.color = '#D97706';
 }
 
 function saveMarks() {
@@ -1834,6 +2151,301 @@ function updateAttendanceSettings() {
     hideModal('attendanceSettingsModal');
 }
 
+function openGradingFlow(title) {
+    document.getElementById('gradingExamTitle').innerText = title;
+    navigateTo('examattendance');
+}
+
+function openStudentResponse(name) {
+    document.getElementById('gradingStuName').innerText = name;
+    document.getElementById('gradestudentTotal').innerText = "1/100"; // Starting with MCQ grade
+    navigateTo('gradestudent');
+}
+
+function updateGradingTotal() {
+    const subMark = parseInt(document.getElementById('subjectiveMarkVal').value || 0);
+    const total = 1 + subMark; // 1 from MCQ + subjective
+    document.getElementById('gradestudentTotal').innerText = `${total}/100`;
+}
+
+function openDetailedResults(title) {
+    const mainTitle = document.getElementById('resultsMainTitle');
+    const contextTag = document.getElementById('resultsContextTag');
+    const termSelector = document.getElementById('termSelectorRow');
+    const settingsBtn = document.getElementById('gradingSettingsBtn');
+    const matrixCard = document.getElementById('resultsMatrixCard');
+    const examStatsCard = document.getElementById('examStatsCard');
+    
+    // Default to hiding term selector unless it's a summary
+    termSelector.style.display = 'none';
+    
+    if (title.includes('Summary')) {
+        mainTitle.innerText = "Academic Ledger";
+        contextTag.innerText = "X-A · Academic Year 2026";
+        termSelector.style.display = 'flex';
+        settingsBtn.style.display = 'flex';
+        matrixCard.style.display = 'block';
+        examStatsCard.style.display = 'none';
+        
+        // Trigger initial T1 load
+        const firstBtn = termSelector.querySelector('.chip');
+        switchGradebookTerm('T1', firstBtn);
+    } else {
+        termSelector.style.display = 'none';
+        settingsBtn.style.display = 'none';
+        matrixCard.style.display = 'none';
+        examStatsCard.style.display = 'block';
+        // Single Exam mode
+        if (title.includes('Calculus')) {
+            mainTitle.innerText = "Calculus Unit Test";
+            contextTag.innerText = "Class X-A · Jan 2026";
+        } else if (title.includes('Algebra')) {
+            mainTitle.innerText = "Algebra Monthly Test";
+            contextTag.innerText = "Class IX-A · Feb 2026";
+        } else if (title.includes('Finals')) {
+            mainTitle.innerText = "Term 1 Final Results";
+            contextTag.innerText = "All Sections · Dec 2025";
+        }
+        
+        // Custom simple header for specific exam
+        document.getElementById('gradeTableHeader').innerHTML = `<div style="flex:1.5">Student</div><div style="width:55px;text-align:center">Marks</div><div style="width:55px;text-align:center">Grade</div>`;
+        
+        // Dynamic Table Body for specific exam (Multi-student fix)
+        const body = document.getElementById('gradeTableBody');
+        body.innerHTML = '';
+        const students = gradebookData.T1.students; // Use T1 mock list for all students
+        
+        students.forEach(s => {
+            // Give them exam-specific marks
+            const mark = Math.max(30, Math.min(100, (s.tot - 5) + Math.floor(Math.random() * 10)));
+            const grd = mark >= 90 ? 'A+' : mark >= 75 ? 'A' : mark >= 60 ? 'B' : mark >= 40 ? 'C' : 'F';
+            
+            const row = document.createElement('div');
+            row.style = `cursor:pointer;display:flex;align-items:center;padding:14px;border-bottom:1px solid #F1F5F9;${mark < 40 ? 'background:#FEF2F2' : ''}`;
+            row.onclick = () => openGradeUpdate(s.name, mark, '95%');
+            row.innerHTML = `
+                <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">Roll No: ${100 + s.id % 20}</div></div>
+                <div style="width:55px;text-align:center;font-size:11px;font-weight:800;color:${mark < 40 ? '#EF4444' : 'var(--ev-text)'}">${mark}/100</div>
+                <div style="width:55px;text-align:center"><span style="background:${mark < 40 ? '#FEF2F2' : '#ECFDF5'};color:${mark < 40 ? '#EF4444' : '#059669'};padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900">${grd}</span></div>
+            `;
+            body.appendChild(row);
+        });
+    }
+    
+    navigateTo('results');
+}
+
+const gradebookData = {
+    'T1': {
+        avg: '76%', att: '92%', prof: '84%',
+        matrix: { exam: 76, att: 92, ass: 84, tst: 72, lab: 88 },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 28, fin: 38, att: 5, ass: 9, tst: 9, lab: 5, tot: 94, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, mid: 26, fin: 36, att: 5, ass: 8, tst: 10, lab: 4, tot: 89, grd: 'A', trend: '↔️' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 38, mid: 10, fin: 15, att: 2, ass: 3, tst: 4, lab: 1, tot: 35, grd: 'F', trend: '📉', fail: true }
+        ]
+    },
+    'T2': {
+        avg: '79%', att: '94%', prof: '88%',
+        matrix: { exam: 79, att: 94, ass: 88, tst: 76, lab: 90 },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 29, fin: 39, att: 5, ass: 10, tst: 10, lab: 5, tot: 98, grd: 'A+', trend: '📈' },
+            { id: 105, name: 'Riya Gupta', rnk: 3, mid: 24, fin: 35, att: 4, ass: 9, tst: 8, lab: 5, tot: 85, grd: 'A-', trend: '📉' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 35, mid: 14, fin: 22, att: 3, ass: 5, tst: 3, lab: 2, tot: 49, grd: 'E', trend: '📈', fail: true }
+        ]
+    },
+    'Overall': {
+        avg: '77.5%', att: '93%', prof: '86%',
+        matrix: { exam: 78, att: 93, ass: 86, tst: 74, lab: 89 },
+        students: [
+            { id: 101, name: 'Arjun Kumar', rnk: 1, mid: 'T1:94%', fin: 'T2:98%', tot: 96, grd: 'A+', trend: '🌟' },
+            { id: 105, name: 'Riya Gupta', rnk: 2, mid: 'T1:89%', fin: 'T2:85%', tot: 87, grd: 'A', trend: '↔️' },
+            { id: 103, name: 'Sanjay Mehta', rnk: 36, mid: 'T1:35%', fin: 'T2:49%', tot: 42, grd: 'F', trend: '📉', fail: true }
+        ]
+    }
+};
+
+function toggleStudentBreakdown(id) {
+    const el = document.getElementById('breakdown_' + id);
+    if (!el) return;
+    const isVisible = el.style.display === 'block';
+    // Close others
+    document.querySelectorAll('.student-breakdown').forEach(d => d.style.display = 'none');
+    el.style.display = isVisible ? 'none' : 'block';
+}
+
+function switchGradebookTerm(term, btn) {
+    const chips = document.querySelectorAll('#termSelectorRow .chip');
+    chips.forEach(c => {
+        c.style.background = 'rgba(255,255,255,.15)';
+        c.style.color = '#fff';
+    });
+    btn.style.background = '#fff';
+    btn.style.color = '#4F46E5';
+    
+    // Update Tiles
+    const data = gradebookData[term];
+    const tiles = document.querySelectorAll('#resultsStatTiles > div');
+    tiles[0].querySelector('div').innerText = data.avg;
+    tiles[1].querySelector('div').innerText = data.att;
+    tiles[2].querySelector('div').innerText = data.prof;
+
+    // Update Matrix
+    const m = data.matrix;
+    document.getElementById('matrix_exam').style.width = m.exam + '%';
+    document.getElementById('matrix_exam_val').innerText = m.exam + '%';
+    document.getElementById('matrix_att').style.width = m.att + '%';
+    document.getElementById('matrix_att_val').innerText = m.att + '%';
+    document.getElementById('matrix_ass').style.width = m.ass + '%';
+    document.getElementById('matrix_ass_val').innerText = m.ass + '%';
+    document.getElementById('matrix_tst').style.width = m.tst + '%';
+    document.getElementById('matrix_tst_val').innerText = m.tst + '%';
+    document.getElementById('matrix_lab').style.width = m.lab + '%';
+    document.getElementById('matrix_lab_val').innerText = m.lab + '%';
+    
+    const header = document.getElementById('gradeTableHeader');
+    if (term === 'Overall') {
+        header.innerHTML = `<div style="flex:1.5">Student</div><div style="width:50px;text-align:center">Term 1</div><div style="width:50px;text-align:center">Term 2</div><div style="width:55px;text-align:center">Total</div>`;
+    } else {
+        header.innerHTML = `<div style="flex:1.5">Student</div><div style="width:40px;text-align:center">Rnk</div><div style="width:40px;text-align:center">Trend</div><div style="width:55px;text-align:center">Result</div>`;
+    }
+    
+    const body = document.getElementById('gradeTableBody');
+    body.style.opacity = '0.3';
+    
+    setTimeout(() => {
+        body.innerHTML = '';
+        data.students.forEach(s => {
+            const container = document.createElement('div');
+            container.style = "border-bottom:1px solid #F1F5F9";
+            
+            const row = document.createElement('div');
+            row.onclick = () => term === 'Overall' ? null : toggleStudentBreakdown(s.id);
+            row.style = `cursor:pointer;display:flex;align-items:center;padding:14px;${s.fail ? 'background:#FEF2F2' : ''}`;
+            
+            let resultCol = `<div style="width:55px;text-align:center"><div style="font-size:11px;font-weight:900;color:${s.fail ? '#EF4444' : '#4F46E5'}">${s.tot}${typeof s.tot === 'number' ? '%' : ''}</div><div style="font-size:8px;font-weight:800;color:${s.fail ? '#EF4444' : '#059669'}">${s.grd}</div></div>`;
+            
+            if (term === 'Overall') {
+                row.innerHTML = `
+                    <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">Rank ${s.rnk}</div></div>
+                    <div style="width:50px;text-align:center;font-size:10px;font-weight:600;color:var(--ev-text)">${s.mid}</div>
+                    <div style="width:50px;text-align:center;font-size:10px;font-weight:600;color:var(--ev-text)">${s.fin}</div>
+                    ${resultCol}
+                `;
+            } else {
+                row.innerHTML = `
+                    <div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--ev-text)">${s.name}</div><div style="font-size:8px;color:var(--ev-text3)">ID: #${s.id}</div></div>
+                    <div style="width:40px;text-align:center;font-size:10px;font-weight:700;color:var(--ev-text)">#${s.rnk}</div>
+                    <div style="width:40px;text-align:center;font-size:12px">${s.trend}</div>
+                    ${resultCol}
+                `;
+                
+                // Add Breakdown Drawer
+                const breakdown = document.createElement('div');
+                breakdown.id = 'breakdown_' + s.id;
+                breakdown.className = 'student-breakdown';
+                breakdown.style = "display:none;background:#F8FAFC;padding:12px 14px;border-top:1px dashed #E2E8F0";
+                breakdown.innerHTML = `
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+                        <div class="param-box"><span>Mid-Term</span><strong>${s.mid}</strong></div>
+                        <div class="param-box"><span>Final</span><strong>${s.fin}</strong></div>
+                        <div class="param-box"><span>Attendance</span><strong>${s.att}</strong></div>
+                        <div class="param-box"><span>Assignments</span><strong>${s.ass}</strong></div>
+                        <div class="param-box"><span>Tests</span><strong>${s.tst}</strong></div>
+                        <div class="param-box"><span>Labs</span><strong>${s.lab}</strong></div>
+                    </div>
+                    <div style="margin-top:10px;display:flex;gap:6px">
+                        <button class="btn-primary" style="flex:1;padding:6px;font-size:10px" onclick="openGradeUpdate('${s.name}', ${s.tot}, '96%')">📝 Update Marks</button>
+                        <button class="btn-secondary" style="flex:1;padding:6px;font-size:10px">📊 Analytics</button>
+                    </div>
+                `;
+                container.appendChild(row);
+                container.appendChild(breakdown);
+            }
+            
+            if (term === 'Overall') body.appendChild(row);
+            else body.appendChild(container);
+        });
+        body.style.opacity = '1';
+    }, 300);
+}
+
+function submitStudentGrade() {
+    const loader = document.createElement('div');
+    loader.style = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:999998';
+    loader.innerHTML = `<div style="background:#fff;padding:24px;border-radius:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)">
+        <div style="font-size:40px;margin-bottom:12px;display:inline-block;animation:ring-spin 2s linear infinite">⚙️</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:var(--ev-text)">Saving Grade...</div>
+    </div>`;
+    document.body.appendChild(loader);
+    
+    setTimeout(() => {
+        loader.remove();
+        alert("✅ Grade submitted and student notified!");
+        goBack();
+    }, 1500);
+}
+
+
+function adjustWeightage(id, delta) {
+    const slider = document.getElementById('range_' + id);
+    if (!slider) return;
+    let val = parseInt(slider.value) + delta;
+    if (val < 0) val = 0;
+    if (val > 100) val = 100;
+    slider.value = val;
+    updateWeightage();
+}
+
+function updateWeightage() {
+    let total = 0;
+    const sliders = document.querySelectorAll('.weight-slider');
+    sliders.forEach(s => {
+        const id = s.getAttribute('data-id');
+        const val = parseInt(s.value);
+        total += val;
+        document.getElementById('val_' + id).innerText = val + '%';
+    });
+    
+    const gauge = document.getElementById('weightageGauge');
+    const text = document.getElementById('gaugeText');
+    const warn = document.getElementById('gaugeWarn');
+    const btn = document.getElementById('applyPolicyBtn');
+    
+    text.innerText = total + '%';
+    gauge.setAttribute('stroke-dasharray', total + ', 100');
+    
+    if (total === 100) {
+        gauge.setAttribute('stroke', '#059669');
+        warn.innerText = '✓ Perfect Allocation';
+        warn.style.color = '#059669';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+    } else {
+        gauge.setAttribute('stroke', total > 100 ? '#EF4444' : '#6366F1');
+        warn.innerText = total > 100 ? '⚠️ Total exceeds 100%' : '⚠️ Total must equal 100%';
+        warn.style.color = total > 100 ? '#EF4444' : '#6366F1';
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+    }
+}
+
+function applyGradingPolicy() {
+    const loader = document.createElement('div');
+    loader.style = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:999999';
+    loader.innerHTML = `<div style="text-align:center">
+        <div style="font-size:40px;margin-bottom:12px;animation:ring-spin 1.5s linear infinite">⚙️</div>
+        <div style="font-family:'Outfit',sans-serif;color:#fff;font-size:18px;font-weight:900">Calculating Ledger...</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:4px">Applying new weightage parameters</div>
+    </div>`;
+    document.body.appendChild(loader);
+    
+    setTimeout(() => {
+        loader.remove();
+        alert("✅ Grading Policy Applied! All student totals have been recalculated.");
+        goBack();
+    }, 2000);
+}
 
 </script>
 </body>
