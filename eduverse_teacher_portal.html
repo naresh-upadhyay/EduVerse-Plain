@@ -624,7 +624,7 @@ select.input-field{appearance:auto}
         <div style="font-size:11px;color:var(--ev-text3);line-height:1.6;margin-bottom:10px">📅 March 28, 2026 · ⏰ 9:00 AM – 12:00 PM<br>📍 Hall A · 100 Marks · Published ✓</div>
         <div style="display:flex;gap:6px">
             <button onclick="navigateTo('setpaper')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#0F766E;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📝 Edit Paper</button>
-            <button onclick="navigateTo('results')" style="flex:1;padding:8px;border-radius:10px;border:none;background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📊 Marks</button>
+            <button onclick="showModal('editExamModal')" style="flex:1;padding:8px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--ev-text2);font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✏️ Edit Details</button>
             <button onclick="cancelExam('Final Exam')" style="padding:8px 10px;border-radius:10px;border:1.5px solid #FEE2E2;background:#fff;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">Cancel</button>
         </div>
     </div>
@@ -720,14 +720,16 @@ select.input-field{appearance:auto}
         </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,#fff,#F0F9FF);border-radius:24px;padding:12px;margin-bottom:20px;border:2.5px solid #0EA5E9;box-shadow:0 8px 30px rgba(14,165,233,0.12);display:flex;align-items:center;gap:12px;position:relative;overflow:hidden">
-        <div style="position:absolute;top:-20px;right:-20px;width:60px;height:60px;background:radial-gradient(circle,rgba(6,182,212,0.15),transparent 70%)"></div>
-        <div style="width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#0EA5E9,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 10px 20px rgba(14,165,233,0.3)">✨</div>
-        <div style="flex:1">
-            <div style="font-size:9px;font-weight:900;color:var(--ev-primary);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Simulate AI Generation</div>
-            <input type="text" id="aiPaperPrompt" placeholder="E.g., 5 hard Calculus questions..." style="width:100%;border:none;background:none;font-size:13px;font-family:'Outfit',sans-serif;outline:none;font-weight:700;color:var(--ev-text)">
+    <div style="background:linear-gradient(135deg,#fff,#F0F9FF);border-radius:24px;padding:16px;margin-bottom:20px;border:1.5px solid #0EA5E9;box-shadow:0 10px 30px rgba(14,165,233,0.08);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(6,182,212,0.1),transparent 70%)"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <div style="width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#0EA5E9,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;box-shadow:0 4px 10px rgba(14,165,233,0.2)">✨</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:900;color:var(--ev-primary);letter-spacing:1px;text-transform:uppercase">Magic AI Assistant</div>
         </div>
-        <button onclick="generateAiPaper()" class="ai-gen-btn" style="padding:10px 18px;border-radius:14px;border:none;background:linear-gradient(135deg,#0EA5E9,#06B6D4);color:#fff;font-size:11px;font-weight:900;cursor:pointer;animation:pulseSubtle 2s infinite;box-shadow:0 4px 15px rgba(14,165,233,0.4)">Magic Generate</button>
+        <textarea id="aiPaperPrompt" placeholder="E.g., 3 MCQs on probability and 2 subjective questions on area under the curve. Make them challenging!" style="width:100%;min-height:90px;border:none;background:none;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;font-weight:500;color:var(--ev-text);resize:none;line-height:1.6"></textarea>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px">
+            <button onclick="generateAiPaper()" class="ai-gen-btn" style="padding:10px 24px;border-radius:14px;border:none;background:linear-gradient(135deg,#0EA5E9,#06B6D4);color:#fff;font-size:12px;font-weight:900;cursor:pointer;animation:pulseSubtle 2s infinite;box-shadow:0 4px 15px rgba(14,165,233,0.4);display:flex;align-items:center;gap:6px"><span>✨</span> Magic Generate</button>
+        </div>
     </div>
 
     <div id="questionList" style="display:flex;flex-direction:column;gap:14px">
@@ -747,20 +749,35 @@ select.input-field{appearance:auto}
 </div>
 
 <div class="modal-overlay" id="createExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📝 Create Exam</div>
-<div class="label-sm">Exam Title</div><input class="input-field" value="Unit Test 5 — Probability">
+<div class="label-sm">Exam Title</div><input class="input-field" placeholder="E.g. Mid-Term 2026">
 <div class="label-sm">Class</div><select class="input-field"><option>X-A</option><option>X-B</option><option>IX-A</option></select>
-<div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local" value="2026-04-05T09:00">
-<div class="label-sm">Total Marks</div><input class="input-field" type="number" value="50">
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local"></div>
+    <div style="flex:1"><div class="label-sm">Exam Type</div><select class="input-field"><option>Offline</option><option>Online</option></select></div>
+</div>
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Hall No.</div><input class="input-field" placeholder="E.g. Hall A"></div>
+    <div style="flex:1"><div class="label-sm">Total Marks</div><input class="input-field" type="number" value="50"></div>
+</div>
 <div class="label-sm">Duration (mins)</div><input class="input-field" type="number" value="90">
-<div class="label-sm">Chapters Covered</div><input class="input-field" value="Ch.13 Probability, Ch.14 Statistics">
+<div class="label-sm">Chapters Covered</div><input class="input-field" placeholder="E.g. Chapter 1, 2, 3">
 <button class="btn-primary" onclick="hideModal('createExamModal')">✅ Create Exam</button>
 <button class="btn-secondary" onclick="hideModal('createExamModal')" style="margin-top:8px">Cancel</button>
 </div></div>
 
-<div class="modal-overlay" id="editExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">✏️ Edit Exam</div>
-<div class="label-sm">Exam Title</div><input class="input-field" value="Mathematics — Unit Test 4">
-<div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local" value="2026-04-02T10:00">
-<div class="label-sm">Chapters Covered</div><input class="input-field" value="Chapter 5-6">
+<div class="modal-overlay" id="editExamModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">✏️ Edit Exam Details</div>
+<div class="label-sm">Exam Title</div><input class="input-field" value="Mathematics — Final Exam">
+<div class="label-sm">Class</div><select class="input-field"><option selected>X-A & X-B</option><option>X-A</option><option>X-B</option><option>IX-A</option></select>
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Date & Time</div><input class="input-field" type="datetime-local" value="2026-03-28T09:00"></div>
+    <div style="flex:1"><div class="label-sm">Exam Type</div><select class="input-field"><option selected>Offline</option><option>Online</option></select></div>
+</div>
+<div style="display:flex;gap:10px">
+    <div style="flex:1"><div class="label-sm">Hall No.</div><input class="input-field" value="Hall A"></div>
+    <div style="flex:1"><div class="label-sm">Total Marks</div><input class="input-field" type="number" value="100"></div>
+</div>
+<div class="label-sm">Duration (mins)</div><input class="input-field" type="number" value="180">
+<div class="label-sm">Chapters Covered</div><input class="input-field" value="Full Syllabus">
 <button class="btn-primary" onclick="hideModal('editExamModal')">💾 Save Changes</button>
 <button class="btn-secondary" onclick="hideModal('editExamModal')" style="margin-top:8px">Cancel</button>
 </div></div>
