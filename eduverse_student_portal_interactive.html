@@ -267,7 +267,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="qa-item" onclick="navigateTo('attendance')"><div class="qa-icon-wrap" style="background:#EFF6FF">📋</div><div class="qa-lbl">Attendance</div></div>
 <div class="qa-item" onclick="navigateTo('library')"><div class="qa-icon-wrap" style="background:#FAF5FF">📖</div><div class="qa-lbl">Library</div></div>
 <div class="qa-item" onclick="navigateTo('courses')"><div class="qa-icon-wrap" style="background:#ECFDF5">📚</div><div class="qa-lbl">Courses</div></div>
-<div class="qa-item" onclick="navigateTo('exams')"><div class="qa-icon-wrap" style="background:#FEF2F2">📝</div><div class="qa-lbl">Exams</div></div>
+<div class="qa-item" onclick="navigateTo('leave')"><div class="qa-icon-wrap" style="background:#FEF2F2">✉️</div><div class="qa-lbl">Leave</div></div>
 </div>
 <!-- Schedule -->
 <div class="dash-card"><div class="card-title">Today's Schedule <a onclick="navigateTo('timetable')">View All →</a></div>
@@ -765,6 +765,158 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
 </div>
+
+<!-- ==================== LEAVE APPLICATION SCREEN ==================== -->
+<div class="screen" data-screen="leave" style="background:#F0F4FF">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#4F46E5,#06B6D4);padding-top:14px"><span>9:41</span><div class="notch" style="background:#4F46E5"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#4F46E5,#06B6D4);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Leave Management</div></div></div>
+
+<!-- Leave Dashboard -->
+<div style="margin:14px 14px 10px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(79,70,229,.1);display:flex;gap:8px">
+    <div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:var(--ev-primary)">15</div><div style="font-size:8px;color:var(--ev-text3);text-transform:uppercase;font-weight:700;margin-top:2px">Total Quota</div></div>
+    <div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#059669">06</div><div style="font-size:8px;color:var(--ev-text3);text-transform:uppercase;font-weight:700;margin-top:2px">Used</div></div>
+    <div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#F59E0B">01</div><div style="font-size:8px;color:var(--ev-text3);text-transform:uppercase;font-weight:700;margin-top:2px">Pending</div></div>
+    <div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#4F46E5">08</div><div style="font-size:8px;color:var(--ev-text3);text-transform:uppercase;font-weight:700;margin-top:2px">Balance</div></div>
+</div>
+
+<!-- Tab Navigation -->
+<div style="display:flex;gap:8px;padding:0 14px 10px">
+    <button class="leave-tab active" id="tabUpcoming" onclick="switchLeaveTab(0)" style="flex:1;padding:10px;border-radius:12px;border:none;background:#4F46E5;color:#fff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer">Upcoming Leaves</button>
+    <button class="leave-tab" id="tabPast" onclick="switchLeaveTab(1)" style="flex:1;padding:10px;border-radius:12px;border:none;background:#EEF2FF;color:#4F46E5;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer">Past Leaves</button>
+</div>
+
+<div id="upcomingSection">
+<div style="padding:0 14px 8px"><div class="section-header-title">Apply New Leave</div></div>
+<div style="margin:0 14px 16px;background:#fff;border-radius:20px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.04);border:1px solid #EEF2FF">
+    <div style="font-size:11px;font-weight:700;color:var(--ev-text3);margin-bottom:6px">Leave Type</div>
+    <select class="input-field" id="leaveType" style="appearance:auto">
+        <option>Sick Leave</option>
+        <option>Casual Leave</option>
+        <option>Urgent Work</option>
+        <option>Family Event</option>
+        <option>Others</option>
+    </select>
+    
+    <div style="margin-bottom:12px">
+        <div style="margin-bottom:10px">
+            <div style="font-size:11px;font-weight:700;color:var(--ev-text3);margin-bottom:6px">Start Date</div>
+            <input type="date" class="input-field" id="leaveStart" value="2025-03-30">
+        </div>
+        <div>
+            <div style="font-size:11px;font-weight:700;color:var(--ev-text3);margin-bottom:6px">End Date</div>
+            <input type="date" class="input-field" id="leaveEnd" value="2025-03-31">
+        </div>
+    </div>
+    
+    <div style="font-size:11px;font-weight:700;color:var(--ev-text3);margin-bottom:6px">Reason for Leave</div>
+    <textarea class="input-field" id="leaveReason" placeholder="Describe the reason for your leave request..." rows="3" style="resize:none;margin-bottom:14px"></textarea>
+    
+    <div style="font-size:11px;font-weight:700;color:var(--ev-text3);margin-bottom:6px">Supporting Document (Optional)</div>
+    <div style="border:1.5px dashed #CBD5E1;border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:#F8FAFC;margin-bottom:16px">
+        <div style="font-size:24px;margin-bottom:4px">📁</div>
+        <div style="font-size:11px;font-weight:600;color:var(--ev-text)">Tap to Upload Medical Note / Slip</div>
+    </div>
+    
+    <button class="btn-primary" onclick="submitLeave()">✨ Apply for Leave</button>
+</div>
+
+<div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;border:1px solid #EEF2FF" id="leave_card_3">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:20px">✨</div>
+        <div style="flex:1">
+            <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Family Event</div>
+            <div style="font-size:10px;color:var(--ev-text3)">Apr 12 – Apr 14, 2025 • 3 days</div>
+        </div>
+        <div class="fee-badge due" style="background:#FFF7ED;color:#D97706">PENDING</div>
+    </div>
+    <div style="display:flex;gap:8px;padding-top:8px;border-top:1px solid #F8FAFC">
+        <button onclick="editLeave('leave_card_3', 'Family Event', '2025-04-12', '2025-04-14', 'Attend my sister\'s wedding.', 'PENDING')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#F1F5F9;color:var(--ev-text2);font-size:10px;font-weight:700;cursor:pointer">✏️ Edit</button>
+        <button onclick="confirmCancel('leave_card_3')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#FEF2F2;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">✕ Cancel</button>
+    </div>
+</div>
+
+<div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;border:1px solid #ECFDF5" id="leave_card_1">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:20px">🤒</div>
+        <div style="flex:1">
+            <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Sick Leave</div>
+            <div style="font-size:10px;color:var(--ev-text3)">Feb 8 – Feb 9, 2025 • 2 days</div>
+        </div>
+        <div class="fee-badge paid" style="background:#ECFDF5;color:#059669">APPROVED</div>
+    </div>
+    <div style="display:flex;gap:8px;padding-top:8px;border-top:1px solid #F8FAFC">
+        <button onclick="editLeave('leave_card_1', 'Sick Leave', '2025-02-08', '2025-02-09', 'Suffering from viral fever.', 'APPROVED')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#F1F5F9;color:var(--ev-text2);font-size:10px;font-weight:700;cursor:pointer">✏️ Edit</button>
+        <button onclick="confirmCancel('leave_card_1')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#FEF2F2;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">✕ Cancel</button>
+    </div>
+</div>
+
+<div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;border:1px solid #ECFDF5" id="leave_card_2">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:20px">📦</div>
+        <div style="flex:1">
+            <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Urgent Work</div>
+            <div style="font-size:10px;color:var(--ev-text3)">Jan 12, 2025 • 1 day</div>
+        </div>
+        <div class="fee-badge paid" style="background:#ECFDF5;color:#059669">APPROVED</div>
+    </div>
+    <div style="display:flex;gap:8px;padding-top:8px;border-top:1px solid #F8FAFC">
+        <button onclick="editLeave('leave_card_2', 'Urgent Work', '2025-01-12', '2025-01-12', 'Important family matter.', 'APPROVED')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#F1F5F9;color:var(--ev-text2);font-size:10px;font-weight:700;cursor:pointer">✏️ Edit</button>
+        <button onclick="confirmCancel('leave_card_2')" style="flex:1;padding:6px;border-radius:8px;border:none;background:#FEF2F2;color:#EF4444;font-size:10px;font-weight:700;cursor:pointer">✕ Cancel</button>
+    </div>
+</div>
+    <div class="spacer"></div>
+</div> <!-- End upcomingSection -->
+
+<div id="pastSection" style="display:none">
+    <div style="padding:0 14px 12px"><div class="section-header-title">Historical Records</div></div>
+    <div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.03);opacity:0.8;border:1px solid #F1F5F9">
+        <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;border-radius:12px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:20px">🤒</div>
+            <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Medical Leave</div>
+                <div style="font-size:10px;color:var(--ev-text3)">Dec 15, 2024 • 1 day</div>
+            </div>
+            <div class="fee-badge paid" style="background:#F1F5F9;color:#64748B">COMPLETED</div>
+        </div>
+    </div>
+    <div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.03);opacity:0.8;border:1px solid #F1F5F9">
+        <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;border-radius:12px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:20px">🏠</div>
+            <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Casual Leave</div>
+                <div style="font-size:10px;color:var(--ev-text3)">Nov 20 – Nov 22, 2024 • 3 days</div>
+            </div>
+            <div class="fee-badge paid" style="background:#F1F5F9;color:#64748B">COMPLETED</div>
+        </div>
+    </div>
+    <div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.03);opacity:0.8;border:1px solid #F1F5F9">
+        <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;border-radius:12px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:20px">📦</div>
+            <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:var(--ev-text)">Urgent Work</div>
+                <div style="font-size:10px;color:var(--ev-text3)">Oct 5, 2024 • 1 day</div>
+            </div>
+            <div class="fee-badge due" style="background:#F1F5F9;color:#94A3B8;opacity:0.6">REJECTED</div>
+        </div>
+    </div>
+    <div class="spacer"></div>
+</div>
+</div>
+<div class="bottom-nav">
+<div class="nav-item active" onclick="navigateTo('dashboard')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item" onclick="navigateTo('attendance')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Attend.</div></div>
+<div class="nav-item" onclick="navigateTo('leave')"><div class="nav-icon-wrap">✉️</div><div class="nav-lbl">Leave</div></div>
+<div class="nav-item" onclick="navigateTo('results')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Results</div></div>
+<div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
+</div>
+</div>
+
+<!-- Leave Success Modal -->
+<div class="modal-overlay" id="leaveSuccessModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">✨</div><div class="modal-title" style="color:var(--ev-primary)">Leave Applied!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px">Your leave request has been submitted to your Class Teacher. You'll be notified once approved.</p><button class="btn-primary" onclick="hideModal('leaveSuccessModal');navigateTo('dashboard')">Back to Home</button></div></div>
+
+<!-- Leave Update (Re-approval) Modal -->
+<div class="modal-overlay" id="leaveUpdateModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">📝</div><div class="modal-title" style="color:var(--ev-primary)">Sent for Re-approval</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px">Since you edited an approved leave, it has been sent back to your Class Teacher for fresh approval.</p><button class="btn-primary" onclick="hideModal('leaveUpdateModal')">Got it</button></div></div>
 
 <!-- ==================== PROFILE SCREEN ==================== -->
 <div class="screen" data-screen="profile" style="background:#F5F6FF">
@@ -1434,6 +1586,97 @@ function updateBottomNav(screenId) {
   document.querySelectorAll('.bottom-nav').forEach(nav => {
     nav.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   });
+}
+
+function switchLeaveTab(idx) {
+  const tU = document.getElementById('tabUpcoming');
+  const tP = document.getElementById('tabPast');
+  const secU = document.getElementById('upcomingSection');
+  const secP = document.getElementById('pastSection');
+  
+  if (idx === 0) {
+    tU.style.background = '#4F46E5'; tU.style.color = '#fff';
+    tP.style.background = '#EEF2FF'; tP.style.color = '#4F46E5';
+    secU.style.display = 'block';
+    secP.style.display = 'none';
+  } else {
+    tP.style.background = '#4F46E5'; tP.style.color = '#fff';
+    tU.style.background = '#EEF2FF'; tU.style.color = '#4F46E5';
+    secP.style.display = 'block';
+    secU.style.display = 'none';
+  }
+}
+
+function editLeave(cardId, type, start, end, reason, status) {
+  editingCardId = cardId;
+  originalStatus = status;
+  
+  document.getElementById('leaveType').value = type;
+  document.getElementById('leaveStart').value = start;
+  document.getElementById('leaveEnd').value = end;
+  document.getElementById('leaveReason').value = reason;
+  
+  const submitBtn = document.querySelector('[onclick="submitLeave()"]');
+  submitBtn.innerHTML = "✨ Update Leave Request";
+  
+  // Scroll to top of form
+  document.querySelector('[data-screen="leave"] .screen-body').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function submitLeave() {
+  const type = document.getElementById('leaveType').value;
+  const reason = document.getElementById('leaveReason').value;
+  const start = document.getElementById('leaveStart').value;
+  const end = document.getElementById('leaveEnd').value;
+  
+  if (!reason.trim()) {
+    alert('Please enter a reason for your leave.');
+    return;
+  }
+  
+  if (editingCardId) {
+    // Update existing card
+    const card = document.getElementById(editingCardId);
+    if (card) {
+      card.querySelector('[style*="font-weight:700;color:var(--ev-text)"]').innerText = type;
+      card.querySelector('[style*="font-size:10px;color:var(--ev-text3)"]').innerText = `${start} – ${end}`;
+      
+      // Reset status to Pending if it was Approved
+      if (originalStatus === 'APPROVED') {
+        const badge = card.querySelector('.fee-badge');
+        badge.innerText = 'PENDING';
+        badge.className = 'fee-badge due';
+        badge.style.background = '#FFF7ED';
+        badge.style.color = '#D97706';
+        card.style.borderColor = '#EEF2FF';
+        showModal('leaveUpdateModal'); // Special modal for re-approval
+      } else {
+        showModal('leaveSuccessModal');
+      }
+    }
+    
+    // Reset Edit Mode
+    editingCardId = null;
+    originalStatus = null;
+    document.querySelector('[onclick="submitLeave()"]').innerHTML = "✨ Apply for Leave";
+  } else {
+    showModal('leaveSuccessModal');
+  }
+}
+
+function confirmCancel(cardId) {
+  if (confirm("Are you sure you want to cancel this leave request?")) {
+    const card = document.getElementById(cardId);
+    if (card) {
+      const badge = card.querySelector('.fee-badge');
+      badge.innerText = 'CANCELLED';
+      badge.className = 'fee-badge due';
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#EF4444';
+      card.style.opacity = '0.6';
+      card.querySelectorAll('button').forEach(b => b.disabled = true);
+    }
+  }
 }
 
 // ===== MODAL SYSTEM =====

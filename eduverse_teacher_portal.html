@@ -26,9 +26,10 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 .status-icons{display:flex;gap:5px;align-items:center}
 .screen-body{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
 .screen-body::-webkit-scrollbar{display:none}
-.screen{display:none;flex-direction:column;height:100%;position:absolute;inset:0;z-index:1;background:var(--ev-surface)}
-.screen.active{display:flex;z-index:2;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.screen{display:none;flex-direction:column;height:100%;position:absolute;inset:0;z-index:1;background:var(--ev-surface);overflow:hidden}
+.screen.active{display:flex;z-index:10;animation:fadeIn .3s cubic-bezier(0.4, 0, 0.2, 1)}
+.screen.previous{display:flex;z-index:1}
+@keyframes fadeIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 .bottom-nav{display:flex;background:#fff;border-top:1px solid #F1F5F9;padding:8px 0 14px;flex-shrink:0;position:relative;z-index:10}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .nav-icon-wrap{width:36px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:16px;transition:all .2s}
@@ -2188,9 +2189,25 @@ function goBack() {
 }
 
 function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const screens = document.querySelectorAll('.screen');
+  const oldActive = document.querySelector('.screen.active');
   const target = document.querySelector('[data-screen="'+name+'"]');
-  if (target) { 
+
+  if (target) {
+      // Mark current active as previous to keep it visible during fade
+      if (oldActive && oldActive !== target) {
+          oldActive.classList.remove('active');
+          oldActive.classList.add('previous');
+          // cleanup old screen after animation
+          const lastOld = oldActive;
+          setTimeout(() => {
+              lastOld.classList.remove('previous');
+          }, 400);
+      }
+      
+      // Remove active from any others just in case
+      screens.forEach(s => { if(s !== target && s !== oldActive) s.classList.remove('active', 'previous'); });
+
       target.classList.add('active'); 
       currentScreen = name; 
       if (name === 'timetable') initTimetable();
@@ -2203,7 +2220,7 @@ function showScreen(name) {
   if (activeScreen) {
     const bn = activeScreen.querySelector('.bottom-nav');
     if (bn) {
-      const navMap = {'dashboard':0,'myclasses':1,'exams':2,'messages':3,'profile':4};
+      const navMap = {'dashboard':0,'myclasses':1,'exams':2,'messaging':3,'profile':4};
       const idx = navMap[name];
       if (idx !== undefined && bn.children[idx]) bn.children[idx].classList.add('active');
     }
