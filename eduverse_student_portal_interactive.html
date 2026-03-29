@@ -27,9 +27,10 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 .screen-body::-webkit-scrollbar{display:none}
 
 /* Screen stack */
-.screen{display:none;flex-direction:column;height:100%;position:absolute;inset:0;z-index:1;background:var(--ev-surface)}
-.screen.active{display:flex;z-index:2;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.screen{display:none;flex-direction:column;height:100%;position:absolute;inset:0;z-index:1;background:var(--ev-surface);overflow:hidden}
+.screen.active{display:flex!important;z-index:100;animation:fadeIn .4s cubic-bezier(0.4, 0, 0.2, 1)}
+.screen.previous{display:flex!important;z-index:10}
+@keyframes fadeIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @keyframes fadeOut{from{opacity:1}to{opacity:0}}
 
 /* Bottom Nav */
@@ -1016,7 +1017,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 
 <!-- ==================== AI CHAT SCREEN ==================== -->
-<div class="screen" data-screen="aichat" style="display:flex;flex-direction:column">
+<div class="screen" data-screen="aichat" style="background:#020617">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0F0C29,#302B63);padding-top:14px;flex-shrink:0"><span>9:41</span><div class="notch" style="background:#302B63"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div style="background:linear-gradient(135deg,#0F0C29,#302B63);padding:8px 18px 16px;flex-shrink:0">
 <div style="display:flex;align-items:center;gap:10px"><div class="back-btn" onclick="goBack()">←</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:14px">🤖</div><div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">EduVerse AI</div><div style="font-size:10px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px"><div class="live-dot"></div>Always Online</div></div></div>
@@ -1543,15 +1544,27 @@ let currentScreen = 'splash';
 function navigateTo(screenId) {
   if (screenId === currentScreen) return;
   const screens = document.querySelectorAll('.screen');
-  screens.forEach(s => s.classList.remove('active'));
+  const oldActive = document.querySelector('.screen.active');
   const target = document.querySelector('[data-screen="'+screenId+'"]');
+
   if (target) {
+    if (oldActive && oldActive !== target) {
+      oldActive.classList.remove('active');
+      oldActive.classList.add('previous');
+      const lastOld = oldActive;
+      setTimeout(() => { 
+        lastOld.classList.remove('previous'); 
+      }, 500); // 500ms to be safe (CSS is 0.4s)
+    }
+    
+    // Safety cleanup for other screens
+    screens.forEach(s => { if(s !== target && s !== oldActive) s.classList.remove('active', 'previous'); });
+
     target.classList.add('active');
     if (screenId !== 'splash') navHistory.push(screenId);
     currentScreen = screenId;
     updateBottomNav(screenId);
     
-    // Trigger internal exam timer if entering the screen
     if (screenId === 'online_exam_internal') {
       startInternalTimer();
     }
@@ -1560,14 +1573,21 @@ function navigateTo(screenId) {
 
 function goBack() {
   if (navHistory.length > 1) {
+    const oldActive = document.querySelector('.screen.active');
     navHistory.pop();
     const prev = navHistory[navHistory.length - 1];
-    currentScreen = prev; // Update state without pushing back to history
-    
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const target = document.querySelector('[data-screen="'+prev+'"]');
+
     if (target) {
+      if (oldActive && oldActive !== target) {
+        oldActive.classList.remove('active');
+        oldActive.classList.add('previous');
+        const lastOld = oldActive;
+        setTimeout(() => { lastOld.classList.remove('previous'); }, 500);
+      }
+      
       target.classList.add('active');
+      currentScreen = prev;
       updateBottomNav(prev);
     }
   } else {
@@ -1584,7 +1604,21 @@ function filterGrp(v) {
 
 function updateBottomNav(screenId) {
   document.querySelectorAll('.bottom-nav').forEach(nav => {
-    nav.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    const items = nav.querySelectorAll('.nav-item');
+    items.forEach(item => item.classList.remove('active'));
+    
+    // Auto-highlight logic for common base screens
+    const map = {
+      'dashboard': 0,
+      'exams': 1, 'online_exam_internal': 1, 'fees': 1, 'courses': 1,
+      'results': 2,
+      'events': 3, 'homework': 3, 'notices': 3,
+      'profile': 4, 'settings': 4
+    };
+    const idx = map[screenId];
+    if (idx !== undefined && items[idx]) {
+      items[idx].classList.add('active');
+    }
   });
 }
 
