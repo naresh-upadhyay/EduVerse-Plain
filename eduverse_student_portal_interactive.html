@@ -144,21 +144,65 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 
 /* Internal Exam Portal Styles */
 .screen[data-screen="online_exam_internal"] { background: #F8FAFC; }
-.top-bar-exam { background: #0F172A; color: #fff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.top-bar-exam { background: #0F172A; color: #fff; padding: 12px 16px 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .timer-box-exam { background: rgba(239,68,68,0.15); color: #FCA5A5; border: 1px solid #EF4444; padding: 4px 10px; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; display: flex; gap: 6px; align-items: center; }
 .timer-box-exam.warning { background: #EF4444; color: #fff; animation: pulse 1s infinite; }
 
-.exam-main { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+.exam-main { display: flex; flex-direction: column; flex: 1; overflow: hidden; position: relative; }
 .exam-sidebar { background: #fff; border-bottom: 1px solid #E2E8F0; padding: 12px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
-.nav-grid-exam { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.nav-grid-exam { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; padding: 4px; max-height: 90px; overflow-y: auto; scrollbar-width: none; }
+.nav-grid-exam::-webkit-scrollbar { display: none; }
 .nav-pill-exam { aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; border: 1.5px solid transparent; }
 .nav-pill-exam.answered { background: #059669; color: #fff; }
 .nav-pill-exam.current { background: #4F46E5; color: #fff; box-shadow: 0 2px 8px rgba(79,70,229,0.3); }
 .nav-pill-exam.review { background: #F59E0B; color: #fff; }
 .nav-pill-exam.unanswered { background: #F1F5F9; color: #64748B; border: 1.5px solid #E2E8F0; }
 
-.exam-content-area { flex: 1; padding: 16px; overflow-y: auto; background: #F8FAFC; }
-.question-card-exam { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); border: 1px solid #E2E8F0; margin-bottom: 16px; }
+/* Section Toggle Switches */
+.exam-type-switcher { display: flex; background: #F1F5F9; border-radius: 12px; padding: 4px; margin: 0 12px 10px; }
+.type-btn { flex: 1; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 700; text-align: center; cursor: pointer; transition: 0.3s; color: #64748B; border: none; background: transparent; }
+.type-btn.active { background: #fff; color: #4F46E5; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+/* Subjective Fields */
+.subjective-input { width: 100%; min-height: 180px; padding: 12px; border-radius: 12px; border: 1.5px solid #E2E8F0; font-family: inherit; font-size: 13px; line-height: 1.6; resize: none; background: #FAFAFA; color: #1E293B; margin-bottom: 12px; }
+.subjective-input:focus { outline: none; border-color: #4F46E5; background: #fff; box-shadow: 0 0 0 4px rgba(79,70,229,0.05); }
+.attach-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 2px dashed #CBD5E1; background: #F8FAFC; padding: 14px; border-radius: 12px; color: #475569; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.3s; }
+.attach-btn:hover { border-color: #4F46E5; background: #EEF2FF; color: #4F46E5; }
+.attach-status { font-size: 10px; color: #059669; font-weight: 700; margin-top: 6px; display: none; }
+.attach-status.visible { display: flex; align-items: center; gap: 4px; }
+
+/* Locked Exam Mode */
+.locked-exam-mode .bottom-nav, 
+.locked-exam-mode .ai-fab { 
+    display: none !important; 
+}
+
+/* Exam Success Styles */
+.confetti-piece { 
+    position: absolute; width: 8px; height: 8px; background: #FFD700; border-radius: 50%; 
+    animation: confetti-fall 3s linear infinite; 
+}
+@keyframes confetti-fall { 
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 
+    100% { transform: translateY(600px) rotate(720deg); opacity: 0; } 
+}
+
+.result-card-anim {
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Question Palette Interactive */
+.nav-pill-exam { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+.nav-pill-exam:active { transform: scale(0.9); }
+
+
+.exam-content-area { flex: 1; padding: 16px; overflow-y: auto; background: #F8FAFC; scrollbar-width: none; }
+.exam-content-area::-webkit-scrollbar { display: none; }
+.question-card-exam { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); border: 1px solid #E2E8F0; margin-bottom: 80px; }
 .q-header-exam { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #F1F5F9; }
 .q-text-exam { font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--ev-text); margin-bottom: 16px; }
 
@@ -167,7 +211,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 .option-label-exam input[type="radio"] { width: 16px; height: 16px; accent-color: #4F46E5; }
 .option-label-exam.selected { border-color: #4F46E5; background: #EEF2FF; font-weight: 600; color: #4F46E5; }
 
-.exam-bottom-bar { background: #fff; border-top: 1px solid #E2E8F0; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.exam-bottom-bar { background: #fff; border-top: 1px solid #E2E8F0; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; position: sticky; bottom: 0; left: 0; right: 0; z-index: 10; }
 .btn-exam { padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; transition: all 0.2s; }
 .btn-exam-outline { background: #f1f5f9; color: #475569; }
 .btn-exam-primary { background: linear-gradient(135deg, #4F46E5, #06B6D4); color: #fff; }
@@ -269,6 +313,10 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="qa-item" onclick="navigateTo('library')"><div class="qa-icon-wrap" style="background:#FAF5FF">📖</div><div class="qa-lbl">Library</div></div>
 <div class="qa-item" onclick="navigateTo('courses')"><div class="qa-icon-wrap" style="background:#ECFDF5">📚</div><div class="qa-lbl">Courses</div></div>
 <div class="qa-item" onclick="navigateTo('leave')"><div class="qa-icon-wrap" style="background:#FEF2F2">✉️</div><div class="qa-lbl">Leave</div></div>
+<div class="qa-item" onclick="navigateTo('exams')"><div class="qa-icon-wrap" style="background:#EEF2FF">✍️</div><div class="qa-lbl">Exams</div></div>
+<div class="qa-item" onclick="navigateTo('live_classes')"><div class="qa-icon-wrap" style="background:#FFE4E6;position:relative"><div style="position:absolute;top:0;right:0;width:8px;height:8px;background:#EF4444;border-radius:50%;border:2px solid #fff"></div>🔴</div><div class="qa-lbl">Live Class</div></div>
+<div class="qa-item" onclick="navigateTo('messaging')"><div class="qa-icon-wrap" style="background:#E0E7FF">💬</div><div class="qa-lbl">Messages</div></div>
+<div class="qa-item" onclick="showDynModal('cert','Certificates & Awards','Your academic honors','🏅','<b>Certificates:</b><br>• Excellence in Physics (2024)<br>• 100% Attendance Award (2025)<br>• Science Fair Winner (2024)<br><br><b>Badges Earned:</b> 12<br><b>Rank:</b> Star Performer','📥 Download All','✅ Academic Proof')"><div class="qa-icon-wrap" style="background:#FEF3C7">🎓</div><div class="qa-lbl">Certificates</div></div>
 </div>
 <!-- Schedule -->
 <div class="dash-card"><div class="card-title">Today's Schedule <a onclick="navigateTo('timetable')">View All →</a></div>
@@ -331,47 +379,77 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 
 <!-- ==================== RESULTS SCREEN ==================== -->
-<div class="screen" data-screen="results" style="background:#FAF5FF">
-<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#5B21B6,#7C3AED);padding-top:14px"><span>9:41</span><div class="notch" style="background:#7C3AED"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen" data-screen="results" style="background:#F8FAFC">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#4F46E5,#6366F1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#6366F1"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#5B21B6,#7C3AED);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Results</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">Term 2 • 2024-25</div></div></div>
-<div style="margin:-10px 14px 12px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(91,33,182,.15);text-align:center">
-<div style="font-size:11px;color:var(--ev-text3);margin-bottom:4px">Overall Performance</div>
-<div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;background:linear-gradient(135deg,#5B21B6,#06B6D4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1">91.4%</div>
-<div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#059669;margin:4px 0 8px">A+ Grade 🏅</div>
-<div style="display:flex;justify-content:center;gap:20px">
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">3rd</div><div style="font-size:9px;color:var(--ev-text3)">Class Rank</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">548/600</div><div style="font-size:9px;color:var(--ev-text3)">Total Marks</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">↑ 4.2%</div><div style="font-size:9px;color:var(--ev-text3)">vs Last Term</div></div>
-</div></div>
-<div class="chip-row"><div class="chip" style="background:#5B21B6;color:#fff">Term 2</div><div class="chip" style="color:#5B21B6;background:#F5F3FF">Term 1</div><div class="chip" style="color:#5B21B6;background:#F5F3FF">Mid-Term</div><div class="chip" style="color:#5B21B6;background:#F5F3FF">Unit Tests</div></div>
-<div class="spacer-sm"></div>
-<div onclick="showDynModal('res','Mathematics — Term 2','Score: 95/100 · Grade: A+ · Rank: 2nd','📐','<b>Section-wise Breakdown:</b><br>• Algebra: 24/25 ✅<br>• Calculus: 23/25 ✅<br>• Probability: 25/25 🏅<br>• Geometry: 23/25 ✅<br><br><b>Teacher Remark:</b> Excellent improvement in Calculus. Keep practicing Geometry proofs.','📄 View detailed answer sheet','🏅 Class Rank: 2nd in Mathematics')" style="cursor:pointer;margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:14px">📐</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Mathematics</div><div style="font-size:10px;color:var(--ev-text3)">95/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:95%;height:100%;background:#4F46E5;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#4F46E5;width:32px;text-align:right">95</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;font-size:14px">⚛️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Physics</div><div style="font-size:10px;color:var(--ev-text3)">89/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:89%;height:100%;background:#3B82F6;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#3B82F6;width:32px;text-align:right">89</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:14px">⚗️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Chemistry</div><div style="font-size:10px;color:var(--ev-text3)">91/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:91%;height:100%;background:#F59E0B;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#F59E0B;width:32px;text-align:right">91</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:14px">📖</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">English</div><div style="font-size:10px;color:var(--ev-text3)">92/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:92%;height:100%;background:#059669;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#059669;width:32px;text-align:right">92</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#FDF2F8;display:flex;align-items:center;justify-content:center;font-size:14px">🗺️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Social Science</div><div style="font-size:10px;color:var(--ev-text3)">88/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:88%;height:100%;background:#EC4899;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#EC4899;width:32px;text-align:right">88</div></div>
-<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:14px">💻</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Computer Science</div><div style="font-size:10px;color:var(--ev-text3)">93/100</div></div><div style="width:60px;height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="width:93%;height:100%;background:#10B981;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#10B981;width:32px;text-align:right">93</div></div>
-<!-- AI Analysis -->
-<div style="margin:8px 14px;background:linear-gradient(135deg,#F5F3FF,#EFF6FF);border-radius:14px;padding:12px;border:1px solid #DDD6FE"><div class="ai-tag" style="margin-bottom:6px">🤖 AI ANALYSIS</div><div style="font-size:11px;color:#4338CA;line-height:1.6">You're consistently strong in English & Maths. Physics needs 5% improvement — focus on Mechanics. Predicted final score: <strong>93%</strong> 🎯</div></div>
-<div style="margin:0 14px 14px;display:flex;gap:8px">
-<button onclick="showModal('downloadModal')" style="flex:1;padding:10px;border-radius:12px;background:#5B21B6;color:#fff;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📥 Download PDF</button>
-<button onclick="showModal('shareModal')" style="flex:1;padding:10px;border-radius:12px;background:#EEF2FF;color:#5B21B6;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📤 Share</button>
-</div><div class="spacer"></div>
+<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Results</div><div style="display:flex;gap:8px"><div id="resultsYearTag" onclick="showModal('yearPickerModal')" style="cursor:pointer;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">Year 2026 ▾</div></div></div>
+<div style="display:flex;gap:6px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none" id="resultCategoryRow">
+    <div class="chip active category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:#fff;color:#4F46E5;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Class Test', this)">Class Test</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Lab Test', this)">Lab Test</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Assignment', this)">Assignment</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Mid-Term', this)">Mid-Term</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('End-Term', this)">End-Term</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Other', this)">Other</div>
+    <div class="chip category-chip" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px;cursor:pointer" onclick="switchResultCategory('Overall', this)">Overall</div>
 </div>
-<div class="ai-fab" onclick="navigateTo('aichat')">🤖</div>
-<div class="bottom-nav">
+</div>
+
+<div id="resultMainContent" style="min-height: 480px; transition: opacity 0.3s ease;">
+    <div style="margin:16px 14px 12px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(79,70,229,.1);text-align:center">
+        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:4px">Academic Performance</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;background:linear-gradient(135deg,#4F46E5,#6366F1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1" id="overallScore">91.4%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#059669;margin:4px 0 8px" id="overallGrade">A+ Grade 🏅</div>
+        <div style="display:flex;justify-content:center;gap:20px">
+            <div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">3rd</div><div style="font-size:9px;color:var(--ev-text3)">Class Rank</div></div>
+            <div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">548/600</div><div style="font-size:9px;color:var(--ev-text3)">Total Marks</div></div>
+            <div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)">↑ 4.2%</div><div style="font-size:9px;color:var(--ev-text3)">vs Last Year</div></div>
+        </div>
+    </div>
+
+    <div id="subjectResultsList">
+        <!-- Subject cards will be injected here -->
+        <div class="section-header-row"><div class="section-header-title">Subject-wise Analytics</div></div>
+        <div class="dash-card" style="padding:10px">
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 6px">
+                <div style="width:36px;height:36px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:18px">📐</div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Mathematics</div><div style="font-size:10px;color:var(--ev-text3)">Score: 95/100</div></div>
+                <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#4F46E5">95</div><div style="font-size:8px;font-weight:700;color:#059669">A+</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 6px">
+                <div style="width:36px;height:36px;border-radius:12px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;font-size:18px">⚛️</div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Physics</div><div style="font-size:10px;color:var(--ev-text3)">Score: 89/100</div></div>
+                <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#3B82F6">89</div><div style="font-size:8px;font-weight:700;color:#059669">A</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 6px">
+                <div style="width:36px;height:36px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:18px">⚗️</div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Chemistry</div><div style="font-size:10px;color:var(--ev-text3)">Score: 91/100</div></div>
+                <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">91</div><div style="font-size:8px;font-weight:700;color:#059669">A</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin:8px 14px 14px;display:flex;gap:8px">
+    <button onclick="downloadReportCard()" style="flex:1;padding:12px;border-radius:12px;background:#4F46E5;color:#fff;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"><span>📥</span> Download Report Card</button>
+</div>
+</div>
+<div class="ai-fab" onclick="navigateTo('aichat')" style="z-index:1001">🤖</div>
+<div class="bottom-nav" style="z-index:1001; background: #fff;">
 <div class="nav-item" onclick="navigateTo('dashboard')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
 <div class="nav-item" onclick="navigateTo('courses')"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Courses</div></div>
 <div class="nav-item active" onclick="navigateTo('results')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Results</div></div>
 <div class="nav-item" onclick="navigateTo('achievements')"><div class="nav-icon-wrap">🏆</div><div class="nav-lbl">Achieve</div></div>
 <div class="nav-item" onclick="navigateTo('profile')"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 </div>
-<!-- Modals -->
-<div class="modal-overlay" id="downloadModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div style="font-size:50px;margin-bottom:8px">📄</div><div class="modal-title">Report Card Ready!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px">Your Term 2 report card PDF has been generated</p><div style="background:#F0FDF4;border-radius:12px;padding:12px;margin-bottom:16px"><div style="font-size:11px;color:#059669;font-weight:600">📥 Term2_ReportCard_ArjunKumar.pdf</div><div style="font-size:10px;color:var(--ev-text3)">Size: 256 KB</div></div><button class="btn-primary" onclick="hideModal('downloadModal')">✅ Downloaded!</button></div></div>
-<div class="modal-overlay" id="shareModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="modal-title">Share Results</div><div style="display:flex;gap:12px;justify-content:center;margin:16px 0"><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">💬</div><div style="font-size:9px;color:var(--ev-text3)">WhatsApp</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#1DA1F2;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">🐦</div><div style="font-size:9px;color:var(--ev-text3)">Twitter</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#EA4335;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">📧</div><div style="font-size:9px;color:var(--ev-text3)">Email</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">📋</div><div style="font-size:9px;color:var(--ev-text3)">Copy Link</div></div></div><button class="btn-secondary" onclick="hideModal('shareModal')">Cancel</button></div></div>
 </div>
-
+<!-- Modals -->
+<div class="modal-overlay" id="yearPickerModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="modal-title">Select Academic Year</div><div style="display:flex;flex-direction:column;gap:10px;margin:16px 0">
+    <div onclick="changeResultYear('2026')" style="padding:14px;border-radius:14px;background:#EEF2FF;border:2px solid #4F46E5;color:#4F46E5;font-weight:700;cursor:pointer">Year 2026 (Current)</div>
+    <div onclick="changeResultYear('2025')" style="padding:14px;border-radius:14px;background:#F8FAFC;border:1px solid #E2E8F0;color:var(--ev-text);font-weight:600;cursor:pointer">Year 2025</div>
+    <div onclick="changeResultYear('2024')" style="padding:14px;border-radius:14px;background:#F8FAFC;border:1px solid #E2E8F0;color:var(--ev-text);font-weight:600;cursor:pointer">Year 2024</div>
+</div><button class="btn-secondary" onclick="hideModal('yearPickerModal')">Cancel</button></div></div>
+<div class="modal-overlay" id="downloadModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div style="font-size:50px;margin-bottom:8px">📄</div><div class="modal-title">Report Card Ready!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px" id="reportCardMsg">Your consolidated academic ledger for 2026 has been generated</p><div style="background:#F0FDF4;border-radius:12px;padding:12px;margin-bottom:16px"><div style="font-size:11px;color:#059669;font-weight:600" id="reportCardFilename">📥 ReportCard_2026_Arjun.pdf</div><div style="font-size:10px;color:var(--ev-text3)">Size: 312 KB • Format: PDF</div></div><button class="btn-primary" onclick="hideModal('downloadModal')">✅ Download Successfully</button></div></div>
+<div class="modal-overlay" id="shareModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="modal-title">Share Results</div><div style="display:flex;gap:12px;justify-content:center;margin:16px 0"><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">💬</div><div style="font-size:9px;color:var(--ev-text3)">WhatsApp</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#1DA1F2;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">🐦</div><div style="font-size:9px;color:var(--ev-text3)">Twitter</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#EA4335;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">📧</div><div style="font-size:9px;color:var(--ev-text3)">Email</div></div><div style="text-align:center;cursor:pointer"><div style="width:48px;height:48px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 4px">📋</div><div style="font-size:9px;color:var(--ev-text3)">Copy Link</div></div></div><button class="btn-secondary" onclick="hideModal('shareModal')">Cancel</button></div></div>
 <!-- ==================== EXAMS SCREEN ==================== -->
 <div class="screen" data-screen="exams" style="background:#F0FDF9">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#134E4A,#0F766E);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0F766E"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
@@ -401,7 +479,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
   <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:6px">📝 Online Exam Portal</div>
   <div style="font-size:11px;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:10px">Take MCQ-based exams online with a timer. Upload handwritten answers for subjective sections.</div>
   <div style="display:flex;gap:8px">
-    <button onclick="navigateTo('online_exam_internal')" style="flex:1;padding:10px;border-radius:10px;background:#fff;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;color:#4F46E5;cursor:pointer">✍️ Take Online Exam</button>
+    <button onclick="navigateTo('exam_instructions')" style="flex:1;padding:10px;border-radius:10px;background:#fff;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;color:#4F46E5;cursor:pointer">✍️ Take Online Exam</button>
     <button onclick="showModal('examUploadModal')" style="flex:1;padding:10px;border-radius:10px;background:rgba(255,255,255,.2);border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;color:#fff;cursor:pointer">📤 Upload Answer Sheet</button>
   </div>
 </div>
@@ -431,90 +509,102 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div></div>
 </div>
 
+<!-- ==================== EXAM INSTRUCTIONS SCREEN ==================== -->
+<div class="screen" data-screen="exam_instructions" style="background:#F8FAFC">
+<div class="status-bar" style="color:#fff;background:#0F172A;padding-top:14px"><span>9:41</span><div class="notch" style="background:#0F172A"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:#0F172A;padding:8px 18px 24px">
+    <div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Exam Instructions</div></div>
+    <div style="margin-top:20px;text-align:center">
+        <div style="font-size:48px;margin-bottom:12px">📏</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">Physics Term 2 — Final</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6)">Duration: 90 Minutes • Total Marks: 100</div>
+    </div>
+</div>
+<div style="padding:20px 18px">
+    <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.05)">
+        <div style="font-size:13px;font-weight:800;color:var(--ev-text);margin-bottom:14px;display:flex;align-items:center;gap:8px">📜 General Instructions</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:10px"><div style="color:#4F46E5">●</div><div style="font-size:11.5px;color:var(--ev-text2);line-height:1.5">You can navigate between questions using the palette or next/prev buttons.</div></div>
+            <div style="display:flex;gap:10px"><div style="color:#4F46E5">●</div><div style="font-size:11.5px;color:var(--ev-text2);line-height:1.5">MCQs award <b>+4</b> for correct and <b>-1</b> for wrong answers.</div></div>
+            <div style="display:flex;gap:10px"><div style="color:#4F46E5">●</div><div style="font-size:11.5px;color:var(--ev-text2);line-height:1.5">Do NOT switch tabs or minimize the browser. AI monitoring is active.</div></div>
+            <div style="display:flex;gap:10px"><div style="color:#4F46E5">●</div><div style="font-size:11.5px;color:var(--ev-text2);line-height:1.5">Upload handwritten solutions in the "Upload" modal for subjective parts.</div></div>
+            <div style="display:flex;gap:10px"><div style="color:#4F46E5">●</div><div style="font-size:11.5px;color:var(--ev-text2);line-height:1.5">Exam will be auto-submitted when the timer hits zero.</div></div>
+        </div>
+    </div>
+    <div style="margin-top:20px;background:#FFFBEB;border:1px solid #FEF3C7;border-radius:14px;padding:12px;display:flex;gap:10px">
+        <div style="font-size:20px">🤖</div>
+        <div style="font-size:10.5px;color:#92400E;line-height:1.5"><b>AI Integrity Check:</b> We've detected a stable connection. You are ready to begin. Good luck, Arjun!</div>
+    </div>
+</div>
+<div style="position:absolute;bottom:0;left:0;right:0;padding:20px 18px;background:#fff;border-top:1px solid #F1F5F9">
+    <button class="btn-primary" onclick="startOfficialExam()">🚀 Start Examination</button>
+</div>
+</div>
+</div>
+
 <!-- ==================== INTERNAL ONLINE EXAM SCREEN ==================== -->
-<div class="screen" data-screen="online_exam_internal">
+<div class="screen" data-screen="online_exam_internal" style="background:#F8FAFC">
+<div class="status-bar" style="background:#0F172A;color:#fff;padding-top:14px;position:relative;z-index:20">
+    <span>9:41</span><div class="notch" style="background:#111"></div><div class="status-icons"><span>📶</span><span>🔋</span></div>
+</div>
 <div class="top-bar-exam">
   <div>
     <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800">Physics Term 2 — Final Exam</div>
     <div style="font-size:9px;color:#94A3B8">Arjun Kumar | STU-2024-1082</div>
   </div>
-  <div class="timer-box-exam" id="examTimerInternal">
-    ⏱️ <span id="timerTextInternal">01:29:55</span>
+  <div class="timer-box-exam" id="examTimerInternalDiv">
+    ⏱️ <span id="examTimerDisplay">01:30:00</span>
   </div>
 </div>
 
 <div class="exam-main">
   <!-- Small Nav Grid for Mobile -->
   <div class="exam-sidebar">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">Question Palette</div>
-      <div style="font-size:9px;color:#64748B">2 of 20 Answered</div>
+    <!-- Section Switcher -->
+    <div class="exam-type-switcher">
+        <button class="type-btn active" id="btnObjSection" onclick="switchExamSection('objective')">Objective</button>
+        <button class="type-btn" id="btnSubjSection" onclick="switchExamSection('subjective')">Subjective</button>
     </div>
-    <div class="nav-grid-exam" id="examNavGrid">
-        <div class="nav-pill-exam answered">1</div>
-        <div class="nav-pill-exam current">2</div>
-        <div class="nav-pill-exam review">3</div>
-        <div class="nav-pill-exam unanswered">4</div>
-        <div class="nav-pill-exam unanswered">5</div>
-        <div class="nav-pill-exam unanswered">6</div>
-        <div class="nav-pill-exam unanswered">7</div>
-        <div class="nav-pill-exam unanswered">8</div>
-        <div class="nav-pill-exam unanswered">9</div>
-        <div class="nav-pill-exam unanswered">10</div>
-        <div class="nav-pill-exam unanswered">11</div>
-        <div class="nav-pill-exam unanswered">12</div>
-        <div class="nav-pill-exam unanswered">13</div>
-        <div class="nav-pill-exam unanswered">14</div>
-        <div class="nav-pill-exam unanswered">15</div>
-        <div class="nav-pill-exam unanswered">16</div>
-        <div class="nav-pill-exam unanswered">17</div>
-        <div class="nav-pill-exam unanswered">18</div>
-        <div class="nav-pill-exam unanswered">19</div>
-        <div class="nav-pill-exam unanswered">20</div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700" id="paletteTitle">Objective Section</div>
+      <div style="font-size:9px;color:#64748B" id="paletteStats">0 of 10 Answered</div>
+    </div>
+    <div class="nav-grid-exam" id="questionPaletteGrid">
+        <!-- Palette pills will be injected here -->
     </div>
   </div>
   
-  <div class="exam-content-area">
+  <div class="exam-content-area" id="examContentArea">
       <div style="background:#FFFBEB;border:1px solid #FDE68A;padding:10px;border-radius:10px;margin-bottom:12px">
         <div style="font-size:10px;font-weight:700;color:#D97706;margin-bottom:2px">INSTRUCTIONS</div>
-        <div style="font-size:11px;color:#92400E;line-height:1.4">Negative marking (-1) applies. Do not switch tabs.</div>
+        <div style="font-size:11px;color:#92400E;line-height:1.4">Negative marking (-1) applies to MCQs. For subjective, you can type or upload.</div>
       </div>
       
       <div class="question-card-exam">
         <div class="q-header-exam">
-          <div style="font-weight:700;color:#64748B;font-size:11px">Question 2</div>
-          <div style="font-weight:700;color:#4F46E5;background:#EEF2FF;padding:3px 8px;border-radius:12px;font-size:10px">+4 / -1 Marks</div>
+          <div style="font-weight:700;color:#64748B;font-size:11px" id="currentQNumber">Question 1</div>
+          <div style="font-weight:700;color:#4F46E5;background:#EEF2FF;padding:3px 8px;border-radius:12px;font-size:10px" id="marksBadge">+4 / -1 Marks</div>
         </div>
-        <div class="q-text-exam">Which of the following phenomena proves the transverse nature of light waves?</div>
+        <div class="q-text-exam" id="questionTextInternal">Loading question...</div>
         
-        <label class="option-label-exam" onclick="selectOptionInternal(this)">
-          <input type="radio" name="q2int">
-          <span>Interference</span>
-        </label>
-        <label class="option-label-exam" onclick="selectOptionInternal(this)">
-          <input type="radio" name="q2int">
-          <span>Diffraction</span>
-        </label>
-        <label class="option-label-exam selected" onclick="selectOptionInternal(this)">
-          <input type="radio" name="q2int" checked>
-          <span>Polarization</span>
-        </label>
-        <label class="option-label-exam" onclick="selectOptionInternal(this)">
-          <input type="radio" name="q2int">
-          <span>Dispersion</span>
-        </label>
+        <div id="optionsContainerInternal">
+            <!-- Dynamic options (MCQ) or Subjective UI (Textarea) will be injected here -->
+        </div>
       </div>
   </div>
-</div>
 
-<div class="exam-bottom-bar">
-  <div style="display:flex;gap:6px">
-    <button class="btn-exam btn-exam-outline" onclick="navigateTo('exams')">Exit</button>
-    <button class="btn-exam btn-exam-outline" onclick="markReviewInternal(this)">🚩 Review</button>
-  </div>
-  <div style="display:flex;gap:6px">
-    <button class="btn-exam btn-exam-primary" onclick="nextQInternal()">Next →</button>
-    <button class="btn-exam btn-exam-success" onclick="showModal('submitModalInternal')">Submit</button>
+  <div class="exam-bottom-bar">
+    <div style="display:flex;gap:6px">
+      <button class="btn-exam btn-exam-outline" onclick="exitExamPrompt()">Exit</button>
+      <button class="btn-exam btn-exam-outline" onclick="toggleReviewCurrent()">🚩 Review</button>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="btn-exam btn-exam-outline" onclick="prevQuestion()">< Prev</button>
+      <button id="nextBtnExam" class="btn-exam btn-exam-primary" onclick="nextQuestion()">Next →</button>
+      <button id="submitBtnExam" class="btn-exam btn-exam-success" style="display:none" onclick="showModal('submitModalInternal')">Submit Exam</button>
+    </div>
   </div>
 </div>
 </div>
@@ -523,14 +613,72 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="modal-overlay" id="submitModalInternal">
   <div class="modal-sheet" style="text-align:center;padding:24px">
     <div style="font-size:40px;margin-bottom:12px">⚠️</div>
-    <div class="modal-title">Submit Exam?</div>
-    <div style="font-size:12px;color:#64748B;margin-bottom:20px;line-height:1.5">You have 13 unanswered questions. Are you sure you want to finish and submit the exam?</div>
+    <div class="modal-title">Final Submission?</div>
+    <div id="unansweredCount" style="font-size:12px;color:#64748B;margin-bottom:20px;line-height:1.5">Are you sure you want to finish and submit the exam?</div>
     <div style="display:flex;gap:10px">
       <button class="btn-secondary" style="flex:1" onclick="hideModal('submitModalInternal')">Cancel</button>
-      <button class="btn-primary" style="flex:1" onclick="submitExamInternal()">Yes, Submit</button>
+      <button class="btn-primary" style="flex:1" onclick="finalizeExamSubmission()">Yes, Submit</button>
     </div>
   </div>
 </div>
+
+<!-- ==================== EXAM SUCCESS SCREEN ==================== -->
+<div class="screen" data-screen="exam_success" style="background:#F0FDF4;overflow:hidden">
+    <!-- Confetti layer -->
+    <div id="confettiContainer" style="position:absolute;inset:0;pointer-events:none"></div>
+    
+    <div class="screen-body" style="display:flex;flex-direction:column;align-items:center;padding:40px 24px">
+        <div style="width:100px;height:100px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:50px;box-shadow:0 10px 40px rgba(5,150,105,0.2);margin-bottom:24px;position:relative">
+            ✅
+            <div style="position:absolute;inset:-10px;border:3px solid #059669;border-radius:50%;border-top-color:transparent;animation:ring-spin 1.5s linear infinite"></div>
+        </div>
+        
+        <div style="text-align:center;margin-bottom:32px">
+            <div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#065F46;margin-bottom:8px">Exam Submitted!</div>
+            <div style="font-size:13px;color:#059669">Physics Term 2 — Final Exam</div>
+        </div>
+        
+        <div class="result-card-anim" style="background:#fff;border-radius:24px;padding:24px;width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.05);border:1px solid #DCFCE7">
+            <div style="display:flex;justify-content:space-between;margin-bottom:16px"><span style="font-size:12px;color:var(--ev-text3)">Submission ID</span><span style="font-size:12px;font-weight:700;color:var(--ev-text);font-family:monospace">EV-EX-2024-8742</span></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:20px"><span style="font-size:12px;color:var(--ev-text3)">Submitted at</span><span id="finishTime" style="font-size:12px;font-weight:700;color:var(--ev-text)">--:--</span></div>
+            
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+                <div style="background:#F0FDF4;padding:12px;border-radius:16px;text-align:center">
+                    <div id="statAttempted" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#059669">20/20</div>
+                    <div style="font-size:10px;color:#065F46;opacity:.7">Attempted</div>
+                </div>
+                <div style="background:#EFF6FF;padding:12px;border-radius:16px;text-align:center">
+                    <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1D4ED8">+250</div>
+                    <div style="font-size:10px;color:#1E40AF;opacity:.7">XP Earned</div>
+                </div>
+            </div>
+            
+            <div style="background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border:1px dashed #059669;padding:14px;border-radius:16px;display:flex;gap:10px;align-items:center">
+                <div style="font-size:20px">🤖</div>
+                <div style="font-size:11px;color:#065F46;line-height:1.5"><b>AI Verdict:</b> Integrity maintained. No screen switches detected. Results will be published on April 10.</div>
+            </div>
+        </div>
+        
+        <div style="margin-top:auto;width:100%">
+            <button class="btn-primary" onclick="navigateTo('dashboard')">Home Dashboard</button>
+            <button class="btn-secondary" style="margin-top:10px;border:1px solid #E2E8F0" onclick="navigateTo('exams')">Back to Exams</button>
+        </div>
+    </div>
+</div>
+
+<!-- Exit Confirmation Modal -->
+<div class="modal-overlay" id="exitExamModal">
+  <div class="modal-sheet" style="text-align:center;padding:24px">
+    <div style="font-size:40px;margin-bottom:12px">🛑</div>
+    <div class="modal-title">Exit Examination?</div>
+    <div style="font-size:12px;color:#64748B;margin-bottom:20px;line-height:1.5">Walking away now will submit your exam as-is. This action cannot be undone. Are you sure?</div>
+    <div style="display:flex;gap:10px">
+      <button class="btn-secondary" style="flex:1" onclick="hideModal('exitExamModal')">Stay & Work</button>
+      <button class="btn-danger" style="flex:1" onclick="finalizeExamSubmission()">Yes, Exit</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- ==================== FEES SCREEN ==================== -->
 <div class="screen" data-screen="fees" style="background:#F0FDF9">
@@ -1566,7 +1714,7 @@ function navigateTo(screenId) {
     updateBottomNav(screenId);
     
     if (screenId === 'online_exam_internal') {
-      startInternalTimer();
+      // Exam initialization handled by startOfficialExam
     }
   }
 }
@@ -2096,49 +2244,113 @@ window.switchLeaderboard = function(idx) {
 // Init leaderboard with class rank
 switchLeaderboard(0);
 
-// ===== ADD MESSAGING LINK TO DASHBOARD =====
-// Replace Exams icon with Messages icon or add messaging
-const qaGrid = document.querySelector('[data-screen="dashboard"] .qa-grid');
-if (qaGrid && !qaGrid.querySelector('[onclick*="messaging"]')) {
-  const msgItem = document.createElement('div');
-  msgItem.className = 'qa-item';
-  msgItem.onclick = () => navigateTo('messaging');
-  msgItem.innerHTML = '<div class="qa-icon-wrap" style="background:#E0E7FF">💬</div><div class="qa-lbl">Messages</div>';
-  qaGrid.appendChild(msgItem);
+// ===== DASHBOARD INITIALIZED =====
+
+// ===== ENHANCED RESULTS: CATEGORY & YEAR SWITCHING =====
+window.currentResultYear = '2026';
+window.currentResultCategory = 'Class Test';
+
+window.switchResultCategory = function(cat, el) {
+  window.currentResultCategory = cat;
+  // Update chips
+  const chips = document.querySelectorAll('.category-chip');
+  chips.forEach(c => {
+    c.classList.remove('active');
+    c.style.background = 'rgba(255,255,255,.15)';
+    c.style.color = '#fff';
+  });
+  el.classList.add('active');
+  el.style.background = '#fff';
+  el.style.color = '#4F46E5';
+
+  const container = document.getElementById('resultMainContent');
+  if (cat === 'Overall') {
+    renderOverallLedger();
+  } else {
+    renderCategoryResults(cat);
+  }
+};
+
+window.changeResultYear = function(year) {
+  window.currentResultYear = year;
+  document.getElementById('resultsYearTag').textContent = `Year ${year} ▾`;
+  hideModal('yearPickerModal');
+  // Refresh view
+  const activeChip = document.querySelector('.category-chip.active');
+  if (activeChip) activeChip.click();
+};
+
+function renderCategoryResults(cat) {
+  const scores = {
+    'Class Test': { avg: '92.4%', grade: 'A+', total: '185/200', subjects: [{n:'Math',s:48,m:50,i:'📐',c:'#EEF2FF'},{n:'Physics',s:45,m:50,i:'⚛️',c:'#EFF6FF'},{n:'Chemistry',s:47,m:50,i:'⚗️',c:'#F0FDF4'},{n:'English',s:45,m:50,i:'📖',c:'#FDF2F8'}] },
+    'Lab Test': { avg: '88.5%', grade: 'A', total: '88/100', subjects: [{n:'Physics Lab',s:44,m:50,i:'🧪',c:'#F0FDFA'},{n:'Chem Lab',s:44,m:50,i:'🔬',c:'#F0FDF4'}] },
+    'Assignment': { avg: '95.0%', grade: 'A+', total: '237/250', subjects: [{n:'Math HW',s:24,m:25,i:'📝',c:'#F8FAFC'},{n:'Physics Proj',s:48,m:50,i:'🏗️',c:'#EEF2FF'},{n:'Eng Essay',s:23,m:25,i:'✍️',c:'#FDF2F8'}] },
+    'Mid-Term': { avg: '89.2%', grade: 'A', total: '446/500', subjects: [{n:'Math',s:92,m:100,i:'📐',c:'#EEF2FF'},{n:'Physics',s:85,m:100,i:'⚛️',c:'#EFF6FF'},{n:'Chemistry',s:88,m:100,i:'⚗️',c:'#F0FDF4'},{n:'English',s:91,m:100,i:'📖',c:'#FDF2F8'},{n:'Soc Sci',s:90,m:100,i:'🗺️',c:'#FEF3C7'}] },
+    'End-Term': { avg: '---', grade: 'Pending', total: '--/--', subjects: [] },
+    'Other': { avg: '91.0%', grade: 'A', total: '91/100', subjects: [{n:'Internal Assess',s:46,m:50,i:'📋',c:'#F1F5F9'},{n:'Attendance',s:45,m:50,i:'📅',c:'#ECFDF5'}] }
+  };
+  
+  const data = scores[cat] || { avg: '0%', grade: '-', total: '0/0', subjects: [] };
+  const html = `
+    <div style="margin:16px 14px 12px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(79,70,229,.1);text-align:center">
+        <div style="font-size:11px;color:var(--ev-text3);margin-bottom:4px">${cat} Performance (${window.currentResultYear})</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;background:linear-gradient(135deg,#4F46E5,#6366F1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1">${data.avg}</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:${data.grade === 'Pending' ? '#94A3B8' : '#059669'};margin:4px 0 8px">${data.grade} ${data.grade === 'Pending' ? '⏳' : '🏅'}</div>
+        <div style="font-size:12px;color:var(--ev-text2);font-weight:600">Total Marks: ${data.total}</div>
+    </div>
+    <div class="section-header-row"><div class="section-header-title">${cat} - Subject Breakdown</div></div>
+    <div class="dash-card" style="padding:10px;margin-bottom:10px">
+        ${data.subjects.length > 0 ? data.subjects.map(s => `
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 6px">
+                <div style="width:36px;height:36px;border-radius:12px;background:${s.c};display:flex;align-items:center;justify-content:center;font-size:18px">${s.i}</div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">${s.n}</div><div style="font-size:10px;color:var(--ev-text3)">Marks: ${s.s}/${s.m}</div></div>
+                <div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#4F46E5">${s.s}</div><div style="font-size:8px;font-weight:700;color:#059669">${s.s/s.m >= 0.9 ? 'A+' : 'A'}</div></div>
+            </div>
+        `).join('') : '<div style="padding:30px;text-align:center;font-size:12px;color:#94A3B8">Results not yet uploaded for this category.</div>'}
+    </div>
+  `;
+  document.getElementById('resultMainContent').innerHTML = html;
 }
 
-// ===== RESULTS: TAB SWITCH + MULTI-SELECT + PREVIOUS YEAR =====
-document.querySelector('[data-screen="results"] .chip-row')?.querySelectorAll('.chip').forEach((c,i) => {
-  c.onclick = () => {
-    const scr = document.querySelector('[data-screen="results"]');
-    const chips = scr.querySelectorAll('.chip-row .chip');
-    chips.forEach((ch,j) => { ch.style.background = j===i ? '#5B21B6' : '#F5F3FF'; ch.style.color = j===i ? '#fff' : '#5B21B6'; });
-    const perfCard = scr.querySelector('[style*="Overall Performance"]')?.parentElement;
-    const termLabels = ['Term 2 • 2024-25','Term 1 • 2024-25','Mid-Term • 2024-25','Unit Tests • 2024-25'];
-    const termHeader = scr.querySelector('[style*="Term 2"]');
-    if (termHeader) termHeader.textContent = termLabels[i];
-    const scores = [[95,89,91,92,88,93,'91.4%','548/600','A+'],[90,85,88,90,82,89,'87.3%','524/600','A'],[88,82,86,87,80,85,'84.7%','508/600','A'],[92,88,90,91,85,91,'89.5%','537/600','A+']];
-    const s = scores[i];
-    const pctEl = scr.querySelector('[style*="font-size:52px"]');
-    if (pctEl) pctEl.textContent = s[6];
-    const gradeEl = scr.querySelector('[style*="font-size:20px"]');
-    if (gradeEl) gradeEl.innerHTML = `${s[8]} Grade 🏅`;
-    const totalEl = scr.querySelectorAll('[style*="font-size:14px;font-weight:700"]');
-    if (totalEl[1]) totalEl[1].textContent = s[7];
-  };
-});
-// Add multi-select + previous year buttons in results
-const resBody = document.querySelector('[data-screen="results"] .screen-body');
-const resChipRow = document.querySelector('[data-screen="results"] .chip-row');
-if (resBody && resChipRow && !resBody.querySelector('#resTools')) {
-  const toolDiv = document.createElement('div');
-  toolDiv.id = 'resTools';
-  toolDiv.style.cssText = 'display:flex;gap:6px;padding:8px 14px 0';
-  toolDiv.innerHTML = `<div onclick="showDynModal('res','📅 Previous Year Results','Select academic year to view','📅','<b>Available Records:</b><br><br>• 2024-25 (Current) — Term 1, Term 2, Mid-Term, Unit Tests<br>• 2023-24 — Term 1: 86.2%, Term 2: 88.5%<br>• 2022-23 — Term 1: 82.1%, Term 2: 84.8%<br>• 2021-22 — Term 1: 78.5%, Term 2: 80.2%<br><br><b>Year-over-Year Growth:</b><br>📈 +3.1% average improvement per year','📥 Download All Year Reports','📊 Consistent Improvement!')" style="flex:1;padding:6px;border-radius:10px;background:#F5F3FF;text-align:center;font-size:10px;font-weight:600;color:#5B21B6;cursor:pointer;font-family:Outfit,sans-serif">📅 Past Years</div>
-  <div onclick="showDynModal('res','☑ Select Subjects to Download','Multi-select mode','📥','<b>Select subjects to include in PDF:</b><br><br>☑ Mathematics — 95/100<br>☑ Physics — 89/100<br>☑ Chemistry — 91/100<br>☑ English — 92/100<br>☑ Social Science — 88/100<br>☑ Computer Science — 93/100<br><br><b>Options:</b><br>• Download as combined PDF<br>• Download individual subject PDFs<br>• Include rank comparison chart<br>• Include teacher remarks','📥 Generate Custom PDF','📊 6 subjects selected')" style="flex:1;padding:6px;border-radius:10px;background:#F5F3FF;text-align:center;font-size:10px;font-weight:600;color:#5B21B6;cursor:pointer;font-family:Outfit,sans-serif">☑ Multi-Select</div>
-  <div onclick="showDynModal('res','⏰ Time Range Filter','Select date range','📊','<b>Filter results by duration:</b><br><br>📅 Last 3 months<br>📅 Last 6 months<br>📅 Last 1 year<br>📅 Full academic year (2024-25)<br>📅 Custom range<br><br><b>Export Options:</b><br>• Consolidated report (all terms)<br>• Progress chart over time<br>• Subject-wise trend analysis','📥 Generate Report','📊 Custom Time Range Report')" style="flex:1;padding:6px;border-radius:10px;background:#F5F3FF;text-align:center;font-size:10px;font-weight:600;color:#5B21B6;cursor:pointer;font-family:Outfit,sans-serif">⏰ Filter</div>`;
-  resChipRow.after(toolDiv);
+function renderOverallLedger() {
+  const html = `
+    <div style="margin:16px 14px 12px;background:linear-gradient(135deg,#4F46E5,#6366F1);border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(79,70,229,.2);color:#fff">
+        <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-bottom:4px">CONSOLIDATED ACADEMIC LEDGER - ${window.currentResultYear}</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <div><div style="font-family:'Outfit',sans-serif;font-size:42px;font-weight:900">91.4%</div><div style="font-size:12px;font-weight:700;color:#34D399">🏅 DIVISON - I (HONOURS)</div></div>
+            <div style="text-align:right"><div style="font-size:11px">Class X-A</div><div style="font-size:11px">Rank: #3 / 42</div></div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.2);margin:15px 0"></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px">
+           <div style="text-align:center">850/1000<br>TOTAL</div>
+           <div style="text-align:center">95%<br>ATTENDANCE</div>
+           <div style="text-align:center">A+<br>DISCIPLINE</div>
+        </div>
+    </div>
+    <div class="section-header-row"><div class="section-header-title">Consolidated Subjects</div></div>
+    <div class="dash-card" style="padding:10px;margin-bottom:10px">
+        <table style="width:100%;font-size:11px;border-collapse:collapse">
+            <tr style="color:var(--ev-text3);border-bottom:1px solid #f1f5f9;text-align:left"><th style="padding:8px">SUBJECT</th><th style="padding:8px">CT</th><th style="padding:8px">MID</th><th style="padding:8px">TOTAL</th></tr>
+            <tr style="border-bottom:1px solid #f8fafc"><td style="padding:8px;font-weight:700">Mathematics</td><td style="padding:8px">48</td><td style="padding:8px">92</td><td style="padding:8px;color:#4F46E5;font-weight:900">95%</td></tr>
+            <tr style="border-bottom:1px solid #f8fafc"><td style="padding:8px;font-weight:700">Physics</td><td style="padding:8px">45</td><td style="padding:8px">85</td><td style="padding:8px;color:#4F46E5;font-weight:900">89%</td></tr>
+            <tr style="border-bottom:1px solid #f8fafc"><td style="padding:8px;font-weight:700">Chemistry</td><td style="padding:8px">47</td><td style="padding:8px">88</td><td style="padding:8px;color:#4F46E5;font-weight:900">91%</td></tr>
+            <tr style="border-bottom:1px solid #f8fafc"><td style="padding:8px;font-weight:700">English</td><td style="padding:8px">45</td><td style="padding:8px">91</td><td style="padding:8px;color:#4F46E5;font-weight:900">92%</td></tr>
+        </table>
+    </div>
+    <div style="margin:12px 14px;background:#F0FDF4;border-radius:14px;padding:12px;border:1px solid #BBF7D0">
+        <div class="ai-tag" style="background:#059669;margin-bottom:6px">🤖 PRINCIPAL'S REMARK</div>
+        <div style="font-size:11px;color:#065F46;line-height:1.6">Arjun has shown exceptional aptitude in scientific subjects. His participation in the science fair was commendable. <strong>Promoted to higher class.</strong></div>
+    </div>
+  `;
+  document.getElementById('resultMainContent').innerHTML = html;
 }
+
+window.downloadReportCard = function() {
+  document.getElementById('reportCardMsg').textContent = `Your consolidated academic ledger for ${window.currentResultYear} has been generated`;
+  document.getElementById('reportCardFilename').textContent = `📥 ReportCard_${window.currentResultYear}_Arjun.pdf`;
+  showModal('downloadModal');
+};
+
 
 // ===== TIMETABLE: MONTH/YEAR NAVIGATION =====
 const ttBody = document.querySelector('[data-screen="timetable"] .screen-body');
@@ -2205,15 +2417,7 @@ document.querySelectorAll('[data-screen="notices"] .screen-body > div[style*="bo
   if (n) card.onclick = () => showDynModal('notice', n.t, n.s, n.i, n.d, '', '📌 School Notice');
 });
 
-// ===== DASHBOARD: ADD LIVE CLASSES =====
-const qaGridLC = document.querySelector('[data-screen="dashboard"] .qa-grid');
-if (qaGridLC && !qaGridLC.querySelector('[onclick*="live_classes"]')) {
-  const lcItem = document.createElement('div');
-  lcItem.className = 'qa-item';
-  lcItem.onclick = () => navigateTo('live_classes');
-  lcItem.innerHTML = '<div class="qa-icon-wrap" style="background:#FFE4E6;position:relative"><div style="position:absolute;top:0;right:0;width:8px;height:8px;background:#EF4444;border-radius:50%;border:2px solid #fff"></div>🔴</div><div class="qa-lbl">Live Class</div>';
-  qaGridLC.insertBefore(lcItem, qaGridLC.lastElementChild); // Insert before 'More'
-}
+
 
 // ===== LIVE CLASSES LOGIC (YouTube-Style) =====
 window.joinLiveClass = (title, teacher) => {
@@ -2388,67 +2592,334 @@ document.querySelectorAll('[data-screen="library"] .screen-body button, [data-sc
       e.stopPropagation();
       b.textContent = '⏳ Pending Return';
       b.style.background = '#F1F5F9'; b.style.color = '#64748B'; b.style.cursor = 'default';
-      showDynModal('lib','Return Request Submitted','H.C. Verma Vol.1','📤','Your request to return "H.C. Verma Vol.1" has been logged.<br><br>Please drop the physical book at the <b>Library Desk</b> by tomorrow.<br>The librarian will process and confirm the return within 24 hours.<br><br><b>Request ID:</b> RET-2025-0394','','⏳ Awaiting Book Drop');
+      showDynModal('lib','Return Request Submitted','Book Return','📤','Your request to return the book has been logged. Please drop it at the library desk.','','⏳ Awaiting Book Drop');
     });
   }
 });
 
-// ===== LEADERBOARD CLASS VS SCHOOL RANK LIST (OVERRIDE) DELETED =====
-// ===== INTERNAL ONLINE EXAM LOGIC =====
-let internalExamTimer = null;
-let internalExamTimeLeft = 1 * 3600 + 29 * 60 + 55;
+// ==================== ENHANCED DUAL-SECTION EXAM ENGINE (60 QUESTIONS) ====================
+let examState = {
+    currentIdx: 0,
+    currentSection: 'objective', // 'objective' or 'subjective'
+    questions: [
+        // Objective Section (0-49) - High Quality Physics MCQs
+        { t: 'objective', q: "What is the speed of light in a vacuum?", options: ["3 x 10^8 m/s", "3 x 10^6 m/s", "3 x 10^10 m/s", "3 x 10^5 m/s"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "The SI unit of Electrical Power is:", options: ["Joule", "Watt", "Ampere", "Ohm"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Which lens is used to correct Myopia?", options: ["Convex", "Concave", "Cylindrical", "Bifocal"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Sound waves in air are:", options: ["Transverse", "Longitudinal", "Electromagnetic", "Polarized"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The process of heat transfer through direct contact is:", options: ["Convection", "Radiation", "Conduction", "Absorption"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Which quantity remains constant in a series circuit?", options: ["Voltage", "Resistance", "Current", "Power"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Newton's First Law of Motion is also known as:", options: ["Law of Force", "Law of Inertia", "Law of Action-Reaction", "Law of Gravity"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The refractive index of water is approximately:", options: ["1.00", "1.33", "1.50", "2.42"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Which of these is a scalar quantity?", options: ["Velocity", "Acceleration", "Force", "Work"], correct: 3, marks: "+4 / -1" },
+        { t: 'objective', q: "The frequency of AC in India is:", options: ["60 Hz", "50 Hz", "100 Hz", "220 Hz"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The escape velocity on Earth's surface is approximately:", options: ["11.2 km/s", "9.8 km/s", "7.9 km/s", "42 km/s"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Pascal is the SI unit of:", options: ["Force", "Density", "Pressure", "Strain"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "A concave mirror produces a real, inverted image when the object is:", options: ["Between P & F", "At F", "Beyond C", "At infinity"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The momentum of an object depends on:", options: ["Mass & Velocity", "Force & Time", "Mass & Acceleration", "Mass & Height"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "X-rays were discovered by:", options: ["Becquerel", "Roentgen", "Curie", "Maxwell"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Which color of light bends the most during dispersion?", options: ["Red", "Blue", "Violet", "Yellow"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The energy possessed by a body due to its position is:", options: ["Kinetic", "Potential", "Chemical", "Nuclear"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "One Horse Power (HP) is equal to:", options: ["746 W", "1000 W", "500 W", "3600 W"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Which part of the eye controls the amount of light entering?", options: ["Cornea", "Retina", "Iris", "Lens"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The magnetic field inside a long straight solenoid is:", options: ["Zero", "Same at all points", "Decreases at ends", "Increases at ends"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Diamond shines due to:", options: ["Interference", "TIR", "Diffraction", "Refraction"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Which instrument measures atmospheric pressure?", options: ["Hydrometer", "Barometer", "Hygrometer", "Manometer"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The mirror used as a rear-view mirror in vehicles is:", options: ["Plane", "Concave", "Convex", "Cylindrical"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Tesla is the unit of:", options: ["Flux", "Field Induction", "Moment", "Susceptibility"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Universal Law of Gravitation was given by:", options: ["Kepler", "Galileo", "Newton", "Copernicus"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The work done in a circular path is always:", options: ["Positive", "Negative", "Zero", "Dynamic"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Which wave does not require a medium for propagation?", options: ["Sound", "Water", "Light", "Seismic"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The resistance of a conductor is inversely proportional to its:", options: ["Length", "Temp", "Area of Cross-section", "Resistivity"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "A transformer works on the principle of:", options: ["Self Induction", "Mutual Induction", "Eddy Currents", "Lorentz Force"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "What is the power of a lens with focal length 50 cm?", options: ["1D", "2D", "-2D", "0.5D"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The focal length of a plane mirror is:", options: ["Zero", "Infinity", "25 cm", "-25 cm"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Which force holds protons together in the nucleus?", options: ["Gravity", "EM Force", "Strong Nuclear", "Weak Nuclear"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Modulus of Rigidity is the ratio of:", options: ["Long. Stress to Strain", "Shearing Stress to Strain", "Volume Stress to Strain", "Tensile Stress to Strain"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The pitch of sound depends on its:", options: ["Amplitude", "Frequency", "Waveform", "Intensity"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "A bodies weight is maximum at:", options: ["Equator", "Poles", "Center of Earth", "Moon"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "Primary colors of light are:", options: ["Red, Blue, Green", "Red, Yellow, Blue", "Magenta, Cyan, Yellow", "Red, Green, Yellow"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Which semiconductor is p-type?", options: ["Pure Si", "Si doped with P", "Si doped with B", "Ge doped with As"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The time period of a simple pendulum on the Moon:", options: ["Increases", "Decreases", "Same", "Zero"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Which ray has the highest ionizing power?", options: ["Alpha", "Beta", "Gamma", "X-ray"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Ohm's Law is valid for:", options: ["Semiconductors", "Electrolytes", "Metals", "Insulators"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The value of 'g' at the center of the Earth is:", options: ["9.8", "Infinity", "Zero", "1.6"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "An electric fuse wire should have:", options: ["High Melting Point", "Low Resistance", "Low Melting Point", "High Ductility"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Which device converts Mechanical Energy into Electrical?", options: ["Motor", "Generator", "Transformer", "Heater"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The least distance of distinct vision is:", options: ["Unlimited", "2.5 cm", "25 cm", "1 m"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "Which phenomenon explains the blue color of sky?", options: ["Refraction", "Reflection", "Scattering", "Diffraction"], correct: 2, marks: "+4 / -1" },
+        { t: 'objective', q: "The kinetic energy of a molecule is proportional to:", options: ["Temp (T)", "T^2", "1/T", "sqrt(T)"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Viscosity of liquids ________ with temperature increase.", options: ["Increases", "Decreases", "Remains same", "Fluctuates"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "The current in a superconductor is:", options: ["Zero", "Infinite", "Constant", "Periodic"], correct: 1, marks: "+4 / -1" },
+        { t: 'objective', q: "What is the speed of sound in air (approx)?", options: ["330 m/s", "3 x 10^8 m/s", "1500 m/s", "5000 m/s"], correct: 0, marks: "+4 / -1" },
+        { t: 'objective', q: "Nuclear reactors use which process for energy?", options: ["Controlled Fission", "Fusion", "Combustion", "Decay"], correct: 0, marks: "+4 / -1" },
+        
+        // Subjective Section (50-59)
+        { t: 'subjective', q: "Explain the construction and working of a Moving Coil Galvanometer with a neat diagram.", marks: "10 Marks" },
+        { t: 'subjective', q: "Define Total Internal Reflection. State the conditions required for it to occur and give one practical application.", marks: "5 Marks" },
+        { t: 'subjective', q: "Derive the expression for the equivalent resistance of three resistors connected in parallel.", marks: "5 Marks" },
+        { t: 'subjective', q: "State and explain Faraday's Laws of Electromagnetic Induction.", marks: "5 Marks" },
+        { t: 'subjective', q: "Explain the principle of conservation of linear momentum with a suitable example.", marks: "5 Marks" },
+        { t: 'subjective', q: "Describe the working of a P-N Junction Diode in Forward and Reverse Bias.", marks: "10 Marks" },
+        { t: 'subjective', q: "What is Photoelectric Effect? Write Einstein's photoelectric equation and explain its terms.", marks: "5 Marks" },
+        { t: 'subjective', q: "Differentiate between Nuclear Fission and Nuclear Fusion with one example each.", marks: "5 Marks" },
+        { t: 'subjective', q: "Explain the working of a Hydraulic Lift based on Pascal's Law.", marks: "5 Marks" },
+        { t: 'subjective', q: "Describe the three types of thermal expansion in solids: Linear, Superficial, and Cubical.", marks: "5 Marks" }
+    ],
+    answers: Array(60).fill(null),
+    reviewed: Array(60).fill(false),
+    timeLeft: 90 * 60,
+    timerInterval: null
+};
 
-window.startInternalTimer = function() {
-  if (internalExamTimer) clearInterval(internalExamTimer);
-  const timerText = document.getElementById('timerTextInternal');
-  const timerBox = document.getElementById('examTimerInternal');
-  
-  internalExamTimer = setInterval(() => {
-    if (internalExamTimeLeft <= 0) {
-      clearInterval(internalExamTimer);
-      submitExamInternal();
-      return;
-    }
-    internalExamTimeLeft--;
-    const h = Math.floor(internalExamTimeLeft / 3600);
-    const m = Math.floor((internalExamTimeLeft % 3600) / 60);
-    const s = internalExamTimeLeft % 60;
-    const display = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-    if (timerText) timerText.textContent = display;
+window.startOfficialExam = function() {
+    examState.currentIdx = 0;
+    examState.currentSection = 'objective';
+    examState.answers = Array(60).fill(null);
+    examState.reviewed = Array(60).fill(false);
+    examState.timeLeft = 90 * 60;
     
-    if (internalExamTimeLeft < 300) { // 5 minutes warning
-      timerBox?.classList.add('warning');
+    document.body.classList.add('locked-exam-mode');
+    navigateTo('online_exam_internal');
+    
+    // Slight delay to ensure DOM is ready before rendering
+    setTimeout(() => {
+        window.switchExamSection('objective');
+        startExamTimer();
+    }, 50);
+};
+
+function startExamTimer() {
+    if (examState.timerInterval) clearInterval(examState.timerInterval);
+    examState.timerInterval = setInterval(() => {
+        examState.timeLeft--;
+        if (examState.timeLeft <= 0) {
+            finalizeExamSubmission();
+            return;
+        }
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const h = Math.floor(examState.timeLeft / 3600);
+    const m = Math.floor((examState.timeLeft % 3600) / 60);
+    const s = examState.timeLeft % 60;
+    const timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    const el = document.getElementById('examTimerDisplay');
+    if (el) {
+        el.textContent = timeStr;
+        if (examState.timeLeft < 300) el.parentElement.classList.add('warning');
     }
-  }, 1000);
+}
+
+window.switchExamSection = function(section) {
+    examState.currentSection = section;
+    examState.currentIdx = (section === 'objective') ? 0 : 50;
+    
+    // Update UI Header
+    const btnObj = document.getElementById('btnObjSection');
+    const btnSubj = document.getElementById('btnSubjSection');
+    const title = document.getElementById('paletteTitle');
+    
+    if (btnObj) btnObj.classList.toggle('active', section === 'objective');
+    if (btnSubj) btnSubj.classList.toggle('active', section === 'subjective');
+    if (title) title.textContent = section === 'objective' ? 'Objective Section' : 'Subjective Section';
+    
+    renderQuestion();
+    updatePalette();
 };
 
-window.selectOptionInternal = function(el) {
-  const card = el.closest('.question-card-exam');
-  card.querySelectorAll('.option-label-exam').forEach(opt => opt.classList.remove('selected'));
-  el.classList.add('selected');
-  const radio = el.querySelector('input[type="radio"]');
-  if (radio) radio.checked = true;
+function renderQuestion() {
+    const idx = examState.currentIdx;
+    const qData = examState.questions[idx];
+    if (!qData) return;
+    
+    const numEl = document.getElementById('currentQNumber');
+    const marksEl = document.getElementById('marksBadge');
+    const textEl = document.getElementById('questionTextInternal');
+    const container = document.getElementById('optionsContainerInternal');
+    
+    if (numEl) numEl.textContent = `Question ${idx + 1}`;
+    if (marksEl) marksEl.textContent = qData.marks;
+    if (textEl) textEl.textContent = qData.q;
+    
+    if (!container) return;
+    container.innerHTML = '';
+    
+    if (qData.t === 'objective') {
+        container.innerHTML = `<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">` + 
+            qData.options.map((opt, i) => `
+            <label class="option-label-exam ${examState.answers[idx] === i ? 'selected' : ''}" onclick="selectOptionInternal(${i})">
+                <input type="radio" name="exam_q" ${examState.answers[idx] === i ? 'checked' : ''}>
+                <span>${opt}</span>
+            </label>
+            `).join('') + `</div>`;
+    } else {
+        const saved = examState.answers[idx] || {text: '', file: false};
+        container.innerHTML = `
+            <div style="margin-top:16px">
+                <textarea class="subjective-input" placeholder="Type your answer here..." oninput="saveSubjectiveText(this.value)">${saved.text}</textarea>
+                <div class="attach-btn" onclick="simulateFileUpload(${idx})">
+                    <span>📎</span> Attach Physical Solution (Photo/PDF)
+                </div>
+                <div id="attachStatus_${idx}" class="attach-status ${saved.file ? 'visible' : ''}">
+                    <span>✅</span> 1 File Attached (solution_page_1.png)
+                </div>
+            </div>
+        `;
+    }
+
+    // Nav Buttons
+    const nextBtn = document.getElementById('nextBtnExam');
+    const submitBtn = document.getElementById('submitBtnExam');
+    if (nextBtn) nextBtn.style.display = idx === 59 ? 'none' : 'block';
+    if (submitBtn) submitBtn.style.display = idx === 59 ? 'block' : 'none';
+}
+
+window.saveSubjectiveText = function(val) {
+    if (!examState.answers[examState.currentIdx]) examState.answers[examState.currentIdx] = {text: '', file: false};
+    examState.answers[examState.currentIdx].text = val;
+    updatePalette(); // Refresh stats
 };
 
-window.markReviewInternal = function(btn) {
-  btn.classList.toggle('marked-review');
-  const currentPill = document.querySelector('.nav-pill-exam.current');
-  if (currentPill) {
-    currentPill.classList.toggle('review');
-  }
+window.simulateFileUpload = function(idx) {
+    if (!examState.answers[idx]) examState.answers[idx] = {text: '', file: false};
+    examState.answers[idx].file = true;
+    const status = document.getElementById(`attachStatus_${idx}`);
+    if (status) status.classList.add('visible');
+    updatePalette();
 };
 
-window.nextQInternal = function() {
-  // Simple simulation of moving to next question
-  showDynModal('exam','Next Question','Question 3 Loading...','📝','This is a prototype. In the full version, this would load Question 3 from the database.','','✅ Proceed');
+window.selectOptionInternal = function(optIdx) {
+    examState.answers[examState.currentIdx] = optIdx;
+    renderQuestion();
+    updatePalette();
 };
 
-window.submitExamInternal = function() {
-  clearInterval(internalExamTimer);
-  hideModal('submitModalInternal');
-  showDynModal('examSub','Exam Submitted Successfully!','Physics Term 2 — Final','✅','Your answers have been securely transmitted to the school server.<br><br><b>Result:</b> Will be published on April 10, 2025.<br><b>Total Questions:</b> 20<br><b>Attempted:</b> 7<br><b>Marked for Review:</b> 1','','✅ Back to Exams');
-  navigateTo('exams');
+window.nextQuestion = function() {
+    if (examState.currentIdx < 59) {
+        examState.currentIdx++;
+        if (examState.currentIdx === 50 && examState.currentSection === 'objective') {
+            window.switchExamSection('subjective');
+        } else {
+            renderQuestion();
+            updatePalette();
+        }
+    }
 };
+
+window.prevQuestion = function() {
+    if (examState.currentIdx > 0) {
+        examState.currentIdx--;
+        if (examState.currentIdx === 49 && examState.currentSection === 'subjective') {
+            window.switchExamSection('objective');
+            examState.currentIdx = 49; // ensure we land on 50th question
+            renderQuestion();
+            updatePalette();
+        } else {
+            renderQuestion();
+            updatePalette();
+        }
+    }
+};
+
+window.goToQuestion = function(idx) {
+    examState.currentIdx = idx;
+    const newSection = idx < 50 ? 'objective' : 'subjective';
+    if (newSection !== examState.currentSection) {
+        window.switchExamSection(newSection);
+        examState.currentIdx = idx; // Switch Section resets index, so we set it back
+        renderQuestion();
+        updatePalette();
+    } else {
+        renderQuestion();
+        updatePalette();
+    }
+};
+
+window.toggleReviewCurrent = function() {
+    examState.reviewed[examState.currentIdx] = !examState.reviewed[examState.currentIdx];
+    updatePalette();
+};
+
+function updatePalette() {
+    const grid = document.getElementById('questionPaletteGrid');
+    const stats = document.getElementById('paletteStats');
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    const start = examState.currentSection === 'objective' ? 0 : 50;
+    const count = examState.currentSection === 'objective' ? 50 : 10;
+    const end = start + count;
+    
+    let answeredCount = 0;
+    for (let i = start; i < end; i++) {
+        let status = 'unanswered';
+        const ans = examState.answers[i];
+        const q = examState.questions[i];
+        
+        let isAnswered = false;
+        if (q.t === 'objective') {
+            isAnswered = ans !== null;
+        } else {
+            isAnswered = ans && (ans.text.length > 5 || ans.file);
+        }
+
+        if (i === examState.currentIdx) status = 'current';
+        else if (examState.reviewed[i]) status = 'review';
+        else if (isAnswered) status = 'answered';
+        
+        if (isAnswered) answeredCount++;
+
+        const pill = document.createElement('div');
+        pill.className = `nav-pill-exam ${status}`;
+        pill.textContent = i + 1;
+        pill.onclick = () => window.goToQuestion(i);
+        grid.appendChild(pill);
+    }
+    
+    if (stats) stats.textContent = `${answeredCount} of ${count} Answered`;
+}
+
+window.exitExamPrompt = function() {
+    showModal('exitExamModal');
+};
+
+window.finalizeExamSubmission = function() {
+    clearInterval(examState.timerInterval);
+    hideModal('submitModalInternal');
+    hideModal('exitExamModal');
+    document.body.classList.remove('locked-exam-mode');
+    
+    const attempted = examState.answers.filter(a => {
+        if (!a) return false;
+        if (typeof a === 'number') return true;
+        return a.text.length > 5 || a.file;
+    }).length;
+    
+    const attEl = document.getElementById('statAttempted');
+    const timeEl = document.getElementById('finishTime');
+    if (attEl) attEl.textContent = `${attempted}/20`;
+    if (timeEl) timeEl.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    navigateTo('exam_success');
+    spawnConfetti();
+};
+
+function spawnConfetti() {
+    const container = document.getElementById('confettiContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    for(let i=0; i<50; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = Math.random() * 100 + '%';
+        c.style.backgroundColor = ['#FFD700', '#4F46E5', '#06B6D4', '#10B981'][Math.floor(Math.random()*4)];
+        c.style.animationDelay = Math.random() * 1.5 + 's';
+        container.appendChild(c);
+    }
+}
 </script>
 </body>
 </html>
