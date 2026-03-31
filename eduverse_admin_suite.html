@@ -37,15 +37,12 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 .back-btn{width:28px;height:28px;border-radius:9px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;cursor:pointer}
 .mini-top{display:flex;align-items:center;gap:10px}
 .mini-title{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#fff;flex:1}
-.section-header-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 8px}
-.section-header-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--ev-text)}
 .chip-row{display:flex;gap:6px;padding:10px 14px 2px;overflow-x:auto;scrollbar-width:none}
 .chip-row::-webkit-scrollbar{display:none}
 .chip{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
 .ai-tag{display:inline-flex;align-items:center;gap:5px;background:#6366f1;color:#fff;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;letter-spacing:.05em;margin-bottom:8px}
 .dash-card{margin:0 14px 12px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
 .card-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--ev-text);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.card-title a{font-size:10px;color:var(--ev-accent);font-weight:500;text-decoration:none;cursor:pointer}
 .spacer{height:12px}.spacer-sm{height:8px}
 .modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center;border-radius:34px;overflow:hidden}
 .modal-overlay.show{display:flex}
@@ -77,7 +74,6 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 .live-badge{display:inline-flex;align-items:center;gap:4px;background:#ef4444;color:#fff;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:700;font-family:'Outfit',sans-serif;animation:pulse-red 2s infinite}
 @keyframes pulse-red{0%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
 .notification-badge{position:absolute;top:-3px;right:-3px;width:16px;height:16px;background:#ef4444;border-radius:50%;font-size:8px;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif}
-.attend-ring{fill:none;stroke-width:8;stroke-linecap:round}
 .progress-bar{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;border-radius:3px;transition:width .5s ease}
 .task-check{width:22px;height:22px;border-radius:50%;border:2px solid #e2e8f0;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:all .2s;flex-shrink:0}
@@ -90,6 +86,18 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 @media(max-width:400px){.phone{width:calc(100vw - 32px);height:calc(100vh - 60px)}}
 .screen-body{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
 .screen-body::-webkit-scrollbar{display:none}
+.att-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F8FAFC}
+.att-name{flex:1;font-size:12px;font-weight:600;color:var(--ev-text)}
+.att-roll{font-size:10px;color:var(--ev-text3);width:24px}
+.att-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all .15s;background:#fff}
+.att-btn.p{background:#ECFDF5;border-color:#059669;color:#059669}
+.att-btn.a{background:#FEF2F2;border-color:#EF4444;color:#EF4444}
+.att-btn.l{background:#FFF7ED;border-color:#D97706;color:#D97706}
+.student-card{cursor:pointer;margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;transition:transform 0.2s}
+.student-card:active{transform:scale(0.98)}
+.label-sm{font-size:11px;color:var(--ev-text3);margin-bottom:4px;font-weight:600}
+select.input-field{appearance:auto}
+textarea.input-field{resize:none;min-height:60px}
 </style>
 </head>
 <body>
@@ -143,7 +151,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 </div>
 
-<!-- ==================== COMMAND CENTER (PRINCIPAL) ==================== -->
+<!-- ==================== COMMAND CENTER ==================== -->
 <div class="screen" data-screen="command_center" style="background:#0f1623">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1f3a,#2d3158);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1f3a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -161,43 +169,43 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="toggle-btn inactive" onclick="switchRoleView(this)">📊 Reports</div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px">
-<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">847</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Students</div></div>
-<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">62</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Staff</div></div>
-<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#22c55e">91%</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Attend.</div></div>
-<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#f59e0b">12</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Pending</div></div>
+<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer" onclick="navigateTo('student_directory')"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">847</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Students</div></div>
+<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer" onclick="navigateTo('staff_directory')"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">62</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Staff</div></div>
+<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer" onclick="navigateTo('attendance')"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#22c55e">91%</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Attend.</div></div>
+<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer" onclick="navigateTo('notifications')"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#f59e0b">12</div><div style="font-size:8px;color:rgba(255,255,255,.35)">Pending</div></div>
 </div>
 </div>
 <div style="padding:12px 14px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase">Quick Access</div>
 <div class="qa-grid" style="background:#0f1623">
-<div class="qa-item" onclick="navigateTo('staff_directory')"><div class="qa-icon-wrap" style="background:rgba(99,102,241,.15)">📋</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Attendance</div></div>
+<div class="qa-item" onclick="navigateTo('attendance')"><div class="qa-icon-wrap" style="background:rgba(99,102,241,.15)">📋</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Attendance</div></div>
 <div class="qa-item" onclick="navigateTo('staff_directory')"><div class="qa-icon-wrap" style="background:rgba(34,197,94,.15)">👥</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Staff</div></div>
 <div class="qa-item" onclick="navigateTo('timetable')"><div class="qa-icon-wrap" style="background:rgba(245,158,11,.15)">📅</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Timetable</div></div>
 <div class="qa-item" onclick="navigateTo('notices')"><div class="qa-icon-wrap" style="background:rgba(239,68,68,.15)">📢</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Notice</div></div>
 <div class="qa-item" onclick="navigateTo('admissions')"><div class="qa-icon-wrap" style="background:rgba(6,182,212,.15)">🚪</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Admission</div></div>
-<div class="qa-item" onclick="navigateTo('reports')"><div class="qa-icon-wrap" style="background:rgba(139,92,246,.15)">🏆</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Results</div></div>
+<div class="qa-item" onclick="navigateTo('gradebook')"><div class="qa-icon-wrap" style="background:rgba(139,92,246,.15)">🏆</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Results</div></div>
 <div class="qa-item" onclick="navigateTo('ai_assistant')"><div class="qa-icon-wrap" style="background:rgba(99,102,241,.15)">🤖</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">AI Assist</div></div>
 <div class="qa-item" onclick="navigateTo('reports')"><div class="qa-icon-wrap" style="background:rgba(245,158,11,.15)">📊</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Reports</div></div>
 </div>
 <div style="padding:8px 14px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase">Live Alerts</div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
-<div style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px"><div style="font-size:16px">🔴</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">3 teachers absent today — substitutes needed</div><div style="font-size:9px;color:rgba(255,255,255,.25)">8:05 AM</div></div>
-<div style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px"><div style="font-size:16px">💰</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">₹2.4L fee collection pending — 18 students</div><div style="font-size:9px;color:rgba(255,255,255,.25)">7:30 AM</div></div>
-<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px"><div style="font-size:16px">📝</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">New admission: Rohan Verma, Class IX</div><div style="font-size:9px;color:rgba(255,255,255,.25)">7:15 AM</div></div>
+<div style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer" onclick="navigateTo('attendance')"><div style="font-size:16px">🔴</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">3 teachers absent today — substitutes needed</div><div style="font-size:9px;color:rgba(255,255,255,.25)">8:05 AM</div></div>
+<div style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer" onclick="navigateTo('defaulters')"><div style="font-size:16px">💰</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">₹2.4L fee collection pending — 18 students</div><div style="font-size:9px;color:rgba(255,255,255,.25)">7:30 AM</div></div>
+<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer" onclick="navigateTo('admissions')"><div style="font-size:16px">📝</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.65)">New admission: Rohan Verma, Class IX</div><div style="font-size:9px;color:rgba(255,255,255,.25)">7:15 AM</div></div>
 </div>
-<div style="margin:4px 14px 12px;background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(129,140,248,.1));border:1px solid rgba(99,102,241,.2);border-radius:16px;padding:12px"><div class="ai-tag">🤖 AI RISK ALERT</div><div style="font-size:11px;color:rgba(255,255,255,.7);line-height:1.6">Class VIII-B attendance dropped below 85%. 4 students at risk of detention. Auto-notify parents?</div></div>
+<div style="margin:4px 14px 12px;background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(129,140,248,.1));border:1px solid rgba(99,102,241,.2);border-radius:16px;padding:12px;cursor:pointer" onclick="showToast('AI analyzing Class VIII-B attendance patterns...')"><div class="ai-tag">🤖 AI RISK ALERT</div><div style="font-size:11px;color:rgba(255,255,255,.7);line-height:1.6">Class VIII-B attendance dropped below 85%. 4 students at risk of detention. Auto-notify parents?</div></div>
 <div class="spacer"></div>
 </div>
 <div class="ai-fab" onclick="navigateTo('ai_assistant')">🤖</div>
 <div class="bottom-nav">
 <div class="nav-item active" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
-<div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== DIRECTOR DASHBOARD ==================== -->
+<!-- ==================== DIRECTOR ==================== -->
 <div class="screen" data-screen="director" style="background:#0f1623">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1300,#2a1e00);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1300"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -227,14 +235,14 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 <div class="bottom-nav">
 <div class="nav-item active" onclick="navigateTo('director')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">🏫</div><div class="nav-lbl">Schools</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">🏫</div><div class="nav-lbl">Schools</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Finance</div></div>
 <div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== FINANCE DASHBOARD ==================== -->
+<!-- ==================== FINANCE ==================== -->
 <div class="screen" data-screen="finance" style="background:#0f1623">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0a2218,#0d4f3c);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0a2218"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -249,9 +257,9 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 </div>
 <div class="qa-grid" style="padding:12px 14px">
-<div class="qa-item"><div class="qa-icon-wrap" style="background:rgba(34,197,94,.15)">💳</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Collect</div></div>
+<div class="qa-item" onclick="showModal('collectFeeModal')"><div class="qa-icon-wrap" style="background:rgba(34,197,94,.15)">💳</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Collect</div></div>
 <div class="qa-item" onclick="navigateTo('defaulters')"><div class="qa-icon-wrap" style="background:rgba(239,68,68,.15)">📋</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Defaulters</div></div>
-<div class="qa-item"><div class="qa-icon-wrap" style="background:rgba(245,158,11,.15)">💵</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Payroll</div></div>
+<div class="qa-item" onclick="showModal('payrollModal')"><div class="qa-icon-wrap" style="background:rgba(245,158,11,.15)">💵</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Payroll</div></div>
 <div class="qa-item" onclick="navigateTo('reports')"><div class="qa-icon-wrap" style="background:rgba(99,102,241,.15)">📊</div><div class="qa-lbl" style="color:rgba(255,255,255,.5)">Reports</div></div>
 </div>
 <div style="padding:8px 14px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase">Recent Transactions</div>
@@ -272,34 +280,86 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 </div>
 
+<!-- ==================== STUDENT DIRECTORY ==================== -->
+<div class="screen" data-screen="student_directory" style="background:#f8fafc">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1f3a,#3730a3);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1f3a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#1a1f3a,#3730a3);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Student Directory</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">847 Total</div></div></div>
+<input type="text" placeholder="🔍 Search by name, roll no, class..." style="width:calc(100% - 28px);margin:10px 14px;padding:10px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:inherit;font-size:12px;outline:none;box-sizing:border-box" oninput="filterStudents(this.value)">
+<div class="chip-row"><div class="chip active" style="background:#6366f1;color:#fff" onclick="filterStudentsByClass('all', this)">All (847)</div><div class="chip" style="background:#eef2ff;color:#6366f1" onclick="filterStudentsByClass('X', this)">Class X (280)</div><div class="chip" style="background:#eef2ff;color:#6366f1" onclick="filterStudentsByClass('IX', this)">Class IX (260)</div><div class="chip" style="background:#eef2ff;color:#6366f1" onclick="filterStudentsByClass('VIII', this)">Class VIII (207)</div></div>
+<div style="padding:0 14px;display:flex;flex-direction:column;gap:6px" id="studentList">
+<div class="student-card" data-class="X" onclick="showStudentProfile('Arjun Kumar','X-A','Roll 1','95%','92%','Rank 3')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:18px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 1 · 95% Avg</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#ECFDF5;color:#059669">92% Att</div></div>
+<div class="student-card" data-class="X" onclick="showStudentProfile('Riya Gupta','X-A','Roll 2','91%','94%','Rank 5')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#f472b6);display:flex;align-items:center;justify-content:center;font-size:18px">👧</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">X-A · Roll 2 · 91% Avg</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#ECFDF5;color:#059669">94% Att</div></div>
+<div class="student-card" data-class="X" style="background:#FEF2F2" onclick="showStudentProfile('Sanjay Mehta','X-A','Roll 3','42%','72%','Rank 38')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#f87171);display:flex;align-items:center;justify-content:center;font-size:18px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Sanjay Mehta ⚠️</div><div style="font-size:10px;color:#ef4444">X-A · Roll 3 · 42% Avg</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#FEF2F2;color:#EF4444">72% Att ⚠️</div></div>
+<div class="student-card" data-class="IX" onclick="showStudentProfile('Vikram Joshi','IX-A','Roll 5','35%','68%','Rank 42')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:18px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Vikram Joshi</div><div style="font-size:10px;color:var(--ev-text3)">IX-A · Roll 5 · 35% Avg</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#FEF2F2;color:#EF4444">68% Att ⚠️</div></div>
+<div class="student-card" data-class="IX" onclick="showStudentProfile('Ananya Singh','IX-B','Roll 6','82%','90%','Rank 12')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#10b981,#34d399);display:flex;align-items:center;justify-content:center;font-size:18px">👧</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ananya Singh</div><div style="font-size:10px;color:var(--ev-text3)">IX-B · Roll 6 · 82% Avg</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#ECFDF5;color:#059669">90% Att</div></div>
+</div>
+<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px" onclick="showToast('Add student form coming soon!')">+ Add New Student</button></div>
+<div class="spacer"></div>
+</div>
+<div class="bottom-nav">
+<div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item active" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
+<div class="nav-item" onclick="navigateTo('attendance')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Attend.</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
+<div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
+</div>
+</div>
+
+<!-- ==================== ATTENDANCE ==================== -->
+<div class="screen" data-screen="attendance" style="background:#f0fdf4">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#065f46,#059669);padding-top:14px"><span>9:41</span><div class="notch" style="background:#059669"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#065f46,#059669);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Mark Attendance</div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📅 March 31, 2026</div><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📚 X-A Mathematics</div></div></div>
+<div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text);font-family:'Outfit',sans-serif">Student List (45)</div><div style="display:flex;gap:6px"><div style="background:#ECFDF5;color:#059669;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;cursor:pointer" onclick="markAllPresent()">✅ All Present</div></div></div>
+<div style="padding:0 14px">
+<div class="att-row"><div class="att-roll">1</div><div class="att-name">Arjun Kumar</div><div class="att-btn p" onclick="toggleAtt(this,'p')">P</div><div class="att-btn" onclick="toggleAtt(this,'a')">A</div><div class="att-btn" onclick="toggleAtt(this,'l')">L</div></div>
+<div class="att-row"><div class="att-roll">2</div><div class="att-name">Riya Gupta</div><div class="att-btn p" onclick="toggleAtt(this,'p')">P</div><div class="att-btn" onclick="toggleAtt(this,'a')">A</div><div class="att-btn" onclick="toggleAtt(this,'l')">L</div></div>
+<div class="att-row"><div class="att-roll">3</div><div class="att-name">Sanjay Mehta</div><div class="att-btn" onclick="toggleAtt(this,'p')">P</div><div class="att-btn a" onclick="toggleAtt(this,'a')">A</div><div class="att-btn" onclick="toggleAtt(this,'l')">L</div></div>
+<div class="att-row"><div class="att-roll">4</div><div class="att-name">Neha Patel</div><div class="att-btn p" onclick="toggleAtt(this,'p')">P</div><div class="att-btn" onclick="toggleAtt(this,'a')">A</div><div class="att-btn" onclick="toggleAtt(this,'l')">L</div></div>
+<div class="att-row"><div class="att-roll">5</div><div class="att-name">Vikram Joshi</div><div class="att-btn" onclick="toggleAtt(this,'p')">P</div><div class="att-btn" onclick="toggleAtt(this,'a')">A</div><div class="att-btn l" onclick="toggleAtt(this,'l')">L</div></div>
+<div class="att-row"><div class="att-roll">6</div><div class="att-name">Ananya Singh</div><div class="att-btn p" onclick="toggleAtt(this,'p')">P</div><div class="att-btn" onclick="toggleAtt(this,'a')">A</div><div class="att-btn" onclick="toggleAtt(this,'l')">L</div></div>
+</div>
+<div style="padding:12px 14px"><button class="btn-success" onclick="showModal('attSuccessModal')">✅ Submit Attendance (5P · 1A · 0L)</button></div>
+<div class="spacer"></div>
+</div>
+<div class="bottom-nav">
+<div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item active" onclick="navigateTo('attendance')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Attend.</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
+<div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
+</div>
+</div>
+
 <!-- ==================== STAFF DIRECTORY ==================== -->
 <div class="screen" data-screen="staff_directory" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1f3a,#3730a3);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1f3a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#1a1f3a,#3730a3);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Staff Directory</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">62 Total</div></div></div>
-<input type="text" placeholder="🔍 Search by name, department, role..." style="width:calc(100% - 28px);margin:10px 14px;padding:10px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:inherit;font-size:12px;outline:none;box-sizing:border-box">
-<div class="chip-row"><div class="chip" style="background:#6366f1;color:#fff">All (62)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Teachers (38)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Admin (8)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Support (12)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Transport (4)</div></div>
+<input type="text" placeholder="🔍 Search by name, department, role..." style="width:calc(100% - 28px);margin:10px 14px;padding:10px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:inherit;font-size:12px;outline:none;box-sizing:border-box" oninput="filterStaff(this.value)">
+<div class="chip-row"><div class="chip active" style="background:#6366f1;color:#fff">All (62)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Teachers (38)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Admin (8)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Support (12)</div><div class="chip" style="background:#eef2ff;color:#6366f1">Transport (4)</div></div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
 <div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Mr. R. Sharma','Mathematics','Room 301','12 years','M.Sc, B.Ed')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:18px">👨‍🏫</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Mr. R. Sharma</div><div style="font-size:10px;color:var(--ev-text3)">Mathematics · Room 301</div></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
 <div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Ms. P. Gupta','English','Room 204','8 years','M.A, B.Ed')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#f472b6);display:flex;align-items:center;justify-content:center;font-size:18px">👩‍🏫</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ms. P. Gupta</div><div style="font-size:10px;color:var(--ev-text3)">English · Room 204</div></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
 <div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Dr. A. Verma','Physics','Lab 2','15 years','Ph.D, M.Sc')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#06b6d4,#22d3ee);display:flex;align-items:center;justify-content:center;font-size:18px">👨‍🔬</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Dr. A. Verma</div><div style="font-size:10px;color:var(--ev-text3)">Physics · Lab 2</div></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Mr. V. Jain','Computer Science','Lab 3','6 years','M.Tech')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#10b981,#34d399);display:flex;align-items:center;justify-content:center;font-size:18px">👨‍💻</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Mr. V. Jain</div><div style="font-size:10px;color:var(--ev-text3)">Computer Science · Lab 3</div></div><div style="width:8px;height:8px;border-radius:50%;background:#94a3b8"></div></div>
 <div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Mohan Lal','Housekeeping','Block A','3 years','10th Pass')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#78716c,#a8a29e);display:flex;align-items:center;justify-content:center;font-size:18px">🧹</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Mohan Lal</div><div style="font-size:10px;color:var(--ev-text3)">Housekeeping · Block A</div></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
 <div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer" onclick="showStaffDetail('Ramkumar Singh','Security','Main Gate','5 years','12th Pass')"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#94a3b8,#cbd5e1);display:flex;align-items:center;justify-content:center;font-size:18px">🔒</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ramkumar Singh</div><div style="font-size:10px;color:var(--ev-text3)">Security · Main Gate</div></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div></div>
 </div>
-<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px">+ Add New Staff Member</button></div>
+<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px" onclick="showToast('Add staff form coming soon!')">+ Add New Staff Member</button></div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
 <div class="nav-item active" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
-<div class="nav-item" onclick="navigateTo('hr')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Attendance</div></div>
-<div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
+<div class="nav-item" onclick="navigateTo('hr')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">HR</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== HR DASHBOARD ==================== -->
+<!-- ==================== HR ==================== -->
 <div class="screen" data-screen="hr" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#3b0764,#6d28d9);padding-top:14px"><span>9:41</span><div class="notch" style="background:#3b0764"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -309,9 +369,8 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#22c55e">3</div><div style="font-size:8px;color:rgba(255,255,255,.4)">New</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#ef4444">1</div><div style="font-size:8px;color:rgba(255,255,255,.4)">Left</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#f59e0b">97%</div><div style="font-size:8px;color:rgba(255,255,255,.4)">Present</div></div>
-</div>
-</div>
-<div class="qa-grid"><div class="qa-item"><div class="qa-icon-wrap" style="background:#eef2ff">📋</div><div class="qa-lbl">Attendance</div></div><div class="qa-item"><div class="qa-icon-wrap" style="background:#fef3c7">📝</div><div class="qa-lbl">Leave Mgmt</div></div><div class="qa-item"><div class="qa-icon-wrap" style="background:#ecfdf5">💵</div><div class="qa-lbl">Payroll</div></div><div class="qa-item" onclick="navigateTo('reports')"><div class="qa-icon-wrap" style="background:#f3e8ff">📊</div><div class="qa-lbl">Reports</div></div></div>
+</div></div>
+<div class="qa-grid"><div class="qa-item" onclick="navigateTo('attendance')"><div class="qa-icon-wrap" style="background:#eef2ff">📋</div><div class="qa-lbl">Attendance</div></div><div class="qa-item" onclick="showModal('leaveReqModal')"><div class="qa-icon-wrap" style="background:#fef3c7">📝</div><div class="qa-lbl">Leave Mgmt</div></div><div class="qa-item" onclick="showModal('payrollModal')"><div class="qa-icon-wrap" style="background:#ecfdf5">💵</div><div class="qa-lbl">Payroll</div></div><div class="qa-item" onclick="navigateTo('reports')"><div class="qa-icon-wrap" style="background:#f3e8ff">📊</div><div class="qa-lbl">Reports</div></div></div>
 <div class="dash-card"><div class="card-title">📋 Pending Leave Requests</div>
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#fef3c7;border-radius:10px"><div style="font-size:16px">🤒</div><div style="flex:1"><div style="font-size:12px;font-weight:600">Mr. A. Verma</div><div style="font-size:10px;color:var(--ev-text3)">Sick Leave · Mar 28-29</div></div><div style="display:flex;gap:4px"><button style="padding:4px 10px;border-radius:6px;border:none;background:#22c55e;color:#fff;font-size:9px;font-weight:700;cursor:pointer" onclick="approveLeave(this)">✓ Approve</button><button style="padding:4px 10px;border-radius:6px;border:none;background:#ef4444;color:#fff;font-size:9px;font-weight:700;cursor:pointer" onclick="rejectLeave(this)">✕ Reject</button></div></div>
@@ -329,7 +388,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 </div>
 
-<!-- ==================== ADMISSIONS PIPELINE ==================== -->
+<!-- ==================== ADMISSIONS ==================== -->
 <div class="screen" data-screen="admissions" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1f3a,#6366f1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1f3a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -340,8 +399,8 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#f59e0b">28</div><div style="font-size:8px;color:rgba(255,255,255,.4)">In Process</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#06b6d4">86</div><div style="font-size:8px;color:rgba(255,255,255,.4)">Enquiries</div></div>
 </div></div>
-<div style="padding:12px 14px 8px;font-size:10px;font-weight:700;color:var(--ev-text3);letter-spacing:.1em;text-transform:uppercase">Pipeline Stages</div>
-<div style="display:flex;gap:2px;padding:0 14px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none">
+<div style="padding:12px 14px 8px;font-size:10px;font-weight:700;color:var(--ev-text3);letter-spacing:.1em;text-transform:uppercase">Pipeline</div>
+<div style="display:flex;gap:2px;padding:0 14px;margin-bottom:10px;overflow-x:auto">
 <div style="flex:1;min-width:50px;background:#6366f1;border-radius:8px;padding:6px;text-align:center"><div style="font-size:14px;font-weight:800;color:#fff">86</div><div style="font-size:7px;color:rgba(255,255,255,.7)">Enquiry</div></div>
 <div style="flex:1;min-width:50px;background:#818cf8;border-radius:8px;padding:6px;text-align:center"><div style="font-size:14px;font-weight:800;color:#fff">45</div><div style="font-size:7px;color:rgba(255,255,255,.7)">Applied</div></div>
 <div style="flex:1;min-width:50px;background:#f59e0b;border-radius:8px;padding:6px;text-align:center"><div style="font-size:14px;font-weight:800;color:#fff">28</div><div style="font-size:7px;color:#fff">Test</div></div>
@@ -349,43 +408,41 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="flex:1;min-width:50px;background:#22c55e;border-radius:8px;padding:6px;text-align:center"><div style="font-size:14px;font-weight:800;color:#fff">42</div><div style="font-size:7px;color:#fff">Enrolled</div></div>
 </div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Rohan Verma</div><div style="font-size:10px;color:var(--ev-text3)">Class IX · Test Stage · Mar 25</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#fef3c7;color:#d97706">TEST</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ananya Singh</div><div style="font-size:10px;color:var(--ev-text3)">Class VI · Interview · Mar 22</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#e0f2fe;color:#0284c7">INTERVIEW</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#ecfdf5;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Vikram Patel</div><div style="font-size:10px;color:var(--ev-text3)">Class X · Applied · Mar 20</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#eef2ff;color:#6366f1">APPLIED</div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Rohan Verma</div><div style="font-size:10px;color:var(--ev-text3)">Class IX · Test Stage</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#fef3c7;color:#d97706">TEST</div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Ananya Singh</div><div style="font-size:10px;color:var(--ev-text3)">Class VI · Interview</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#e0f2fe;color:#0284c7">INTERVIEW</div></div>
 </div>
 <div style="margin:10px 14px 12px;background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(129,140,248,.1));border:1px solid rgba(99,102,241,.2);border-radius:16px;padding:12px"><div class="ai-tag">🤖 LEAD SCORING</div><div style="font-size:11px;color:var(--ev-text2);line-height:1.6">Top 5 high-probability applicants identified. Auto-send acceptance reminders?</div></div>
+<div style="padding:0 14px;display:flex;gap:8px;margin-bottom:12px">
+<button class="btn-primary" style="flex:1;font-size:12px;padding:10px" onclick="showToast('New admission form coming soon!')">+ New Admission</button>
+<button class="btn-secondary" style="flex:1;font-size:12px;padding:10px" onclick="showToast('Visitor log coming soon!')">📋 Visitor Log</button>
+</div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
 <div class="nav-item active" onclick="navigateTo('admissions')"><div class="nav-icon-wrap">🚪</div><div class="nav-lbl">Pipeline</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">🚫</div><div class="nav-lbl">Visitors</div></div>
+<div class="nav-item" onclick="showToast('Visitor log coming soon!')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Visitors</div></div>
 <div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== GATE QR SCANNER ==================== -->
+<!-- ==================== GATE SCANNER ==================== -->
 <div class="screen" data-screen="gate_scanner" style="background:#0f1623">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1200,#2d1f00);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1200"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#1a1200,#2d1f00);padding:8px 18px 16px"><div class="mini-top"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff;flex:1">Gate Scanner</div><div style="font-size:22px">🔒</div></div><div style="font-size:10px;color:rgba(255,255,255,.5)">Ramkumar Singh · Main Gate</div></div>
-<div style="margin:14px;background:rgba(245,158,11,.1);border:1.5px dashed rgba(245,158,11,.3);border-radius:16px;padding:30px;text-align:center;position:relative;overflow:hidden">
-<div class="scan-line"></div>
-<div style="font-size:48px;margin-bottom:8px">📷</div>
-<div style="font-size:13px;color:rgba(255,255,255,.6);font-weight:700">Tap to Scan QR / RFID</div>
-</div>
+<div style="margin:14px;background:rgba(245,158,11,.1);border:1.5px dashed rgba(245,158,11,.3);border-radius:16px;padding:30px;text-align:center;position:relative;overflow:hidden;cursor:pointer" onclick="simulateScan()"><div class="scan-line"></div><div style="font-size:48px;margin-bottom:8px">📷</div><div style="font-size:13px;color:rgba(255,255,255,.6);font-weight:700">Tap to Scan QR / RFID</div></div>
 <div style="display:flex;gap:8px;padding:0 14px;margin-bottom:12px">
-<div style="flex:1;background:rgba(245,158,11,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer"><div style="font-size:18px">📱</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">QR Code</div></div>
-<div style="flex:1;background:rgba(99,102,241,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer"><div style="font-size:18px">🆔</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">ID Card</div></div>
-<div style="flex:1;background:rgba(34,197,94,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer"><div style="font-size:18px">✍️</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">Manual</div></div>
+<div style="flex:1;background:rgba(245,158,11,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer" onclick="showToast('QR scanning...')"><div style="font-size:18px">📱</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">QR Code</div></div>
+<div style="flex:1;background:rgba(99,102,241,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer" onclick="showToast('ID Card scanning...')"><div style="font-size:18px">🆔</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">ID Card</div></div>
+<div style="flex:1;background:rgba(34,197,94,.15);border-radius:10px;padding:10px;text-align:center;cursor:pointer" onclick="showModal('manualEntryModal')"><div style="font-size:18px">✍️</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-weight:600">Manual</div></div>
 </div>
 <div style="padding:0 14px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase">Today's Log</div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
 <div style="background:#fff;border-radius:10px;padding:10px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div><div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--ev-text)">Anita Sharma (Parent)</div><div style="font-size:9px;color:var(--ev-text3)">Visitor · Meeting Principal</div></div><div style="font-size:10px;color:var(--ev-text3);font-weight:600">9:12 AM</div></div>
 <div style="background:#fff;border-radius:10px;padding:10px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#ef4444"></div><div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--ev-text)">Rajesh Kumar (Vendor)</div><div style="font-size:9px;color:var(--ev-text3)">Exit · Canteen delivery</div></div><div style="font-size:10px;color:var(--ev-text3);font-weight:600">9:05 AM</div></div>
 <div style="background:#fff;border-radius:10px;padding:10px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div><div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--ev-text)">Mrs. Priya Sharma</div><div style="font-size:9px;color:var(--ev-text3)">Staff · Teacher check-in</div></div><div style="font-size:10px;color:var(--ev-text3);font-weight:600">8:45 AM</div></div>
-<div style="background:#fff;border-radius:10px;padding:10px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div><div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--ev-text)">Bus #KA-01-1234</div><div style="font-size:9px;color:var(--ev-text3)">Transport · 42 students</div></div><div style="font-size:10px;color:var(--ev-text3);font-weight:600">8:30 AM</div></div>
 </div>
 <div style="padding:14px;display:flex;gap:8px">
 <div style="flex:1;background:rgba(255,255,255,.06);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#22c55e">47</div><div style="font-size:8px;color:rgba(255,255,255,.4)">Entries</div></div>
@@ -395,15 +452,15 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
-<div class="nav-item active"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📷</div><div class="nav-lbl">Scan</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Log</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📞</div><div class="nav-lbl">Emergency</div></div>
+<div class="nav-item active" onclick="navigateTo('gate_scanner')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item" onclick="simulateScan()"><div class="nav-icon-wrap">📷</div><div class="nav-lbl">Scan</div></div>
+<div class="nav-item" onclick="showToast('Log view coming soon!')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Log</div></div>
+<div class="nav-item" onclick="showToast('Emergency contacts coming soon!')"><div class="nav-icon-wrap">📞</div><div class="nav-lbl">Emergency</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== SUPPORT STAFF TASKS ==================== -->
+<!-- ==================== SUPPORT TASKS ==================== -->
 <div class="screen" data-screen="support_tasks" style="background:#fafaf9">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1c1917,#44403c);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1c1917"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -417,25 +474,23 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
 <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div class="task-check done">✓</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#94a3b8;text-decoration:line-through">Clean Classroom 301</div><div style="font-size:9px;color:var(--ev-text3)">Completed 7:30 AM</div></div></div>
 <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div class="task-check done">✓</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#94a3b8;text-decoration:line-through">Clean Classroom 302</div><div style="font-size:9px;color:var(--ev-text3)">Completed 7:45 AM</div></div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div class="task-check done">✓</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#94a3b8;text-decoration:line-through">Clean Washroom Block A</div><div style="font-size:9px;color:var(--ev-text3)">Completed 8:00 AM</div></div></div>
 <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div class="task-check done">✓</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#94a3b8;text-decoration:line-through">Mop Corridor Block A</div><div style="font-size:9px;color:var(--ev-text3)">Completed 8:30 AM</div></div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div class="task-check done">✓</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#94a3b8;text-decoration:line-through">Empty Dustbins Ground Floor</div><div style="font-size:9px;color:var(--ev-text3)">Completed 9:00 AM</div></div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);border-left:3px solid #f59e0b"><div class="task-check" onclick="toggleTask(this)">⬜</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanitize Boys Washroom</div><div style="font-size:9px;color:var(--ev-text3)">Due 10:00 AM</div></div><div style="font-size:16px;cursor:pointer">📸</div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);border-left:3px solid #f59e0b"><div class="task-check" onclick="toggleTask(this)">⬜</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Mop First Floor Corridor</div><div style="font-size:9px;color:var(--ev-text3)">Due 11:00 AM</div></div><div style="font-size:16px;cursor:pointer">📸</div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);border-left:3px solid #f59e0b"><div class="task-check" onclick="toggleTask(this)">⬜</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Clean Staff Room</div><div style="font-size:9px;color:var(--ev-text3)">Due 12:00 PM</div></div><div style="font-size:16px;cursor:pointer">📸</div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);border-left:3px solid #f59e0b"><div class="task-check" onclick="toggleTask(this)">⬜</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Sanitize Boys Washroom</div><div style="font-size:9px;color:var(--ev-text3)">Due 10:00 AM</div></div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);border-left:3px solid #f59e0b"><div class="task-check" onclick="toggleTask(this)">⬜</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Mop First Floor Corridor</div><div style="font-size:9px;color:var(--ev-text3)">Due 11:00 AM</div></div></div>
 </div>
 <div style="padding:14px"><button class="btn-success" style="font-size:13px;padding:12px" onclick="completeAllTasks()">✅ Mark All Complete</button></div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
-<div class="nav-item active"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Tasks</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📸</div><div class="nav-lbl">Photos</div></div>
+<div class="nav-item active" onclick="navigateTo('support_tasks')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item" onclick="showToast('Task list coming soon!')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Tasks</div></div>
+<div class="nav-item" onclick="showToast('Photo upload coming soon!')"><div class="nav-icon-wrap">📸</div><div class="nav-lbl">Photos</div></div>
+<div class="nav-item" onclick="showToast('Maintenance coming soon!')"><div class="nav-icon-wrap">🔧</div><div class="nav-lbl">Maintenance</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== TRANSPORT DASHBOARD ==================== -->
+<!-- ==================== TRANSPORT ==================== -->
 <div class="screen" data-screen="transport" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0c4a6e,#0369a1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0c4a6e"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -449,21 +504,20 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px;margin-top:8px">
 <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:24px">🚌</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Route 7B · HR-29-3847</div><div style="font-size:10px;color:var(--ev-text3)">38 students · 5 min to school</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#ecfdf5;color:#059669">● LIVE</div></div>
 <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:24px">🚌</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Route 3A · HR-26-5678</div><div style="font-size:10px;color:var(--ev-text3)">42 students · 12 min to school</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#fef3c7;color:#d97706">12 min</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="font-size:24px">🚌</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Route 12 · DL-01-9012</div><div style="font-size:10px;color:var(--ev-text3)">35 students · Arrived</div></div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;background:#eef2ff;color:#6366f1">✓ Arrived</div></div>
 </div>
 <div style="margin:10px 14px 12px;background:linear-gradient(135deg,rgba(6,182,212,.15),rgba(14,165,233,.1));border:1px solid rgba(6,182,212,.2);border-radius:16px;padding:12px"><div class="ai-tag" style="background:#06b6d4">🤖 ROUTE OPTIMIZER</div><div style="font-size:11px;color:var(--ev-text2);line-height:1.6">Route 3A can save 8 min by reordering stops 4 & 5. Apply optimization?</div></div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item active"><div class="nav-icon-wrap">🚌</div><div class="nav-lbl">Routes</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">👨‍✈️</div><div class="nav-lbl">Drivers</div></div>
+<div class="nav-item active" onclick="navigateTo('transport')"><div class="nav-icon-wrap">🚌</div><div class="nav-lbl">Routes</div></div>
+<div class="nav-item" onclick="showToast('Driver management coming soon!')"><div class="nav-icon-wrap">👨‍✈️</div><div class="nav-lbl">Drivers</div></div>
 <div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
 
-<!-- ==================== LIBRARY MANAGER ==================== -->
+<!-- ==================== LIBRARY ==================== -->
 <div class="screen" data-screen="library" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#3b0764,#6d28d9);padding-top:14px"><span>9:41</span><div class="notch" style="background:#3b0764"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
@@ -474,20 +528,57 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#ef4444">12</div><div style="font-size:7px;color:rgba(255,255,255,.4)">Overdue</div></div>
 <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#f59e0b">5</div><div style="font-size:7px;color:rgba(255,255,255,.4)">Requests</div></div>
 </div></div>
-<input type="text" placeholder="🔍 Search books by title, author, ISBN..." style="width:calc(100% - 28px);margin:10px 14px;padding:10px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:inherit;font-size:12px;outline:none;box-sizing:border-box">
+<input type="text" placeholder="🔍 Search books..." style="width:calc(100% - 28px);margin:10px 14px;padding:10px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:inherit;font-size:12px;outline:none;box-sizing:border-box">
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
-<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📘</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">NCERT Physics XII</div><div style="font-size:10px;color:var(--ev-text3)">By NCERT · Class XII</div><div style="font-size:10px;font-weight:600;color:#22c55e;margin-top:2px">Available</div></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📙</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">H.C. Verma Vol.1</div><div style="font-size:10px;color:var(--ev-text3)">By H.C. Verma</div><div style="font-size:10px;font-weight:600;color:#d97706;margin-top:2px">Issued to Arjun (Due: Apr 5)</div></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#059669,#34d399);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📗</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">R.D. Sharma Class X</div><div style="font-size:10px;color:var(--ev-text3)">By R.D. Sharma</div><div style="font-size:10px;font-weight:600;color:#ef4444;margin-top:2px">⚠️ Overdue · Send Reminder</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📘</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">NCERT Physics XII</div><div style="font-size:10px;color:var(--ev-text3)">By NCERT · Available</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📙</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">H.C. Verma Vol.1</div><div style="font-size:10px;color:var(--ev-text3)">Issued to Arjun · Due Apr 5</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.04)"><div style="width:40px;height:52px;border-radius:8px;background:linear-gradient(135deg,#059669,#34d399);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📗</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">R.D. Sharma Class X</div><div style="font-size:10px;color:#ef4444;margin-top:2px">⚠️ Overdue · Send Reminder</div></div></div>
 </div>
 <div style="margin:10px 14px 12px;background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(168,85,247,.1));border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:12px"><div class="ai-tag" style="background:#8b5cf6">🤖 READING RECOMMENDATION</div><div style="font-size:11px;color:var(--ev-text2);line-height:1.6">12 books overdue. Auto-send reminders to students and notify parents?</div></div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item active"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Catalog</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Issues</div></div>
-<div class="nav-item"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fines</div></div>
+<div class="nav-item active" onclick="navigateTo('library')"><div class="nav-icon-wrap">📚</div><div class="nav-lbl">Catalog</div></div>
+<div class="nav-item" onclick="showToast('Book issues coming soon!')"><div class="nav-icon-wrap">📋</div><div class="nav-lbl">Issues</div></div>
+<div class="nav-item" onclick="showToast('Fine management coming soon!')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fines</div></div>
+<div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
+</div>
+</div>
+
+<!-- ==================== GRADEBOOK ==================== -->
+<div class="screen" data-screen="gradebook" style="background:#f8fafc">
+<div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#1a1f3a,#6366f1);padding-top:14px"><span>9:41</span><div class="notch" style="background:#1a1f3a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+<div class="screen-body">
+<div style="background:linear-gradient(135deg,#1a1f3a,#6366f1);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Gradebook</div><div style="font-size:10px;color:rgba(255,255,255,.5)">X-A · March 2026</div></div>
+<div style="display:flex;gap:6px;margin-top:14px;overflow-x:auto;scrollbar-width:none">
+<div class="chip" style="background:#6366f1;color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">Class Test</div>
+<div class="chip" style="background:rgba(255,255,255,.15);color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">Lab Test</div>
+<div class="chip" style="background:rgba(255,255,255,.15);color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">Assignment</div>
+<div class="chip" style="background:rgba(255,255,255,.15);color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">Mid-Term</div>
+<div class="chip" style="background:rgba(255,255,255,.15);color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">End-Term</div>
+<div class="chip" style="background:rgba(255,255,255,.15);color:#fff;white-space:nowrap" onclick="switchGradeTab(this)">Overall</div>
+</div></div>
+<div style="padding:12px 14px">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+<div style="background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#6366f1">76%</div><div style="font-size:9px;color:var(--ev-text3)">Class Avg</div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#22c55e">92%</div><div style="font-size:9px;color:var(--ev-text3)">Attendance</div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#f59e0b">84%</div><div style="font-size:9px;color:var(--ev-text3)">Proficiency</div></div>
+</div>
+</div>
+<div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
+<div style="background:#fff;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);cursor:pointer" onclick="showUpdateMarks('Arjun Kumar','95')"><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;color:#6366f1;width:24px">1</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Arjun Kumar</div><div style="font-size:10px;color:var(--ev-text3)">95/100</div></div><div style="font-size:14px;font-weight:800;color:#22c55e">A+</div></div>
+<div style="background:#fff;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);cursor:pointer" onclick="showUpdateMarks('Riya Gupta','91')"><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;color:#6366f1;width:24px">2</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Riya Gupta</div><div style="font-size:10px;color:var(--ev-text3)">91/100</div></div><div style="font-size:14px;font-weight:800;color:#22c55e">A</div></div>
+<div style="background:#FEF2F2;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);cursor:pointer" onclick="showUpdateMarks('Sanjay Mehta','42')"><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;color:#ef4444;width:24px">38</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Sanjay Mehta ⚠️</div><div style="font-size:10px;color:#ef4444">42/100</div></div><div style="font-size:14px;font-weight:800;color:#ef4444">F</div></div>
+</div>
+<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px" onclick="showToast('Export report cards coming soon!')">📥 Export Report Cards</button></div>
+<div class="spacer"></div>
+</div>
+<div class="bottom-nav">
+<div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
+<div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
+<div class="nav-item active" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
@@ -499,24 +590,23 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="background:linear-gradient(135deg,#1a1f3a,#6366f1);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Reports & Analytics</div></div></div>
 <div style="padding:12px 14px 8px;font-size:10px;font-weight:700;color:var(--ev-text3);letter-spacing:.1em;text-transform:uppercase">Report Categories</div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 14px;margin-bottom:12px">
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">📊</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Academic</div></div>
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">📋</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Attendance</div></div>
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">💰</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Financial</div></div>
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">👥</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Staff</div></div>
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">🚌</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Transport</div></div>
-<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer"><div style="font-size:24px;margin-bottom:4px">📖</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Library</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="showToast('Academic reports coming soon!')"><div style="font-size:24px;margin-bottom:4px">📊</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Academic</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="navigateTo('attendance')"><div style="font-size:24px;margin-bottom:4px">📋</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Attendance</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="navigateTo('finance')"><div style="font-size:24px;margin-bottom:4px">💰</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Financial</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="navigateTo('staff_directory')"><div style="font-size:24px;margin-bottom:4px">👥</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Staff</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="navigateTo('transport')"><div style="font-size:24px;margin-bottom:4px">🚌</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Transport</div></div>
+<div style="background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer" onclick="navigateTo('library')"><div style="font-size:24px;margin-bottom:4px">📖</div><div style="font-size:10px;font-weight:700;color:var(--ev-text)">Library</div></div>
 </div>
 <div style="padding:8px 14px 4px;font-size:10px;font-weight:700;color:var(--ev-text3);letter-spacing:.1em;text-transform:uppercase">Recent Reports</div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div style="font-size:20px">📊</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Monthly Attendance — March 2026</div><div style="font-size:10px;color:var(--ev-text3)">Generated: Mar 27</div></div><div style="font-size:10px;color:#6366f1;font-weight:700;cursor:pointer">📥 PDF</div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div style="font-size:20px">💰</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Fee Collection Summary — Q4</div><div style="font-size:10px;color:var(--ev-text3)">Generated: Mar 25</div></div><div style="font-size:10px;color:#6366f1;font-weight:700;cursor:pointer">📥 PDF</div></div>
-<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)"><div style="font-size:20px">👥</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Staff Appraisal — Annual</div><div style="font-size:10px;color:var(--ev-text3)">Generated: Mar 20</div></div><div style="font-size:10px;color:#6366f1;font-weight:700;cursor:pointer">📥 PDF</div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);cursor:pointer" onclick="showToast('Downloading report...')"><div style="font-size:20px">📊</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Monthly Attendance — March 2026</div><div style="font-size:10px;color:var(--ev-text3)">Generated: Mar 27</div></div><div style="font-size:10px;color:#6366f1;font-weight:700">📥 PDF</div></div>
+<div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.03);cursor:pointer" onclick="showToast('Downloading report...')"><div style="font-size:20px">💰</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ev-text)">Fee Collection Summary — Q4</div><div style="font-size:10px;color:var(--ev-text3)">Generated: Mar 25</div></div><div style="font-size:10px;color:#6366f1;font-weight:700">📥 PDF</div></div>
 </div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
 <div class="nav-item active" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
@@ -529,7 +619,6 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div style="background:linear-gradient(135deg,#0f0c29,#302b63);padding:8px 18px 12px;flex-shrink:0"><div style="display:flex;align-items:center;gap:10px"><div class="back-btn" onclick="goBack()">←</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:14px">🤖</div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">EduVerse AI</div><div style="font-size:10px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px"><div style="width:6px;height:6px;background:#22c55e;border-radius:50%;animation:blink 1s infinite"></div>Always Online</div></div></div></div>
 <div id="chatBody" style="background:#f8faff;flex:1;padding:12px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;scrollbar-width:none">
 <div style="display:flex;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-right:6px">🤖</div><div style="max-width:85%;background:#fff;border-radius:4px 16px 16px 16px;padding:10px 13px;box-shadow:0 2px 8px rgba(0,0,0,.06)"><div style="font-size:12px;color:var(--ev-text);line-height:1.6">Hello Dr. Mehta! 👋 I'm your EduVerse AI assistant. I can help with attendance analysis, fee tracking, staff management, admissions pipeline, and more!</div><div style="font-size:9px;color:var(--ev-text3);margin-top:4px">9:00 AM</div></div></div>
-<div style="display:flex;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-right:6px">🤖</div><div style="max-width:85%;background:#fff;border-radius:4px 16px 16px 16px;padding:10px 13px;box-shadow:0 2px 8px rgba(0,0,0,.06)"><div style="font-size:12px;color:var(--ev-text);line-height:1.6">📊 <b>Today's Summary:</b><br>• Attendance: 91% (785/862 students)<br>• 3 teachers absent (need substitutes)<br>• ₹2.4L fee pending (18 students)<br>• 28 admission applications in pipeline<br><br>What would you like to focus on?</div><div style="font-size:9px;color:var(--ev-text3);margin-top:4px">9:01 AM</div></div></div>
 </div>
 <div style="padding:6px 10px;display:flex;gap:5px;background:#f8faff;overflow-x:auto;scrollbar-width:none;flex-shrink:0">
 <div style="flex-shrink:0;background:#eef2ff;color:#6366f1;font-size:9.5px;font-weight:600;padding:5px 10px;border-radius:20px;font-family:'Outfit',sans-serif;cursor:pointer" onclick="sendAiMsg('Show attendance summary')">📊 Attendance</div>
@@ -547,20 +636,22 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="screen" data-screen="notices" style="background:#f8fafc">
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#92400e,#d97706);padding-top:14px"><span>9:41</span><div class="notch" style="background:#92400e"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
-<div style="background:linear-gradient(135deg,#92400e,#d97706);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Notices</div><div style="background:rgba(255,255,255,.2);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer">+ Create</div></div></div>
+<div style="background:linear-gradient(135deg,#92400e,#d97706);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Notices</div><div style="background:rgba(255,255,255,.2);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer" onclick="showModal('createNoticeModal')">+ Create</div></div></div>
 <div class="chip-row"><div class="chip" style="background:#d97706;color:#fff">All (12)</div><div class="chip" style="background:#fef3c7;color:#d97706">Urgent (2)</div><div class="chip" style="background:#fef3c7;color:#d97706">General</div><div class="chip" style="background:#fef3c7;color:#d97706">Events</div></div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px">
 <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #ef4444;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#fef2f2;color:#ef4444;display:inline-block;margin-bottom:4px">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Exam Hall Ticket Collection</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">Collect hall tickets from office · Mar 28</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #ef4444;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#fef2f2;color:#ef4444;display:inline-block;margin-bottom:4px">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Fee Payment Deadline Extended</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">Extended to April 5 · Late fees waived · Mar 25</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #6366f1;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#eef2ff;color:#6366f1;display:inline-block;margin-bottom:4px">📋 GENERAL</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Staff Meeting Tomorrow</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">All staff · Room 101 · 8:00 AM · Mar 24</div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #f59e0b;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#fef3c7;color:#d97706;display:inline-block;margin-bottom:4px">🎉 EVENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Annual Day Preparation</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">Committee meeting · Auditorium · Mar 22</div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #ef4444;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#fef2f2;color:#ef4444;display:inline-block;margin-bottom:4px">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Fee Payment Deadline Extended</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">Extended to April 5 · Late fees waived</div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #6366f1;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#eef2ff;color:#6366f1;display:inline-block;margin-bottom:4px">📋 GENERAL</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Staff Meeting Tomorrow</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">All staff · Room 101 · 8:00 AM</div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #f59e0b;cursor:pointer"><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#fef3c7;color:#d97706;display:inline-block;margin-bottom:4px">🎉 EVENT</div><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Annual Day Preparation</div><div style="font-size:10px;color:var(--ev-text3);margin-top:2px">Committee meeting · Auditorium</div></div>
 </div>
-<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px">📝 Create New Notice</button></div>
+<div style="padding:14px"><button class="btn-primary" style="font-size:13px;padding:12px" onclick="showModal('createNoticeModal')">📝 Create New Notice</button></div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item active"><div class="nav-icon-wrap">📢</div><div class="nav-lbl">Notices</div></div>
+<div class="nav-item active" onclick="navigateTo('notices')"><div class="nav-icon-wrap">📢</div><div class="nav-lbl">Notices</div></div>
+<div class="nav-item" onclick="showToast('Calendar coming soon!')"><div class="nav-icon-wrap">📅</div><div class="nav-lbl">Calendar</div></div>
+<div class="nav-item" onclick="showToast('Events coming soon!')"><div class="nav-icon-wrap">🎉</div><div class="nav-lbl">Events</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
@@ -581,8 +672,9 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item active"><div class="nav-icon-wrap">📅</div><div class="nav-lbl">Timetable</div></div>
+<div class="nav-item active" onclick="navigateTo('timetable')"><div class="nav-icon-wrap">📅</div><div class="nav-lbl">Timetable</div></div>
 <div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="showToast('Live classes coming soon!')"><div class="nav-icon-wrap">🎥</div><div class="nav-lbl">Live</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
@@ -602,17 +694,23 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 <div style="font-size:10px;font-weight:700;color:var(--ev-text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Account</div>
 <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:12px">
-<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">👤</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Profile</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
-<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">🔑</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Change Password</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
+<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer" onclick="navigateTo('profile')"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">👤</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Profile</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
+<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer" onclick="showToast('Change password coming soon!')"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">🔑</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Change Password</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
 <div style="display:flex;align-items:center;padding:13px 14px;gap:12px;cursor:pointer" onclick="navigateTo('login')"><div style="width:34px;height:34px;border-radius:10px;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:16px">🚪</div><div style="font-size:13px;font-weight:600;color:#ef4444;flex:1">Logout</div></div>
 </div>
-<div style="text-align:center;padding:8px 0 16px;font-size:10px;color:var(--ev-text3)">EduVerse Admin Suite v1.0 · © 2026</div>
+<div style="font-size:10px;font-weight:700;color:var(--ev-text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">School Settings</div>
+<div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:12px">
+<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer" onclick="showToast('Academic year management coming soon!')"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">📅</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Academic Year</div><div style="font-size:10px;color:var(--ev-text3)">2026-27</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
+<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;border-bottom:1px solid #f8fafc;cursor:pointer" onclick="showToast('Class management coming soon!')"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">📚</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Classes & Sections</div><div style="font-size:10px;color:var(--ev-text3)">12 classes</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
+<div style="display:flex;align-items:center;padding:13px 14px;gap:12px;cursor:pointer" onclick="showToast('Fee structure coming soon!')"><div style="width:34px;height:34px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:16px">💰</div><div style="font-size:13px;font-weight:600;color:var(--ev-text);flex:1">Fee Structure</div><div style="font-size:14px;color:#cbd5e1">›</div></div>
+</div>
+<div style="text-align:center;padding:8px 0 16px;font-size:10px;color:var(--ev-text3)">EduVerse Admin Suite v2.0 · © 2026</div>
 </div></div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
-<div class="nav-item" onclick="navigateTo('reports')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Reports</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
 <div class="nav-item active" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
@@ -622,12 +720,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="status-bar" style="color:#fff;background:linear-gradient(135deg,#0f172a,#1e293b);padding-top:14px"><span>9:41</span><div class="notch" style="background:#0f172a"></div><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:8px 18px 0"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Profile</div></div>
-<div style="text-align:center;padding:20px 0"><div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 8px;border:3px solid rgba(255,255,255,.2)">👨‍💼</div><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">Dr. Suresh Mehta</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Principal · DAV Public School · EMP-001</div></div>
-<div style="display:flex;justify-content:space-around;background:rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:16px">
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">15</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Years Exp</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">12</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Awards</div></div>
-<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#22c55e">98%</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Rating</div></div>
-</div></div>
+<div style="text-align:center;padding:20px 0"><div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 8px;border:3px solid rgba(255,255,255,.2)">👨‍💼</div><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">Dr. Suresh Mehta</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Principal · DAV Public School · EMP-001</div></div></div>
 <div style="padding:14px">
 <div style="font-size:10px;font-weight:700;color:var(--ev-text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Personal Info</div>
 <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:12px">
@@ -641,7 +734,7 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
 <div class="nav-item active"><div class="nav-icon-wrap">👤</div><div class="nav-lbl">Profile</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
@@ -654,17 +747,18 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#1a1f3a,#3730a3);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Notifications</div></div></div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px;margin-top:8px">
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #ef4444;display:flex;gap:10px"><div style="font-size:16px">🔴</div><div style="flex:1"><div style="font-size:12px;font-weight:600">3 Teachers Absent Today</div><div style="font-size:10px;color:var(--ev-text3)">Substitutes needed · 2 mins ago</div></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #f59e0b;display:flex;gap:10px"><div style="font-size:16px">💰</div><div style="flex:1"><div style="font-size:12px;font-weight:600">Fee Collection Alert</div><div style="font-size:10px;color:var(--ev-text3)">₹2.4L pending · 1 hour ago</div></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #6366f1;display:flex;gap:10px"><div style="font-size:16px">📝</div><div style="flex:1"><div style="font-size:12px;font-weight:600">New Admission Application</div><div style="font-size:10px;color:var(--ev-text3)">Rohan Verma · Class IX · 3 hours ago</div></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #22c55e;display:flex;gap:10px"><div style="font-size:16px">✅</div><div style="flex:1"><div style="font-size:12px;font-weight:600">Leave Approved</div><div style="font-size:10px;color:var(--ev-text3)">Mr. A. Verma · Sick Leave · Yesterday</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #ef4444;display:flex;gap:10px;cursor:pointer" onclick="navigateTo('attendance')"><div style="font-size:16px">🔴</div><div style="flex:1"><div style="font-size:12px;font-weight:600">3 Teachers Absent Today</div><div style="font-size:10px;color:var(--ev-text3)">Substitutes needed · 2 mins ago</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #f59e0b;display:flex;gap:10px;cursor:pointer" onclick="navigateTo('finance')"><div style="font-size:16px">💰</div><div style="flex:1"><div style="font-size:12px;font-weight:600">Fee Collection Alert</div><div style="font-size:10px;color:var(--ev-text3)">₹2.4L pending · 1 hour ago</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #6366f1;display:flex;gap:10px;cursor:pointer" onclick="navigateTo('admissions')"><div style="font-size:16px">📝</div><div style="flex:1"><div style="font-size:12px;font-weight:600">New Admission Application</div><div style="font-size:10px;color:var(--ev-text3)">Rohan Verma · Class IX · 3 hours ago</div></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);border-left:3px solid #22c55e;display:flex;gap:10px;cursor:pointer" onclick="navigateTo('hr')"><div style="font-size:16px">✅</div><div style="flex:1"><div style="font-size:12px;font-weight:600">Leave Approved</div><div style="font-size:10px;color:var(--ev-text3)">Mr. A. Verma · Sick Leave</div></div></div>
 </div>
 <div class="spacer"></div>
 </div>
 <div class="bottom-nav">
 <div class="nav-item" onclick="navigateTo('command_center')"><div class="nav-icon-wrap">🏠</div><div class="nav-lbl">Home</div></div>
-<div class="nav-item" onclick="navigateTo('staff_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Staff</div></div>
+<div class="nav-item" onclick="navigateTo('student_directory')"><div class="nav-icon-wrap">👥</div><div class="nav-lbl">Students</div></div>
 <div class="nav-item" onclick="navigateTo('finance')"><div class="nav-icon-wrap">💰</div><div class="nav-lbl">Fees</div></div>
+<div class="nav-item" onclick="navigateTo('gradebook')"><div class="nav-icon-wrap">📊</div><div class="nav-lbl">Grades</div></div>
 <div class="nav-item" onclick="navigateTo('settings')"><div class="nav-icon-wrap">⚙️</div><div class="nav-lbl">Settings</div></div>
 </div>
 </div>
@@ -675,10 +769,8 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 <div class="screen-body">
 <div style="background:linear-gradient(135deg,#7f1d1d,#dc2626);padding:8px 18px 16px"><div class="mini-top"><div class="back-btn" onclick="goBack()">←</div><div class="mini-title">Fee Defaulters</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">18 Students</div></div></div>
 <div style="padding:0 14px;display:flex;flex-direction:column;gap:6px;margin-top:8px">
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👧</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Sneha Patel</div><div style="font-size:10px;color:var(--ev-text3)">Class VIII-B · Overdue 14 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹8,500</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer">Send SMS</button></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Rohan Verma</div><div style="font-size:10px;color:var(--ev-text3)">Class IX-A · Overdue 10 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹6,200</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer">Send SMS</button></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Amit Singh</div><div style="font-size:10px;color:var(--ev-text3)">Class VII-C · Overdue 7 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹4,500</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer">Send SMS</button></div></div>
-<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👧</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Priya Sharma</div><div style="font-size:10px;color:var(--ev-text3)">Class VI-B · Overdue 5 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹4,500</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer">Send SMS</button></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👧</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Sneha Patel</div><div style="font-size:10px;color:var(--ev-text3)">Class VIII-B · Overdue 14 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹8,500</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer" onclick="showToast('SMS sent!')">Send SMS</button></div></div>
+<div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:14px">👦</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ev-text)">Rohan Verma</div><div style="font-size:10px;color:var(--ev-text3)">Class IX-A · Overdue 10 days</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:#ef4444">₹6,200</div><button style="margin-top:4px;padding:3px 8px;border-radius:6px;border:none;background:#6366f1;color:#fff;font-size:9px;font-weight:700;cursor:pointer" onclick="showToast('SMS sent!')">Send SMS</button></div></div>
 </div>
 <div style="padding:14px"><button class="btn-danger" style="font-size:13px;padding:12px" onclick="showToast('SMS sent to all 18 defaulters!')">📱 Send Bulk SMS to All Defaulters</button></div>
 <div class="spacer"></div>
@@ -691,35 +783,26 @@ body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;displa
 </div>
 </div>
 
-<!-- ==================== STAFF DETAIL MODAL ==================== -->
-<div class="modal-overlay" id="staffDetailModal">
-<div class="modal-sheet" style="text-align:center">
-<div class="modal-handle"></div>
-<div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 10px" id="staffModalAvatar">👨‍🏫</div>
-<div class="modal-title" id="staffModalName">Mr. R. Sharma</div>
-<div style="font-size:12px;color:var(--ev-text3);margin-bottom:16px" id="staffModalInfo">Mathematics · Room 301</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
-<div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text)" id="staffModalExp">12 years</div><div style="font-size:9px;color:var(--ev-text3)">Experience</div></div>
-<div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text)" id="staffModalQual">M.Sc, B.Ed</div><div style="font-size:9px;color:var(--ev-text3)">Qualification</div></div>
-</div>
-<div style="display:flex;gap:8px;margin-bottom:8px">
-<button class="btn-secondary" style="flex:1" onclick="hideModal('staffDetailModal')">📞 Call</button>
-<button class="btn-primary" style="flex:1" onclick="hideModal('staffDetailModal')">💬 Message</button>
-</div>
-<button class="btn-secondary" onclick="hideModal('staffDetailModal')" style="margin-top:4px">Close</button>
-</div>
-</div>
+<!-- ==================== MODALS ==================== -->
+<div class="modal-overlay" id="staffDetailModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 10px" id="staffModalAvatar">👨‍🏫</div><div class="modal-title" id="staffModalName">Mr. R. Sharma</div><div style="font-size:12px;color:var(--ev-text3);margin-bottom:16px" id="staffModalInfo">Mathematics · Room 301</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"><div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text)" id="staffModalExp">12 years</div><div style="font-size:9px;color:var(--ev-text3)">Experience</div></div><div style="background:#f8fafc;border-radius:10px;padding:10px;text-align:center"><div style="font-size:12px;font-weight:700;color:var(--ev-text)" id="staffModalQual">M.Sc, B.Ed</div><div style="font-size:9px;color:var(--ev-text3)">Qualification</div></div></div><div style="display:flex;gap:8px;margin-bottom:8px"><button class="btn-secondary" style="flex:1" onclick="hideModal('staffDetailModal')">📞 Call</button><button class="btn-primary" style="flex:1" onclick="hideModal('staffDetailModal')">💬 Message</button></div><button class="btn-secondary" onclick="hideModal('staffDetailModal')" style="margin-top:4px">Close</button></div></div>
 
-<!-- ==================== PAYMENT SUCCESS MODAL ==================== -->
-<div class="modal-overlay" id="successModal">
-<div class="modal-sheet" style="text-align:center">
-<div class="modal-handle"></div>
-<div class="success-check" style="font-size:60px;margin-bottom:8px">✅</div>
-<div class="modal-title" style="color:#22c55e" id="successTitle">Action Completed!</div>
-<p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px" id="successMsg">The action has been processed successfully.</p>
-<button class="btn-primary" onclick="hideModal('successModal')">Done</button>
-</div>
-</div>
+<div class="modal-overlay" id="successModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">✅</div><div class="modal-title" style="color:#22c55e" id="successTitle">Action Completed!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px" id="successMsg">The action has been processed successfully.</p><button class="btn-primary" onclick="hideModal('successModal')">Done</button></div></div>
+
+<div class="modal-overlay" id="attSuccessModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div class="success-check" style="font-size:60px;margin-bottom:8px">✅</div><div class="modal-title" style="color:#059669">Attendance Submitted!</div><p style="font-size:12px;color:var(--ev-text3);margin-bottom:16px">X-A Mathematics attendance for March 31 has been recorded.<br>Present: 5 · Absent: 1 · Late: 0</p><button class="btn-primary" onclick="hideModal('attSuccessModal')">Done</button></div></div>
+
+<div class="modal-overlay" id="collectFeeModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">💳 Collect Fee</div><div class="label-sm">Student Name</div><input class="input-field" placeholder="Search student..."><div class="label-sm">Fee Type</div><select class="input-field"><option>Tuition Fee</option><option>Lab Fee</option><option>Transport Fee</option><option>Exam Fee</option></select><div class="label-sm">Amount</div><input class="input-field" type="number" placeholder="Enter amount" value="8500"><div class="label-sm">Payment Method</div><select class="input-field"><option>Cash</option><option>UPI</option><option>Card</option><option>Net Banking</option></select><button class="btn-success" onclick="hideModal('collectFeeModal');showToast('Fee collected successfully! ₹8,500')">💰 Collect ₹8,500</button><button class="btn-secondary" onclick="hideModal('collectFeeModal')" style="margin-top:8px">Cancel</button></div></div>
+
+<div class="modal-overlay" id="payrollModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">💵 Payroll Summary</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"><div style="background:#ecfdf5;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#059669">₹48.2L</div><div style="font-size:9px;color:var(--ev-text3)">Total Payroll</div></div><div style="background:#eef2ff;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#6366f1">62</div><div style="font-size:9px;color:var(--ev-text3)">Staff</div></div></div><button class="btn-primary" onclick="hideModal('payrollModal');showToast('Payroll processing initiated!')">🚀 Process Payroll</button><button class="btn-secondary" onclick="hideModal('payrollModal')" style="margin-top:8px">Close</button></div></div>
+
+<div class="modal-overlay" id="leaveReqModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📝 Leave Requests</div><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"><div style="background:#fef3c7;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px"><div style="font-size:16px">🤒</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--ev-text)">Mr. A. Verma</div><div style="font-size:10px;color:var(--ev-text3)">Sick Leave · Mar 28-29</div></div><div style="display:flex;gap:4px"><button style="padding:6px 12px;border-radius:8px;border:none;background:#22c55e;color:#fff;font-size:10px;font-weight:700;cursor:pointer" onclick="hideModal('leaveReqModal');showToast('Leave approved!')">✓ Approve</button><button style="padding:6px 12px;border-radius:8px;border:none;background:#ef4444;color:#fff;font-size:10px;font-weight:700;cursor:pointer" onclick="hideModal('leaveReqModal');showToast('Leave rejected!')">✕ Reject</button></div></div></div><button class="btn-secondary" onclick="hideModal('leaveReqModal')">Close</button></div></div>
+
+<div class="modal-overlay" id="createNoticeModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">📝 Create Notice</div><div class="label-sm">Title</div><input class="input-field" placeholder="Notice title..."><div class="label-sm">Category</div><select class="input-field"><option>General</option><option>Urgent</option><option>Event</option><option>Academic</option></select><div class="label-sm">Content</div><textarea class="input-field" placeholder="Write notice content..." rows="4"></textarea><button class="btn-primary" onclick="hideModal('createNoticeModal');showToast('Notice published!')">📤 Publish Notice</button><button class="btn-secondary" onclick="hideModal('createNoticeModal')" style="margin-top:8px">Cancel</button></div></div>
+
+<div class="modal-overlay" id="manualEntryModal"><div class="modal-sheet" style="text-align:center"><div class="modal-handle"></div><div style="font-size:40px;margin-bottom:8px">✍️</div><div class="modal-title">Manual Entry</div><div class="label-sm">Name</div><input class="input-field" placeholder="Visitor/Staff name..."><div class="label-sm">Type</div><select class="input-field"><option>Visitor</option><option>Staff</option><option>Vendor</option></select><div class="label-sm">Purpose</div><input class="input-field" placeholder="Meeting, delivery..."><button class="btn-success" onclick="hideModal('manualEntryModal');showToast('Entry recorded!')">✅ Record Entry</button><button class="btn-secondary" onclick="hideModal('manualEntryModal')" style="margin-top:8px">Cancel</button></div></div>
+
+<div class="modal-overlay" id="studentProfileModal"><div class="modal-sheet"><div class="modal-handle"></div><div style="text-align:center;margin-bottom:16px"><div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 8px">👦</div><div class="modal-title" id="profileName" style="margin-bottom:4px">Arjun Kumar</div><div style="font-size:11px;color:var(--ev-text3)" id="profileInfo">X-A · Roll 1</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"><div style="background:#ecfdf5;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#059669" id="profileAttend">92%</div><div style="font-size:9px;color:var(--ev-text3)">Attendance</div></div><div style="background:#eef2ff;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#6366f1" id="profileScore">95%</div><div style="font-size:9px;color:var(--ev-text3)">Avg Score</div></div><div style="background:#fef3c7;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#d97706" id="profileRank">3rd</div><div style="font-size:9px;color:var(--ev-text3)">Rank</div></div><div style="background:#f3e8ff;border-radius:10px;padding:10px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#8b5cf6">A+</div><div style="font-size:9px;color:var(--ev-text3)">Grade</div></div></div><div style="display:flex;gap:8px"><button class="btn-secondary" style="flex:1" onclick="hideModal('studentProfileModal');navigateTo('attendance')">📋 Attendance</button><button class="btn-primary" style="flex:1" onclick="hideModal('studentProfileModal');navigateTo('gradebook')">📊 Grades</button></div><button class="btn-secondary" onclick="hideModal('studentProfileModal')" style="margin-top:8px">Close</button></div></div>
+
+<div class="modal-overlay" id="updateMarksModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title" id="marksStudentName">Update Marks — Arjun Kumar</div><div class="label-sm">Internal Assessment (out of 20)</div><input class="input-field" type="number" id="internalMarks" value="18" max="20" oninput="calculateTotal()"><div class="label-sm">Practical/Project (out of 20)</div><input class="input-field" type="number" id="practicalMarks" value="19" max="20" oninput="calculateTotal()"><div class="label-sm">Main Term Exam (out of 60)</div><input class="input-field" type="number" id="termMarks" value="58" max="60" oninput="calculateTotal()"><div style="background:#f0fdf4;border-radius:12px;padding:12px;text-align:center;margin-bottom:16px"><div style="font-size:10px;color:var(--ev-text3)">Total Score</div><div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#059669" id="totalScore">95/100</div><div style="font-size:12px;font-weight:700;color:#059669" id="totalGrade">A+ Grade</div></div><button class="btn-primary" onclick="hideModal('updateMarksModal');showToast('Marks updated successfully!')">💾 Update Result</button><button class="btn-secondary" onclick="hideModal('updateMarksModal')" style="margin-top:8px">Cancel</button></div></div>
 
 </div>
 </div>
@@ -730,24 +813,12 @@ const screenHistory = [];
 let currentScreen = 'splash';
 let selectedRoleIndex = 0;
 
-// Splash auto-transition
 setTimeout(() => { const b = document.getElementById('splashBar'); if(b) b.style.width = '100%'; }, 300);
 setTimeout(() => navigateTo('login'), 2000);
 
-// Role to dashboard mapping
 const roleDashboards = {
-  0: 'command_center',  // Super Admin → Command Center
-  1: 'director',        // Director
-  2: 'command_center',  // Principal
-  3: 'finance',         // Finance
-  4: 'command_center',  // Admin Mgr → Command Center
-  5: 'hr',              // HR
-  6: 'transport',       // Transport
-  7: 'library',         // Librarian
-  8: 'command_center',  // Sports → Command Center
-  9: 'gate_scanner',    // Security
-  10: 'support_tasks',  // Support
-  11: 'transport'       // Driver → Transport
+  0:'command_center',1:'director',2:'command_center',3:'finance',4:'command_center',
+  5:'hr',6:'transport',7:'library',8:'command_center',9:'gate_scanner',10:'support_tasks',11:'transport'
 };
 
 function navigateTo(name) {
@@ -757,28 +828,40 @@ function navigateTo(name) {
 }
 
 function goBack() {
-  if (screenHistory.length > 0) {
-    showScreen(screenHistory.pop());
-  }
+  if (screenHistory.length > 0) showScreen(screenHistory.pop());
 }
 
 function showScreen(name) {
-  const screens = document.querySelectorAll('.screen');
-  const oldActive = document.querySelector('.screen.active');
   const target = document.querySelector('[data-screen="'+name+'"]');
   if (!target) return;
-  
-  if (oldActive && oldActive !== target) {
-    oldActive.classList.remove('active');
-    setTimeout(() => {}, 400);
-  }
-  screens.forEach(s => { if(s !== target) s.classList.remove('active'); });
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   target.classList.add('active');
   currentScreen = name;
+  
+  document.querySelectorAll('.bottom-nav').forEach(nav => {
+    nav.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  });
+  const activeNav = target.querySelector('.bottom-nav');
+  if (activeNav) {
+    const navMap = {'command_center':0,'student_directory':1,'finance':2,'gradebook':3,'settings':4,
+                    'director':0,'attendance':1,'staff_directory':0,'hr':1,'admissions':1,'defaulters':1,
+                    'gate_scanner':0,'support_tasks':0,'transport':1,'library':1,'reports':3,'notices':1,
+                    'timetable':1,'notifications':0,'profile':3};
+    const idx = navMap[name];
+    if (idx !== undefined && activeNav.children[idx]) activeNav.children[idx].classList.add('active');
+  }
 }
 
 function showModal(id) { document.getElementById(id)?.classList.add('show'); }
 function hideModal(id) { document.getElementById(id)?.classList.remove('show'); }
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:12px 24px;border-radius:30px;font-size:12px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:99999;max-width:300px;text-align:center';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
+}
 
 function selectRole(el) {
   document.querySelectorAll('.lr-card').forEach(c => c.classList.remove('active'));
@@ -786,18 +869,11 @@ function selectRole(el) {
   selectedRoleIndex = Array.from(document.querySelectorAll('.lr-card')).indexOf(el);
 }
 
-function loginToRole() {
-  const dashboard = roleDashboards[selectedRoleIndex] || 'command_center';
-  navigateTo(dashboard);
-}
+function loginToRole() { navigateTo(roleDashboards[selectedRoleIndex] || 'command_center'); }
 
 function switchRoleView(el) {
-  el.parentElement.querySelectorAll('.toggle-btn').forEach(b => {
-    b.classList.remove('active');
-    b.classList.add('inactive');
-  });
-  el.classList.remove('inactive');
-  el.classList.add('active');
+  el.parentElement.querySelectorAll('.toggle-btn').forEach(b => { b.classList.remove('active'); b.classList.add('inactive'); });
+  el.classList.remove('inactive'); el.classList.add('active');
 }
 
 function showStaffDetail(name, dept, room, exp, qual) {
@@ -809,53 +885,97 @@ function showStaffDetail(name, dept, room, exp, qual) {
 }
 
 function toggleTask(el) {
-  if (el.classList.contains('done')) {
-    el.classList.remove('done');
-    el.textContent = '⬜';
-  } else {
-    el.classList.add('done');
-    el.textContent = '✓';
-  }
+  if (el.classList.contains('done')) { el.classList.remove('done'); el.textContent = '⬜'; }
+  else { el.classList.add('done'); el.textContent = '✓'; }
 }
 
 function completeAllTasks() {
-  document.querySelectorAll('.task-check').forEach(t => {
-    t.classList.add('done');
-    t.textContent = '✓';
+  document.querySelectorAll('.task-check').forEach(t => { t.classList.add('done'); t.textContent = '✓'; });
+  showModal('successModal');
+}
+
+function approveLeave(btn) { btn.parentElement.innerHTML = '<span style="font-size:9px;font-weight:700;color:#22c55e">✅ Approved</span>'; showToast('Leave approved!'); }
+function rejectLeave(btn) { btn.parentElement.innerHTML = '<span style="font-size:9px;font-weight:700;color:#ef4444">✕ Rejected</span>'; showToast('Leave rejected!'); }
+
+function toggleAtt(btn, type) {
+  const row = btn.parentElement;
+  row.querySelectorAll('.att-btn').forEach(b => { b.className = 'att-btn'; });
+  btn.classList.add('att-btn', type);
+}
+
+function markAllPresent() {
+  document.querySelectorAll('.att-row').forEach(row => {
+    const pBtn = row.querySelector('.att-btn');
+    if(pBtn) pBtn.className = 'att-btn p';
   });
-  document.getElementById('successTitle').textContent = 'All Tasks Complete! ✅';
-  document.getElementById('successMsg').textContent = 'All housekeeping tasks for today have been marked as complete.';
-  showModal('successModal');
+  showToast('All students marked as Present!');
 }
 
-function approveLeave(btn) {
-  btn.parentElement.innerHTML = '<span style="font-size:9px;font-weight:700;color:#22c55e">✅ Approved</span>';
-  document.getElementById('successTitle').textContent = 'Leave Approved ✅';
-  document.getElementById('successMsg').textContent = 'The leave request has been approved and the staff member notified.';
-  showModal('successModal');
+function filterStudents(query) {
+  query = query.toLowerCase();
+  document.querySelectorAll('.student-card').forEach(card => {
+    card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none';
+  });
 }
 
-function rejectLeave(btn) {
-  btn.parentElement.innerHTML = '<span style="font-size:9px;font-weight:700;color:#ef4444">✕ Rejected</span>';
-  document.getElementById('successTitle').textContent = 'Leave Rejected';
-  document.getElementById('successMsg').textContent = 'The leave request has been rejected.';
-  showModal('successModal');
+function filterStudentsByClass(cls, el) {
+  el.parentElement.querySelectorAll('.chip').forEach(c => { c.style.background = '#eef2ff'; c.style.color = '#6366f1'; });
+  el.style.background = '#6366f1'; el.style.color = '#fff';
+  document.querySelectorAll('.student-card').forEach(card => {
+    card.style.display = (cls === 'all' || card.dataset.class === cls) ? 'flex' : 'none';
+  });
 }
 
-function showToast(msg) {
-  const toast = document.createElement('div');
-  toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:12px 24px;border-radius:30px;font-size:12px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:99999';
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2500);
+function filterStaff(query) {
+  query = query.toLowerCase();
+  document.querySelectorAll('[data-screen="staff_directory"] [style*="border-radius:14px"][style*="cursor:pointer"]').forEach(card => {
+    card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none';
+  });
 }
 
-// AI Chat
+function showStudentProfile(name, cls, roll, avg, attend, rank) {
+  document.getElementById('profileName').textContent = name;
+  document.getElementById('profileInfo').textContent = cls + ' · ' + roll;
+  document.getElementById('profileAttend').textContent = attend;
+  document.getElementById('profileScore').textContent = avg;
+  document.getElementById('profileRank').textContent = rank;
+  showModal('studentProfileModal');
+}
+
+function switchGradeTab(el) {
+  el.parentElement.querySelectorAll('.chip').forEach(c => { c.style.background = 'rgba(255,255,255,.15)'; });
+  el.style.background = '#6366f1';
+  showToast('Switched to ' + el.textContent);
+}
+
+function showUpdateMarks(name, score) {
+  document.getElementById('marksStudentName').textContent = 'Update Marks — ' + name;
+  showModal('updateMarksModal');
+}
+
+function calculateTotal() {
+  const internal = parseInt(document.getElementById('internalMarks').value || 0);
+  const practical = parseInt(document.getElementById('practicalMarks').value || 0);
+  const term = parseInt(document.getElementById('termMarks').value || 0);
+  const total = internal + practical + term;
+  document.getElementById('totalScore').textContent = total + '/100';
+  let grade = 'F';
+  if (total >= 90) grade = 'A+';
+  else if (total >= 80) grade = 'A';
+  else if (total >= 70) grade = 'B+';
+  else if (total >= 60) grade = 'B';
+  else if (total >= 50) grade = 'C';
+  else if (total >= 40) grade = 'D';
+  document.getElementById('totalGrade').textContent = grade + ' Grade';
+}
+
+function simulateScan() { showModal('manualEntryModal'); }
+
 const aiResponses = {
-  'attendance': '📊 <b>Today\'s Attendance Report:</b><br><br>• Overall: 91% (785/862 students)<br>• Class X-A: 96% ✅<br>• Class IX-B: 92% ✅<br>• Class VIII-B: 83% ⚠️ (Below threshold!)<br>• Class VII-C: 89%<br><br>3 teachers absent. Substitutes arranged for 2. Need 1 more for Hindi.',
-  'defaulters': '💰 <b>Fee Defaulter Summary:</b><br><br>• Total Defaulters: 18 students<br>• Total Pending: ₹2,42,000<br>• Overdue >30 days: 5 students (₹52,000)<br>• Overdue 15-30 days: 8 students (₹96,000)<br>• Overdue <15 days: 5 students (₹94,000)<br><br>Auto-send bulk SMS reminders?',
-  'staff': '👥 <b>Staff Absence Today:</b><br><br>• Mr. A. Verma (Physics) — Sick Leave ✅ Approved<br>• Ms. K. Rao (History) — Casual Leave ⏳ Pending<br>• Mr. P. Singh (Hindi) — Emergency Leave ✅ Approved<br><br>Substitutes assigned for Physics & Hindi. History substitute needed.',
-  'tasks': '📋 <b>Pending Tasks:</b><br><br>• 3 substitute arrangements pending<br>• 5 admission applications to review<br>• 2 parent complaints unresolved<br>• Monthly report due tomorrow<br>• Staff meeting agenda preparation<br><br>Priority: Substitute arrangements (high)'
+  'attendance': '📊 <b>Today\'s Attendance Report:</b><br><br>• Overall: 91% (785/862 students)<br>• Class X-A: 96% ✅<br>• Class IX-B: 92% ✅<br>• Class VIII-B: 83% ⚠️<br><br>3 teachers absent. Substitutes needed for 1.',
+  'defaulters': '💰 <b>Fee Defaulter Summary:</b><br><br>• Total Defaulters: 18 students<br>• Total Pending: ₹2,42,000<br>• Overdue >30 days: 5 students (₹52,000)<br>• Overdue 15-30 days: 8 students (₹96,000)',
+  'staff': '👥 <b>Staff Absence Today:</b><br><br>• Mr. A. Verma (Physics) — Sick Leave ✅<br>• Ms. K. Rao (History) — Pending ⏳<br>• Mr. P. Singh (Hindi) — Approved ✅',
+  'tasks': '📋 <b>Pending Tasks:</b><br><br>• 3 substitute arrangements pending<br>• 5 admission applications to review<br>• 2 parent complaints unresolved<br>• Monthly report due tomorrow'
 };
 
 function sendAiMsg(preset) {
@@ -864,14 +984,12 @@ function sendAiMsg(preset) {
   const msg = preset || (input ? input.value.trim() : '');
   if (!msg) return;
   
-  // Add user message
   const userDiv = document.createElement('div');
   userDiv.style.cssText = 'max-width:85%;background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:16px 16px 4px 16px;padding:10px 13px;align-self:flex-end';
   userDiv.innerHTML = '<div style="font-size:12px;color:#fff;line-height:1.6">' + msg + '</div><div style="font-size:9px;color:rgba(255,255,255,.6);margin-top:4px;text-align:right">' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</div>';
   body.appendChild(userDiv);
   if (input) input.value = '';
   
-  // Typing indicator
   const typingDiv = document.createElement('div');
   typingDiv.style.cssText = 'display:flex;gap:4px;align-items:center;padding:10px';
   typingDiv.innerHTML = '<div style="width:7px;height:7px;background:#cbd5e1;border-radius:50%;animation:typing-bounce 1.2s infinite"></div><div style="width:7px;height:7px;background:#cbd5e1;border-radius:50%;animation:typing-bounce 1.2s infinite .2s"></div><div style="width:7px;height:7px;background:#cbd5e1;border-radius:50%;animation:typing-bounce 1.2s infinite .4s"></div>';
@@ -893,14 +1011,14 @@ function sendAiMsg(preset) {
   }, 1500);
 }
 
-// Close modals on overlay click
 document.addEventListener('click', e => {
-  if (e.target.classList.contains('modal-overlay')) {
-    e.target.classList.remove('show');
+  if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('show');
+  if (e.target.closest('.toggle')) {
+    e.target.closest('.toggle').classList.toggle('toggle-on');
+    e.target.closest('.toggle').classList.toggle('toggle-off');
   }
 });
 
-// Ring spin animation
 const ringStyle = document.createElement('style');
 ringStyle.textContent = '@keyframes ring-spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}@keyframes typing-bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px);background:#6366f1}}.lr-card{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s}.lr-card.active{background:rgba(99,102,241,.25);border-color:rgba(99,102,241,.6)}';
 document.head.appendChild(ringStyle);
