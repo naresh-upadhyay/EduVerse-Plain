@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduVerse Academic App</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--pri:#4F46E5;--pri2:#3730A3;--acc:#06B6D4;--acc2:#F59E0B;--acc3:#10B981;--acc4:#EF4444;--acc5:#8B5CF6;--surf:#FFF;--txt:#0F172A;--txt2:#475569;--txt3:#94A3B8;--bdr:#E2E8F0;--tpri:#0EA5E9;--tgrad1:#0C4A6E;--tgrad2:#0EA5E9}
+body{font-family:'DM Sans',sans-serif;background:#0A0A1A;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.pw{display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px}
+.pt{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px;text-align:center}
+.pt span{background:linear-gradient(135deg,#4F46E5,#06B6D4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ps{color:rgba(255,255,255,.4);font-size:12px;text-align:center;margin-top:-8px}
+.phone{width:360px;height:740px;background:#111;border-radius:44px;padding:12px;box-shadow:0 0 0 2px #222,0 0 0 3px #0A0A1A,0 32px 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08);position:relative}
+.ps2{background:var(--surf);border-radius:34px;overflow:hidden;height:100%;position:relative;display:flex;flex-direction:column}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:10px 18px 0;font-size:10.5px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;z-index:10;position:relative;color:#fff}
+.sb .nt{width:80px;height:22px;border-radius:0 0 16px 16px;position:absolute;top:0;left:50%;transform:translateX(-50%);background:#111}
+.si{display:flex;gap:5px;align-items:center}
+.scr{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.sc{display:none;flex-direction:column;height:100%;position:absolute;inset:0;z-index:1;background:var(--surf);overflow:hidden}
+.sc.active{display:flex!important;z-index:100;animation:fi .4s cubic-bezier(.4,0,.2,1)}
+@keyframes fi{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.bn{display:flex;background:#fff;border-top:1px solid #F1F5F9;padding:8px 0 14px;flex-shrink:0;position:relative;z-index:10}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nw{width:36px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:16px;transition:all .2s}
+.ni.active .nw{background:#EEF2FF}
+.nl{font-size:9px;font-weight:500;color:#94A3B8;font-family:'Outfit',sans-serif}
+.ni.active .nl{color:var(--pri);font-weight:700}
+.fab{position:absolute;bottom:130px;right:16px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(79,70,229,.5);z-index:100;font-size:20px;cursor:pointer;animation:fp 3s ease-in-out infinite}
+@keyframes fp{0%,100%{box-shadow:0 4px 20px rgba(79,70,229,.5)}50%{box-shadow:0 4px 28px rgba(79,70,229,.8),0 0 0 6px rgba(79,70,229,.1)}}
+.bb{width:28px;height:28px;border-radius:9px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;cursor:pointer}
+.mt{display:flex;align-items:center;gap:10px}
+.mn{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#fff;flex:1}
+.shr{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 8px}
+.sht{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)}
+.shl{font-size:11px;color:var(--pri);font-weight:600;cursor:pointer}
+.cr{display:flex;gap:6px;padding:10px 14px 2px;overflow-x:auto;scrollbar-width:none}
+.cr::-webkit-scrollbar{display:none}
+.ch{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.at{display:inline-flex;align-items:center;gap:5px;background:#4F46E5;color:#fff;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;letter-spacing:.05em;margin-bottom:8px}
+.dc{margin:0 14px 12px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.ct{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.ct a{font-size:10px;color:var(--pri);font-weight:500;text-decoration:none;cursor:pointer}
+.sp{height:12px}.ss{height:8px}
+.mo{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center;border-radius:34px;overflow:hidden}
+.mo.show{display:flex}
+.ms{background:#fff;border-radius:24px 24px 0 0;width:100%;max-height:80%;padding:20px;animation:su .3s ease;overflow-y:auto}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mh{width:40px;height:4px;background:#E2E8F0;border-radius:2px;margin:0 auto 16px}
+.mt2{font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:var(--txt);margin-bottom:12px;text-align:center}
+.tg{width:36px;height:20px;border-radius:10px;position:relative;flex-shrink:0;cursor:pointer;transition:background .2s}
+.ton{background:#4F46E5}.tof{background:#CBD5E1}
+.tk{position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:2px;transition:all .2s}
+.ton .tk{right:2px;left:auto}.tof .tk{left:2px;right:auto}
+.fb{margin-left:auto;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif}
+.pd{background:#ECFDF5;color:#059669}.du{background:#FEF2F2;color:#EF4444}.pa{background:#FFF7ED;color:#D97706}
+.ld{width:6px;height:6px;background:#fff;border-radius:50%;animation:bk 1s infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes rs{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.btn1{width:100%;background:linear-gradient(135deg,#4F46E5,#06B6D4);border:none;border-radius:14px;padding:14px;color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(79,70,229,.4)}
+.btn2{width:100%;background:#EEF2FF;border:none;border-radius:14px;padding:12px;color:#4F46E5;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+.btn3{width:100%;background:linear-gradient(135deg,#059669,#06B6D4);border:none;border-radius:14px;padding:12px;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+.btn4{width:100%;background:#FEF2F2;border:none;border-radius:14px;padding:12px;color:#EF4444;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+.inp{width:100%;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:12px;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;color:var(--txt);margin-bottom:8px}
+.inp:focus{border-color:#4F46E5}
+.inpd{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.1);color:#fff}
+.inpd::placeholder{color:rgba(255,255,255,.3)}
+.qg{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:16px}
+.qi{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.qw{width:46px;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .15s}
+.qi:active .qw{transform:scale(.9)}
+.ql{font-size:9.5px;font-weight:600;color:var(--txt2);text-align:center;line-height:1.2;font-family:'Outfit',sans-serif}
+.ar{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F8FAFC}
+.an{flex:1;font-size:12px;font-weight:600;color:var(--txt)}
+.alr{font-size:10px;color:var(--txt3);width:24px}
+.abtn{width:28px;height:28px;border-radius:8px;border:1.5px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all .15s;background:#fff}
+.abtn.p{background:#ECFDF5;border-color:#059669;color:#059669}
+.abtn.a{background:#FEF2F2;border-color:#EF4444;color:#EF4444}
+.abtn.l{background:#FFF7ED;border-color:#D97706;color:#D97706}
+.dc2{flex-shrink:0;padding:6px 14px;border-radius:12px;text-align:center;cursor:pointer;background:rgba(255,255,255,.08)}
+.dc2.active{background:#fff;color:var(--pri)}
+.dc2.active div{color:var(--pri)!important}
+.ls{font-size:11px;color:var(--txt3);margin-bottom:4px;font-weight:600}
+@media(max-width:400px){.phone{width:calc(100vw - 32px);height:calc(100vh - 60px)}}
+.lrc{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.lrc.active{background:rgba(79,70,229,.25);border-color:rgba(79,70,229,.6)}
+</style>
+</head>
+<body>
+<div class="pw">
+<div class="pt">Edu<span>Verse</span> Academic</div>
+<div class="ps">Student & Teacher Portal</div>
+<div class="phone">
+<div class="ps2" id="phoneScreen">
+
+<!-- SPLASH -->
+<div class="sc active" data-screen="splash" style="background:linear-gradient(160deg,#0F0C29,#302B63,#24243E)">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+<div style="width:90px;height:90px;background:rgba(255,255,255,.1);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:42px;border:1px solid rgba(255,255,255,.15);position:relative">🎓<div style="position:absolute;inset:-8px;border-radius:34px;border:1.5px solid rgba(79,70,229,.4);animation:rs 4s linear infinite"></div></div>
+<div style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;color:#fff">Edu<span style="background:linear-gradient(90deg,#4F46E5,#06B6D4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Verse</span></div>
+<div style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase">AI-Powered Academic App</div>
+<div style="margin-top:40px;width:120px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden"><div id="splashBar" style="width:0%;height:100%;background:linear-gradient(90deg,#4F46E5,#06B6D4);border-radius:2px;transition:width 1.5s ease"></div></div>
+</div></div>
+
+<!-- LOGIN -->
+<div class="sc" data-screen="login" style="background:linear-gradient(160deg,#0F0C29,#302B63,#24243E)">
+<div class="sb" style="padding-top:14px"><span>9:41</span><div class="nt"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 24px 32px;position:relative;overflow:hidden">
+<div style="position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.4),transparent 70%);top:-40px;left:50%;transform:translateX(-50%)"></div>
+<div style="width:70px;height:70px;background:rgba(255,255,255,.1);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:24px 0 12px;border:1px solid rgba(255,255,255,.15);position:relative">🎓<div style="position:absolute;inset:-6px;border-radius:30px;border:1.5px solid rgba(79,70,229,.4);animation:rs 4s linear infinite"></div></div>
+<div style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;color:#fff">Edu<span style="background:linear-gradient(90deg,#4F46E5,#06B6D4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Verse</span></div>
+<div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:28px;letter-spacing:.08em;text-transform:uppercase">AI-Powered Academic App</div>
+<div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;align-self:flex-start;font-weight:500">Login as</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:20px" id="loginRoles">
+<div class="lrc active" onclick="selectRole(this,'student')" id="lrStudent"><div style="font-size:28px;margin-bottom:6px">🎒</div><div style="font-size:11px;font-weight:700;color:#818CF8;font-family:'Outfit',sans-serif">Student</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Courses, exams & more</div></div>
+<div class="lrc" onclick="selectRole(this,'teacher')" id="lrTeacher"><div style="font-size:28px;margin-bottom:6px">👩‍🏫</div><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);font-family:'Outfit',sans-serif">Teacher</div><div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Classes & grading</div></div>
+</div>
+<div id="stuFields"><input class="inpd inp" type="text" placeholder="Student ID / Roll No." value="STU-2024-1082"><input class="inpd inp" type="password" placeholder="Password" value="••••••••"></div>
+<div id="tchFields" style="display:none"><input class="inpd inp" type="text" placeholder="Employee ID" value="TCH-2024-0042"><input class="inpd inp" type="password" placeholder="Password" value="••••••••"></div>
+<button class="btn1" onclick="doLogin()" style="margin-top:6px">✨ Login with AI Assist</button>
+<div style="margin-top:16px;font-size:10px;color:rgba(255,255,255,.3);text-align:center">🤖 AI monitors your journey</div>
+<div style="margin-top:12px;display:flex;gap:12px;width:100%">
+<div style="flex:1;background:rgba(255,255,255,.06);border-radius:10px;padding:8px;text-align:center;font-size:10px;color:rgba(255,255,255,.4);cursor:pointer">🆔 Face ID</div>
+<div style="flex:1;background:rgba(255,255,255,.06);border-radius:10px;padding:8px;text-align:center;font-size:10px;color:rgba(255,255,255,.4);cursor:pointer">🔑 OTP</div>
+<div style="flex:1;background:rgba(255,255,255,.06);border-radius:10px;padding:8px;text-align:center;font-size:10px;color:rgba(255,255,255,.4);cursor:pointer">📲 QR</div>
+</div></div></div>
+
+<!-- STUDENT DASHBOARD -->
+<div class="sc" data-screen="sdash" style="background:#F5F6FF">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#302B63);padding-top:14px"><span>9:41</span><div class="nt" style="background:#302B63"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#302B63);padding:8px 18px 20px;position:relative;overflow:hidden">
+<div style="position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06);right:-40px;top:-40px"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;position:relative">
+<div><div style="font-size:11px;color:rgba(255,255,255,.6)">Good Morning 🌤️</div><div style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#fff">Arjun Kumar</div></div>
+<div style="display:flex;align-items:center;gap:6px">
+<div onclick="nav('notif')" style="width:32px;height:32px;background:rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative">🔔<div style="position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#EF4444;border-radius:50%;font-size:8px;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">3</div></div>
+<div onclick="nav('sprof')" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#4F46E5);display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid rgba(255,255,255,.3);cursor:pointer">🧑</div>
+</div></div>
+<div style="background:rgba(255,255,255,.1);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-size:12px;color:rgba(255,255,255,.8)">🔥 Learning Streak</div><div style="font-size:10px;color:rgba(255,255,255,.5)">Keep it going!</div></div>
+<div style="text-align:right"><div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#F59E0B">18</div><div style="font-size:9px;color:rgba(255,255,255,.5)">days</div></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px">
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">94%</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Attend.</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">91.4</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Avg</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">3rd</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Rank</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">2450</div><div style="font-size:9px;color:rgba(255,255,255,.5)">XP</div></div>
+</div></div>
+<div class="shr" style="padding-top:14px"><div class="sht">Quick Access</div></div>
+<div class="qg">
+<div class="qi" onclick="nav('tt')"><div class="qw" style="background:#EEF2FF">🗓️</div><div class="ql">Timetable</div></div>
+<div class="qi" onclick="nav('res')"><div class="qw" style="background:#FDF4FF">📊</div><div class="ql">Results</div></div>
+<div class="qi" onclick="nav('fees')"><div class="qw" style="background:#ECFDF5">💳</div><div class="ql">Fees</div></div>
+<div class="qi" onclick="nav('notices')"><div class="qw" style="background:#FFF7ED">📢</div><div class="ql">Notices</div></div>
+<div class="qi" onclick="nav('hw')"><div class="qw" style="background:#FDF2F8">📝</div><div class="ql">Homework</div></div>
+<div class="qi" onclick="nav('trans')"><div class="qw" style="background:#EFF6FF">🚌</div><div class="ql">Transport</div></div>
+<div class="qi" onclick="nav('events')"><div class="qw" style="background:#FEF3C7">📅</div><div class="ql">Events</div></div>
+<div class="qi" onclick="nav('ach')"><div class="qw" style="background:#F0FDF4">🏆</div><div class="ql">Achieve</div></div>
+<div class="qi" onclick="nav('att')"><div class="qw" style="background:#EFF6FF">📋</div><div class="ql">Attendance</div></div>
+<div class="qi" onclick="nav('lib')"><div class="qw" style="background:#FAF5FF">📖</div><div class="ql">Library</div></div>
+<div class="qi" onclick="nav('courses')"><div class="qw" style="background:#ECFDF5">📚</div><div class="ql">Courses</div></div>
+<div class="qi" onclick="nav('sexams')"><div class="qw" style="background:#EEF2FF">✍️</div><div class="ql">Exams</div></div>
+</div>
+<div class="dc"><div class="ct">Today's Schedule <a onclick="nav('tt')">View All →</a></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F8FAFC"><div style="font-size:10px;font-weight:600;color:var(--txt3);width:44px;font-family:'Outfit',sans-serif">8:00 AM</div><div style="width:8px;height:8px;border-radius:50%;background:#4F46E5"></div><div><div style="font-size:12px;font-weight:600;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">Room 301 · Mr. Sharma</div></div></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;background:#F0FFF4;margin:0 -14px;padding:8px 14px"><div style="font-size:10px;font-weight:600;color:#4F46E5;width:44px;font-family:'Outfit',sans-serif">9:00 AM</div><div style="width:8px;height:8px;border-radius:50%;background:#059669"></div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">Lab 2 · Dr. Verma</div></div><div style="background:#ECFDF5;color:#059669;font-size:9px;font-weight:700;padding:3px 7px;border-radius:6px;font-family:'Outfit',sans-serif">● Now</div></div>
+</div>
+<div style="margin:0 14px 12px;background:linear-gradient(135deg,#EEF2FF,#F0FDFF);border-radius:18px;padding:14px;border:1.5px solid #E0E7FF"><div class="at">🤖 AI INSIGHT</div><div style="font-size:12px;color:#3730A3;line-height:1.6">Your Physics score improved by 8%! Focus on Optics for upcoming exam.</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn">
+<div class="ni active" onclick="nav('sdash')"><div class="nw">🏠</div><div class="nl">Home</div></div>
+<div class="ni" onclick="nav('courses')"><div class="nw">📚</div><div class="nl">Courses</div></div>
+<div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div>
+<div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div>
+<div class="ni" onclick="nav('sprof')"><div class="nw">👤</div><div class="nl">Profile</div></div>
+</div></div>
+
+<!-- TEACHER DASHBOARD -->
+<div class="sc" data-screen="tdash" style="background:#F0F7FF">
+<div class="sb" style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0C4A6E"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 20px;position:relative;overflow:hidden">
+<div style="position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06);right:-40px;top:-40px"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;position:relative">
+<div><div style="font-size:11px;color:rgba(255,255,255,.6)">Good Morning 🌤️</div><div style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#fff">Mrs. Priya Sharma</div><div style="font-size:10px;color:rgba(255,255,255,.5)">Mathematics · HOD</div></div>
+<div style="display:flex;align-items:center;gap:6px">
+<div onclick="nav('notif')" style="width:32px;height:32px;background:rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative">🔔<div style="position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#EF4444;border-radius:50%;font-size:8px;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">5</div></div>
+<div onclick="nav('tprof')" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid rgba(255,255,255,.3);cursor:pointer">👩‍🏫</div>
+</div></div>
+<div style="display:flex;gap:8px;margin-top:4px">
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">156</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Students</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">92%</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Attend.</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">6</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Classes</div></div>
+<div style="flex:1;background:rgba(255,255,255,.1);border-radius:12px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">8</div><div style="font-size:9px;color:rgba(255,255,255,.5)">Pending</div></div>
+</div></div>
+<div class="shr" style="padding-top:14px"><div class="sht">Quick Access</div></div>
+<div class="qg">
+<div class="qi" onclick="nav('mycls')"><div class="qw" style="background:#E0F2FE">📚</div><div class="ql">My Classes</div></div>
+<div class="qi" onclick="nav('tatt')"><div class="qw" style="background:#ECFDF5">📋</div><div class="ql">Attendance</div></div>
+<div class="qi" onclick="nav('thw')"><div class="qw" style="background:#FDF2F8">📝</div><div class="ql">Homework</div></div>
+<div class="qi" onclick="nav('texams')"><div class="qw" style="background:#FEF3C7">📝</div><div class="ql">Exams</div></div>
+<div class="qi" onclick="nav('gb')"><div class="qw" style="background:#FAF5FF">📊</div><div class="ql">Gradebook</div></div>
+<div class="qi" onclick="nav('stdir')"><div class="qw" style="background:#FFF7ED">👥</div><div class="ql">Students</div></div>
+<div class="qi" onclick="nav('tt')"><div class="qw" style="background:#EEF2FF">🗓️</div><div class="ql">Timetable</div></div>
+<div class="qi" onclick="nav('notices')"><div class="qw" style="background:#FEF2F2">📢</div><div class="ql">Notices</div></div>
+<div class="qi" onclick="nav('leave')"><div class="qw" style="background:#F0FDF4">🏖️</div><div class="ql">Leave</div></div>
+<div class="qi" onclick="nav('live')"><div class="qw" style="background:#FFF1F2">🎥</div><div class="ql">Live Class</div></div>
+<div class="qi" onclick="nav('mats')"><div class="qw" style="background:#ECFDF5">📁</div><div class="ql">Materials</div></div>
+<div class="qi" onclick="nav('sal')"><div class="qw" style="background:#EFF6FF">💰</div><div class="ql">Salary</div></div>
+</div>
+<div class="dc"><div class="ct">Today's Schedule <a onclick="nav('tt')">View All →</a></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F8FAFC"><div style="font-size:10px;font-weight:600;color:var(--txt3);width:44px;font-family:'Outfit',sans-serif">8:00 AM</div><div style="width:8px;height:8px;border-radius:50%;background:#0EA5E9"></div><div><div style="font-size:12px;font-weight:600;color:var(--txt)">Mathematics — X-A</div><div style="font-size:10px;color:var(--txt3)">Room 301 · Calculus Ch.7</div></div></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;background:#F0FFF4;margin:0 -14px;padding:8px 14px"><div style="font-size:10px;font-weight:600;color:#0EA5E9;width:44px;font-family:'Outfit',sans-serif">9:00 AM</div><div style="width:8px;height:8px;border-radius:50%;background:#059669"></div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Mathematics — X-B</div><div style="font-size:10px;color:var(--txt3)">Room 305 · Integration</div></div><div style="background:#ECFDF5;color:#059669;font-size:9px;font-weight:700;padding:3px 7px;border-radius:6px;font-family:'Outfit',sans-serif">● Now</div></div>
+</div>
+<div style="margin:0 14px 12px;background:linear-gradient(135deg,#E0F2FE,#F0FDFA);border-radius:18px;padding:14px;border:1.5px solid #BAE6FD"><div class="at" style="background:#0EA5E9">🤖 AI TEACHING INSIGHT</div><div style="font-size:12px;color:#0369A1;line-height:1.6">5 students in X-A scored below 40%. Consider a remedial session on Integration by Parts.</div></div>
+<div class="dc"><div class="ct">Pending Reviews <a onclick="nav('thw')">8 tasks</a></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F8FAFC"><div style="width:32px;height:32px;border-radius:10px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:14px">📝</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Integration HW — X-A</div><div style="font-size:10px;color:var(--txt3)">32/45 submitted</div></div><div style="font-size:10px;color:#EF4444;font-weight:600">Review!</div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn">
+<div class="ni active" onclick="nav('tdash')"><div class="nw">🏠</div><div class="nl">Home</div></div>
+<div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div>
+<div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div>
+<div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div>
+<div class="ni" onclick="nav('tprof')"><div class="nw">👤</div><div class="nl">Profile</div></div>
+</div></div>
+
+<!-- TIMETABLE -->
+<div class="sc" data-screen="tt" style="background:#F0F4FF">
+<div class="sb" style="background:linear-gradient(135deg,#1E40AF,#1D4ED8);padding-top:14px"><span>9:41</span><div class="nt" style="background:#1D4ED8"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#1E40AF,#1D4ED8);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Timetable</div></div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;margin-top:12px">
+<div class="dc2" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">MON</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">24</div></div>
+<div class="dc2" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">TUE</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">25</div></div>
+<div class="dc2 active" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;font-weight:600">WED</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800">26</div></div>
+<div class="dc2" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">THU</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">27</div></div>
+<div class="dc2" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">FRI</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">28</div></div>
+<div class="dc2" onclick="this.parentElement.querySelectorAll('.dc2').forEach(c=>c.classList.remove('active'));this.classList.add('active')"><div style="font-size:9px;color:rgba(255,255,255,.6);font-weight:600">SAT</div><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">29</div></div>
+</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;padding:12px;background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:16px;display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#4F46E5;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">8:00</div><div style="font-size:9px;color:var(--txt3)">9:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#4F46E5"></div><div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">Mr. R. Sharma</div></div><div style="margin-left:auto;font-size:10px;font-weight:600;color:var(--txt2);background:#F1F5F9;padding:4px 8px;border-radius:8px">301</div></div>
+<div style="margin:0 14px 10px;padding:12px;background:#ECFDF5;border:1.5px solid #BBF7D0;border-radius:16px;display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#059669;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;color:#059669">9:00</div><div style="font-size:9px;color:var(--txt3)">10:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#059669"></div><div style="flex:1"><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">Dr. A. Verma</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><div style="font-size:10px;font-weight:600;color:var(--txt2);background:#F1F5F9;padding:4px 8px;border-radius:8px">Lab 2</div><div style="font-size:9px;background:#DCFCE7;color:#059669;padding:2px 6px;border-radius:5px;font-weight:700">Now</div></div></div>
+<div style="margin:0 14px 10px;background:#FFF7ED;border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11px;color:#92400E;font-weight:600">☕ Break</div><div style="font-size:10px;color:#B45309">10:00 – 10:20</div></div>
+<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#EF4444;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">10:20</div><div style="font-size:9px;color:var(--txt3)">11:20</div></div><div style="width:8px;height:8px;border-radius:50%;background:#EF4444"></div><div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt)">English</div><div style="font-size:10px;color:var(--txt3)">Ms. P. Gupta</div></div><div style="margin-left:auto;font-size:10px;font-weight:600;color:var(--txt2);background:#F1F5F9;padding:4px 8px;border-radius:8px">204</div></div>
+<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#F59E0B;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">11:20</div><div style="font-size:9px;color:var(--txt3)">12:20</div></div><div style="width:8px;height:8px;border-radius:50%;background:#F59E0B"></div><div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt)">Chemistry</div><div style="font-size:10px;color:var(--txt3)">Dr. S. Mehta</div></div><div style="margin-left:auto;font-size:10px;font-weight:600;color:var(--txt2);background:#F1F5F9;padding:4px 8px;border-radius:8px">Lab 1</div></div>
+<div style="margin:0 14px 10px;background:#FFF7ED;border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11px;color:#92400E;font-weight:600">🍱 Lunch</div><div style="font-size:10px;color:#B45309">12:20 – 1:00</div></div>
+<div style="margin:0 14px 10px;padding:12px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#8B5CF6;border-radius:4px 0 0 4px"></div><div style="width:42px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700">1:00</div><div style="font-size:9px;color:var(--txt3)">2:00</div></div><div style="width:8px;height:8px;border-radius:50%;background:#8B5CF6"></div><div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt)">History</div><div style="font-size:10px;color:var(--txt3)">Mrs. K. Rao</div></div><div style="margin-left:auto;font-size:10px;font-weight:600;color:var(--txt2);background:#F1F5F9;padding:4px 8px;border-radius:8px">102</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">🗓️</div><div class="nl">Timetable</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('hw')"><div class="nw">📝</div><div class="nl">Homework</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- RESULTS -->
+<div class="sc" data-screen="res" style="background:#F8FAFC">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding-top:14px"><span>9:41</span><div class="nt" style="background:#6366F1"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Results</div></div></div>
+<div style="margin:16px 14px 12px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(79,70,229,.1);text-align:center">
+<div style="font-size:11px;color:var(--txt3);margin-bottom:4px">Academic Performance</div>
+<div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;background:linear-gradient(135deg,#4F46E5,#6366F1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1">91.4%</div>
+<div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#059669;margin:4px 0 8px">A+ Grade 🏅</div>
+<div style="display:flex;justify-content:center;gap:20px">
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)">3rd</div><div style="font-size:9px;color:var(--txt3)">Class Rank</div></div>
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)">548/600</div><div style="font-size:9px;color:var(--txt3)">Total</div></div>
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)">↑4.2%</div><div style="font-size:9px;color:var(--txt3)">vs Last</div></div>
+</div></div>
+<div class="shr"><div class="sht">Subject-wise</div></div>
+<div class="dc" style="padding:10px">
+<div style="display:flex;align-items:center;gap:12px;padding:8px 6px"><div style="width:36px;height:36px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:18px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">95/100</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#4F46E5">95</div><div style="font-size:8px;font-weight:700;color:#059669">A+</div></div></div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 6px"><div style="width:36px;height:36px;border-radius:12px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;font-size:18px">⚛️</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">89/100</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#3B82F6">89</div><div style="font-size:8px;font-weight:700;color:#059669">A</div></div></div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 6px"><div style="width:36px;height:36px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:18px">⚗️</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Chemistry</div><div style="font-size:10px;color:var(--txt3)">91/100</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#10B981">91</div><div style="font-size:8px;font-weight:700;color:#059669">A</div></div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('courses')"><div class="nw">📚</div><div class="nl">Courses</div></div><div class="ni active"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- EXAMS (STUDENT) -->
+<div class="sc" data-screen="sexams" style="background:#F0FDF9">
+<div class="sb" style="background:linear-gradient(135deg,#134E4A,#0F766E);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0F766E"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#134E4A,#0F766E);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Exams</div><div style="display:inline-flex;align-items:center;gap:4px;background:rgba(79,70,229,.15);border:1px solid rgba(79,70,229,.3);color:#818CF8;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'Outfit',sans-serif">🤖 AI Prep</div></div></div>
+<div style="margin:-10px 14px 12px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(19,78,74,.15);text-align:center">
+<div style="font-size:11px;color:var(--txt3);margin-bottom:4px">Next Exam</div>
+<div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--txt);margin-bottom:10px">📐 Mathematics — Final</div>
+<div style="display:flex;justify-content:center;gap:8px">
+<div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px 12px;min-width:50px"><div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#fff">05</div><div style="font-size:9px;color:rgba(255,255,255,.6)">Days</div></div>
+<div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px 12px;min-width:50px"><div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#fff">14</div><div style="font-size:9px;color:rgba(255,255,255,.6)">Hours</div></div>
+<div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px 12px;min-width:50px"><div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#fff">32</div><div style="font-size:9px;color:rgba(255,255,255,.6)">Mins</div></div>
+</div></div>
+<div class="shr"><div class="sht">Exam Schedule</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center"><div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px;text-align:center;min-width:44px"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">28</div><div style="font-size:9px;color:rgba(255,255,255,.7)">MAR</div></div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">9:00 – 12:00 · 3 hrs</div></div><div style="background:#F1F5F9;padding:5px 9px;border-radius:8px;font-size:10px;font-weight:600;color:var(--txt2)">Hall A</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center"><div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px;text-align:center;min-width:44px"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">30</div><div style="font-size:9px;color:rgba(255,255,255,.7)">MAR</div></div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">9:00 – 12:00 · 3 hrs</div></div><div style="background:#F1F5F9;padding:5px 9px;border-radius:8px;font-size:10px;font-weight:600;color:var(--txt2)">Hall B</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;align-items:center"><div style="background:linear-gradient(135deg,#134E4A,#0F766E);border-radius:12px;padding:8px;text-align:center;min-width:44px"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">01</div><div style="font-size:9px;color:rgba(255,255,255,.7)">APR</div></div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Chemistry</div><div style="font-size:10px;color:var(--txt3)">9:00 – 12:00 · 3 hrs</div></div><div style="background:#F1F5F9;padding:5px 9px;border-radius:8px;font-size:10px;font-weight:600;color:var(--txt2)">Lab 2</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('events')"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- FEES -->
+<div class="sc" data-screen="fees" style="background:#F0FDF9">
+<div class="sb" style="background:linear-gradient(135deg,#065F46,#059669);padding-top:14px"><span>9:41</span><div class="nt" style="background:#059669"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#065F46,#059669);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Fees & Payments</div></div></div>
+<div style="margin:-10px 14px 12px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(6,95,70,.15)">
+<div style="font-size:11px;color:var(--txt3);margin-bottom:4px">Outstanding Balance</div>
+<div style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:#EF4444;letter-spacing:-1px">₹ 12,500</div>
+<div style="font-size:10px;color:#EF4444;margin-bottom:12px">⚠️ Due by April 5, 2025</div>
+<button class="btn3">💳 Pay Now via UPI / Card</button>
+</div>
+<div class="shr"><div class="sht">Fee History</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:12px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:16px">📚</div><div><div style="font-size:12px;font-weight:600;color:var(--txt)">Tuition Fee — Q4</div><div style="font-size:10px;color:var(--txt3)">Due: April 5, 2025</div></div><div style="margin-left:auto;text-align:right"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#EF4444">₹8,500</div><div class="fb du">PENDING</div></div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:16px">🏫</div><div><div style="font-size:12px;font-weight:600;color:var(--txt)">Lab Fee — Annual</div><div style="font-size:10px;color:var(--txt3)">Paid: Jan 15, 2025</div></div><div style="margin-left:auto;text-align:right"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#059669">₹2,000</div><div class="fb pd">PAID ✓</div></div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">💳</div><div class="nl">Fees</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('hw')"><div class="nw">📝</div><div class="nl">Homework</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- NOTICES -->
+<div class="sc" data-screen="notices" style="background:#FFFBEB">
+<div class="sb" style="background:linear-gradient(135deg,#92400E,#D97706);padding-top:14px"><span>9:41</span><div class="nt" style="background:#D97706"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#92400E,#D97706);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Notices</div><div style="background:#EF4444;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;font-family:'Outfit',sans-serif">5</div></div></div>
+<div class="cr"><div class="ch" style="background:#D97706;color:#fff">All</div><div class="ch" style="color:#D97706;background:#FEF3C7">Urgent</div><div class="ch" style="color:#D97706;background:#FEF3C7">General</div><div class="ch" style="color:#D97706;background:#FEF3C7">Events</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#EF4444"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#FEF2F2;color:#EF4444">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:4px">Exam Hall Ticket Collection</div><div style="font-size:10.5px;color:var(--txt3);line-height:1.5">Collect hall tickets from school office.</div><div style="font-size:9px;color:var(--txt3);margin-top:6px">📅 March 22 · By Principal</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#EF4444"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#FEF2F2;color:#EF4444">🚨 URGENT</div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:4px">Fee Deadline Extended</div><div style="font-size:10.5px;color:var(--txt3);line-height:1.5">Fee deadline extended to April 5, 2025.</div><div style="font-size:9px;color:var(--txt3);margin-top:6px">📅 March 20 · By Accounts</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#4F46E5"></div><div style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;font-family:'Outfit',sans-serif;margin-bottom:5px;display:inline-block;background:#EEF2FF;color:#4F46E5">📋 GENERAL</div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:4px">Sports Day Registration</div><div style="font-size:10.5px;color:var(--txt3);line-height:1.5">Register by March 29.</div><div style="font-size:9px;color:var(--txt3);margin-top:6px">📅 March 18 · Sports Dept</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📢</div><div class="nl">Notices</div></div><div class="ni" onclick="nav('events')"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni" onclick="nav('hw')"><div class="nw">📝</div><div class="nl">Homework</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- HOMEWORK (STUDENT) -->
+<div class="sc" data-screen="hw" style="background:#FFF0F8">
+<div class="sb" style="background:linear-gradient(135deg,#BE185D,#DB2777);padding-top:14px"><span>9:41</span><div class="nt" style="background:#DB2777"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#BE185D,#DB2777);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Homework</div></div></div>
+<div class="cr"><div class="ch" style="flex:1;text-align:center;background:#FDF2F8;color:#BE185D">Pending (3)</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Submitted</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Graded</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 0;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #EF4444">
+<div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;background:#FEE2E2;color:#EF4444">📐 Mathematics</div><div style="font-size:10px;color:var(--txt3)">5 problems</div></div>
+<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:5px">Integration Practice Set — Ch.7</div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px">Solve all 5 problems from page 128-130.</div>
+<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;font-weight:600;color:#EF4444">🔴 Due: TODAY 5 PM</div><button style="font-size:10px;font-weight:700;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;background:#4F46E5;color:#fff">📤 Submit</button></div>
+</div>
+<div style="margin:10px 14px 0;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #F59E0B">
+<div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">⚗️ Chemistry</div><div style="font-size:10px;color:var(--txt3)">Lab Report</div></div>
+<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:5px">Titration Lab Report</div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px">Write lab report with aim, theory, observations.</div>
+<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;font-weight:600;color:#D97706">🟡 Due: Tomorrow</div><button style="font-size:10px;font-weight:700;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;background:#4F46E5;color:#fff">📤 Submit</button></div>
+</div>
+<div style="margin:10px 14px;background:linear-gradient(135deg,#FDF2F8,#FFF0F0);border-radius:14px;padding:12px;border:1px solid #FBCFE8"><div class="at" style="background:#BE185D;margin-bottom:6px">🤖 AI HELPER</div><div style="font-size:11px;color:#831843;line-height:1.6;margin-bottom:8px">Struggling with Integration? I can explain concepts and check your work.</div><button onclick="nav('ai')" style="background:#BE185D;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">💬 Ask AI</button></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni active"><div class="nw">📝</div><div class="nl">Homework</div></div><div class="ni" onclick="nav('events')"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- TRANSPORT -->
+<div class="sc" data-screen="trans" style="background:#F0F8FF">
+<div class="sb" style="background:linear-gradient(135deg,#0C4A6E,#0369A1);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0369A1"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#0C4A6E,#0369A1);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Transport</div><div style="background:#EF4444;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:4px"><div class="ld"></div>LIVE</div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><div style="background:rgba(255,255,255,.12);border-radius:10px;padding:6px 10px;font-size:10px;color:rgba(255,255,255,.8)">🚌 Route 7B</div><div style="background:rgba(255,255,255,.12);border-radius:10px;padding:6px 10px;font-size:10px;color:rgba(255,255,255,.8)">📍 Rajpur</div><div style="background:rgba(255,255,255,.12);border-radius:10px;padding:6px 10px;font-size:10px;color:rgba(255,255,255,.8)">🎒 Seat 14</div></div></div>
+<div style="margin:10px 14px;border-radius:18px;height:140px;position:relative;overflow:hidden;border:1.5px solid #BAE6FD">
+<svg viewBox="0 0 340 140" style="width:100%;height:100%"><rect width="340" height="140" fill="#E8F4E8"/><rect x="30" y="0" width="24" height="140" fill="#F5F5DC" rx="2" opacity=".5"/><rect x="140" y="0" width="24" height="140" fill="#F5F5DC" rx="2" opacity=".5"/><rect x="250" y="0" width="24" height="140" fill="#F5F5DC" rx="2" opacity=".5"/><rect x="0" y="55" width="340" height="24" fill="#F5F5DC" rx="2" opacity=".5"/><path d="M20 130 L120 130 L120 70 L250 70 L250 10" stroke="#4F46E5" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="250" cy="10" r="5" fill="#059669" stroke="#fff" stroke-width="1.5"/><circle cx="120" cy="70" r="5" fill="#4F46E5" stroke="#fff" stroke-width="1.5"/><g><animateMotion dur="3s" repeatCount="indefinite" path="M200,55 L120,55 L120,100 L50,100"/><rect x="-8" y="-5" width="16" height="10" rx="3" fill="#F59E0B"/><text x="0" y="3" font-size="7" text-anchor="middle">🚌</text></g></svg>
+<div style="position:absolute;top:12px;left:12px;background:#4F46E5;color:#fff;border-radius:10px;padding:6px 10px;font-family:'Outfit',sans-serif"><div style="font-size:18px;font-weight:800">8 min</div><div style="font-size:9px;opacity:.8">ETA</div></div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+<div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🚌 Bus HR-29-3847</div>
+<div style="display:flex;gap:10px">
+<div style="flex:1;background:#EFF6FF;border-radius:10px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#1D4ED8;font-family:'Outfit',sans-serif">8 Min</div><div style="font-size:9px;color:#64748B">ETA</div></div>
+<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#059669;font-family:'Outfit',sans-serif">38</div><div style="font-size:9px;color:#64748B">Students</div></div>
+<div style="flex:1;background:#FFF7ED;border-radius:10px;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#D97706;font-family:'Outfit',sans-serif">4</div><div style="font-size:9px;color:#64748B">Stops</div></div>
+</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">🚌</div><div class="nl">Transport</div></div><div class="ni" onclick="nav('notices')"><div class="nw">📢</div><div class="nl">Notices</div></div><div class="ni" onclick="nav('events')"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- EVENTS -->
+<div class="sc" data-screen="events" style="background:#FFF1F5">
+<div class="sb" style="background:linear-gradient(135deg,#831843,#BE185D);padding-top:14px"><span>9:41</span><div class="nt" style="background:#BE185D"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#831843,#BE185D);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Events</div></div></div>
+<div class="cr"><div class="ch" style="background:#BE185D;color:#fff">Upcoming</div><div class="ch" style="color:#BE185D;background:#FFF1F5">Registered</div><div class="ch" style="color:#BE185D;background:#FFF1F5">Past</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)"><div style="height:90px;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:flex-end;padding:10px"><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">🏃 Annual Sports Day</div></div><div style="background:#fff;padding:12px"><div style="font-size:10px;color:var(--txt3);margin-bottom:8px">📅 April 5, 2025 · ⏰ 8:00 AM</div><button style="width:100%;padding:8px;border-radius:10px;border:none;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;background:#4F46E5;color:#fff">✅ Registered</button></div></div>
+<div style="margin:0 14px 10px;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)"><div style="height:90px;background:linear-gradient(135deg,#059669,#F59E0B);display:flex;align-items:flex-end;padding:10px"><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff">🔬 Science Exhibition</div></div><div style="background:#fff;padding:12px"><div style="font-size:10px;color:var(--txt3);margin-bottom:8px">📅 April 10, 2025 · 📍 School Hall</div><button style="width:100%;padding:8px;border-radius:10px;border:none;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#059669,#0F766E);color:#fff">🎯 Register Now</button></div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('notices')"><div class="nw">📢</div><div class="nl">Notices</div></div><div class="ni active"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- ACHIEVEMENTS -->
+<div class="sc" data-screen="ach" style="background:#FFFBEB">
+<div class="sb" style="background:linear-gradient(135deg,#78350F,#B45309);padding-top:14px"><span>9:41</span><div class="nt" style="background:#B45309"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#78350F,#B45309);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Achievements</div></div></div>
+<div style="margin:10px 14px;background:linear-gradient(135deg,#F59E0B,#D97706);border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-bottom:4px">Total XP Points</div><div style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;color:#fff">2,450</div></div>
+<div style="text-align:right"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">🏅 3rd Place</div></div>
+</div>
+<div class="shr"><div class="sht">Your Badges</div><div class="shl">18 earned</div></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)"><div style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,#FCD34D,#F59E0B)">🏆</div><div><div style="font-size:13px;font-weight:700;color:var(--txt)">Academic Excellence</div><div style="font-size:10.5px;color:var(--txt3)">Scored 90%+ in Term 2</div></div></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)"><div style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,#60A5FA,#3B82F6)">🔥</div><div><div style="font-size:13px;font-weight:700;color:var(--txt)">18-Day Streak</div><div style="font-size:10.5px;color:var(--txt3)">Logged in 18 consecutive days</div></div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('events')"><div class="nw">📅</div><div class="nl">Events</div></div><div class="ni active"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- ATTENDANCE (STUDENT) -->
+<div class="sc" data-screen="att" style="background:#EFF6FF">
+<div class="sb" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6);padding-top:14px"><span>9:41</span><div class="nt" style="background:#3B82F6"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#1D4ED8,#3B82F6);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Attendance</div></div></div>
+<div style="background:#fff;margin:10px 14px;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(29,78,216,.1)">
+<div style="display:flex;justify-content:center;padding:10px 0"><svg width="120" height="120" viewBox="0 0 120 120"><circle fill="none" stroke="#F1F5F9" stroke-width="8" cx="60" cy="60" r="46"/><circle fill="none" stroke="#1D4ED8" stroke-width="8" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="17" cx="60" cy="60" r="46" transform="rotate(-90 60 60)"/><text x="60" y="55" font-family="Outfit" font-size="22" font-weight="900" fill="#0F172A" text-anchor="middle">94%</text><text x="60" y="70" font-family="DM Sans" font-size="9" fill="#94A3B8" text-anchor="middle">Attendance</text></svg></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#059669">162</div><div style="font-size:9px;color:#6B7280">Present</div></div>
+<div style="flex:1;background:#FEF2F2;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#EF4444">10</div><div style="font-size:9px;color:#6B7280">Absent</div></div>
+<div style="flex:1;background:#FFF7ED;border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#D97706">172</div><div style="font-size:9px;color:#6B7280">Total</div></div>
+</div></div>
+<div class="shr"><div class="sht">Subject-wise</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:14px">📐</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">48/50</div></div><div style="width:70px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:96%;height:100%;background:#4F46E5;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;color:#4F46E5;width:36px;text-align:right">96%</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;font-size:14px">⚛️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">44/50</div></div><div style="width:70px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:88%;height:100%;background:#3B82F6;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;color:#3B82F6;width:36px;text-align:right">88%</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:14px">⚗️</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Chemistry</div><div style="font-size:10px;color:var(--txt3)">47/50</div></div><div style="width:70px;height:5px;background:#F1F5F9;border-radius:3px"><div style="width:94%;height:100%;background:#F59E0B;border-radius:3px"></div></div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;color:#F59E0B;width:36px;text-align:right">94%</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📋</div><div class="nl">Attend.</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- COURSES -->
+<div class="sc" data-screen="courses" style="background:#F0F4FF">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#302B63);padding-top:14px"><span>9:41</span><div class="nt" style="background:#302B63"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#302B63);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">My Courses</div></div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:18px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Mathematics</div><div style="font-size:10px;color:var(--txt3)">Mr. Sharma · 42 chapters</div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#4F46E5">95%</div></div>
+<div style="height:4px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="width:78%;height:100%;background:linear-gradient(90deg,#4F46E5,#06B6D4);border-radius:2px"></div></div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:12px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;font-size:18px">⚛️</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Physics</div><div style="font-size:10px;color:var(--txt3)">Dr. Verma · 38 chapters</div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#3B82F6">89%</div></div>
+<div style="height:4px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="width:72%;height:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:2px"></div></div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:18px">⚗️</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Chemistry</div><div style="font-size:10px;color:var(--txt3)">Dr. Mehta · 35 chapters</div></div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#F59E0B">91%</div></div>
+<div style="height:4px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="width:80%;height:100%;background:linear-gradient(90deg,#F59E0B,#FCD34D);border-radius:2px"></div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📚</div><div class="nl">Courses</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- LIBRARY -->
+<div class="sc" data-screen="lib" style="background:#FAF5FF">
+<div class="sb" style="background:linear-gradient(135deg,#3B0764,#6D28D9);padding-top:14px"><span>9:41</span><div class="nt" style="background:#6D28D9"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#3B0764,#6D28D9);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Library</div></div>
+<div style="background:rgba(255,255,255,.12);border-radius:12px;padding:8px 12px;display:flex;gap:8px;align-items:center;margin-top:8px"><span>🔍</span><span style="font-size:12px;color:rgba(255,255,255,.5)">Search books...</span></div></div>
+<div class="cr"><div class="ch" style="background:#6D28D9;color:#fff">My Books (3)</div><div class="ch" style="color:#6D28D9;background:#F5F3FF">Browse</div><div class="ch" style="color:#6D28D9;background:#F5F3FF">Digital</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px"><div style="width:50px;height:66px;border-radius:8px;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📘</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--txt)">NCERT Physics Part II</div><div style="font-size:10px;color:var(--txt3)">By NCERT · Class XII</div><div style="font-size:10px;font-weight:600;color:#059669">Return: April 5 ✅</div></div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px"><div style="width:50px;height:66px;border-radius:8px;background:linear-gradient(135deg,#D97706,#F59E0B);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📙</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--txt)">H.C. Verma Vol.1</div><div style="font-size:10px;color:var(--txt3)">By H.C. Verma</div><div style="font-size:10px;font-weight:600;color:#EF4444">⚠️ Return: March 30</div></div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('courses')"><div class="nw">📚</div><div class="nl">Courses</div></div><div class="ni active"><div class="nw">📖</div><div class="nl">Library</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- LEAVE -->
+<div class="sc" data-screen="leave" style="background:#F0F4FF">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#06B6D4);padding-top:14px"><span>9:41</span><div class="nt" style="background:#4F46E5"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#06B6D4);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Leave Management</div></div></div>
+<div style="margin:14px 14px 10px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(79,70,229,.1);display:flex;gap:8px">
+<div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:var(--pri)">15</div><div style="font-size:8px;color:var(--txt3);text-transform:uppercase;font-weight:700">Quota</div></div>
+<div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#059669">06</div><div style="font-size:8px;color:var(--txt3);text-transform:uppercase;font-weight:700">Used</div></div>
+<div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#F59E0B">01</div><div style="font-size:8px;color:var(--txt3);text-transform:uppercase;font-weight:700">Pending</div></div>
+<div style="flex:1;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#4F46E5">08</div><div style="font-size:8px;color:var(--txt3);text-transform:uppercase;font-weight:700">Balance</div></div>
+</div>
+<div style="padding:0 14px 8px"><div class="sht">Apply New Leave</div></div>
+<div style="margin:0 14px 16px;background:#fff;border-radius:20px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.04);border:1px solid #EEF2FF">
+<div class="ls">Leave Type</div><select class="inp"><option>Sick Leave</option><option>Casual Leave</option><option>Family Event</option></select>
+<div class="ls">Start Date</div><input type="date" class="inp" value="2025-03-30">
+<div class="ls">End Date</div><input type="date" class="inp" value="2025-03-31">
+<div class="ls">Reason</div><textarea class="inp" placeholder="Describe reason..." rows="3" style="resize:none;margin-bottom:14px"></textarea>
+<button class="btn1">✨ Apply for Leave</button>
+</div>
+<div class="shr"><div class="sht">Leave History</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.04);border:1px solid #ECFDF5">
+<div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:40px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:20px">🤒</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--txt)">Sick Leave</div><div style="font-size:10px;color:var(--txt3)">Feb 8-9, 2025 · 2 days</div></div><div class="fb pd">APPROVED</div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="bn"><div class="ni active" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('att')"><div class="nw">📋</div><div class="nl">Attend.</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- MESSAGING -->
+<div class="sc" data-screen="msg" style="background:#F8FAFC">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#7C3AED);padding-top:14px"><span>9:41</span><div class="nt" style="background:#7C3AED"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#7C3AED);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Messages</div></div></div>
+<div style="padding:10px 14px 0"><input type="text" placeholder="🔍 Search..." style="width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid #E2E8F0;font-family:inherit;font-size:12px;box-sizing:border-box;background:#fff"></div>
+<div class="cr"><div class="ch" style="background:#4F46E5;color:#fff">All</div><div class="ch" style="background:#EEF2FF;color:#4F46E5">Teachers</div><div class="ch" style="background:#EEF2FF;color:#4F46E5">Students</div><div class="ch" style="background:#EEF2FF;color:#4F46E5">Groups</div></div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;margin:0 14px 6px;border-radius:14px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.03)">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:18px;position:relative">👨‍🏫<div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22C55E;border-radius:50%;border:2px solid #fff"></div></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Mr. R. Sharma</div><div style="font-size:10px;color:var(--txt3)">Sure, I'll cover integration...</div></div>
+<div style="text-align:right"><div style="font-size:9px;color:var(--txt3)">3:25 PM</div><div style="width:18px;height:18px;background:#4F46E5;border-radius:50%;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:auto;margin-top:4px">2</div></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;margin:0 14px 6px;border-radius:14px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.03)">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#DB2777);display:flex;align-items:center;justify-content:center;font-size:18px">🎓</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Principal Mrs. Verma</div><div style="font-size:10px;color:var(--txt3)">Thank you for the report.</div></div>
+<div style="text-align:right"><div style="font-size:9px;color:var(--txt3)">Yesterday</div></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;margin:0 14px 6px;border-radius:14px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.03)">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:18px">👥</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Study Group — Physics</div><div style="font-size:10px;color:var(--txt3)">Vikram: Sharing Optics notes</div></div>
+<div style="text-align:right"><div style="font-size:9px;color:var(--txt3)">Sat</div><div style="width:18px;height:18px;background:#4F46E5;border-radius:50%;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:auto;margin-top:4px">5</div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni active"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- NOTIFICATIONS -->
+<div class="sc" data-screen="notif" style="background:#F5F6FF">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#302B63);padding-top:14px"><span>9:41</span><div class="nt" style="background:#302B63"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#302B63);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Notifications</div></div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;border-left:3px solid #EF4444"><div style="width:36px;height:36px;border-radius:12px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:16px">📝</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Homework Due Today!</div><div style="font-size:10px;color:var(--txt3)">Integration Practice Set</div><div style="font-size:9px;color:var(--txt3);margin-top:3px">2 mins ago</div></div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;border-left:3px solid #F59E0B"><div style="width:36px;height:36px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:16px">💳</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Fee Reminder</div><div style="font-size:10px;color:var(--txt3)">₹12,500 due by April 5</div><div style="font-size:9px;color:var(--txt3);margin-top:3px">1 hour ago</div></div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;gap:10px;border-left:3px solid #4F46E5"><div style="width:36px;height:36px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:16px">📊</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Results Published!</div><div style="font-size:10px;color:var(--txt3)">Term 2 results available</div><div style="font-size:9px;color:var(--txt3);margin-top:3px">3 hours ago</div></div></div>
+<div class="sp"></div>
+</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('courses')"><div class="nw">📚</div><div class="nl">Courses</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- STUDENT PROFILE -->
+<div class="sc" data-screen="sprof" style="background:#F5F6FF">
+<div class="sb" style="background:linear-gradient(160deg,#0F172A,#1E293B);padding-top:14px"><span>9:41</span><div class="nt" style="background:#1E293B"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(160deg,#0F172A,#1E293B);padding:8px 18px 0">
+<div style="text-align:center;padding:16px 0"><div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 8px;border:3px solid rgba(255,255,255,.2)">🧑</div><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">Arjun Kumar</div><div style="font-size:11px;color:rgba(255,255,255,.5)">Class X-A · Roll 18 · 2024–25</div></div>
+<div style="display:flex;justify-content:space-around;background:rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:16px">
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">91.4%</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Avg</div></div>
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">94%</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Attend</div></div>
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">3rd</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Rank</div></div>
+<div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff">18</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Badges</div></div>
+</div></div>
+<div style="background:#F5F6FF;padding:14px 14px 0">
+<div style="font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Outfit',sans-serif">Personal Info</div>
+<div style="background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.04)">
+<div style="display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">Gender</div><div style="font-size:12px;font-weight:600;color:var(--txt)">Male</div></div>
+<div style="display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">DOB</div><div style="font-size:12px;font-weight:600;color:var(--txt)">Oct 12, 2009</div></div>
+<div style="display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">Blood</div><div style="font-size:12px;font-weight:600;color:var(--txt)">O+</div></div>
+<div style="display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">Email</div><div style="font-size:12px;font-weight:600;color:#4F46E5">arjun@eduverse.in</div></div>
+<div style="display:flex;justify-content:space-between;padding:11px 14px"><div style="font-size:11px;color:var(--txt3)">Phone</div><div style="font-size:12px;font-weight:600;color:#4F46E5">+91-9876543210</div></div>
+</div>
+<div style="font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Outfit',sans-serif">Father/Guardian</div>
+<div style="background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.04)">
+<div style="display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">Name</div><div style="font-size:12px;font-weight:600;color:var(--txt)">Rajesh Kumar</div></div>
+<div style="display:flex;justify-content:space-between;padding:11px 14px"><div style="font-size:11px;color:var(--txt3)">Phone</div><div style="font-size:12px;font-weight:600;color:#4F46E5">+91-9876543210</div></div>
+</div>
+<div style="margin:0 14px 8px"><button class="btn4" onclick="nav('login')">🚪 Logout</button></div>
+<div class="sp"></div>
+</div></div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('res')"><div class="nw">📊</div><div class="nl">Results</div></div><div class="ni" onclick="nav('ach')"><div class="nw">🏆</div><div class="nl">Achieve</div></div><div class="ni active"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- TEACHER PROFILE -->
+<div class="sc" data-screen="tprof" style="background:#F0F7FF">
+<div class="sb" style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0C4A6E"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 50px;text-align:center;position:relative">
+<div class="mt" style="margin-bottom:16px"><div class="bb" onclick="goback()">←</div><div class="mn">My Profile</div></div>
+<div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto;border:3px solid rgba(255,255,255,.3)">👩‍🏫</div>
+<div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-top:8px">Mrs. Priya Sharma</div>
+<div style="font-size:11px;color:rgba(255,255,255,.6)">HOD — Mathematics</div>
+<div style="font-size:10px;color:rgba(255,255,255,.4)">TCH-2024-0042</div>
+</div>
+<div style="margin:-30px 14px 12px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.1);position:relative;z-index:2">
+<div style="display:flex;gap:6px;margin-bottom:12px">
+<div style="flex:1;text-align:center;background:#E0F2FE;border-radius:10px;padding:8px"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#0EA5E9">12</div><div style="font-size:9px;color:var(--txt3)">Yrs Exp</div></div>
+<div style="flex:1;text-align:center;background:#ECFDF5;border-radius:10px;padding:8px"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#059669">133</div><div style="font-size:9px;color:var(--txt3)">Students</div></div>
+<div style="flex:1;text-align:center;background:#FEF3C7;border-radius:10px;padding:8px"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#D97706">4.8⭐</div><div style="font-size:9px;color:var(--txt3)">Rating</div></div>
+</div>
+<div style="font-size:11px;color:var(--txt2);line-height:1.8"><b>📧:</b> priya@eduverse.in<br><b>📞:</b> +91-9876543210<br><b>🎓:</b> M.Sc Maths, B.Ed</div>
+</div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;cursor:pointer" onclick="nav('sal')"><div style="font-size:16px">💰</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--txt)">Salary & Payslips</div><div style="font-size:12px;color:var(--txt3)">→</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;cursor:pointer" onclick="nav('leave')"><div style="font-size:16px">🏖️</div><div style="flex:1;font-size:12px;font-weight:600;color:var(--txt)">Leave Management</div><div style="font-size:12px;color:var(--txt3)">→</div></div>
+<div style="margin:0 14px 8px"><button class="btn4" onclick="nav('login')">🚪 Logout</button></div>
+<div class="sp"></div>
+</div></div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni active"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- MY CLASSES (TEACHER) -->
+<div class="sc" data-screen="mycls" style="background:#E0F2FE">
+<div class="sb" style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0C4A6E"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#0C4A6E,#0EA5E9);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">My Classes</div><div style="font-size:10px;color:rgba(255,255,255,.6)">3 Sections</div></div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:4px solid #0EA5E9">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--txt)">📐 Mathematics — X-A</div><div style="background:#E0F2FE;color:#0EA5E9;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif">45 Students</div></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#059669">92%</div><div style="font-size:8px;color:#6B7280">Attend</div></div>
+<div style="flex:1;background:#EEF2FF;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#4F46E5">78.5</div><div style="font-size:8px;color:#6B7280">Avg</div></div>
+<div style="flex:1;background:#FEF3C7;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#D97706">3</div><div style="font-size:8px;color:#6B7280">Pending</div></div>
+</div>
+<div style="font-size:10px;color:var(--txt3);margin-top:8px">Next: Today 8:00 AM · Room 301</div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:4px solid #8B5CF6">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--txt)">📐 Mathematics — X-B</div><div style="background:#F5F3FF;color:#8B5CF6;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif">48 Students</div></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#059669">89%</div><div style="font-size:8px;color:#6B7280">Attend</div></div>
+<div style="flex:1;background:#EEF2FF;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#4F46E5">72.3</div><div style="font-size:8px;color:#6B7280">Avg</div></div>
+<div style="flex:1;background:#FEF3C7;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#D97706">5</div><div style="font-size:8px;color:#6B7280">Pending</div></div>
+</div>
+<div style="font-size:10px;color:var(--txt3);margin-top:8px">Next: Today 9:00 AM · Room 305</div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:4px solid #F59E0B">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--txt)">📐 Mathematics — IX-A</div><div style="background:#FEF3C7;color:#D97706;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif">40 Students</div></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#F0FDF4;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#059669">95%</div><div style="font-size:8px;color:#6B7280">Attend</div></div>
+<div style="flex:1;background:#EEF2FF;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#4F46E5">81.2</div><div style="font-size:8px;color:#6B7280">Avg</div></div>
+<div style="flex:1;background:#FEF3C7;border-radius:10px;padding:6px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#D97706">0</div><div style="font-size:8px;color:#6B7280">Pending</div></div>
+</div>
+<div style="font-size:10px;color:var(--txt3);margin-top:8px">Next: Today 11:20 AM · Room 202</div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- TEACHER ATTENDANCE -->
+<div class="sc" data-screen="tatt" style="background:#F0FDF4">
+<div class="sb" style="background:linear-gradient(135deg,#065F46,#059669);padding-top:14px"><span>9:41</span><div class="nt" style="background:#059669"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#065F46,#059669);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Mark Attendance</div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📅 March 27</div><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:10px;color:#fff;font-weight:600">📚 X-A</div></div></div>
+<div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:700;color:var(--txt);font-family:'Outfit',sans-serif">Student List (45)</div><div style="background:#ECFDF5;color:#059669;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;cursor:pointer">✅ All Present</div></div>
+<div style="padding:0 14px">
+<div class="ar"><div class="alr">1</div><div class="an">Arjun Kumar</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l');this.parentElement.querySelectorAll('.abtn').forEach(b=>{if(b!==this){b.classList.remove('p','a','l')}})">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l');this.parentElement.querySelector('.abtn.p').classList.remove('p')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a');this.parentElement.querySelector('.abtn.p').classList.remove('p')">L</div></div>
+<div class="ar"><div class="alr">2</div><div class="an">Riya Gupta</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">3</div><div class="an">Sanjay Mehta</div><div class="abtn" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn a" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">4</div><div class="an">Neha Patel</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">5</div><div class="an">Vikram Joshi</div><div class="abtn" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn l" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">6</div><div class="an">Ananya Singh</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">7</div><div class="an">Rohit Verma</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+<div class="ar"><div class="alr">8</div><div class="an">Kavya Sharma</div><div class="abtn p" onclick="this.classList.add('p');this.classList.remove('a','l')">P</div><div class="abtn" onclick="this.classList.add('a');this.classList.remove('p','l')">A</div><div class="abtn" onclick="this.classList.add('l');this.classList.remove('p','a')">L</div></div>
+</div>
+<div style="padding:12px 14px"><button class="btn3">✅ Submit Attendance (42P · 2A · 1L)</button></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni active"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- TEACHER HOMEWORK -->
+<div class="sc" data-screen="thw" style="background:#FFF0F8">
+<div class="sb" style="background:linear-gradient(135deg,#BE185D,#DB2777);padding-top:14px"><span>9:41</span><div class="nt" style="background:#DB2777"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#BE185D,#DB2777);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Homework Manager</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer">+ Create</div></div></div>
+<div class="cr"><div class="ch" style="flex:1;text-align:center;background:#BE185D;color:#fff">Active (3)</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Submissions</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Graded</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #EF4444">
+<div style="display:flex;justify-content:space-between;margin-bottom:6px"><div style="font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;background:#FEE2E2;color:#EF4444">📐 X-A</div><div style="font-size:10px;color:var(--txt3)">32/45 submitted</div></div>
+<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:5px">Integration Practice Set — Ch.7</div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px">Due today 5 PM.</div>
+<div style="display:flex;gap:6px"><button style="flex:1;padding:8px;border-radius:10px;border:none;background:#BE185D;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📋 Review</button><button style="padding:8px 10px;border-radius:10px;border:none;background:#FDF2F8;color:#BE185D;font-size:11px;font-weight:700;cursor:pointer">⏰</button></div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #F59E0B">
+<div style="display:flex;justify-content:space-between;margin-bottom:6px"><div style="font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif;background:#FEF3C7;color:#D97706">📐 X-B</div><div style="font-size:10px;color:var(--txt3)">18/48 submitted</div></div>
+<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:5px">Trigonometry Worksheet</div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.5;margin-bottom:10px">Due tomorrow.</div>
+<div style="display:flex;gap:6px"><button style="flex:1;padding:8px;border-radius:10px;border:none;background:#D97706;color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📋 Review (18)</button></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- TEACHER EXAMS -->
+<div class="sc" data-screen="texams" style="background:#F0FDF9">
+<div class="sb" style="background:linear-gradient(135deg,#134E4A,#0F766E);padding-top:14px"><span>9:41</span><div class="nt" style="background:#0F766E"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#134E4A,#0F766E);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Exam Management</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer">+ Create</div></div></div>
+<div class="cr"><div class="ch" style="flex:1;text-align:center;background:#0F766E;color:#fff">Upcoming</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Past</div><div class="ch" style="flex:1;text-align:center;color:var(--txt3)">Results</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);border-left:4px solid #94A3B8;position:relative">
+<div style="position:absolute;top:14px;right:14px;background:#F1F5F9;color:#64748B;font-size:8px;font-weight:800;padding:3px 8px;border-radius:6px;text-transform:uppercase">📁 Draft</div>
+<div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt);margin-bottom:8px;padding-right:50px">📐 Unit Test 5 — Probability</div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.6;margin-bottom:12px">📅 April 5, 2026 · Duration: 90 mins</div>
+<div style="display:flex;gap:6px"><button style="flex:2;padding:9px;border-radius:10px;border:none;background:linear-gradient(135deg,#0F766E,#0D9488);color:#fff;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">✨ Setup</button><button style="flex:1;padding:9px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--txt2);font-size:11px;font-weight:700;cursor:pointer">✏️ Edit</button></div>
+</div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #0EA5E9">
+<div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)">📐 Mathematics — Final</div><div style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;background:#E0F2FE;color:#0EA5E9">X-A & X-B</div></div>
+<div style="font-size:11px;color:var(--txt3);line-height:1.6;margin-bottom:10px">📅 March 28 · ⏰ 9:00 AM · Hall A · 100 Marks</div>
+<div style="display:flex;gap:6px"><button style="flex:1;padding:8px;border-radius:10px;border:none;background:#0F766E;color:#fff;font-size:11px;font-weight:700;cursor:pointer">📝 Edit Paper</button><button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid #E2E8F0;background:#fff;color:var(--txt2);font-size:11px;font-weight:700;cursor:pointer">✏️ Edit</button></div>
+</div>
+<div style="margin:8px 14px;background:linear-gradient(135deg,#ECFDF5,#F0FDFA);border-radius:14px;padding:12px;border:1px solid #A7F3D0"><div class="at" style="background:#059669">🤖 AI QUESTION GENERATOR</div><div style="font-size:11px;color:#065F46;line-height:1.6;margin-bottom:8px">Generate question papers with AI!</div><button onclick="nav('ai')" style="background:#059669;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">🤖 Generate</button></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni active"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- GRADEBOOK -->
+<div class="sc" data-screen="gb" style="background:#F8FAFC">
+<div class="sb" style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding-top:14px"><span>9:41</span><div class="nt" style="background:#6366F1"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#4F46E5,#6366F1);padding:8px 18px 20px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Gradebook</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600">X-A · 2026</div></div>
+<div style="display:flex;gap:6px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none">
+<div class="ch" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:#fff;color:#4F46E5;font-weight:800;font-size:10px">Class Test</div>
+<div class="ch" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px">Mid-Term</div>
+<div class="ch" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px">End-Term</div>
+<div class="ch" style="white-space:nowrap;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-weight:800;font-size:10px">Overall</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px">
+<div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">76%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">Avg</div></div>
+<div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">92%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">Attend</div></div>
+<div style="flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:8px;text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:#fff">84%</div><div style="font-size:8px;color:rgba(255,255,255,.6)">Prof</div></div>
+</div></div>
+<div style="margin:16px 14px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+<div style="display:flex;background:#F8FAFC;padding:12px 14px;border-bottom:1px solid #F1F5F9;font-size:8px;font-weight:800;color:#64748B;text-transform:uppercase;letter-spacing:1px"><div style="flex:1.5">Student</div><div style="width:40px;text-align:center">Rnk</div><div style="width:55px;text-align:center">Total</div></div>
+<div style="display:flex;align-items:center;padding:14px;border-bottom:1px solid #F1F5F9"><div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--txt)">Arjun Kumar</div><div style="font-size:8px;color:var(--txt3)">📈 Improving</div></div><div style="width:40px;text-align:center;font-size:10px;font-weight:900;color:#4F46E5">#1</div><div style="width:55px;text-align:center;font-size:11px;font-weight:900;color:#4F46E5">95</div></div>
+<div style="display:flex;align-items:center;padding:14px;border-bottom:1px solid #F1F5F9"><div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--txt)">Riya Gupta</div><div style="font-size:8px;color:var(--txt3)">↔️ Steady</div></div><div style="width:40px;text-align:center;font-size:10px;font-weight:900;color:#4F46E5">#2</div><div style="width:55px;text-align:center;font-size:11px;font-weight:900;color:#4F46E5">91</div></div>
+<div style="display:flex;align-items:center;padding:14px;background:#FEF2F2;border-bottom:1px solid #F1F5F9"><div style="flex:1.5"><div style="font-size:11px;font-weight:700;color:var(--txt)">Sanjay Mehta</div><div style="font-size:8px;color:#EF4444">📉 At Risk</div></div><div style="width:40px;text-align:center;font-size:10px;font-weight:900;color:#EF4444">#38</div><div style="width:55px;text-align:center;font-size:11px;font-weight:900;color:#EF4444">42</div></div>
+</div>
+<div style="margin:16px 14px;background:linear-gradient(135deg,#EEF2FF,#F5F3FF);border-radius:14px;padding:12px;border:1px solid #DDD6FE"><div class="at" style="background:#6366F1">🤖 AI REPORT</div><div style="font-size:11px;color:#4338CA;line-height:1.6">Class up 12% in practicals. Bottleneck: <b>Trigonometry</b>.</div></div>
+<div style="padding:8px 14px 20px"><button class="btn1" style="background:linear-gradient(135deg,#4F46E5,#6366F1)">📥 Export Report Cards</button></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- STUDENTS DIRECTORY -->
+<div class="sc" data-screen="stdir" style="background:#FFF7ED">
+<div class="sb" style="background:linear-gradient(135deg,#92400E,#D97706);padding-top:14px"><span>9:41</span><div class="nt" style="background:#D97706"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#92400E,#D97706);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Student Directory</div><div style="font-size:10px;color:rgba(255,255,255,.6)">133 Students</div></div></div>
+<div style="padding:12px 14px"><input class="inp" placeholder="🔍 Search students..." style="margin-bottom:0;border-color:#FDE68A;background:#FFF"></div>
+<div class="cr" style="background:#FFF7ED;padding:4px 14px 12px"><div class="ch" style="background:#D97706;color:#fff">All</div><div class="ch" style="background:#FEF3C7;color:#D97706">X-A (45)</div><div class="ch" style="background:#FEF3C7;color:#D97706">X-B (48)</div><div class="ch" style="background:#FEF3C7;color:#D97706">IX-A (40)</div></div>
+<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#06B6D4,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">AK</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Arjun Kumar</div><div style="font-size:10px;color:var(--txt3)">X-A · Roll 1 · 95%</div></div>
+<div style="display:flex;gap:8px"><div style="width:34px;height:34px;border-radius:12px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">📞</div><div style="width:34px;height:34px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">💬</div></div>
+</div>
+<div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">RG</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Riya Gupta</div><div style="font-size:10px;color:var(--txt3)">X-A · Roll 2 · 91%</div></div>
+<div style="display:flex;gap:8px"><div style="width:34px;height:34px;border-radius:12px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">📞</div><div style="width:34px;height:34px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">💬</div></div>
+</div>
+<div style="margin:0 14px 6px;background:#FEF2F2;border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border:1px solid #FECACA">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;font-family:'Outfit',sans-serif">SM</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--txt)">Sanjay Mehta ⚠️</div><div style="font-size:10px;color:#EF4444">X-A · Roll 3 · 42%</div></div>
+<div style="display:flex;gap:8px"><div style="width:34px;height:34px;border-radius:12px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;color:#EF4444">📞</div><div style="width:34px;height:34px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">💬</div></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- LIVE CLASSES -->
+<div class="sc" data-screen="live" style="background:#FFF1F2">
+<div class="sb" style="background:linear-gradient(135deg,#9F1239,#E11D48);padding-top:14px"><span>9:41</span><div class="nt" style="background:#E11D48"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#9F1239,#E11D48);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Live Classes</div></div></div>
+<div style="margin:10px 14px;background:linear-gradient(135deg,#E11D48,#BE123C);border-radius:16px;padding:14px;color:#fff;box-shadow:0 4px 15px rgba(225,29,72,0.2)">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px"><div style="background:#fff;color:#E11D48;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:900">LIVE</div><div style="font-size:10px;font-weight:700;opacity:0.8">38 Students</div></div>
+<div style="font-size:15px;font-weight:700;margin-bottom:4px">Mathematics — Calculus Revision</div>
+<div style="font-size:11px;opacity:0.8;margin-bottom:12px">Duration: 42 min elapsed</div>
+<div style="display:flex;gap:8px"><button class="btn1" style="background:#fff;color:#E11D48;flex:1">Join Stream</button><button class="btn2" style="background:rgba(255,255,255,0.2);color:#fff;border:none;flex:0.5">End</button></div>
+</div>
+<div class="shr"><div class="sht">Upcoming Today</div></div>
+<div style="margin:0 14px 10px;background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04)">
+<div style="font-size:14px;font-weight:700;color:var(--txt)">Physics — Wave Optics</div>
+<div style="font-size:11px;color:var(--txt3);margin-top:2px">Today · 2:30 PM (60 min)</div>
+<div style="display:flex;gap:8px;margin-top:10px"><button style="padding:6px 12px;font-size:10px;border-radius:8px;border:none;background:#E11D48;color:#fff;font-weight:700;cursor:pointer">Go Live</button><button style="padding:6px 12px;font-size:10px;border-radius:8px;border:1.5px solid #E2E8F0;background:#fff;color:var(--txt2);font-weight:700;cursor:pointer">Edit</button></div>
+</div>
+<div class="sp"></div>
+</div>
+<div class="fab" style="background:linear-gradient(135deg,#E11D48,#BE123C)">🎥</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- STUDY MATERIALS -->
+<div class="sc" data-screen="mats" style="background:#F0FDFA">
+<div class="sb" style="background:linear-gradient(135deg,#065F46,#059669);padding-top:14px"><span>9:41</span><div class="nt" style="background:#059669"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#065F46,#059669);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Study Materials</div><div style="background:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;color:#fff;font-weight:600;cursor:pointer">📤 Upload</div></div></div>
+<div class="cr"><div class="ch" style="background:#059669;color:#fff">All</div><div class="ch" style="color:#059669;background:#ECFDF5">Notes</div><div class="ch" style="color:#059669;background:#ECFDF5">PPTs</div><div class="ch" style="color:#059669;background:#ECFDF5">Videos</div></div>
+<div class="ss"></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:18px">📄</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Integration by Parts — Notes</div><div style="font-size:10px;color:var(--txt3)">X-A · March 25</div></div><div style="font-size:14px;cursor:pointer">✏️</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Trigonometry — PPT</div><div style="font-size:10px;color:var(--txt3)">X-B · March 22</div></div><div style="font-size:14px;cursor:pointer">✏️</div></div>
+<div style="margin:0 14px 8px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:10px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:18px">📝</div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--txt)">Algebra Worksheet</div><div style="font-size:10px;color:var(--txt3)">IX-A · March 20</div></div><div style="font-size:14px;cursor:pointer">✏️</div></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- SALARY -->
+<div class="sc" data-screen="sal" style="background:#F0FDF4">
+<div class="sb" style="background:linear-gradient(135deg,#065F46,#059669);padding-top:14px"><span>9:41</span><div class="nt" style="background:#059669"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div class="scr">
+<div style="background:linear-gradient(135deg,#065F46,#059669);padding:8px 18px 16px"><div class="mt"><div class="bb" onclick="goback()">←</div><div class="mn">Salary & Payslips</div></div></div>
+<div style="margin:-10px 14px 12px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(6,95,70,.15);text-align:center">
+<div style="font-size:11px;color:var(--txt3);margin-bottom:4px">Net Salary — March 2026</div>
+<div style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;color:#059669;letter-spacing:-1px">₹68,450</div>
+<div style="font-size:10px;color:#059669;margin-bottom:8px">✅ Credited March 1, 2026</div>
+<div style="display:flex;justify-content:center;gap:16px"><div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--txt)">₹75,000</div><div style="font-size:9px;color:var(--txt3)">Gross</div></div><div style="text-align:center"><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#EF4444">₹6,550</div><div style="font-size:9px;color:var(--txt3)">Deductions</div></div></div>
+</div>
+<div class="shr"><div class="sht">Breakup</div></div>
+<div style="margin:0 14px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)">
+<div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">Basic Pay</div><div style="font-size:12px;font-weight:600;color:var(--txt)">₹45,000</div></div>
+<div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">HRA</div><div style="font-size:12px;font-weight:600;color:var(--txt)">₹18,000</div></div>
+<div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:var(--txt3)">DA</div><div style="font-size:12px;font-weight:600;color:var(--txt)">₹7,000</div></div>
+<div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:#EF4444">PF</div><div style="font-size:12px;font-weight:600;color:#EF4444">- ₹3,600</div></div>
+<div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;color:#EF4444">TDS</div><div style="font-size:12px;font-weight:600;color:#EF4444">- ₹2,500</div></div>
+<div style="display:flex;justify-content:space-between;padding:10px 14px;background:#F0FDF4"><div style="font-size:12px;font-weight:700;color:#059669">Net</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#059669">₹68,450</div></div>
+</div>
+<div style="padding:12px 14px"><button style="width:100%;padding:10px;border-radius:12px;background:#059669;color:#fff;border:none;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer">📥 Download Payslip</button></div>
+<div class="sp"></div>
+</div>
+<div class="fab" onclick="nav('ai')">🤖</div>
+<div class="bn"><div class="ni" onclick="goback()"><div class="nw">🏠</div><div class="nl">Home</div></div><div class="ni" onclick="nav('mycls')"><div class="nw">📚</div><div class="nl">Classes</div></div><div class="ni" onclick="nav('texams')"><div class="nw">📝</div><div class="nl">Exams</div></div><div class="ni" onclick="nav('msg')"><div class="nw">💬</div><div class="nl">Messages</div></div><div class="ni" onclick="goback()"><div class="nw">👤</div><div class="nl">Profile</div></div></div></div>
+
+<!-- AI CHAT -->
+<div class="sc" data-screen="ai" style="background:#020617">
+<div class="sb" style="background:linear-gradient(135deg,#0F0C29,#302B63);padding-top:14px;flex-shrink:0"><span>9:41</span><div class="nt" style="background:#302B63"></div><div class="si"><span>📶</span><span>🔋</span></div></div>
+<div style="background:linear-gradient(135deg,#0F0C29,#302B63);padding:8px 18px 16px;flex-shrink:0"><div style="display:flex;align-items:center;gap:10px"><div class="bb" onclick="goback()">←</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:14px">🤖</div><div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#fff">EduVerse AI</div><div style="font-size:10px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px"><div class="ld"></div>Online</div></div></div></div>
+<div style="background:#F8FAFF;flex:1;padding:12px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto">
+<div style="display:flex;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-right:6px">🤖</div><div style="max-width:85%;background:#fff;border-radius:4px 16px 16px 16px;padding:10px 13px;box-shadow:0 2px 8px rgba(0,0,0,.06)"><div style="font-size:12px;color:var(--txt);line-height:1.6">👋 Hey! I'm your EduVerse AI. I can help with homework, explain concepts, manage classes, or anything school-related!</div></div></div>
+<div style="max-width:85%;background:linear-gradient(135deg,#4F46E5,#06B6D4);border-radius:16px 16px 4px 16px;padding:10px 13px;align-self:flex-end"><div style="font-size:12px;color:#fff;line-height:1.6">What should I focus on for my Math exam?</div></div>
+<div style="display:flex;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-right:6px">🤖</div><div style="max-width:85%;background:#fff;border-radius:4px 16px 16px 16px;padding:10px 13px;box-shadow:0 2px 8px rgba(0,0,0,.06)"><div style="font-size:12px;color:var(--txt);line-height:1.6">Focus on:<br>📐 <b>Integration & Differentiation</b> — 40%<br>📊 <b>Probability</b> — 20%<br>📈 <b>Coordinate Geometry</b> — 15%<br><br>You're weakest in Integration. Want a quick revision? 🚀</div></div></div>
+</div>
+<div style="padding:6px 10px;display:flex;gap:5px;background:#F8FAFF;overflow-x:auto;scrollbar-width:none;flex-shrink:0">
+<div style="flex-shrink:0;background:#EEF2FF;color:#4F46E5;font-size:9.5px;font-weight:600;padding:5px 10px;border-radius:20px;font-family:'Outfit',sans-serif;cursor:pointer">📅 Timetable</div>
+<div style="flex-shrink:0;background:#EEF2FF;color:#4F46E5;font-size:9.5px;font-weight:600;padding:5px 10px;border-radius:20px;font-family:'Outfit',sans-serif;cursor:pointer">📝 Homework</div>
+<div style="flex-shrink:0;background:#EEF2FF;color:#4F46E5;font-size:9.5px;font-weight:600;padding:5px 10px;border-radius:20px;font-family:'Outfit',sans-serif;cursor:pointer">📊 Report</div>
+</div>
+<div style="background:#fff;border-top:1px solid #E2E8F0;padding:10px 12px 16px;display:flex;gap:8px;align-items:center;flex-shrink:0">
+<input class="inp" placeholder="Ask anything..." style="margin-bottom:0;flex:1">
+<button style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;color:#fff">➤</button>
+</div>
+</div>
+
+</div></div></div>
+
+<script>
+let navHist=['splash'],curScr='splash',role='student';
+function nav(s){if(s===curScr)return;navHist.push(curScr);showScr(s)}
+function goback(){if(navHist.length>1){navHist.pop();showScr(navHist[navHist.length-1])}}
+function showScr(n){
+document.querySelectorAll('.sc').forEach(s=>s.classList.remove('active'));
+const t=document.querySelector('[data-screen="'+n+'"]');
+if(t)t.classList.add('active');
+curScr=n;
+document.querySelectorAll('.bn').forEach(b=>b.querySelectorAll('.ni').forEach(i=>i.classList.remove('active')));
+const m={'sdash':0,'courses':1,'res':2,'msg':3,'sprof':4,'tdash':0,'mycls':1,'texams':2,'msg':3,'tprof':4};
+const idx=m[n];
+if(idx!==undefined){document.querySelectorAll('.bn').forEach(b=>{if(b.children[idx])b.children[idx].classList.add('active')})}
+}
+function selectRole(el,r){
+role=r;
+document.querySelectorAll('.lrc').forEach(c=>{c.classList.remove('active');c.style.background='rgba(255,255,255,.06)';c.style.borderColor='rgba(255,255,255,.08)'});
+el.classList.add('active');el.style.background='rgba(79,70,229,.2)';el.style.borderColor='rgba(79,70,229,.6)';
+if(r==='student'){document.getElementById('stuFields').style.display='block';document.getElementById('tchFields').style.display='none'}
+else{document.getElementById('stuFields').style.display='none';document.getElementById('tchFields').style.display='block'}
+}
+function doLogin(){
+const splash=role==='student'?'sdash':'tdash';
+const bar=document.getElementById('splashBar');
+if(bar){bar.style.width='100%'}
+setTimeout(()=>nav(splash),800);
+}
+function toggleAtt(btn,type){
+const row=btn.parentElement;
+row.querySelectorAll('.abtn').forEach(b=>{b.classList.remove('p','a','l')});
+btn.classList.add(type);
+}
+// Splash auto
+setTimeout(()=>{const b=document.getElementById('splashBar');if(b)b.style.width='100%'},300);
+setTimeout(()=>nav('login'),2000);
+</script>
+</body>
+</html>
