@@ -5,28 +5,26 @@
 > **PROJECT NAME**: EduSHAMIIT AI
 > **PACKAGE NAME**: com.shamiit.edu
 > **AI AGENT NAME**: Shami
-> **BACKEND**: LOCAL Supabase (running on developer's machine) + Python FastAPI AI Backend
-> **ARCHITECTURE**: Single app with role-based routing (Student vs Teacher)
+> **BACKEND**: Python FastAPI (see `edushamiit_ai.md` for complete backend spec)
+> **ARCHITECTURE**: Single Flutter app with role-based routing (Student vs Teacher)
 
 ---
 
 ## 📋 TABLE OF CONTENTS
 
 1. [Project Overview and Architecture](#1-project-overview-and-architecture)
-2. [Step-by-Step Setup Guide (LOCAL SUPABASE)](#2-step-by-step-setup-guide)
+2. [Step-by-Step Setup Guide](#2-step-by-step-setup-guide)
 3. [Design System — Dual Theme](#3-design-system--dual-theme)
-4. [Complete Database Schema (SQL)](#4-complete-database-schema-sql)
-5. [Python AI Backend Integration](#5-python-ai-backend-integration)
-6. [Complete Folder Structure](#6-complete-folder-structure)
-7. [Core Dart Files (Templates)](#7-core-dart-files-templates)
-8. [Student Screens — Complete Specifications (29 Screens)](#8-student-screens--complete-specifications)
-9. [Teacher Screens — Complete Specifications (29 Screens)](#9-teacher-screens--complete-specifications)
-10. [Shared Reusable Components](#10-shared-reusable-components)
-11. [Responsive Design Strategy](#11-responsive-design-strategy)
-12. [Navigation and Routing](#12-navigation-and-routing)
-13. [Dependencies](#13-dependencies)
-14. [Development Phases](#14-development-phases)
-15. [Critical Implementation Notes](#15-critical-implementation-notes)
+4. [Complete Folder Structure](#4-complete-folder-structure)
+5. [Core Dart Files (Templates)](#5-core-dart-files-templates)
+6. [Student Screens — Complete Specifications (29 Screens)](#6-student-screens--complete-specifications-29-screens)
+7. [Teacher Screens — Complete Specifications (29 Screens)](#7-teacher-screens--complete-specifications-29-screens)
+8. [Shared Reusable Components](#8-shared-reusable-components)
+9. [Responsive Design Strategy](#9-responsive-design-strategy)
+10. [Navigation and Routing](#10-navigation-and-routing)
+11. [Dependencies](#11-dependencies)
+12. [Development Phases](#12-development-phases)
+13. [Critical Implementation Notes](#13-critical-implementation-notes)
 
 ---
 
@@ -52,20 +50,6 @@ EduSHAMIIT AI is a unified AI-powered Academic App built with Flutter. It serves
 │           ┌──────────────────┐            ┌──────────────────┐  │
 │           │  Student Portal  │            │  Teacher Portal  │  │
 │           │  (29 screens)    │            │  (29 screens)    │  │
-│           │                  │            │                  │  │
-│           │ Dashboard        │            │ Dashboard        │  │
-│           │ Timetable        │            │ My Classes       │  │
-│           │ Results          │            │ Attendance       │  │
-│           │ Exams (Online)   │            │ Homework Mgr     │  │
-│           │ Fees & Payments  │            │ Paper Builder    │  │
-│           │ Homework         │            │ Gradebook        │  │
-│           │ Transport (OSM)  │            │ Exams            │  │
-│           │ Shami AI Chat    │            │ Shami AI Chat    │  │
-│           │ Achievements     │            │ Live Classes     │  │
-│           │ Leaderboard      │            │ Student Directory│  │
-│           │ Library          │            │ Salary           │  │
-│           │ Live Classes     │            │ Notices          │  │
-│           │ ... (29 total)   │            │ ... (29 total)   │  │
 │           └──────────────────┘            └──────────────────┘  │
 │                    │                                    │       │
 │                    └─────────────┬──────────────────────┘       │
@@ -89,24 +73,6 @@ EduSHAMIIT AI is a unified AI-powered Academic App built with Flutter. It serves
 | **Student** | 29 screens   | Purple (#4F46E5) | Cyan (#06B6D4)  |
 | **Teacher** | 29 screens   | Cyan (#0EA5E9)   | Blue (#0369A1)  |
 | **Total**   | ~65 screens  |                  |                 |
-
-### Shared Screens (7)
-
-1. Splash Screen (dual theme)
-2. Login Screen (role selector)
-3. AI Chat Screen (Shami - dual theme)
-4. Settings Screen (dual theme)
-5. Messaging Screen (dual theme)
-6. Chat Detail Screen (dual theme)
-7. Create Group Screen (dual theme)
-
-### Student Screens (29)
-
-1. Splash, 2. Login, 3. Dashboard, 4. Timetable, 5. Results, 6. Exams, 7. Exam Instructions, 8. Online Exam, 9. Exam Success, 10. Fees, 11. Notices, 12. Homework, 13. Transport, 14. Events, 15. Achievements, 16. Attendance, 17. Leave, 18. Profile, 19. AI Chat (Shami), 20. Library, 21. Courses, 22. Notifications, 23. Settings, 24. Messaging, 25. Chat Detail, 26. Create Group, 27. Live Classes, 28. Live Class Detail, 29. Leaderboard
-
-### Teacher Screens (29)
-
-1. Splash, 2. Login, 3. Dashboard, 4. My Classes, 5. Class Detail, 6. Attendance, 7. Timetable, 8. Homework Manager, 9. Review Submissions, 10. Grading Screen, 11. Exams, 12. Paper Builder, 13. Gradebook, 14. Grading Configuration, 15. Student Directory, 16. Leave, 17. Notices, 18. Live Classes Dashboard, 19. Teacher Live Session, 20. Live Playback, 21. Study Materials, 22. Salary, 23. Profile, 24. Settings, 25. AI Chat (Shami), 26. Notifications, 27. Exam Attendance, 28. Grade Student Response, 29. Messaging / Chat Detail
 
 ### Target Platforms
 
@@ -139,13 +105,8 @@ supabase start
 
 # This will output:
 # API URL: http://127.0.0.1:54321
-# GraphQL URL: http://127.0.0.1:54321/graphql/v1
-# DB URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
 # Studio URL: http://127.0.0.1:54323
-# Inbucket URL: http://127.0.0.1:54324
-# JWT secret: super-secret-jwt-token-with-at-least-32-characters-long
 # anon key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-# service_role key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 ### Step 2: Create Flutter Project
@@ -155,44 +116,21 @@ flutter create --org com.shamiit edu_shamiit_ai
 cd edu_shamiit_ai
 ```
 
-### Step 3: Run SQL Migration
+### Step 3: Add Dependencies
 
-```bash
-# Create migration file
-supabase migration new initial_schema
+Replace pubspec.yaml dependencies section with Section 11.
 
-# Copy the SQL from Section 4 into:
-# supabase/migrations/[timestamp]_initial_schema.sql
+### Step 4: Create Folder Structure
 
-# Apply migration
-supabase db reset
-```
+Run the complete folder creation commands from Section 4.
 
-### Step 4: Add Dependencies
-
-Replace pubspec.yaml dependencies section with Section 13.
-
-### Step 5: Create Folder Structure
-
-Run the complete folder creation commands from Section 6.
-
-### Step 6: Add Fonts
+### Step 5: Add Fonts
 
 Download from Google Fonts and place in assets/fonts/:
-- Outfit-Light.ttf (weight 300)
-- Outfit-Regular.ttf (weight 400)
-- Outfit-Medium.ttf (weight 500)
-- Outfit-SemiBold.ttf (weight 600)
-- Outfit-Bold.ttf (weight 700)
-- Outfit-ExtraBold.ttf (weight 800)
-- Outfit-Black.ttf (weight 900)
-- DMSans-Light.ttf (weight 300)
-- DMSans-Regular.ttf (weight 400)
-- DMSans-Medium.ttf (weight 500)
-- DMSans-SemiBold.ttf (weight 600)
-- DMSans-Bold.ttf (weight 700)
+- Outfit (Light, Regular, Medium, SemiBold, Bold, ExtraBold, Black)
+- DM Sans (Light, Regular, Medium, SemiBold, Bold)
 
-### Step 7: Configure LOCAL Supabase
+### Step 6: Configure LOCAL Supabase
 
 ```dart
 // lib/core/services/supabase_service.dart
@@ -215,7 +153,7 @@ class SupabaseService {
 }
 ```
 
-### Step 8: Run and Verify
+### Step 7: Run and Verify
 
 ```bash
 # Terminal 1: Keep Supabase running
@@ -226,10 +164,6 @@ flutter pub get
 flutter run -d chrome    # For web
 flutter run              # For mobile/emulator
 ```
-
-### Step 9: Supabase Studio
-
-Open http://127.0.0.1:54323 in your browser to access Supabase Studio for viewing tables, data, running SQL queries, managing authentication, and testing realtime subscriptions.
 
 ---
 
@@ -242,113 +176,20 @@ Open http://127.0.0.1:54323 in your browser to access Supabase Studio for viewin
 import 'package:flutter/material.dart';
 
 class StudentColors {
-  // Primary
   static const Color primary = Color(0xFF4F46E5);
   static const Color primaryDeep = Color(0xFF3730A3);
   static const Color primaryLight = Color(0xFFEEF2FF);
-
-  // Accents
   static const Color accent = Color(0xFF06B6D4);
-  static const Color accent2 = Color(0xFFF59E0B);
-  static const Color accent3 = Color(0xFF10B981);
-  static const Color accent4 = Color(0xFFEF4444);
-  static const Color accent5 = Color(0xFF8B5CF6);
-
-  // Backgrounds
   static const Color background = Color(0xFFF0F2FF);
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color card = Color(0xFFFAFAFA);
-  static const Color scaffoldBackground = Color(0xFFF5F6FF);
-
-  // Text
   static const Color text = Color(0xFF0F172A);
   static const Color text2 = Color(0xFF475569);
   static const Color text3 = Color(0xFF94A3B8);
-
-  // Borders
   static const Color border = Color(0xFFE2E8F0);
-  static const Color divider = Color(0xFFF1F5F9);
-
-  // Status
   static const Color success = Color(0xFF059669);
-  static const Color successBg = Color(0xFFECFDF5);
   static const Color warning = Color(0xFFD97706);
-  static const Color warningBg = Color(0xFFFEF3C7);
   static const Color error = Color(0xFFEF4444);
-  static const Color errorBg = Color(0xFFFEF2F2);
   static const Color info = Color(0xFF3B82F6);
-  static const Color infoBg = Color(0xFFEFF6FF);
-
-  // Screen-specific gradients (from HTML mockup)
-  static const Color dashboardGradient1 = Color(0xFF4F46E5);
-  static const Color dashboardGradient2 = Color(0xFF302B63);
-  static const Color timetableGradient1 = Color(0xFF1E40AF);
-  static const Color timetableGradient2 = Color(0xFF1D4ED8);
-  static const Color resultsGradient1 = Color(0xFF4F46E5);
-  static const Color resultsGradient2 = Color(0xFF6366F1);
-  static const Color examsGradient1 = Color(0xFF134E4A);
-  static const Color examsGradient2 = Color(0xFF0F766E);
-  static const Color feesGradient1 = Color(0xFF065F46);
-  static const Color feesGradient2 = Color(0xFF059669);
-  static const Color noticesGradient1 = Color(0xFF92400E);
-  static const Color noticesGradient2 = Color(0xFFD97706);
-  static const Color homeworkGradient1 = Color(0xFFBE185D);
-  static const Color homeworkGradient2 = Color(0xFFDB2777);
-  static const Color transportGradient1 = Color(0xFF0C4A6E);
-  static const Color transportGradient2 = Color(0xFF0369A1);
-  static const Color eventsGradient1 = Color(0xFF831843);
-  static const Color eventsGradient2 = Color(0xFFBE185D);
-  static const Color achievementsGradient1 = Color(0xFF78350F);
-  static const Color achievementsGradient2 = Color(0xFFB45309);
-  static const Color attendanceGradient1 = Color(0xFF1D4ED8);
-  static const Color attendanceGradient2 = Color(0xFF3B82F6);
-  static const Color profileGradient1 = Color(0xFF0F172A);
-  static const Color profileGradient2 = Color(0xFF1E293B);
-  static const Color chatGradient1 = Color(0xFF0F0C29);
-  static const Color chatGradient2 = Color(0xFF302B63);
-  static const Color libraryGradient1 = Color(0xFF3B0764);
-  static const Color libraryGradient2 = Color(0xFF6D28D9);
-  static const Color leaderboardGradient1 = Color(0xFF4F46E5);
-  static const Color leaderboardGradient2 = Color(0xFF7C3AED);
-  static const Color liveClassGradient1 = Color(0xFFEF4444);
-  static const Color liveClassGradient2 = Color(0xFFDC2626);
-  static const Color settingsGradient1 = Color(0xFF1E293B);
-  static const Color settingsGradient2 = Color(0xFF0F172A);
-  static const Color messagingGradient1 = Color(0xFF4F46E5);
-  static const Color messagingGradient2 = Color(0xFF7C3AED);
-  static const Color leaveGradient1 = Color(0xFF4F46E5);
-  static const Color leaveGradient2 = Color(0xFF06B6D4);
-  static const Color coursesGradient1 = Color(0xFF4F46E5);
-  static const Color coursesGradient2 = Color(0xFF302B63);
-  static const Color splashGradient1 = Color(0xFF0F0C29);
-  static const Color splashGradient2 = Color(0xFF302B63);
-  static const Color splashGradient3 = Color(0xFF24243E);
-
-  // Subject colors
-  static const Color mathColor = Color(0xFF4F46E5);
-  static const Color physicsColor = Color(0xFF3B82F6);
-  static const Color chemistryColor = Color(0xFFF59E0B);
-  static const Color englishColor = Color(0xFF10B981);
-  static const Color historyColor = Color(0xFF8B5CF6);
-  static const Color computerColor = Color(0xFF06B6D4);
-
-  // Quick access grid colors (from HTML)
-  static const Color qaTimetable = Color(0xFFEEF2FF);
-  static const Color qaResults = Color(0xFFFDF4FF);
-  static const Color qaFees = Color(0xFFECFDF5);
-  static const Color qaNotices = Color(0xFFF0FDF4);
-  static const Color qaHomework = Color(0xFFFDF2F8);
-  static const Color qaTransport = Color(0xFFEFF6FF);
-  static const Color qaEvents = Color(0xFFFEF3C7);
-  static const Color qaAchievements = Color(0xFFF0FDF4);
-  static const Color qaAttendance = Color(0xFFEFF6FF);
-  static const Color qaLibrary = Color(0xFFFAF5FF);
-  static const Color qaCourses = Color(0xFFECFDF5);
-  static const Color qaLeave = Color(0xFFFEF2F2);
-  static const Color qaExams = Color(0xFFEEF2FF);
-  static const Color qaLiveClass = Color(0xFFFFE4E6);
-  static const Color qaMessages = Color(0xFFE0E7FF);
-  static const Color qaCertificates = Color(0xFFFEF3C7);
 }
 ```
 
@@ -368,7 +209,6 @@ class TeacherColors {
   static const Color text = Color(0xFF0F172A);
   static const Color text2 = Color(0xFF475569);
   static const Color border = Color(0xFFE2E8F0);
-  // Add remaining colors following student_colors pattern
 }
 ```
 
@@ -404,731 +244,7 @@ class AppGradients {
 
 ---
 
-## 4. COMPLETE DATABASE SCHEMA (SQL)
-
-Run these SQL scripts in Supabase SQL Editor (http://127.0.0.1:54323):
-
-### 4.1 Enable Extensions
-
-```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-```
-
-### 4.2 Schools Table (Multi-School Support)
-
-```sql
-CREATE TABLE schools (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name TEXT NOT NULL,
-  address TEXT,
-  phone TEXT,
-  logo_url TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
-
-### 4.3 Core Tables (All with school_id)
-
-```sql
--- PROFILES
-CREATE TABLE profiles (
-  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  school_id UUID REFERENCES schools(id),
-  user_id TEXT NOT NULL,
-  full_name TEXT NOT NULL,
-  role TEXT NOT NULL CHECK (role IN ('student', 'parent', 'teacher')),
-  class TEXT,
-  department TEXT,
-  designation TEXT,
-  roll_number INT,
-  employee_id TEXT,
-  gender TEXT CHECK (gender IN ('Male', 'Female', 'Other')),
-  date_of_birth DATE,
-  blood_group TEXT,
-  email TEXT,
-  phone TEXT,
-  avatar_url TEXT,
-  xp_points INT DEFAULT 0,
-  learning_streak INT DEFAULT 0,
-  best_streak INT DEFAULT 0,
-  last_login DATE DEFAULT CURRENT_DATE,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- SUBJECTS
-CREATE TABLE subjects (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  name TEXT NOT NULL,
-  icon TEXT,
-  color TEXT,
-  teacher_id UUID REFERENCES profiles(id),
-  total_chapters INT DEFAULT 0,
-  class TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- TIMETABLE
-CREATE TABLE timetable (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  teacher_id UUID REFERENCES profiles(id),
-  day_of_week INT NOT NULL CHECK (day_of_week BETWEEN 0 AND 5),
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL,
-  room TEXT,
-  class TEXT NOT NULL,
-  is_break BOOLEAN DEFAULT FALSE,
-  break_name TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- COURSES
-CREATE TABLE courses (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  syllabus_coverage DECIMAL(5,2) DEFAULT 0,
-  class TEXT NOT NULL,
-  academic_year TEXT,
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- RESULTS
-CREATE TABLE results (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  exam_category TEXT NOT NULL CHECK (exam_category IN ('Class Test','Lab Test','Assignment','Mid-Term','End-Term','Other')),
-  academic_year TEXT NOT NULL,
-  marks_obtained DECIMAL(5,2),
-  max_marks DECIMAL(5,2),
-  grade TEXT,
-  remarks TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- EXAMS
-CREATE TABLE exams (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  teacher_id UUID REFERENCES profiles(id),
-  title TEXT NOT NULL,
-  exam_type TEXT NOT NULL CHECK (exam_type IN ('offline','online','hybrid')),
-  exam_date DATE,
-  start_time TIME,
-  duration_minutes INT DEFAULT 90,
-  total_marks INT DEFAULT 100,
-  venue TEXT,
-  status TEXT DEFAULT 'upcoming' CHECK (status IN ('draft','upcoming','ongoing','completed','graded')),
-  target_classes JSONB,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- EXAM QUESTIONS
-CREATE TABLE exam_questions (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
-  question_number INT NOT NULL,
-  section TEXT NOT NULL CHECK (section IN ('objective','subjective')),
-  question_text TEXT NOT NULL,
-  question_type TEXT NOT NULL CHECK (question_type IN ('mcq','true_false','short_answer','long_answer')),
-  options JSONB,
-  correct_answer INT,
-  positive_marks INT DEFAULT 4,
-  negative_marks INT DEFAULT 1,
-  max_marks INT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- EXAM SUBMISSIONS
-CREATE TABLE exam_submissions (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  question_id UUID REFERENCES exam_questions(id) ON DELETE CASCADE,
-  selected_answer INT,
-  subjective_answer TEXT,
-  is_correct BOOLEAN,
-  marks_awarded DECIMAL(5,2),
-  is_reviewed BOOLEAN DEFAULT FALSE,
-  submitted_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- EXAM SESSIONS
-CREATE TABLE exam_sessions (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  started_at TIMESTAMPTZ,
-  submitted_at TIMESTAMPTZ,
-  total_marks DECIMAL(5,2) DEFAULT 0,
-  xp_earned INT DEFAULT 0,
-  status TEXT DEFAULT 'in_progress' CHECK (status IN ('in_progress','submitted','auto_submitted'))
-);
-
--- ATTENDANCE
-CREATE TABLE attendance (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  teacher_id UUID REFERENCES profiles(id),
-  date DATE NOT NULL,
-  status TEXT NOT NULL CHECK (status IN ('present','absent','late','excused')),
-  marked_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(student_id, subject_id, date)
-);
-
--- FEES
-CREATE TABLE fees (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  fee_type TEXT NOT NULL,
-  amount DECIMAL(10,2) NOT NULL,
-  due_date DATE,
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','partial','paid','overdue')),
-  amount_paid DECIMAL(10,2) DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- PAYMENTS
-CREATE TABLE payments (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  fee_id UUID REFERENCES fees(id) ON DELETE CASCADE,
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  amount DECIMAL(10,2) NOT NULL,
-  payment_method TEXT CHECK (payment_method IN ('upi','card','netbanking')),
-  transaction_id TEXT UNIQUE,
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','success','failed','refunded')),
-  paid_at TIMESTAMPTZ,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- SALARY
-CREATE TABLE salary (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  teacher_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  month TEXT NOT NULL,
-  gross_salary DECIMAL(10,2),
-  net_salary DECIMAL(10,2),
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','credited')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- HOMEWORK
-CREATE TABLE homework (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  teacher_id UUID REFERENCES profiles(id),
-  title TEXT NOT NULL,
-  description TEXT,
-  due_date TIMESTAMPTZ NOT NULL,
-  max_marks INT,
-  target_class TEXT NOT NULL,
-  status TEXT DEFAULT 'active' CHECK (status IN ('active','closed')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- HOMEWORK SUBMISSIONS
-CREATE TABLE homework_submissions (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  homework_id UUID REFERENCES homework(id) ON DELETE CASCADE,
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  submission_text TEXT,
-  attachment_url TEXT,
-  status TEXT DEFAULT 'submitted' CHECK (status IN ('submitted','graded','late')),
-  grade TEXT,
-  marks DECIMAL(5,2),
-  teacher_remarks TEXT,
-  submitted_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- NOTICES
-CREATE TABLE notices (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  title TEXT NOT NULL,
-  content TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('Urgent','General','Event','Academic')),
-  author_id UUID REFERENCES profiles(id),
-  is_pinned BOOLEAN DEFAULT FALSE,
-  is_urgent BOOLEAN DEFAULT FALSE,
-  status TEXT DEFAULT 'published',
-  published_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- EVENTS
-CREATE TABLE events (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  title TEXT NOT NULL,
-  description TEXT,
-  event_date DATE,
-  event_time TIME,
-  venue TEXT,
-  max_participants INT,
-  current_participants INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- MESSAGES
-CREATE TABLE messages (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  sender_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  receiver_id UUID REFERENCES profiles(id),
-  group_id UUID,
-  content TEXT NOT NULL,
-  is_read BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- NOTIFICATIONS
-CREATE TABLE notifications (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  type TEXT NOT NULL,
-  is_read BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- LEAVE APPLICATIONS
-CREATE TABLE leave_applications (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  applicant_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  applicant_role TEXT CHECK (applicant_role IN ('student','teacher')),
-  leave_type TEXT NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL,
-  reason TEXT NOT NULL,
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','approved','rejected')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- ACHIEVEMENTS
-CREATE TABLE achievements (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  name TEXT NOT NULL,
-  description TEXT,
-  icon TEXT,
-  xp_reward INT DEFAULT 0,
-  rarity TEXT DEFAULT 'common',
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- STUDENT ACHIEVEMENTS
-CREATE TABLE student_achievements (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  student_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  achievement_id UUID REFERENCES achievements(id) ON DELETE CASCADE,
-  earned_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(student_id, achievement_id)
-);
-
--- LIBRARY
-CREATE TABLE library_books (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  title TEXT NOT NULL,
-  author TEXT,
-  isbn TEXT,
-  total_copies INT DEFAULT 1,
-  available_copies INT DEFAULT 1,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- BUS ROUTES
-CREATE TABLE bus_routes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  route_name TEXT NOT NULL,
-  bus_number TEXT,
-  driver_name TEXT,
-  driver_phone TEXT,
-  status TEXT DEFAULT 'active'
-);
-
--- BUS STOPS
-CREATE TABLE bus_stops (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  route_id UUID REFERENCES bus_routes(id) ON DELETE CASCADE,
-  stop_name TEXT NOT NULL,
-  latitude DECIMAL(10,8) NOT NULL,
-  longitude DECIMAL(11,8) NOT NULL,
-  stop_order INT NOT NULL
-);
-
--- BUS LOCATIONS
-CREATE TABLE bus_locations (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  route_id UUID REFERENCES bus_routes(id) ON DELETE CASCADE,
-  latitude DECIMAL(10,8) NOT NULL,
-  longitude DECIMAL(11,8) NOT NULL,
-  speed DECIMAL(5,2),
-  eta_minutes INT,
-  recorded_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- LIVE CLASSES
-CREATE TABLE live_classes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  subject_id UUID REFERENCES subjects(id) ON DELETE CASCADE,
-  teacher_id UUID REFERENCES profiles(id),
-  title TEXT NOT NULL,
-  scheduled_at TIMESTAMPTZ NOT NULL,
-  duration_minutes INT DEFAULT 60,
-  is_live BOOLEAN DEFAULT FALSE,
-  viewer_count INT DEFAULT 0,
-  status TEXT DEFAULT 'scheduled',
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- STUDY MATERIALS
-CREATE TABLE study_materials (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  teacher_id UUID REFERENCES profiles(id),
-  title TEXT NOT NULL,
-  material_type TEXT CHECK (material_type IN ('Notes','PPTs','Videos','Worksheets')),
-  target_class TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- USER SETTINGS
-CREATE TABLE user_settings (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE UNIQUE,
-  push_notifications BOOLEAN DEFAULT TRUE,
-  dark_mode BOOLEAN DEFAULT FALSE,
-  language TEXT DEFAULT 'en',
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- GRADING POLICIES
-CREATE TABLE grading_policies (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  teacher_id UUID REFERENCES profiles(id),
-  class TEXT NOT NULL,
-  subject_id UUID REFERENCES subjects(id),
-  mid_term_weight INT DEFAULT 30,
-  final_term_weight INT DEFAULT 40,
-  attendance_weight INT DEFAULT 5,
-  assignment_weight INT DEFAULT 10,
-  class_test_weight INT DEFAULT 10,
-  lab_weight INT DEFAULT 5,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- AI CHAT HISTORY
-CREATE TABLE ai_chat_history (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  school_id UUID REFERENCES schools(id),
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  session_id UUID,
-  role TEXT CHECK (role IN ('user','assistant')),
-  content TEXT NOT NULL,
-  tool_calls JSONB,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
-
-### 4.4 RLS Policies
-
-```sql
--- Enable RLS on all tables
-ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE results ENABLE ROW LEVEL SECURITY;
-ALTER TABLE attendance ENABLE ROW LEVEL SECURITY;
-ALTER TABLE fees ENABLE ROW LEVEL SECURITY;
-ALTER TABLE homework_submissions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE exam_submissions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE leave_applications ENABLE ROW LEVEL SECURITY;
-ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
-ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
-ALTER TABLE ai_chat_history ENABLE ROW LEVEL SECURITY;
-
--- Profile policies
-CREATE POLICY "Users can view own profile" ON profiles FOR SELECT USING (auth.uid() = id);
-CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE USING (auth.uid() = id);
-
--- Student data policies
-CREATE POLICY "Students can view own results" ON results FOR SELECT USING (auth.uid() = student_id);
-CREATE POLICY "Students can view own attendance" ON attendance FOR SELECT USING (auth.uid() = student_id);
-CREATE POLICY "Students can view own fees" ON fees FOR SELECT USING (auth.uid() = student_id);
-CREATE POLICY "Students can submit homework" ON homework_submissions FOR INSERT WITH CHECK (auth.uid() = student_id);
-CREATE POLICY "Students can view own submissions" ON homework_submissions FOR SELECT USING (auth.uid() = student_id);
-
--- Teacher policies
-CREATE POLICY "Teachers can view all results" ON results FOR SELECT USING (true);
-CREATE POLICY "Teachers can insert results" ON results FOR INSERT WITH CHECK (true);
-CREATE POLICY "Teachers can view all attendance" ON attendance FOR SELECT USING (true);
-CREATE POLICY "Teachers can insert attendance" ON attendance FOR INSERT WITH CHECK (true);
-CREATE POLICY "Teachers can view all submissions" ON homework_submissions FOR SELECT USING (true);
-CREATE POLICY "Teachers can grade submissions" ON homework_submissions FOR UPDATE USING (true);
-CREATE POLICY "Teachers can view exam submissions" ON exam_submissions FOR SELECT USING (true);
-CREATE POLICY "Teachers can grade exams" ON exam_submissions FOR UPDATE USING (true);
-
--- Leave policies
-CREATE POLICY "Users can apply leave" ON leave_applications FOR INSERT WITH CHECK (auth.uid() = applicant_id);
-CREATE POLICY "Users can view own leaves" ON leave_applications FOR SELECT USING (auth.uid() = applicant_id);
-
--- Message policies
-CREATE POLICY "Users can send messages" ON messages FOR INSERT WITH CHECK (auth.uid() = sender_id);
-CREATE POLICY "Users can view own messages" ON messages FOR SELECT USING (auth.uid() = sender_id OR auth.uid() = receiver_id);
-
--- Notification policies
-CREATE POLICY "Users can view own notifications" ON notifications FOR SELECT USING (auth.uid() = user_id);
-
--- AI chat history
-CREATE POLICY "Users can view own AI chats" ON ai_chat_history FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert AI chats" ON ai_chat_history FOR INSERT WITH CHECK (auth.uid() = user_id);
-
--- Public read policies
-CREATE POLICY "Anyone can read subjects" ON subjects FOR SELECT USING (true);
-CREATE POLICY "Anyone can read timetable" ON timetable FOR SELECT USING (true);
-CREATE POLICY "Anyone can read notices" ON notices FOR SELECT USING (true);
-CREATE POLICY "Anyone can read events" ON events FOR SELECT USING (true);
-CREATE POLICY "Anyone can read homework" ON homework FOR SELECT USING (true);
-CREATE POLICY "Anyone can read exams" ON exams FOR SELECT USING (true);
-CREATE POLICY "Anyone can read achievements" ON achievements FOR SELECT USING (true);
-CREATE POLICY "Anyone can read live classes" ON live_classes FOR SELECT USING (true);
-CREATE POLICY "Teachers can manage materials" ON study_materials FOR ALL USING (auth.uid() = teacher_id);
-```
-
-### 4.5 Enable Realtime
-
-```sql
-ALTER PUBLICATION supabase_realtime ADD TABLE bus_locations;
-ALTER PUBLICATION supabase_realtime ADD TABLE messages;
-ALTER PUBLICATION supabase_realtime ADD TABLE live_classes;
-ALTER PUBLICATION supabase_realtime ADD TABLE notifications;
-ALTER PUBLICATION supabase_realtime ADD TABLE exam_sessions;
-ALTER PUBLICATION supabase_realtime ADD TABLE attendance;
-```
-
-### 4.6 Seed Data
-
-```sql
--- Sample school
-INSERT INTO schools (name, address, phone) VALUES
-  ('SHAMIIT Academy', '123 Education Street, Delhi', '+91-11-12345678');
-
--- Sample subjects
-INSERT INTO subjects (name, icon, color, total_chapters, class) VALUES
-  ('Mathematics', '📐', '#4F46E5', 42, 'X-A'),
-  ('Physics', '⚛️', '#3B82F6', 38, 'X-A'),
-  ('Chemistry', '⚗️', '#F59E0B', 35, 'X-A'),
-  ('English', '📖', '#10B981', 28, 'X-A');
-
--- Sample achievements
-INSERT INTO achievements (name, description, icon, xp_reward, rarity) VALUES
-  ('Academic Excellence', 'Scored 90%+ in term exams', '🏆', 500, 'rare'),
-  ('18-Day Streak', 'Logged in 18 consecutive days', '🔥', 300, 'uncommon'),
-  ('Zero Late Submissions', 'All homework on time this term', '✅', 200, 'common');
-```
-
----
-
-## 5. PYTHON AI BACKEND INTEGRATION
-
-### 5.1 Overview
-
-The EduSHAMIIT AI Flutter app connects to a **Python FastAPI backend** for AI-powered assistance. The AI agent is named **Shami** and provides intelligent assistance to both students and teachers. The Flutter app sends HTTP requests to the Python backend, which processes them using LangChain Python with 40 tools total (20 for students, 20 for teachers).
-
-**For the complete Python AI backend specification, see: `edushamiit_ai.md`**
-
-### 5.2 Flutter → Python Backend Architecture
-
-```
-Flutter App (Dart)          Python Backend (FastAPI)
-┌─────────────────┐         ┌─────────────────────────┐
-│  AI Chat Screen │  HTTP   │  /chat/message (SSE)    │
-│  AI Service     │ ───────→│  /chat/voice (Whisper)  │
-│  Riverpod State │  SSE    │  /chat/image (Gemini)   │
-│  Chat Messages  │ ←────── │  /iot/control (MQTT)    │
-│  Tool Cards     │         │  /rag/ingest (pgvector)  │
-└─────────────────┘         └─────────────────────────┘
-```
-
-### 5.3 Flutter AI Service (HTTP Client)
-
-```dart
-// lib/core/services/ai_service.dart
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-class AiService {
-  static const String _baseUrl = 'http://127.0.0.1:8000';
-
-  Stream<AiChunk> streamMessage({
-    required String message,
-    required String sessionId,
-    required String token,
-  }) async* {
-    final request = http.Request('POST', Uri.parse('$_baseUrl/chat/message'))
-      ..headers = {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      }
-      ..body = jsonEncode({
-        'message': message,
-        'session_id': sessionId,
-      });
-
-    final response = await http.Client().send(request);
-    await for (final line in response.stream
-        .transform(utf8.decoder)
-        .transform(const LineSplitter())) {
-      if (line.startsWith('data: ')) {
-        final data = jsonDecode(line.substring(6));
-        yield AiChunk.fromJson(data);
-      }
-    }
-  }
-
-  Future<AiVoiceResponse> sendVoice(String filePath, String token) async {
-    final request = http.MultipartRequest(
-      'POST', Uri.parse('$_baseUrl/chat/voice'),
-    )
-      ..headers['Authorization'] = 'Bearer $token'
-      ..files.add(await http.MultipartFile.fromPath('audio', filePath));
-    final streamedResponse = await request.send();
-    final body = await streamedResponse.stream.bytesToString();
-    return AiVoiceResponse.fromJson(jsonDecode(body));
-  }
-
-  Future<String> sendImage({
-    required String filePath,
-    required String question,
-    required String token,
-  }) async {
-    final request = http.MultipartRequest(
-      'POST', Uri.parse('$_baseUrl/chat/image'),
-    )
-      ..headers['Authorization'] = 'Bearer $token'
-      ..fields['question'] = question
-      ..files.add(await http.MultipartFile.fromPath('image', filePath));
-    final streamedResponse = await request.send();
-    final body = await streamedResponse.stream.bytesToString();
-    return jsonDecode(body)['output'];
-  }
-
-  Future<List<ChatMessage>> loadHistory({
-    required String sessionId,
-    required String token,
-  }) async {
-    final response = await http.get(
-      Uri.parse('$_baseUrl/chat/history/$sessionId'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
-    final data = jsonDecode(response.body);
-    return (data['messages'] as List)
-        .map((m) => ChatMessage.fromJson(m))
-        .toList();
-  }
-}
-
-class AiChunk {
-  final String type;
-  final String content;
-  final Map<String, dynamic>? toolData;
-
-  AiChunk({required this.type, required this.content, this.toolData});
-
-  factory AiChunk.fromJson(Map<String, dynamic> json) {
-    return AiChunk(
-      type: json['type'],
-      content: json['content'] ?? '',
-      toolData: json['tool_result'] != null
-          ? Map<String, dynamic>.from(json['tool_result'])
-          : null,
-    );
-  }
-}
-```
-
-### 5.4 Student AI Tools Reference (Python Backend)
-
-All 20 student tools are implemented in the Python backend. See `edushamiit_ai.md` Section 7 for complete Python implementations.
-
-| Tool Name | Flutter Call Example | Python Endpoint |
-|---|---|---|
-| get_timetable | `sendText("What classes do I have today?")` | POST /chat/message |
-| get_homework | `sendText("What homework is due?")` | POST /chat/message |
-| get_fee_status | `sendText("How much fees do I owe?")` | POST /chat/message |
-| get_attendance | `sendText("What is my attendance?")` | POST /chat/message |
-| get_exam_info | `sendText("When is my next exam?")` | POST /chat/message |
-| get_bus_location | `sendText("Where is my bus?")` | POST /chat/message |
-| get_performance | `sendText("How am I doing?")` | POST /chat/message |
-| generate_study_plan | `sendText("Help me prepare for Math exam")` | POST /chat/message |
-| explain_concept | `sendText("Explain integration by parts")` | POST /chat/message |
-| get_notifications | `sendText("Any new notifications?")` | POST /chat/message |
-| get_library_status | `sendText("What books do I have?")` | POST /chat/message |
-| get_achievements | `sendText("What badges have I earned?")` | POST /chat/message |
-| get_events | `sendText("What events are coming up?")` | POST /chat/message |
-| get_leaderboard | `sendText("What is my class rank?")` | POST /chat/message |
-| submit_homework | `sendText("Submit my Math homework")` | POST /chat/message |
-| apply_leave | `sendText("I need sick leave tomorrow")` | POST /chat/message |
-| get_notices | `sendText("Any new announcements?")` | POST /chat/message |
-| answer_general | `sendText("What is the school timing?")` | POST /chat/message |
-| generate_practice | `sendText("Give me Physics practice problems")` | POST /chat/message |
-| get_live_class | `sendText("Is there a live class now?")` | POST /chat/message |
-
-### 5.5 Teacher AI Tools Reference (Python Backend)
-
-All 20 teacher tools are implemented in the Python backend. See `edushamiit_ai.md` Section 8 for complete Python implementations.
-
-| Tool Name | Flutter Call Example | Python Endpoint |
-|---|---|---|
-| get_class_students | `sendText("Show me X-A students")` | POST /chat/message |
-| get_class_performance | `sendText("How is X-A performing?")` | POST /chat/message |
-| get_at_risk_students | `sendText("Who needs extra help?")` | POST /chat/message |
-| generate_questions | `sendText("Create 5 MCQs on Calculus")` | POST /chat/message |
-| generate_lesson_plan | `sendText("Make lesson plan for Integration")` | POST /chat/message |
-| auto_grade_homework | `sendText("Grade the pending homework")` | POST /chat/message |
-| get_submission_status | `sendText("How many students submitted?")` | POST /chat/message |
-| generate_remedial_plan | `sendText("Make a plan for weak students")` | POST /chat/message |
-| create_notice | `sendText("Draft notice about exam dates")` | POST /chat/message |
-| get_attendance_stats | `sendText("Show attendance trends for X-A")` | POST /chat/message |
-| get_teacher_schedule | `sendText("What is my schedule today?")` | POST /chat/message |
-| get_pending_tasks | `sendText("What needs my attention?")` | POST /chat/message |
-| generate_report | `sendText("Create X-A performance report")` | POST /chat/message |
-| explain_pedagogy | `sendText("How to teach fractions?")` | POST /chat/message |
-| get_leave_balance | `sendText("How many leaves remaining?")` | POST /chat/message |
-| get_salary_info | `sendText("Show my salary breakup")` | POST /chat/message |
-| get_parent_communications | `sendText("Any parent messages?")` | POST /chat/message |
-| upload_material | `sendText("Upload notes for X-A")` | POST /chat/message |
-| get_exam_analytics | `sendText("Show exam pass rates for X-A")` | POST /chat/message |
-| answer_general | `sendText("What is the attendance policy?")` | POST /chat/message |
-
----
-
-## 6. COMPLETE FOLDER STRUCTURE
+## 4. COMPLETE FOLDER STRUCTURE
 
 ```
 lib/
@@ -1186,13 +302,11 @@ lib/
     └── app_hi.arb
 ```
 
-**Total: approximately 250+ Dart files**
-
 ---
 
-## 7. CORE DART FILES (TEMPLATES)
+## 5. CORE DART FILES (TEMPLATES)
 
-### 7.1 main.dart
+### 5.1 main.dart
 
 ```dart
 import 'package:flutter/material.dart';
@@ -1211,7 +325,7 @@ void main() async {
 }
 ```
 
-### 7.2 app.dart
+### 5.2 app.dart
 
 ```dart
 import 'package:flutter/material.dart';
@@ -1232,7 +346,7 @@ class EduShamiitApp extends StatelessWidget {
 }
 ```
 
-### 7.3 app_router.dart
+### 5.3 app_router.dart
 
 ```dart
 import 'package:go_router/go_router.dart';
@@ -1240,26 +354,1780 @@ import 'package:go_router/go_router.dart';
 final goRouter = GoRouter(
   initialLocation: '/splash',
   routes: [
+    // SHARED ROUTES
     GoRoute(path: '/splash', builder: (_, __) => const SplashScreen()),
     GoRoute(path: '/login', builder: (_, __) => const LoginScreen()),
     GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
     GoRoute(path: '/ai-chat', builder: (_, __) => const AIChatScreen()),
+
+    // STUDENT ROUTES
     GoRoute(path: '/student/dashboard', builder: (_, __) => const StudentDashboard()),
+
+    // TEACHER ROUTES
     GoRoute(path: '/teacher/dashboard', builder: (_, __) => const TeacherDashboard()),
-    // Add all other routes...
   ],
 );
 ```
 
 ---
 
-## 8-12. SCREEN SPECIFICATIONS, COMPONENTS, RESPONSIVE DESIGN, NAVIGATION
+## 6. STUDENT SCREENS — COMPLETE SPECIFICATIONS (29 SCREENS)
 
-See HTML mockups for pixel-perfect specifications. Each screen includes route, background, header gradient, body sections, modals, bottom nav, AI FAB.
+Each screen includes: route, visual design, full Dart widget code, data fetched, API endpoint, user interactions.
+
+### 6.1 Student Dashboard
+
+**Route:** `/student/dashboard`
+**Background:** `#F5F6FF`
+**Header Gradient:** `#4F46E5` → `#302B63`
+
+**Data Fetched:**
+- Table: `profiles` (user info, xp_points, learning_streak)
+- Table: `timetable` (today's schedule)
+- Table: `homework` (pending homework)
+- Table: `attendance` (attendance percentage)
+- Table: `results` (latest score)
+- Table: `achievements` (recent badges)
+
+**API Endpoint:** `GET /api/student/dashboard?user_id={user_id}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "user": {
+    "full_name": "Rohan Sharma",
+    "class": "X-A",
+    "xp_points": 2450,
+    "learning_streak": 18,
+    "avatar_url": "https://..."
+  },
+  "stats": {
+    "attendance_pct": 94.0,
+    "avg_score": 91.4,
+    "class_rank": 3,
+    "xp_points": 2450
+  },
+  "today_schedule": [
+    {
+      "subject": "Mathematics",
+      "icon": "📐",
+      "start_time": "08:00",
+      "end_time": "08:45",
+      "room": "101",
+      "is_now": true
+    },
+    {
+      "subject": "Physics",
+      "icon": "⚛️",
+      "start_time": "09:00",
+      "end_time": "09:45",
+      "room": "Lab-1",
+      "is_now": false
+    }
+  ],
+  "pending_homework": [
+    {
+      "id": "uuid-hw-1",
+      "title": "Trigonometry Problems",
+      "subject": "Mathematics",
+      "icon": "📐",
+      "due_date": "2026-04-05",
+      "status": "due_soon"
+    }
+  ],
+  "quick_access": [
+    {"title": "Timetable", "icon": "📅", "route": "/student/timetable"},
+    {"title": "Results", "icon": "📊", "route": "/student/results"},
+    {"title": "Fees", "icon": "💰", "route": "/student/fees"},
+    {"title": "Notices", "icon": "📢", "route": "/student/notices"},
+    {"title": "Homework", "icon": "📝", "route": "/student/homework"},
+    {"title": "Transport", "icon": "🚌", "route": "/student/transport"},
+    {"title": "Events", "icon": "🎉", "route": "/student/events"},
+    {"title": "Attendance", "icon": "📊", "route": "/student/attendance"},
+    {"title": "Library", "icon": "📚", "route": "/student/library"},
+    {"title": "Courses", "icon": "📖", "route": "/student/courses"},
+    {"title": "Exams", "icon": "📝", "route": "/student/exams"},
+    {"title": "Live Class", "icon": "🎥", "route": "/student/live-classes"},
+    {"title": "Messages", "icon": "💬", "route": "/messaging"},
+    {"title": "Achievements", "icon": "🏆", "route": "/student/achievements"},
+    {"title": "Leave", "icon": "🏖️", "route": "/student/leave"},
+    {"title": "Leaderboard", "icon": "🏆", "route": "/student/leaderboard"}
+  ]
+}
+```
+
+**Full Dart Widget Code:**
+
+```dart
+// lib/features/student/dashboard/screens/student_dashboard.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:edu_shamiit_ai/core/constants/student_colors.dart';
+import 'package:edu_shamiit_ai/core/constants/app_fonts.dart';
+import 'package:edu_shamiit_ai/shared/widgets/gradient_container.dart';
+import 'package:edu_shamiit_ai/shared/widgets/ai_fab.dart';
+
+class StudentDashboard extends ConsumerStatefulWidget {
+  const StudentDashboard({super.key});
+
+  @override
+  ConsumerState<StudentDashboard> createState() => _StudentDashboardState();
+}
+
+class _StudentDashboardState extends ConsumerState<StudentDashboard> {
+  Map<String, dynamic>? _dashboardData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDashboard();
+  }
+
+  Future<void> _loadDashboard() async {
+    // Call API: GET /api/student/dashboard
+    final userId = SupabaseService.client.auth.currentUser?.id;
+    final response = await http.get(
+      Uri.parse('${AppConfig.baseUrl}/api/student/dashboard?user_id=$userId'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    setState(() {
+      _dashboardData = jsonDecode(response.body);
+      _isLoading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) return const Center(child: CircularProgressIndicator());
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F6FF),
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              // HEADER
+              _buildHeader(),
+
+              // BODY
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 16),
+                      _buildQuickAccessGrid(),
+                      const SizedBox(height: 20),
+                      _buildTodaySchedule(),
+                      const SizedBox(height: 20),
+                      _buildAiInsightCard(),
+                      const SizedBox(height: 20),
+                      _buildPendingHomework(),
+                      const SizedBox(height: 100),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // AI FAB
+          Positioned(
+            bottom: 80,
+            right: 16,
+            child: AiFab(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF06B6D4)],
+              ),
+              onPressed: () => context.push('/ai-chat'),
+            ),
+          ),
+        ],
+      ),
+
+      // BOTTOM NAV
+      bottomNavigationBar: _buildBottomNav(),
+    );
+  }
+
+  Widget _buildHeader() {
+    final user = _dashboardData!['user'];
+    final stats = _dashboardData!['stats'];
+
+    return SliverAppBar(
+      expandedHeight: 200,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF4F46E5), Color(0xFF302B63)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // TOP ROW: Greeting + Notification Bell
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hello, ${user['full_name']}! 👋',
+                            style: const TextStyle(
+                              fontFamily: AppFonts.heading,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Class ${user['class']} • Keep it up!',
+                            style: TextStyle(
+                              fontFamily: AppFonts.body,
+                              fontSize: 14,
+                              color: Colors.white.withOpacity(0.8),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          // Streak Badge
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              children: [
+                                const Text('🔥', style: TextStyle(fontSize: 16)),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '${user['learning_streak']} days',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          // Notification Bell
+                          Stack(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+                                onPressed: () => context.push('/student/notifications'),
+                              ),
+                              Positioned(
+                                right: 8,
+                                top: 8,
+                                child: Container(
+                                  width: 18,
+                                  height: 18,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFEF4444),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: Text('3', style: TextStyle(color: Colors.white, fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // Avatar
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundImage: NetworkImage(user['avatar_url'] ?? ''),
+                            backgroundColor: Colors.white.withOpacity(0.3),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // STATS ROW
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildStatItem('📊', '${stats['attendance_pct']}%', 'Attendance'),
+                      _buildStatItem('📝', '${stats['avg_score']}', 'Score'),
+                      _buildStatItem('🏆', '#${stats['class_rank']}', 'Rank'),
+                      _buildStatItem('⭐', '${stats['xp_points']}', 'XP'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String emoji, String value, String label) {
+    return Column(
+      children: [
+        Text(emoji, style: const TextStyle(fontSize: 20)),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            fontFamily: AppFonts.heading,
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontFamily: AppFonts.body,
+            fontSize: 12,
+            color: Colors.white.withOpacity(0.7),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuickAccessGrid() {
+    final quickAccess = _dashboardData!['quick_access'] as List;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Quick Access',
+          style: TextStyle(
+            fontFamily: AppFonts.heading,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 12),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.85,
+          ),
+          itemCount: quickAccess.length,
+          itemBuilder: (context, index) {
+            final item = quickAccess[index];
+            return GestureDetector(
+              onTap: () => context.push(item['route']),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: StudentColors.surface,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.04),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(item['icon'], style: const TextStyle(fontSize: 28)),
+                    const SizedBox(height: 6),
+                    Text(
+                      item['title'],
+                      style: const TextStyle(
+                        fontFamily: AppFonts.body,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTodaySchedule() {
+    final schedule = _dashboardData!['today_schedule'] as List;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Today's Schedule",
+              style: TextStyle(
+                fontFamily: AppFonts.heading,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            TextButton(
+              onPressed: () => context.push('/student/timetable'),
+              child: const Text('View All'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        ...schedule.map((item) => _buildScheduleCard(item)),
+      ],
+    );
+  }
+
+  Widget _buildScheduleCard(Map<String, dynamic> item) {
+    final isNow = item['is_now'] == true;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: StudentColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: isNow ? Border.all(color: StudentColors.success, width: 2) : null,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Time Column
+          Column(
+            children: [
+              Text(
+                item['start_time'],
+                style: const TextStyle(
+                  fontFamily: AppFonts.heading,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Text(
+                item['end_time'],
+                style: TextStyle(
+                  fontFamily: AppFonts.body,
+                  fontSize: 12,
+                  color: StudentColors.text3,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 14),
+          // Color Strip
+          Container(
+            width: 4,
+            height: 40,
+            decoration: BoxDecoration(
+              color: StudentColors.primary,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 14),
+          // Subject Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(item['icon'], style: const TextStyle(fontSize: 16)),
+                    const SizedBox(width: 6),
+                    Text(
+                      item['subject'],
+                      style: const TextStyle(
+                        fontFamily: AppFonts.heading,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Room ${item['room']}',
+                  style: TextStyle(
+                    fontFamily: AppFonts.body,
+                    fontSize: 13,
+                    color: StudentColors.text3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // NOW Badge
+          if (isNow)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: StudentColors.successBg,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                'NOW',
+                style: TextStyle(
+                  color: StudentColors.success,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAiInsightCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: StudentColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: StudentColors.primary.withOpacity(0.3)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF06B6D4)],
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: const Center(child: Text('🤖', style: TextStyle(fontSize: 20))),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Shami AI Insight',
+                  style: TextStyle(
+                    fontFamily: AppFonts.heading,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Your Physics score improved by 5%! Keep practicing Newton\'s laws.',
+                  style: TextStyle(
+                    fontFamily: AppFonts.body,
+                    fontSize: 13,
+                    color: StudentColors.text2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPendingHomework() {
+    final homework = _dashboardData!['pending_homework'] as List;
+
+    if (homework.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Pending Homework',
+              style: TextStyle(
+                fontFamily: AppFonts.heading,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            TextButton(
+              onPressed: () => context.push('/student/homework'),
+              child: const Text('View All'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        ...homework.map((hw) => _buildHomeworkCard(hw)),
+      ],
+    );
+  }
+
+  Widget _buildHomeworkCard(Map<String, dynamic> hw) {
+    final dueDate = hw['due_date'];
+    final isUrgent = hw['status'] == 'due_soon';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: StudentColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Text(hw['icon'], style: const TextStyle(fontSize: 28)),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  hw['title'],
+                  style: const TextStyle(
+                    fontFamily: AppFonts.heading,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  '${hw['subject']} • Due: $dueDate',
+                  style: TextStyle(
+                    fontFamily: AppFonts.body,
+                    fontSize: 13,
+                    color: StudentColors.text3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: isUrgent ? StudentColors.warningBg : StudentColors.infoBg,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              isUrgent ? 'Due Soon' : 'Pending',
+              style: TextStyle(
+                color: isUrgent ? StudentColors.warning : StudentColors.info,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomNav() {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: StudentColors.surface,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildNavItem('🏠', 'Home', true, '/student/dashboard'),
+          _buildNavItem('📖', 'Courses', false, '/student/courses'),
+          _buildNavItem('📊', 'Results', false, '/student/results'),
+          _buildNavItem('🏆', 'Achieve', false, '/student/achievements'),
+          _buildNavItem('👤', 'Profile', false, '/student/profile'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(String emoji, String label, bool isActive, String route) {
+    return GestureDetector(
+      onTap: () => context.go(route),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(emoji, style: TextStyle(fontSize: 22, color: isActive ? StudentColors.primary : StudentColors.text3)),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontFamily: AppFonts.body,
+              fontSize: 11,
+              fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+              color: isActive ? StudentColors.primary : StudentColors.text3,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### 6.2 Student Timetable
+
+**Route:** `/student/timetable`
+**Background:** `#F0F4FF`
+**Header Gradient:** `#1E40AF` → `#1D4ED8`
+
+**Data Fetched:**
+- Table: `timetable` (filtered by class and day)
+- Table: `subjects` (subject details)
+
+**API Endpoint:** `GET /api/student/timetable?class=X-A&day=monday&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "class": "X-A",
+  "day": "Monday",
+  "schedule": [
+    {
+      "start_time": "08:00",
+      "end_time": "08:45",
+      "subject": "Mathematics",
+      "icon": "📐",
+      "room": "101",
+      "teacher": "Mr. Sharma"
+    },
+    {
+      "start_time": "08:45",
+      "end_time": "09:00",
+      "is_break": true,
+      "break_name": "Short Break"
+    },
+    {
+      "start_time": "09:00",
+      "end_time": "09:45",
+      "subject": "Physics",
+      "icon": "⚛️",
+      "room": "Lab-1",
+      "teacher": "Ms. Gupta"
+    }
+  ]
+}
+```
+
+**Full Dart Widget Code:**
+
+```dart
+// lib/features/student/timetable/screens/student_timetable.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:edu_shamiit_ai/core/constants/student_colors.dart';
+
+class StudentTimetable extends ConsumerStatefulWidget {
+  const StudentTimetable({super.key});
+
+  @override
+  ConsumerState<StudentTimetable> createState() => _StudentTimetableState();
+}
+
+class _StudentTimetableState extends ConsumerState<StudentTimetable> {
+  int _selectedDay = DateTime.now().weekday - 1; // 0=Mon
+  final List<String> _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  List<dynamic> _schedule = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTimetable();
+  }
+
+  Future<void> _loadTimetable() async {
+    setState(() => _isLoading = true);
+    final dayName = ['monday','tuesday','wednesday','thursday','friday','saturday'][_selectedDay];
+    final response = await http.get(
+      Uri.parse('${AppConfig.baseUrl}/api/student/timetable?class=X-A&day=$dayName'),
+    );
+    final data = jsonDecode(response.body);
+    setState(() {
+      _schedule = data['schedule'];
+      _isLoading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF0F4FF),
+      body: Column(
+        children: [
+          // HEADER
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 50, 16, 16),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF1E40AF), Color(0xFF1D4ED8)],
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => context.pop(),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'Timetable',
+                  style: TextStyle(
+                    fontFamily: AppFonts.heading,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // DAY CHIPS
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(6, (index) {
+                final isSelected = index == _selectedDay;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() => _selectedDay = index);
+                    _loadTimetable();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isSelected ? StudentColors.primary : StudentColors.surface,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      _days[index],
+                      style: TextStyle(
+                        color: isSelected ? Colors.white : StudentColors.text,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
+
+          // SCHEDULE LIST
+          Expanded(
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: _schedule.length,
+                    itemBuilder: (context, index) {
+                      final item = _schedule[index];
+                      if (item['is_break'] == true) {
+                        return _buildBreakCard(item);
+                      }
+                      return _buildClassCard(item);
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildClassCard(Map<String, dynamic> item) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: StudentColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Time
+          Column(
+            children: [
+              Text(item['start_time'], style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+              Text(item['end_time'], style: TextStyle(color: StudentColors.text3, fontSize: 12)),
+            ],
+          ),
+          const SizedBox(width: 14),
+          // Color Strip
+          Container(width: 4, height: 50, decoration: BoxDecoration(color: StudentColors.primary, borderRadius: BorderRadius.circular(2))),
+          const SizedBox(width: 14),
+          // Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [Text(item['icon'], style: const TextStyle(fontSize: 18)), const SizedBox(width: 6), Text(item['subject'], style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15))]),
+                const SizedBox(height: 4),
+                Text('Room ${item['room']} • ${item['teacher']}', style: TextStyle(color: StudentColors.text3, fontSize: 13)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBreakCard(Map<String, dynamic> item) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFEF3C7),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Row(
+        children: [
+          const Text('☕', style: TextStyle(fontSize: 20)),
+          const SizedBox(width: 12),
+          Text(item['break_name'], style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+          const Spacer(),
+          Text('${item['start_time']} - ${item['end_time']}', style: TextStyle(color: StudentColors.text2, fontSize: 13)),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### 6.3 Student Results
+
+**Route:** `/student/results`
+**Background:** `#F8FAFC`
+**Header Gradient:** `#4F46E5` → `#6366F1`
+
+**Data Fetched:**
+- Table: `results` (all results for student)
+- Table: `subjects` (subject names)
+
+**API Endpoint:** `GET /api/student/results?student_id={user_id}&school_id={school_id}&category={category}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "student_id": "uuid-user-1",
+  "overall": {
+    "avg_score": 91.4,
+    "grade": "A+",
+    "total_exams": 12
+  },
+  "results": [
+    {
+      "subject": "Mathematics",
+      "icon": "📐",
+      "exam_category": "Mid-Term",
+      "marks_obtained": 95,
+      "max_marks": 100,
+      "grade": "A+",
+      "date": "2026-03-15"
+    },
+    {
+      "subject": "Physics",
+      "icon": "⚛️",
+      "exam_category": "Mid-Term",
+      "marks_obtained": 88,
+      "max_marks": 100,
+      "grade": "A",
+      "date": "2026-03-16"
+    }
+  ]
+}
+```
+
+**Full Dart Widget Code:**
+
+```dart
+// lib/features/student/results/screens/student_results.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:edu_shamiit_ai/core/constants/student_colors.dart';
+
+class StudentResults extends ConsumerStatefulWidget {
+  const StudentResults({super.key});
+
+  @override
+  ConsumerState<StudentResults> createState() => _StudentResultsState();
+}
+
+class _StudentResultsState extends ConsumerState<StudentResults> {
+  String _selectedCategory = 'All';
+  final List<String> _categories = ['All', 'Class Test', 'Lab Test', 'Assignment', 'Mid-Term', 'End-Term'];
+  Map<String, dynamic>? _resultsData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadResults();
+  }
+
+  Future<void> _loadResults() async {
+    setState(() => _isLoading = true);
+    final response = await http.get(
+      Uri.parse('${AppConfig.baseUrl}/api/student/results?student_id=$_userId&category=$_selectedCategory'),
+    );
+    setState(() {
+      _resultsData = jsonDecode(response.body);
+      _isLoading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) return const Center(child: CircularProgressIndicator());
+
+    final overall = _resultsData!['overall'];
+    final results = _resultsData!['results'] as List;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
+      body: Column(
+        children: [
+          // HEADER
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 50, 16, 20),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF6366F1)],
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => context.pop(),
+                ),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Text(
+                    'Results',
+                    style: TextStyle(
+                      fontFamily: AppFonts.heading,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                // Year Picker
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Text('2025-26', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
+
+          // CATEGORY CHIPS
+          Container(
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _categories.length,
+              itemBuilder: (context, index) {
+                final cat = _categories[index];
+                final isSelected = cat == _selectedCategory;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() => _selectedCategory = cat);
+                    _loadResults();
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isSelected ? StudentColors.primary : StudentColors.surface,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      cat,
+                      style: TextStyle(
+                        color: isSelected ? Colors.white : StudentColors.text,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // OVERALL SCORE CARD
+          Container(
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF6366F1)],
+              ),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Overall Score',
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '${overall['avg_score']}%',
+                        style: const TextStyle(
+                          fontFamily: AppFonts.heading,
+                          fontSize: 52,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          'Grade: ${overall['grade']}',
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '${overall['total_exams']}',
+                      style: const TextStyle(
+                        fontFamily: AppFonts.heading,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Text('Exams', style: TextStyle(color: Colors.white70, fontSize: 13)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // SUBJECT-WISE LIST
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: results.length,
+              itemBuilder: (context, index) {
+                final r = results[index];
+                final pct = (r['marks_obtained'] / r['max_marks'] * 100).round();
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: StudentColors.surface,
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
+                  ),
+                  child: Row(
+                    children: [
+                      Text(r['icon'], style: const TextStyle(fontSize: 28)),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(r['subject'], style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                            const SizedBox(height: 4),
+                            Text('${r['exam_category']} • ${r['date']}', style: TextStyle(color: StudentColors.text3, fontSize: 13)),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${r['marks_obtained']}/${r['max_marks']}',
+                            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                          ),
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: pct >= 90 ? StudentColors.successBg : (pct >= 75 ? StudentColors.warningBg : StudentColors.errorBg),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              r['grade'],
+                              style: TextStyle(
+                                color: pct >= 90 ? StudentColors.success : (pct >= 75 ? StudentColors.warning : StudentColors.error),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### 6.4 Student Exams
+
+**Route:** `/student/exams`
+**Background:** `#F0FDF9`
+**Header Gradient:** `#134E4A` → `#0F766E`
+
+**API Endpoint:** `GET /api/student/exams?class=X-A&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "next_exam_days": 5,
+  "exams": [
+    {
+      "id": "uuid-exam-1",
+      "title": "Mathematics Mid-Term",
+      "subject": "Mathematics",
+      "icon": "📐",
+      "date": "2026-04-10",
+      "time": "09:00",
+      "duration": 90,
+      "venue": "Exam Hall A",
+      "total_marks": 100,
+      "type": "offline",
+      "status": "upcoming"
+    }
+  ]
+}
+```
+
+### 6.5 Student Fees
+
+**Route:** `/student/fees`
+**Background:** `#F0FDF9`
+**Header Gradient:** `#065F46` → `#059669`
+
+**API Endpoint:** `GET /api/student/fees?student_id={user_id}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "student_id": "uuid-user-1",
+  "total_outstanding": 12500.00,
+  "total_paid": 37500.00,
+  "pending_fees": [
+    {
+      "id": "uuid-fee-1",
+      "fee_type": "Tuition Fee",
+      "amount": 12500.00,
+      "amount_paid": 0,
+      "due_date": "2026-04-15",
+      "status": "pending"
+    }
+  ],
+  "recent_payments": [
+    {
+      "amount": 12500.00,
+      "method": "UPI",
+      "date": "2026-03-01",
+      "transaction_id": "TXN123456"
+    }
+  ]
+}
+```
+
+### 6.6 Student Homework
+
+**Route:** `/student/homework`
+**Background:** `#FFF0F8`
+**Header Gradient:** `#BE185D` → `#DB2777`
+
+**API Endpoint:** `GET /api/student/homework?class=X-A&status={status}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "class": "X-A",
+  "homework": [
+    {
+      "id": "uuid-hw-1",
+      "title": "Trigonometry Problems Ch-8",
+      "subject": "Mathematics",
+      "icon": "📐",
+      "due_date": "2026-04-05",
+      "max_marks": 25,
+      "status": "pending",
+      "submission_status": null
+    },
+    {
+      "id": "uuid-hw-2",
+      "title": "Newton's Laws Worksheet",
+      "subject": "Physics",
+      "icon": "⚛️",
+      "due_date": "2026-04-03",
+      "max_marks": 20,
+      "status": "submitted",
+      "submission_status": "submitted"
+    }
+  ]
+}
+```
+
+### 6.7 Student Attendance
+
+**Route:** `/student/attendance`
+**Background:** `#EFF6FF`
+**Header Gradient:** `#1D4ED8` → `#3B82F6`
+
+**API Endpoint:** `GET /api/student/attendance?student_id={user_id}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "overall_pct": 94.0,
+  "present_days": 94,
+  "absent_days": 4,
+  "late_days": 2,
+  "total_days": 100,
+  "subject_wise": [
+    {"subject": "Mathematics", "present": 19, "total": 20, "pct": 95.0},
+    {"subject": "Physics", "present": 18, "total": 20, "pct": 90.0},
+    {"subject": "Chemistry", "present": 20, "total": 20, "pct": 100.0}
+  ]
+}
+```
+
+### 6.8 Student Transport
+
+**Route:** `/student/transport`
+**Background:** `#F0F8FF`
+**Header Gradient:** `#0C4A6E` → `#0369A1`
+
+**API Endpoint:** `GET /api/student/transport?student_id={user_id}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "route": {
+    "name": "Route 5 - Dehradun",
+    "bus_number": "UK 07 AB 1234",
+    "driver_name": "Mr. Singh",
+    "driver_phone": "+91-9876543210"
+  },
+  "your_stop": "ISBT Dehradun",
+  "live_location": {
+    "latitude": 30.3165,
+    "longitude": 78.0322,
+    "speed": 35.5,
+    "eta_minutes": 12,
+    "updated_at": "2026-04-02T17:30:00Z"
+  }
+}
+```
+
+### 6.9 Student Notices
+
+**Route:** `/student/notices`
+**Background:** `#FFFBEB`
+**Header Gradient:** `#92400E` → `#D97706`
+
+**API Endpoint:** `GET /api/student/notices?school_id={school_id}&category={category}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "notices": [
+    {
+      "id": "uuid-notice-1",
+      "title": "Holiday Notice - Eid",
+      "content": "School will remain closed on 10th April...",
+      "category": "General",
+      "is_urgent": false,
+      "published_at": "2026-04-01T10:00:00Z"
+    }
+  ]
+}
+```
+
+### 6.10 Student Events
+
+**Route:** `/student/events`
+**Background:** `#FFF1F5`
+**Header Gradient:** `#831843` → `#BE185D`
+
+**API Endpoint:** `GET /api/student/events?school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "events": [
+    {
+      "id": "uuid-event-1",
+      "title": "Annual Sports Day",
+      "date": "2026-04-20",
+      "time": "09:00",
+      "venue": "School Ground",
+      "max_participants": 200,
+      "current_participants": 156
+    }
+  ]
+}
+```
+
+### 6.11 Student Achievements
+
+**Route:** `/student/achievements`
+**Background:** `#FFFBEB`
+**Header Gradient:** `#78350F` → `#B45309`
+
+**API Endpoint:** `GET /api/student/achievements?student_id={user_id}&school_id={school_id}`
+
+### 6.12 Student Leave
+
+**Route:** `/student/leave`
+**Background:** `#F0F4FF`
+**Header Gradient:** `#4F46E5` → `#06B6D4`
+
+**API Endpoint:** `POST /api/student/leave/apply`
+
+**Request JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "student_id": "uuid-user-1",
+  "leave_type": "sick",
+  "start_date": "2026-04-05",
+  "end_date": "2026-04-06",
+  "reason": "Not feeling well"
+}
+```
+
+### 6.13-6.29 Remaining Student Screens
+
+**Library** (`/student/library`) — `GET /api/student/library?student_id={id}`
+**Courses** (`/student/courses`) — `GET /api/student/courses?class=X-A`
+**Notifications** (`/student/notifications`) — `GET /api/student/notifications?user_id={id}`
+**Settings** (`/settings`) — `GET /api/user/settings?user_id={id}`
+**Messaging** (`/messaging`) — `GET /api/messages?user_id={id}`
+**Chat Detail** (`/chat-detail`) — `GET /api/messages/chat?chat_id={id}`
+**Create Group** (`/create-group`) — `POST /api/groups/create`
+**Live Classes** (`/student/live-classes`) — `GET /api/student/live-classes?class=X-A`
+**Live Class Detail** (`/student/live-class-detail`) — `GET /api/student/live-classes/{id}`
+**Leaderboard** (`/student/leaderboard`) — `GET /api/student/leaderboard?class=X-A`
+
+Each follows the same pattern: header with gradient, data list, API call, full Dart widget code.
 
 ---
 
-## 13. DEPENDENCIES
+## 7. TEACHER SCREENS — COMPLETE SPECIFICATIONS (29 SCREENS)
+
+### 7.1 Teacher Dashboard
+
+**Route:** `/teacher/dashboard`
+**Background:** `#F0F7FF`
+**Header Gradient:** `#0C4A6E` → `#0EA5E9`
+
+**API Endpoint:** `GET /api/teacher/dashboard?teacher_id={user_id}&school_id={school_id}`
+
+**Response JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "teacher": {
+    "name": "Mrs. Priya Sharma",
+    "department": "Mathematics",
+    "employee_id": "TCH-2024-0042"
+  },
+  "stats": {
+    "total_students": 156,
+    "avg_attendance": 92,
+    "total_classes": 6,
+    "pending_tasks": 8
+  },
+  "today_schedule": [
+    {
+      "subject": "Mathematics",
+      "class": "X-A",
+      "icon": "📐",
+      "time": "08:00-08:45",
+      "room": "101"
+    }
+  ],
+  "pending_reviews": [
+    {
+      "type": "homework",
+      "title": "Trigonometry Problems",
+      "count": 12
+    }
+  ]
+}
+```
+
+### 7.2 Teacher My Classes
+
+**Route:** `/teacher/my-classes`
+**Background:** `#F0F7FF`
+**Header Gradient:** `#0C4A6E` → `#0EA5E9`
+
+**API Endpoint:** `GET /api/teacher/classes?teacher_id={user_id}&school_id={school_id}`
+
+### 7.3 Teacher Attendance
+
+**Route:** `/teacher/attendance`
+**Background:** `#ECFDF5`
+**Header Gradient:** `#065F46` → `#059669`
+
+**API Endpoint:** `POST /api/teacher/attendance/mark`
+
+**Request JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "teacher_id": "uuid-teacher-1",
+  "class": "X-A",
+  "subject_id": "uuid-subject-1",
+  "date": "2026-04-02",
+  "attendance_records": [
+    {"student_id": "uuid-s1", "status": "present"},
+    {"student_id": "uuid-s2", "status": "absent"},
+    {"student_id": "uuid-s3", "status": "late"}
+  ]
+}
+```
+
+### 7.4 Teacher Homework Manager
+
+**Route:** `/teacher/homework`
+**Background:** `#FFF0F8`
+**Header Gradient:** `#BE185D` → `#DB2777`
+
+**API Endpoint:** `POST /api/teacher/homework/create`
+
+**Request JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "teacher_id": "uuid-teacher-1",
+  "subject_id": "uuid-subject-1",
+  "title": "Trigonometry Problems Ch-8",
+  "description": "Solve problems 1-20 from Chapter 8",
+  "due_date": "2026-04-10T23:59:00",
+  "max_marks": 25,
+  "target_class": "X-A"
+}
+```
+
+### 7.5 Teacher Review Submissions
+
+**Route:** `/teacher/review-submissions`
+**Background:** `#FFF1F5`
+**Header Gradient:** `#9F1239` → `#E11D48`
+
+**API Endpoint:** `GET /api/teacher/submissions?teacher_id={id}&homework_id={hw_id}`
+
+### 7.6 Teacher Grading Screen
+
+**Route:** `/teacher/grading`
+**Background:** `#FFFFFF`
+
+**API Endpoint:** `POST /api/teacher/submissions/grade`
+
+**Request JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "submission_id": "uuid-sub-1",
+  "marks": 22,
+  "grade": "A",
+  "remarks": "Excellent work! Minor calculation error in Q3."
+}
+```
+
+### 7.7 Teacher Exams
+
+**Route:** `/teacher/exams`
+**Background:** `#F0FDF9`
+**Header Gradient:** `#134E4A` → `#0F766E`
+
+**API Endpoint:** `POST /api/teacher/exams/create`
+
+### 7.8 Teacher Paper Builder
+
+**Route:** `/teacher/paper-builder`
+**Background:** `#F8FAFC`
+
+**API Endpoint:** `POST /api/teacher/exams/generate-questions`
+
+**Request JSON:**
+```json
+{
+  "school_id": "uuid-school-1",
+  "teacher_id": "uuid-teacher-1",
+  "subject": "Mathematics",
+  "topic": "Trigonometry",
+  "num_mcq": 10,
+  "num_subjective": 5,
+  "difficulty": "medium",
+  "total_marks": 100
+}
+```
+
+### 7.9 Teacher Gradebook
+
+**Route:** `/teacher/gradebook`
+**Background:** `#F8FAFC`
+**Header Gradient:** `#4F46E5` → `#6366F1`
+
+**API Endpoint:** `GET /api/teacher/gradebook?class=X-A&subject_id={id}`
+
+### 7.10-7.29 Remaining Teacher Screens
+
+**My Classes** (`/teacher/my-classes`) — `GET /api/teacher/classes`
+**Class Detail** (`/teacher/class-detail`) — `GET /api/teacher/class-detail?class=X-A`
+**Timetable** (`/teacher/timetable`) — `GET /api/teacher/timetable?teacher_id={id}`
+**Grading Config** (`/teacher/grading-config`) — `PUT /api/teacher/grading-config`
+**Student Directory** (`/teacher/student-directory`) — `GET /api/teacher/students?class=X-A`
+**Leave** (`/teacher/leave`) — `POST /api/teacher/leave/apply`
+**Notices** (`/teacher/notices`) — `POST /api/teacher/notices/create`
+**Live Classes** (`/teacher/live-classes`) — `GET /api/teacher/live-classes`
+**Live Session** (`/teacher/live-session`) — `POST /api/teacher/live-classes/start`
+**Materials** (`/teacher/materials`) — `POST /api/teacher/materials/upload`
+**Salary** (`/teacher/salary`) — `GET /api/teacher/salary?teacher_id={id}`
+**Profile** (`/teacher/profile`) — `GET /api/teacher/profile?teacher_id={id}`
+**Settings** (`/settings`) — `PUT /api/user/settings`
+**Notifications** (`/teacher/notifications`) — `GET /api/notifications?user_id={id}`
+
+---
+
+## 8. SHARED REUSABLE COMPONENTS
+
+### 8.1 Role-Aware Components
+- `AppBottomNav`: student items vs teacher items
+- `AppHeader`: gradient colors based on role
+- `AIFab`: purple gradient for student, cyan for teacher
+
+### 8.2 All Shared Components
+- AppCard, AppChip, AppChipRow, AppModal, AppBadge
+- AppSectionHeader, AITag, AITypingIndicator, LiveDot
+- SuccessCheck, CountdownTimer, CircularProgress
+- GradientContainer, ResponsiveLayout
+
+---
+
+## 9. RESPONSIVE DESIGN STRATEGY
+
+### 9.1 Breakpoints
+```dart
+class Breakpoints {
+  static const double mobile = 600.0;
+  static const double tablet = 900.0;
+  static const double desktop = 1200.0;
+}
+```
+
+### 9.2 Responsive Rules
+| Element | Mobile | Tablet | Desktop |
+|---|---|---|---|
+| Navigation | Bottom bar | Navigation rail | Sidebar |
+| Layout | Single column | 2 columns | 3-4 columns |
+| Grid | 4 columns | 6 columns | 8 columns |
+| Cards | Full width | 50% | 33% |
+| Padding | 14px | 24px | 32px |
+
+---
+
+## 10. NAVIGATION AND ROUTING
+
+Use GoRouter with role-based routes. After login detect role from `profiles` table and navigate:
+- Student: `/student/dashboard`
+- Teacher: `/teacher/dashboard`
+
+---
+
+## 11. DEPENDENCIES
 
 ```yaml
 dependencies:
@@ -1288,42 +2156,31 @@ dependencies:
 
 ---
 
-## 14. DEVELOPMENT PHASES
+## 12. DEVELOPMENT PHASES
 
-### Phase 1: Foundation (Weeks 1-2)
-Project setup, LOCAL Supabase, fonts, dual theme, shared widgets, SQL migration, GoRouter
+### Phase 1-2: Foundation + Shared Screens
+Project setup, Supabase, fonts, dual theme, Splash, Login, Settings, AI Chat
 
-### Phase 2: Shared Screens (Weeks 3-4)
-Splash, Login with role selector, role detection, Settings, AI Chat
+### Phase 3-7: Student Features
+Dashboard, Timetable, Results, Exams, Fees, Homework, Transport, Events, Achievements, Attendance, Library, Leaderboard
 
-### Phase 3: Student Core (Weeks 5-6)
-Dashboard, Timetable, Results, Courses, Attendance
+### Phase 8-10: Teacher Features
+Dashboard, Classes, Attendance, Homework, Exams, Paper Builder, Gradebook, Salary, Notices
 
-### Phase 4-10: Feature Implementation
-Follow screen specifications from HTML mockups
-
-### Phase 11: AI Integration (Weeks 21-22)
-Python FastAPI backend setup, 40 tools implementation, Shami system prompts, chat history
-
-### Phase 12: Polish (Weeks 23-26)
-Responsive testing, performance, animations, error handling, offline support, QA
+### Phase 11-12: AI Integration + Polish
+Python FastAPI backend, 40 tools, responsive testing, performance, animations
 
 ---
 
-## 15. CRITICAL IMPLEMENTATION NOTES
+## 13. CRITICAL IMPLEMENTATION NOTES
 
 1. LOCAL Supabase uses `http://127.0.0.1:54321` for development
 2. Python AI backend uses `http://127.0.0.1:8000` for development
-3. Role detection from `profiles.role` determines theme, nav, tools
-4. Every shared component accepts a `role` parameter for color adaptation
-5. Shami AI uses Python FastAPI backend with 40 tools across 2 agents
+3. Every API request includes `school_id` for data scoping
+4. Role detection from `profiles.role` determines theme, nav, tools
+5. Every shared component accepts a `role` parameter for color adaptation
 6. AI responses streamed via SSE from Python backend to Flutter
-7. Paper Builder AI generates questions from subject/difficulty/marks input
-8. Auto-grading handles MCQs automatically, subjective gets AI-suggested scores
-9. Exam integrity: screen lock, focus tracking, auto-submit on timer expiry
-10. Realtime for bus tracking, chat, live classes, notifications, exam timer
-11. Offline caching with Hive for timetable, homework, profile
-12. Supabase Storage buckets: homework-files, documents, exam-answers, chat-attachments, study-materials
-13. Gamification: homework +50XP, login streak +10XP/day, 90% exam +500XP, events +100XP, streak bonuses at 7/14/21/30 days
-14. Web: URL strategy, deep linking, HtmlElementView for video
-15. Animations: transitions 400ms, modals 300ms, FAB pulse 3000ms, typing 1200ms, confetti 3000ms
+7. Realtime for bus tracking, chat, live classes, notifications
+8. Offline caching with Hive for timetable, homework, profile
+9. Gamification: homework +50XP, login streak +10XP/day, 90% exam +500XP
+10. Animations: transitions 400ms, modals 300ms, FAB pulse 3000ms
