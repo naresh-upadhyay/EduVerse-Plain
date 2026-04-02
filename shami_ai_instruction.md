@@ -1,7 +1,7 @@
 # Shami AI — Complete Agent Instruction Manual
-> EduVerse Pro · School/College SaaS AI Assistant  
+> EduSHAMIIT · School/College SaaS Platform — Shami Innovation and Technologies LLP  
 > Version 1.0 · Python + LangChain + Supabase + ESP32 IoT  
-> Author: Naresh (EduVerse Architect)
+> Author: Naresh — Shami Innovation and Technologies LLP
 
 ---
 
@@ -31,7 +31,7 @@
 
 ## 1. Project Identity
 
-**Product name:** EduVerse Pro  
+**Product name:** EduSHAMIIT  
 **AI assistant name:** Shami  
 **Market:** Indian school/college SaaS  
 **Target users:** Students, Teachers, Parents, Principals, Admins, Support Staff — 17 roles across 7 tiers  
@@ -43,11 +43,13 @@
 - Payments: Razorpay, UPI, BBPS
 - Communication: WhatsApp Business API (Gupshup or Meta Cloud API)
 
-**Shami's personality:**
-- Warm, concise, professional
+**Shami AI — The EduSHAMIIT Intelligence (inspired by J.A.R.V.I.S. from Iron Man):**
+- Proactive, intelligent, always on — like Jarvis for Tony Stark, Shami is the school's always-available intelligent assistant
+- Warm, concise, authoritative
 - Responds in the user's language (Hindi or English, auto-detected)
 - Never hallucinates student data — always fetches from tools
 - Addresses teachers formally, students encouragingly
+- Proactively surfaces insights the user didn't ask for ("Sir, 3 teachers are absent today — shall I arrange substitutes?")
 - Acknowledges when it cannot do something and explains why
 
 ---
@@ -56,7 +58,7 @@
 
 | Layer | Technology | Purpose |
 |---|---|---|
-| Frontend | Flutter + Riverpod | Mobile app (3 apps: Academic, Family, Admin Suite) |
+| Frontend | Flutter + Riverpod | Mobile app (3 apps: EduSHAMIIT Academic, EduSHAMIIT Family, EduSHAMIIT Admin Suite) |
 | State management | Riverpod | Auth state, chat state, role switching |
 | Backend framework | FastAPI (Python 3.11+) | REST API + SSE streaming |
 | AI orchestration | LangChain 0.3 | Agent, tools, RAG, memory |
@@ -83,7 +85,7 @@
 ## 3. Project Structure
 
 ```
-eduverse-ai-backend/
+edushamiit-ai-backend/
 ├── app/
 │   ├── main.py                    # FastAPI app entry point
 │   ├── models.py                  # Pydantic request/response schemas
@@ -93,7 +95,7 @@ eduverse-ai-backend/
 │   │   ├── image.py               # POST /chat/image    (image upload)
 │   │   └── iot.py                 # POST /iot/control, GET /iot/status/{room}
 │   ├── agents/
-│   │   ├── eduverse_agent.py      # Main LangChain agent builder
+│   │   ├── shamiit_agent.py      # Main LangChain agent builder
 │   │   ├── router.py              # Task detection → LLM routing
 │   │   └── prompts.py             # Role-specific system prompts
 │   ├── tools/
@@ -128,7 +130,7 @@ eduverse-ai-backend/
 
 ## 4. Roles & Permissions
 
-EduVerse has 17 roles across 7 tiers. Shami's tool access is gated by role.
+EduSHAMIIT has 17 roles across 7 tiers. Shami's tool access is gated by role.
 
 | Tier | Role | App | Shami Capabilities |
 |---|---|---|---|
@@ -316,7 +318,7 @@ async def analyze_image(image_bytes: bytes, content_type: str, question: str) ->
 ### Main Agent Builder
 
 ```python
-# app/agents/eduverse_agent.py
+# app/agents/shamiit_agent.py
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_anthropic import ChatAnthropic
 from langchain.agents import create_tool_calling_agent, AgentExecutor
@@ -403,7 +405,7 @@ async def process_message(
 ```python
 # app/agents/prompts.py
 
-BASE_PROMPT = """You are Shami, the AI assistant for EduVerse Pro — a school management platform.
+BASE_PROMPT = """You are Shami, the AI assistant for EduSHAMIIT — a school & college management platform by Shami Innovation and Technologies LLP.
 
 IDENTITY:
 - Name: Shami
@@ -656,7 +658,7 @@ def send_whatsapp_message(phone: str, message: str) -> str:
             "source": os.getenv("WHATSAPP_NUMBER"),
             "destination": phone,
             "message": message,
-            "src.name": "EduVerse"
+            "src.name": "EduSHAMIIT"
         }
     )
     return "Message sent successfully" if response.ok else f"Failed: {response.text}"
@@ -1010,7 +1012,7 @@ from app.supabase.client import get_supabase
 
 class IoTController:
     def __init__(self):
-        self._mqtt = mqtt.Client(client_id="eduverse-python")
+        self._mqtt = mqtt.Client(client_id="edushamiit-python")
         self._mqtt.on_message = self._on_status_update
         self._mqtt.connect("localhost", 1883)
         self._mqtt.subscribe("school/+/status")
@@ -1382,7 +1384,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import chat, voice, image, iot
 
-app = FastAPI(title="Shami AI — EduVerse", version="1.0.0")
+app = FastAPI(title="Shami AI — EduSHAMIIT | Shami Innovation and Technologies", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"],
                    allow_methods=["*"], allow_headers=["*"])
 
@@ -1757,9 +1759,9 @@ PHASE 9 — Production Hardening
 
 ---
 
-*This document is the single source of truth for building Shami AI on EduVerse Pro.*  
+*This document is the single source of truth for building Shami AI on EduSHAMIIT — by Shami Innovation and Technologies LLP.*  
 *Every AI agent, code generator, or developer working on this project should start here.*
 
 ---
 **Last updated:** April 2026  
-**Maintainer:** Naresh — EduVerse Pro
+**Maintainer:** Naresh — EduSHAMIIT
