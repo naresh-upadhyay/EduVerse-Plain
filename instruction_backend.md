@@ -31,7 +31,7 @@
 ### docker-compose.yml
 
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
   # ============================================
@@ -310,7 +310,7 @@ docker-compose down
 
 ```bash
 # On your VPS
-git clone https://github.com/naresh-upadhyay/eduSHAMIIT-backend.git
+git clone https://github.com/your-repo/eduSHAMIIT-backend.git
 cd eduSHAMIIT-backend
 cp .env.example .env  # Edit with production values
 docker-compose up -d
@@ -448,14 +448,14 @@ async def create_upi_payment(
 ):
     """
     Create a UPI payment link for fee payment.
-
+    
     Request:
     {
         "fee_id": "uuid-fee-1",
         "amount": 12500.00,
         "description": "Tuition Fee Q2 2026"
     }
-
+    
     Response:
     {
         "success": true,
@@ -469,14 +469,14 @@ async def create_upi_payment(
     }
     """
     sb = get_supabase()
-
+    
     fee_id = request.get("fee_id")
     amount = request.get("amount")
     description = request.get("description", "EduSHAMIIT Fee Payment")
-
+    
     # Generate unique transaction ID
     transaction_id = f"EDU-{uuid.uuid4().hex[:12].upper()}"
-
+    
     # Create payment record
     payment = sb.table("payments").insert({
         "school_id": school_id,
@@ -487,7 +487,7 @@ async def create_upi_payment(
         "status": "pending",
         "payment_method": "upi",
     }).execute()
-
+    
     # Generate UPI deep link
     upi_link = generate_upi_link(
         merchant_id="eduSHAMIIT-school@upi",  # Your school's UPI ID
@@ -496,7 +496,7 @@ async def create_upi_payment(
         transaction_id=transaction_id,
         description=description,
     )
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -525,10 +525,10 @@ def generate_upi_link(
 ) -> str:
     """
     Generate UPI deep link for payment.
-
+    
     UPI Deep Link Format:
     upi://pay?pa={merchant_id}&pn={merchant_name}&am={amount}&tn={description}&tr={transaction_id}
-
+    
     This opens the UPI app (GPay, PhonePe, Paytm, etc.) directly.
     Zero external fees — direct bank-to-bank transfer.
     """
@@ -541,7 +541,7 @@ def generate_upi_link(
         "cu": "INR",                 # Currency
         "mc": "8220",                # Merchant category code (education)
     }
-
+    
     return f"upi://pay?{urlencode(params)}"
 
 def generate_upi_qr_data(
@@ -569,7 +569,7 @@ async def verify_payment(
 ):
     """
     Verify UPI payment after student completes payment in UPI app.
-
+    
     Request:
     {
         "payment_id": "uuid-payment-1",
@@ -577,7 +577,7 @@ async def verify_payment(
         "upi_transaction_id": "UPI-TXN-789012",
         "status": "success"
     }
-
+    
     Response:
     {
         "success": true,
@@ -590,21 +590,21 @@ async def verify_payment(
     }
     """
     sb = get_supabase()
-
+    
     payment_id = request.get("payment_id")
     upi_transaction_id = request.get("upi_transaction_id")
     status = request.get("status", "success")
-
+    
     # Verify with bank webhook (optional — for production)
     # For local development, trust the UPI app callback
-
+    
     # Update payment status
     sb.table("payments").update({
         "status": status,
         "transaction_id": upi_transaction_id,
         "paid_at": datetime.now().isoformat(),
     }).eq("id", payment_id).eq("school_id", school_id).execute()
-
+    
     # Update fee status
     payment = sb.table("payments").select("fee_id, amount").eq("id", payment_id).single().execute()
     if payment.data:
@@ -616,7 +616,7 @@ async def verify_payment(
                 "amount_paid": new_paid,
                 "status": new_status,
             }).eq("id", payment.data["fee_id"]).execute()
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -637,7 +637,7 @@ async def bank_webhook(request: dict):
     """
     Handle bank payment webhook for production.
     Bank sends POST to this endpoint when payment is confirmed.
-
+    
     Request (from bank):
     {
         "transaction_id": "EDU-ABC123DEF456",
@@ -648,28 +648,28 @@ async def bank_webhook(request: dict):
     }
     """
     sb = get_supabase()
-
+    
     transaction_id = request.get("transaction_id")
     upi_transaction_id = request.get("upi_transaction_id")
     status = request.get("status", "success")
-
+    
     # Find payment by transaction_id
     payment = sb.table("payments").select("*").eq("transaction_id", transaction_id).single().execute()
-
+    
     if not payment.data:
         return {"success": False, "error": "Transaction not found"}
-
+    
     # Verify amount matches
     if float(request.get("amount", 0)) != float(payment.data["amount"]):
         return {"success": False, "error": "Amount mismatch"}
-
+    
     # Update payment
     sb.table("payments").update({
         "status": status,
         "transaction_id": upi_transaction_id,
         "paid_at": request.get("timestamp", datetime.now().isoformat()),
     }).eq("id", payment.data["id"]).execute()
-
+    
     # Update fee
     if status == "success":
         fee = sb.table("fees").select("amount, amount_paid").eq("id", payment.data["fee_id"]).single().execute()
@@ -680,7 +680,7 @@ async def bank_webhook(request: dict):
                 "amount_paid": new_paid,
                 "status": new_status,
             }).eq("id", payment.data["fee_id"]).execute()
-
+    
     return {"success": True, "message": "Payment processed"}
 ```
 
@@ -703,14 +703,14 @@ router = APIRouter()
 async def login(request: dict):
     """
     Authenticate user and return JWT token.
-
+    
     Request:
     {
         "email": "rohan@school.com",
         "password": "password123",
         "role": "student"
     }
-
+    
     Response:
     {
         "success": true,
@@ -730,24 +730,24 @@ async def login(request: dict):
     }
     """
     sb = get_supabase()
-
+    
     email = request.get("email")
     password = request.get("password")
-
+    
     # Authenticate with Supabase
     auth_response = sb.auth.sign_in_with_password({
         "email": email,
         "password": password,
     })
-
+    
     user_id = auth_response.user.id
-
+    
     # Get profile
     profile = sb.table("profiles").select("*").eq("id", user_id).single().execute()
-
+    
     if not profile.data:
         raise HTTPException(status_code=404, detail="Profile not found")
-
+    
     # Generate JWT with school_id
     token = jwt.encode(
         {
@@ -760,7 +760,7 @@ async def login(request: dict):
         os.getenv("SUPABASE_JWT_SECRET"),
         algorithm="HS256",
     )
-
+    
     return {
         "success": True,
         "school_id": profile.data["school_id"],
@@ -786,7 +786,7 @@ async def login(request: dict):
 async def register(request: dict):
     """
     Register new user (student/teacher).
-
+    
     Request:
     {
         "email": "newstudent@school.com",
@@ -798,13 +798,13 @@ async def register(request: dict):
     }
     """
     sb = get_supabase()
-
+    
     # Create auth user
     auth_response = sb.auth.sign_up({
         "email": request["email"],
         "password": request["password"],
     })
-
+    
     # Create profile
     sb.table("profiles").insert({
         "id": auth_response.user.id,
@@ -814,7 +814,7 @@ async def register(request: dict):
         "role": request["role"],
         "class": request.get("class"),
     }).execute()
-
+    
     return {"success": True, "message": "Registration successful"}
 ```
 
@@ -826,12 +826,12 @@ async def refresh_token(request: dict):
     """Refresh JWT token."""
     sb = get_supabase()
     refresh_token = request.get("refresh_token")
-
+    
     auth_response = sb.auth.refresh_session(refresh_token)
-
+    
     # Re-generate JWT
     profile = sb.table("profiles").select("*").eq("id", auth_response.user.id).single().execute()
-
+    
     token = jwt.encode(
         {
             "sub": auth_response.user.id,
@@ -842,7 +842,7 @@ async def refresh_token(request: dict):
         os.getenv("SUPABASE_JWT_SECRET"),
         algorithm="HS256",
     )
-
+    
     return {"success": True, "data": {"token": token}}
 ```
 
@@ -868,7 +868,7 @@ async def student_dashboard(
 ):
     """
     Student dashboard data.
-
+    
     Response:
     {
         "success": true,
@@ -886,12 +886,12 @@ async def student_dashboard(
     cached = await get_cached(school_id, "dashboard", user["id"])
     if cached:
         return cached
-
+    
     sb = get_supabase()
-
+    
     # Get profile
     profile = sb.table("profiles").select("*").eq("id", user["id"]).single().execute().data
-
+    
     # Get today's schedule
     today = datetime.now().weekday()
     schedule = sb.table("timetable")\
@@ -900,7 +900,7 @@ async def student_dashboard(
         .eq("class", profile["class"])\
         .eq("day_of_week", today)\
         .order("start_time").execute().data
-
+    
     # Get pending homework
     homework = sb.table("homework")\
         .select("*, subjects(name, icon)")\
@@ -909,15 +909,15 @@ async def student_dashboard(
         .eq("status", "active")\
         .lte("due_date", (datetime.now() + timedelta(days=3)).isoformat())\
         .order("due_date").execute().data
-
+    
     # Get stats
     attendance = sb.table("attendance")\
         .select("status")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"]).execute().data
-
+    
     att_pct = (sum(1 for a in attendance if a["status"] == "present") / len(attendance) * 100) if attendance else 0
-
+    
     result = {
         "success": True,
         "school_id": school_id,
@@ -934,10 +934,10 @@ async def student_dashboard(
             "quick_access": _get_quick_access_items(),
         }
     }
-
+    
     # Cache for 2 minutes
     await set_cached(school_id, "dashboard", result, user["id"], ttl=120)
-
+    
     return result
 ```
 
@@ -952,17 +952,17 @@ async def student_timetable(
 ):
     sb = get_supabase()
     profile = sb.table("profiles").select("class").eq("id", user["id"]).single().execute().data
-
+    
     day_map = {"monday":0,"tuesday":1,"wednesday":2,"thursday":3,"friday":4,"saturday":5}
     day_num = day_map.get(day.lower(), datetime.now().weekday())
-
+    
     schedule = sb.table("timetable")\
         .select("*, subjects(name, icon, color)")\
         .eq("school_id", school_id)\
         .eq("class", profile["class"])\
         .eq("day_of_week", day_num)\
         .order("start_time").execute().data
-
+    
     return {"success": True, "school_id": school_id, "data": {"schedule": schedule}}
 ```
 
@@ -976,22 +976,22 @@ async def student_results(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     query = sb.table("results")\
         .select("*, subjects(name, icon)")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"])
-
+    
     if category != "All":
         query = query.eq("exam_category", category)
-
+    
     results = query.order("created_at", ascending=False).execute().data
-
+    
     # Calculate overall
     total = sum(float(r.get("marks_obtained", 0)) for r in results)
     max_total = sum(float(r.get("max_marks", 100)) for r in results)
     avg_score = (total / max_total * 100) if max_total > 0 else 0
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -1012,14 +1012,14 @@ async def student_exams(
 ):
     sb = get_supabase()
     profile = sb.table("profiles").select("class").eq("id", user["id"]).single().execute().data
-
+    
     exams = sb.table("exams")\
         .select("*, subjects(name, icon)")\
         .eq("school_id", school_id)\
         .contains("target_classes", f'["{profile["class"]}"]')\
         .gte("exam_date", datetime.now().date().isoformat())\
         .order("exam_date").execute().data
-
+    
     return {"success": True, "school_id": school_id, "data": {"exams": exams}}
 ```
 
@@ -1034,27 +1034,27 @@ async def student_homework(
 ):
     sb = get_supabase()
     profile = sb.table("profiles").select("class").eq("id", user["id"]).single().execute().data
-
+    
     homework = sb.table("homework")\
         .select("*, subjects(name, icon)")\
         .eq("school_id", school_id)\
         .eq("target_class", profile["class"])\
         .eq("status", "active")\
         .order("due_date").execute().data
-
+    
     # Get submissions
     submissions = sb.table("homework_submissions")\
         .select("homework_id, status")\
         .eq("student_id", user["id"]).execute().data
-
+    
     submitted_ids = {s["homework_id"] for s in submissions}
-
+    
     # Filter
     filtered = []
     for hw in homework:
         sub = next((s for s in submissions if s["homework_id"] == hw["id"]), None)
         hw["submission_status"] = sub["status"] if sub else None
-
+        
         if status == "all":
             filtered.append(hw)
         elif status == "pending" and not sub:
@@ -1063,7 +1063,7 @@ async def student_homework(
             filtered.append(hw)
         elif status == "graded" and sub and sub["status"] == "graded":
             filtered.append(hw)
-
+    
     return {"success": True, "school_id": school_id, "data": {"homework": filtered}}
 ```
 
@@ -1077,19 +1077,19 @@ async def submit_homework(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     homework_id = request.get("homework_id")
     submission_text = request.get("submission_text", "")
-
+    
     # Check if already submitted
     existing = sb.table("homework_submissions")\
         .select("id")\
         .eq("homework_id", homework_id)\
         .eq("student_id", user["id"]).maybe_single().execute()
-
+    
     if existing.data:
         return {"success": False, "message": "Already submitted"}
-
+    
     # Create submission
     submission = sb.table("homework_submissions").insert({
         "school_id": school_id,
@@ -1098,10 +1098,10 @@ async def submit_homework(
         "submission_text": submission_text,
         "status": "submitted",
     }).execute()
-
+    
     # Award XP
     await _update_xp(school_id, user["id"], 50, "homework_submission")
-
+    
     return {"success": True, "school_id": school_id, "data": {"submission_id": submission.data[0]["id"]}}
 ```
 
@@ -1114,18 +1114,18 @@ async def student_attendance(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     attendance = sb.table("attendance")\
         .select("*, subjects(name)")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"]).execute().data
-
+    
     total = len(attendance)
     present = sum(1 for a in attendance if a["status"] == "present")
     absent = sum(1 for a in attendance if a["status"] == "absent")
     late = sum(1 for a in attendance if a["status"] == "late")
     pct = (present / total * 100) if total > 0 else 0
-
+    
     # Subject-wise
     subject_wise = {}
     for a in attendance:
@@ -1134,7 +1134,7 @@ async def student_attendance(
         subject_wise[subj]["total"] += 1
         if a["status"] == "present":
             subject_wise[subj]["present"] += 1
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -1161,22 +1161,22 @@ async def student_fees(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     fees = sb.table("fees")\
         .select("*")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"])\
         .order("due_date").execute().data
-
+    
     payments = sb.table("payments")\
         .select("*")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"])\
         .order("paid_at", ascending=False).execute().data
-
+    
     total_outstanding = sum(float(f["amount"]) - float(f.get("amount_paid", 0)) for f in fees if f["status"] in ("pending", "partial", "overdue"))
     total_paid = sum(float(f.get("amount_paid", 0)) for f in fees)
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -1198,15 +1198,15 @@ async def student_transport(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     transport = sb.table("student_transport")\
         .select("*, bus_routes(*), bus_stops(*)")\
         .eq("school_id", school_id)\
         .eq("student_id", user["id"]).maybe_single().execute().data
-
+    
     if not transport:
         return {"success": False, "message": "Not assigned to any bus route"}
-
+    
     # Get live location
     bus_location = sb.table("bus_locations")\
         .select("*")\
@@ -1214,7 +1214,7 @@ async def student_transport(
         .eq("route_id", transport["route_id"])\
         .order("recorded_at", ascending=False)\
         .limit(1).maybe_single().execute().data
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -1230,22 +1230,22 @@ async def student_transport(
 
 Each follows the same pattern — `school_id` scoping, Supabase queries, response format.
 
-| Screen        | Endpoint                     | Method |
-| ------------- | ---------------------------- | ------ |
-| Notices       | `/api/student/notices`       | GET    |
-| Events        | `/api/student/events`        | GET    |
-| Achievements  | `/api/student/achievements`  | GET    |
-| Leave         | `/api/student/leave/apply`   | POST   |
-| Profile       | `/api/student/profile`       | GET    |
-| Library       | `/api/student/library`       | GET    |
-| Courses       | `/api/student/courses`       | GET    |
-| Notifications | `/api/student/notifications` | GET    |
-| Settings      | `/api/user/settings`         | GET    |
-| Messaging     | `/api/messages`              | GET    |
-| Chat Detail   | `/api/messages/chat`         | GET    |
-| Create Group  | `/api/groups/create`         | POST   |
-| Live Classes  | `/api/student/live-classes`  | GET    |
-| Leaderboard   | `/api/student/leaderboard`   | GET    |
+| Screen | Endpoint | Method |
+|---|---|---|
+| Notices | `/api/student/notices` | GET |
+| Events | `/api/student/events` | GET |
+| Achievements | `/api/student/achievements` | GET |
+| Leave | `/api/student/leave/apply` | POST |
+| Profile | `/api/student/profile` | GET |
+| Library | `/api/student/library` | GET |
+| Courses | `/api/student/courses` | GET |
+| Notifications | `/api/student/notifications` | GET |
+| Settings | `/api/user/settings` | GET |
+| Messaging | `/api/messages` | GET |
+| Chat Detail | `/api/messages/chat` | GET |
+| Create Group | `/api/groups/create` | POST |
+| Live Classes | `/api/student/live-classes` | GET |
+| Leaderboard | `/api/student/leaderboard` | GET |
 
 ---
 
@@ -1267,29 +1267,29 @@ async def teacher_dashboard(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     # Get classes
     classes = sb.table("timetable")\
         .select("class")\
         .eq("school_id", school_id)\
         .eq("teacher_id", user["id"]).execute().data
-
+    
     unique_classes = list(set(c["class"] for c in classes))
-
+    
     # Get student count
     students = sb.table("profiles")\
         .select("id")\
         .eq("school_id", school_id)\
         .in_("class", unique_classes)\
         .eq("role", "student").execute().data
-
+    
     # Get pending tasks
     homework = sb.table("homework")\
         .select("id")\
         .eq("school_id", school_id)\
         .eq("teacher_id", user["id"])\
         .eq("status", "active").execute().data
-
+    
     pending_subs = 0
     for hw in homework:
         subs = sb.table("homework_submissions")\
@@ -1297,7 +1297,7 @@ async def teacher_dashboard(
             .eq("homework_id", hw["id"])\
             .eq("status", "submitted").execute().data
         pending_subs += len(subs)
-
+    
     return {
         "success": True,
         "school_id": school_id,
@@ -1322,14 +1322,14 @@ async def teacher_classes(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     classes = sb.table("timetable")\
         .select("class")\
         .eq("school_id", school_id)\
         .eq("teacher_id", user["id"]).execute().data
-
+    
     unique_classes = list(set(c["class"] for c in classes))
-
+    
     class_details = []
     for cls in unique_classes:
         students = sb.table("profiles")\
@@ -1337,12 +1337,12 @@ async def teacher_classes(
             .eq("school_id", school_id)\
             .eq("class", cls)\
             .eq("role", "student").execute().data
-
+        
         class_details.append({
             "class": cls,
             "student_count": len(students),
         })
-
+    
     return {"success": True, "school_id": school_id, "data": {"classes": class_details}}
 ```
 
@@ -1356,10 +1356,10 @@ async def mark_attendance(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     date = request.get("date", datetime.now().date().isoformat())
     records = request.get("attendance_records", [])
-
+    
     for record in records:
         # Upsert attendance
         sb.table("attendance").upsert({
@@ -1370,7 +1370,7 @@ async def mark_attendance(
             "date": date,
             "status": record["status"],
         }, on_conflict="school_id,student_id,subject_id,date").execute()
-
+    
     return {"success": True, "school_id": school_id, "message": f"Marked {len(records)} students"}
 ```
 
@@ -1384,7 +1384,7 @@ async def create_homework(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     homework = sb.table("homework").insert({
         "school_id": school_id,
         "subject_id": request.get("subject_id"),
@@ -1396,7 +1396,7 @@ async def create_homework(
         "target_class": request.get("target_class"),
         "status": "active",
     }).execute()
-
+    
     return {"success": True, "school_id": school_id, "data": {"homework_id": homework.data[0]["id"]}}
 ```
 
@@ -1410,7 +1410,7 @@ async def grade_submission(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     sb.table("homework_submissions").update({
         "status": "graded",
         "marks": request.get("marks"),
@@ -1419,35 +1419,35 @@ async def grade_submission(
         "graded_by": user["id"],
         "graded_at": datetime.now().isoformat(),
     }).eq("id", request.get("submission_id")).eq("school_id", school_id).execute()
-
+    
     # Award XP to student
     submission = sb.table("homework_submissions").select("student_id").eq("id", request.get("submission_id")).single().execute()
     if submission.data:
         await _update_xp(school_id, submission.data["student_id"], 50, "homework_graded")
-
+    
     return {"success": True, "school_id": school_id, "message": "Submission graded"}
 ```
 
 ### 6.6-6.29 Remaining Teacher Endpoints
 
-| Screen             | Endpoint                                | Method |
-| ------------------ | --------------------------------------- | ------ |
-| Class Detail       | `/api/teacher/class-detail`             | GET    |
-| Timetable          | `/api/teacher/timetable`                | GET    |
-| Exams              | `/api/teacher/exams/create`             | POST   |
-| Generate Questions | `/api/teacher/exams/generate-questions` | POST   |
-| Gradebook          | `/api/teacher/gradebook`                | GET    |
-| Grading Config     | `/api/teacher/grading-config`           | PUT    |
-| Student Directory  | `/api/teacher/students`                 | GET    |
-| Leave              | `/api/teacher/leave/apply`              | POST   |
-| Notices            | `/api/teacher/notices/create`           | POST   |
-| Live Classes       | `/api/teacher/live-classes`             | GET    |
-| Live Session Start | `/api/teacher/live-classes/start`       | POST   |
-| Materials          | `/api/teacher/materials/upload`         | POST   |
-| Salary             | `/api/teacher/salary`                   | GET    |
-| Profile            | `/api/teacher/profile`                  | GET    |
-| Settings           | `/api/user/settings`                    | PUT    |
-| Notifications      | `/api/notifications`                    | GET    |
+| Screen | Endpoint | Method |
+|---|---|---|
+| Class Detail | `/api/teacher/class-detail` | GET |
+| Timetable | `/api/teacher/timetable` | GET |
+| Exams | `/api/teacher/exams/create` | POST |
+| Generate Questions | `/api/teacher/exams/generate-questions` | POST |
+| Gradebook | `/api/teacher/gradebook` | GET |
+| Grading Config | `/api/teacher/grading-config` | PUT |
+| Student Directory | `/api/teacher/students` | GET |
+| Leave | `/api/teacher/leave/apply` | POST |
+| Notices | `/api/teacher/notices/create` | POST |
+| Live Classes | `/api/teacher/live-classes` | GET |
+| Live Session Start | `/api/teacher/live-classes/start` | POST |
+| Materials | `/api/teacher/materials/upload` | POST |
+| Salary | `/api/teacher/salary` | GET |
+| Profile | `/api/teacher/profile` | GET |
+| Settings | `/api/user/settings` | PUT |
+| Notifications | `/api/notifications` | GET |
 
 ---
 
@@ -1469,13 +1469,13 @@ async def get_messages(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     messages = sb.table("messages")\
         .select("*, profiles!sender_id(full_name, avatar_url, role)")\
         .eq("school_id", school_id)\
         .or_(f"sender_id.eq.{user['id']},receiver_id.eq.{user['id']}")\
         .order("created_at", ascending=False).execute().data
-
+    
     return {"success": True, "school_id": school_id, "data": {"messages": messages}}
 
 @router.post("/messages/send")
@@ -1485,14 +1485,14 @@ async def send_message(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     message = sb.table("messages").insert({
         "school_id": school_id,
         "sender_id": user["id"],
         "receiver_id": request.get("receiver_id"),
         "content": request.get("content"),
     }).execute()
-
+    
     return {"success": True, "school_id": school_id, "data": {"message_id": message.data[0]["id"]}}
 ```
 
@@ -1505,14 +1505,14 @@ async def get_notifications(
     school_id=Depends(require_school_id),
 ):
     sb = get_supabase()
-
+    
     notifications = sb.table("notifications")\
         .select("*")\
         .eq("school_id", school_id)\
         .eq("user_id", user["id"])\
         .order("created_at", ascending=False)\
         .limit(20).execute().data
-
+    
     return {"success": True, "school_id": school_id, "data": {"notifications": notifications}}
 ```
 
@@ -1567,13 +1567,13 @@ async def chat_message(
 ):
     """
     Send message to Shami AI and stream response via SSE.
-
+    
     Request:
     {
         "message": "What classes do I have today?",
         "session_id": "uuid-session-1"
     }
-
+    
     SSE Response:
     data: {"type":"text","content":"📅 Your Monday Schedule:\n"}
     data: {"type":"text","content":"  📐 Mathematics - 08:00 to 08:45\n"}
@@ -1582,7 +1582,7 @@ async def chat_message(
     """
     message = request.get("message")
     session_id = request.get("session_id")
-
+    
     async def generate():
         async for chunk in process_message(
             text=message,
@@ -1591,7 +1591,7 @@ async def chat_message(
             session_id=session_id,
         ):
             yield f"data: {json.dumps(chunk)}\n\n"
-
+    
     return StreamingResponse(generate(), media_type="text/event-stream")
 ```
 
@@ -1608,12 +1608,12 @@ async def chat_voice(
     # Transcribe with Whisper
     from app.services.whisper_service import transcribe
     text = await transcribe(await audio.read())
-
+    
     # Process with AI agent
     async def generate():
         async for chunk in process_message(text=text, user=user, school_id=school_id, session_id=session_id):
             yield f"data: {json.dumps(chunk)}\n\n"
-
+    
     return StreamingResponse(generate(), media_type="text/event-stream")
 ```
 
@@ -1630,17 +1630,17 @@ async def chat_image(
     import base64
     from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.messages import HumanMessage
-
+    
     image_bytes = await image.read()
     b64 = base64.b64encode(image_bytes).decode()
-
+    
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest")
     msg = HumanMessage(content=[
         {"type": "image_url", "image_url": {"url": f"data:{image.content_type};base64,{b64}"}},
         {"type": "text", "text": question}
     ])
     response = await llm.ainvoke([msg])
-
+    
     return {"success": True, "school_id": school_id, "data": {"output": response.content}}
 ```
 
@@ -1666,7 +1666,7 @@ async def control_device(
 ):
     """
     Control classroom device via MQTT.
-
+    
     Request:
     {
         "room": "class_10a",
@@ -1677,9 +1677,9 @@ async def control_device(
     room = request.get("room")
     device = request.get("device")
     action = request.get("action")
-
+    
     result = iot.control_device(room, device, action)
-
+    
     return {
         "success": result["ok"],
         "school_id": school_id,
@@ -1730,7 +1730,7 @@ async def ingest_document_endpoint(
         grade=grade,
         source=source,
     )
-
+    
     return {"success": True, "school_id": school_id, "data": {"chunks_ingested": chunks}}
 ```
 
@@ -1822,22 +1822,22 @@ async def require_school_id(user=Depends(get_current_user)):
 async def _update_xp(school_id: str, student_id: str, xp: int, action: str):
     from app.services.supabase_client import get_supabase
     from datetime import datetime, timedelta
-
+    
     sb = get_supabase()
     profile = sb.table("profiles").select("last_login, learning_streak").eq("id", student_id).single().execute().data
-
+    
     last_login = profile.get("last_login")
     streak = profile.get("learning_streak", 0)
-
+    
     today = datetime.now().date()
-
+    
     if last_login == (today - timedelta(days=1)).isoformat():
         new_streak = streak + 1
     elif last_login < (today - timedelta(days=1)).isoformat():
         new_streak = 1
     else:
         new_streak = streak
-
+    
     sb.table("profiles").update({
         "xp_points": sb.rpc("increment_xp", {"p_student_id": student_id, "p_xp": xp}),
         "learning_streak": new_streak,
@@ -1848,8 +1848,7 @@ async def _update_xp(school_id: str, student_id: str, xp: int, action: str):
 
 ---
 
-_This document is the single source of truth for building the EduSHAMIIT backend — by Shami Innovation and Technologies LLP._
+*This document is the single source of truth for building the EduSHAMIIT backend — by Shami Innovation and Technologies LLP.*
 
 ---
-
 **Last updated:** April 2026
